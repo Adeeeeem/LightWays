@@ -21,6 +21,7 @@
 	--orange-color: #FFA200;
 	--blue-color: #0685D5;
 	--text-color: #333333;
+	--input-color: #FFFFFF;
 }
 /*==================================================
 				HTML & Body
@@ -35,9 +36,9 @@ table th, table td{text-align: center !important; vertical-align: middle !import
 ==================================================*/
 .uk-grid{margin-left: 0 !important;}
 .uk-grid>*{padding-left: 0 !important;}
-.uk-modal-title {font-size: 1.7rem;}
 div.uk-modal-dialog{overflow-x: hidden;}
 div.uk-modal-dialog, div.uk-modal-body{background-color:  var(--body-color); border-radius: 0.5rem;}
+div.uk-modal-dialog .uk-modal-title{font-size: 1.7rem; color: var(--text-color);}
 div.uk-modal-header{background-color: var(--primary-color); padding-top: 10px; padding-bottom: 10px;}
 div.uk-modal-footer{background-color: var(--primary-color); height: 45px !important; padding: 0;}
 button.uk-modal-close-default{background-color: transparent; font-size: 70px; color: var(--orange-color); font-weight: 400; cursor: pointer; margin-top: -10px;}
@@ -46,7 +47,7 @@ button.uk-modal-close-default:hover, button.uk-modal-close-default:focus{color: 
 .uk-modal-footer button:hover, .uk-modal-footer button:focus{background-color: var(--secondary-color);}
 label.uk-form-label{font-size: 12px; letter-spacing: 1px; color: var(--text-color) !important;}
 .uk-accordion-title::before{display: none;}
-input.uk-input{border: 1px solid var(--secondary-color);}
+input.uk-input, select.uk-input, input.uk-input:focus, select.uk-input:focus{border: 1px solid var(--secondary-color); background-color: var(--input-color);}
 .uk-table-hover tbody tr:hover,.uk-table-hover>tr:hover{background-color: var(--primary-color);}
 /*==================================================
 				Preloader

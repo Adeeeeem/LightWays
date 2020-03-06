@@ -40,7 +40,7 @@
 =========================*/
 #lights form label{color: var(--blue-color); padding-bottom: 0 !important; margin-bottom: 0 !important; padding-left: 6rem;}
 #lights form div.uk-form-controls{text-align: center !important;}
-#lights form select{width: 65%; border: none; background-color: transparent; padding: 0; margin-top: -5px !important;}
+#lights form select{width: 65%; border: none; background-color: transparent; border: none; padding: 0; margin-top: -5px !important;}
 #lights hr.select-hr{background-position: 60%; max-width: 60%; margin-top: -5px; background-image: radial-gradient(closest-side, var(--secondary-color), hsla(232, 18%, 69%, 0) 150%); height: 1px;}
 #lights #lights-room{margin-top: -45px !important;}
 #lights #lights-room-name{font-size: 1.5rem !important; letter-spacing: 1px; margin-bottom: 0; margin-top: -20px; color: var(--text-color);}
@@ -91,7 +91,7 @@
 /* Add Group Modal */
 #modal-add-group div.add-group-search-room div{padding: 0; margin: 0;}
 #modal-add-group div.add-group-search-room label{color: var(--blue-color); padding-left: 0.5rem; margin-bottom: 0 !important; font-size: 10px;}
-#modal-add-group #add-group-search-floor, #modal-add-group #add-group-search-room{background-color: transparent;}
+#modal-add-group #add-group-search-floor, #modal-add-group #add-group-search-room{background-color: transparent; border: none;}
 #modal-add-group hr.select-hr{background-position: 85%; max-width: 85%; margin-top: -5px; background-image: radial-gradient(closest-side, var(--secondary-color), hsla(232, 18%, 69%, 0) 150%); height: 1px;}
 #modal-add-group #add-group-room table{border: 1px solid var(--secondary-color); border-radius: .25rem; padding: 10px; border-collapse: separate;}
 #modal-add-group #add-group-room table td{padding: 0 !important;}
@@ -103,7 +103,7 @@
 /* Edit Group Modal */
 #modal-edit-group div.edit-group-search-room div{padding: 0; margin: 0;}
 #modal-edit-group div.edit-group-search-room label{color: var(--blue-color); padding-left: 0.5rem; margin-bottom: 0 !important; font-size: 10px;}
-#modal-edit-group #edit-group-search-floor, #modal-edit-group #edit-group-search-room{background-color: transparent;}
+#modal-edit-group #edit-group-search-floor, #modal-edit-group #edit-group-search-room{background-color: transparent; border: none;}
 #modal-edit-group hr.select-hr{background-position: 85%; max-width: 85%; margin-top: -5px; background-image: radial-gradient(closest-side, var(--secondary-color), hsla(232, 18%, 69%, 0) 150%); height: 1px;}
 #modal-edit-group #edit-group-room table{border: 1px solid var(--secondary-color); border-radius: .25rem; padding: 10px; border-collapse: separate;}
 #modal-edit-group #edit-group-room table td{padding: 0 !important;}
@@ -116,7 +116,7 @@
 #modal-edit-group #edit-group-room table.rotated td div img{-webkit-transform: rotate(270deg); -moz-transform: rotate(270deg); -ms-transform: rotate(270deg); -o-transform: rotate(270deg); transform: rotate(270deg);}
 /* Delete Group Modal */
 #modal-delete-group div.uk-padding-small{border: 2px solid #C0392B; border-radius: 50%;}
-#modal-delete-group h2.uk-modal-title{font-size: 1.45rem; margin-top: 10px;}
+#modal-delete-group h2.uk-modal-title{font-size: 1.45rem; margin-top: 10px; color: var(--text-color);}
 #modal-delete-group button.uk-modal-close{background-color: #C0392B; color: #FFFFFF;}
 #modal-delete-group button#delete-group-confirm-btn{background-color: #2ECC71; color: #FFFFFF;}
 /*=========================
@@ -156,7 +156,7 @@
 #modal-edit-floor #floor-details-table table tr:hover{background-color: var(--primary-color);}
 /* Delete Floor Modal */
 #modal-delete-floor div.uk-padding-small{border: 2px solid #C0392B; border-radius: 50%;}
-#modal-delete-floor h2.uk-modal-title{font-size: 1.45rem; margin-top: 10px;}
+#modal-delete-floor h2.uk-modal-title{font-size: 1.45rem; margin-top: 10px; color: var(--text-color);}
 #modal-delete-floor h2.uk-modal-title span{color: var(--secondary-color);}
 #modal-delete-floor h5{color: #C0392B; line-height: 1; font-size: 15px; margin-top: 25px; font-weight: 500;}
 #modal-delete-floor button.uk-modal-close{background-color: #C0392B; color: #FFFFFF;}
@@ -182,7 +182,7 @@
 /* Add Room Modal */
 #modal-add-room div.add-room-search-floor div{padding: 0; margin: 0;}
 #modal-add-room div.add-room-search-floor label{color: var(--blue-color); padding-left: 0.5rem; margin-bottom: 0 !important; font-size: 10px;}
-#modal-add-room #add-room-search-floor{background-color: transparent;}
+#modal-add-room #add-room-search-floor{background-color: transparent; border: none;}
 #modal-add-room hr.select-hr{background-position: 85%; max-width: 85%; margin-top: -5px; background-image: radial-gradient(closest-side, var(--secondary-color), hsla(232, 18%, 69%, 0) 150%); height: 1px;}
 #modal-add-room div.add-room-width-height div.uk-width-1-2:first-child{padding-right: 5px;}
 #modal-add-room div.add-room-width-height div.uk-width-1-2:nth-child(2){padding-left: 5px;}
@@ -201,7 +201,7 @@
 /* Edit Room Modal */
 #modal-edit-room div.edit-room-search-floor div{padding: 0; margin: 0;}
 #modal-edit-room div.edit-room-search-floor label{color: var(--blue-color); padding-left: 0.5rem; margin-bottom: 0 !important; font-size: 10px;}
-#modal-edit-room #edit-room-search-floor{background-color: transparent;}
+#modal-edit-room #edit-room-search-floor{background-color: transparent; border: none;}
 #modal-edit-room hr.select-hr{background-position: 85%; max-width: 85%; margin-top: -5px; background-image: radial-gradient(closest-side, var(--secondary-color), hsla(232, 18%, 69%, 0) 150%); height: 1px;}
 #modal-edit-room table#edit-room-room-devices{border: 1px solid var(--secondary-color); border-radius: .25rem; padding: 10px; border-collapse: separate; margin-top: 20px;}
 #modal-edit-room table#edit-room-room-devices td{padding: 0 !important;}
@@ -221,7 +221,7 @@
 #modal-edit-room #delete-room-btn img{margin-top: -3px;}
 /* Delete Room Modal */
 #modal-delete-room div.uk-padding-small{border: 2px solid #C0392B; border-radius: 50%;}
-#modal-delete-room h2.uk-modal-title{font-size: 1.45rem; margin-top: 10px;}
+#modal-delete-room h2.uk-modal-title{font-size: 1.45rem; margin-top: 10px; color: var(--text-color);}
 #modal-delete-room h2.uk-modal-title span{color: var(--secondary-color);}
 #modal-delete-room h5{color: #C0392B; line-height: 1; font-size: 15px; margin-top: 25px; font-weight: 500;}
 #modal-delete-room button.uk-modal-close{background-color: #C0392B; color: #FFFFFF;}
