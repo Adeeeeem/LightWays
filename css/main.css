@@ -20,12 +20,13 @@
 	--body-color: #E7E7E4;
 	--orange-color: #FFA200;
 	--blue-color: #0685D5;
+	--text-color: #333333;
 }
 /*==================================================
 				HTML & Body
 ==================================================*/
 *{margin: 0; padding: 0;}
-html, body{height: 100%; width: 100%; font-family: "Raleway", sans serif !important; color: #333333 !important; font-weight: bold; overflow-x: hidden; background-color: var(--body-color);}
+html, body{height: 100%; width: 100%; font-family: "Raleway", sans serif !important; color: var(--text-color) !important; font-weight: bold; overflow-x: hidden; background-color: var(--body-color);}
 label{font-weight: bold;}
 input, select{height: 40px !important; padding: auto 0; border-radius: 0.5rem !important;}
 table th, table td{text-align: center !important; vertical-align: middle !important;}
@@ -43,7 +44,7 @@ button.uk-modal-close-default{background-color: transparent; font-size: 70px; co
 button.uk-modal-close-default:hover, button.uk-modal-close-default:focus{color: var(--blue-color);}
 .uk-modal-footer button{text-transform: uppercase; background-color: var(--primary-color); height: 45px !important;}
 .uk-modal-footer button:hover, .uk-modal-footer button:focus{background-color: var(--secondary-color);}
-label.uk-form-label{font-size: 12px; letter-spacing: 1px;}
+label.uk-form-label{font-size: 12px; letter-spacing: 1px; color: var(--text-color) !important;}
 .uk-accordion-title::before{display: none;}
 input.uk-input{border: 1px solid var(--secondary-color);}
 .uk-table-hover tbody tr:hover,.uk-table-hover>tr:hover{background-color: var(--primary-color);}

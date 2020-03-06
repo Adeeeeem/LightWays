@@ -99,19 +99,19 @@ $(function()
 /* Save Last Open Tab and Open it when Refreshing */
 $(function()
 {
-	if (localStorage.getItem("LastSectionOpen") == null){localStorage.setItem("LastSectionOpen", "#lights-btn");}
+	if (localStorage.getItem("LightWays_ADMIN_SECTION") == null){localStorage.setItem("LightWays_ADMIN_SECTION", "#lights-btn");}
 		
-	$("#lights-btn, #mobile-lights-btn").click(function(){localStorage.setItem("LastSectionOpen", "#lights-btn");});
-	$("#groups-btn, #mobile-groups-btn").click(function(){localStorage.setItem("LastSectionOpen", "#groups-btn");});
-	$("#scenes-btn, #mobile-scenes-btn").click(function(){localStorage.setItem("LastSectionOpen", "#scenes-btn");});
-	$("#statistics-btn, #mobile-statistics-btn").click(function(){localStorage.setItem("LastSectionOpen", "#statistics-btn");});
-	$("#floors-btn, #mobile-floors-btn").click(function(){localStorage.setItem("LastSectionOpen", "#floors-btn")});
-	$("#rooms-btn, #mobile-rooms-btn").click(function(){localStorage.setItem("LastSectionOpen", "#rooms-btn")});
-	$("#users-btn, #mobile-users-btn").click(function(){localStorage.setItem("LastSectionOpen", "#users-btn")});
-	$("#settings-btn, #mobile-settings-btn").click(function(){localStorage.setItem("LastSectionOpen", "#settings-btn");});
-	$("#contact-btn, #mobile-contact-btn").click(function(){localStorage.setItem("LastSectionOpen", "#contact-btn");});
+	$("#lights-btn, #mobile-lights-btn").click(function(){localStorage.setItem("LightWays_ADMIN_SECTION", "#lights-btn");});
+	$("#groups-btn, #mobile-groups-btn").click(function(){localStorage.setItem("LightWays_ADMIN_SECTION", "#groups-btn");});
+	$("#scenes-btn, #mobile-scenes-btn").click(function(){localStorage.setItem("LightWays_ADMIN_SECTION", "#scenes-btn");});
+	$("#statistics-btn, #mobile-statistics-btn").click(function(){localStorage.setItem("LightWays_ADMIN_SECTION", "#statistics-btn");});
+	$("#floors-btn, #mobile-floors-btn").click(function(){localStorage.setItem("LightWays_ADMIN_SECTION", "#floors-btn")});
+	$("#rooms-btn, #mobile-rooms-btn").click(function(){localStorage.setItem("LightWays_ADMIN_SECTION", "#rooms-btn")});
+	$("#users-btn, #mobile-users-btn").click(function(){localStorage.setItem("LightWays_ADMIN_SECTION", "#users-btn")});
+	$("#settings-btn, #mobile-settings-btn").click(function(){localStorage.setItem("LightWays_ADMIN_SECTION", "#settings-btn");});
+	$("#contact-btn, #mobile-contact-btn").click(function(){localStorage.setItem("LightWays_ADMIN_SECTION", "#contact-btn");});
 
-	$(localStorage.getItem("LastSectionOpen")).click();
+	$(localStorage.getItem("LightWays_ADMIN_SECTION")).click();
 });
 /* Mobile Menu */
 $(function()
@@ -233,7 +233,7 @@ $(function()
 			// Turn ON Group Devices
 			GroupStatus(group, status, true);
 			// Change Text Color to Orange
-			$(parent).find("h4").css("color", "#333333");
+			$(parent).find("h4").css("color", "var(--text-color)");
 			// Add Box Shadow
 			$(parent).addClass("uk-box-shadow-medium");
 			// Change in Lights Section
@@ -295,7 +295,7 @@ $(function()
 		.fail(function()
 		{
 			$("#modal-add-group #add-group-room table").empty();
-			$("#modal-add-group #add-group-room table").append("<tr class='uk-animation-scale-down uk-text-center'><th><img src='../images/icons/error.png' width='50' height='50'><br><br>Failed to Load Floors !</th></tr>");
+			$("#modal-add-group #add-group-room table").append("<tr class='uk-animation-scale-down uk-text-center'><th style='color: #C0392B;'><img src='../images/icons/error.png' width='50' height='50'><br><br>Failed to Load Floors !</th></tr>");
 		});
 	});
 
@@ -633,7 +633,7 @@ $(function()
 						.fail(function()
 						{
 							$("#modal-edit-group #edit-group-room table").empty();
-							$("#modal-edit-group #edit-group-room table").append("<tr class='uk-animation-scale-down uk-text-center'><th><img src='../images/icons/error.png' width='50' height='50'><br><br>Failed to Load Rooms !</th></tr>");
+							$("#modal-edit-group #edit-group-room table").append("<tr class='uk-animation-scale-down uk-text-center'><th style='color: #C0392B;'><img src='../images/icons/error.png' width='50' height='50'><br><br>Failed to Load Rooms !</th></tr>");
 						});
 
 					}
@@ -645,7 +645,7 @@ $(function()
 				.fail(function()
 				{
 					$("#modal-edit-group #edit-group-room table").empty();
-					$("#modal-edit-group #edit-group-room table").append("<tr class='uk-animation-scale-down uk-text-center'><th><img src='../images/icons/error.png' width='50' height='50'><br><br>Failed to Load Floors !</th></tr>");
+					$("#modal-edit-group #edit-group-room table").append("<tr class='uk-animation-scale-down uk-text-center'><th style='color: #C0392B;'><img src='../images/icons/error.png' width='50' height='50'><br><br>Failed to Load Floors !</th></tr>");
 				});
 			}
 			else
@@ -1215,7 +1215,7 @@ $(function()
 		.fail(function()
 		{
 			$("#modal-add-room #add-room-room table").empty();
-			$("#modal-add-room #add-room-room table").append("<tr class='uk-animation-scale-down uk-text-center'><th><img src='../images/icons/error.png' width='50' height='50'><br><br>Failed to Load Floors !</th></tr>");
+			$("#modal-add-room #add-room-room table").append("<tr class='uk-animation-scale-down uk-text-center'><th style='color: #C0392B;'><img src='../images/icons/error.png' width='50' height='50'><br><br>Failed to Load Floors !</th></tr>");
 		});
 	});
 
@@ -1664,19 +1664,19 @@ $(function()
 				})
 				.fail(function()
 				{
-					$("#modal-edit-room #edit-room-room-groups").append("<table><tr class='uk-animation-scale-down uk-text-center'><th><img src='../images/icons/error.png' width='50' height='50'><br><br>Failed to Load Groups !</th></tr></table>");
+					$("#modal-edit-room #edit-room-room-groups").append("<table><tr class='uk-animation-scale-down uk-text-center'><th style='color: #C0392B;'><img src='../images/icons/error.png' width='50' height='50'><br><br>Failed to Load Groups !</th></tr></table>");
 				});
 			}
 			else
 			{
 				$.growl.error({ message: "Failed to Get Selected Room Details !" });
-				$("#modal-edit-room table#edit-room-room-devices").append("<tr class='uk-animation-scale-down uk-text-center'><th><img src='../images/icons/error.png' width='50' height='50'><br><br>Failed to Load Room Details !</th></tr>");
+				$("#modal-edit-room table#edit-room-room-devices").append("<tr class='uk-animation-scale-down uk-text-center'><th style='color: #C0392B;'><img src='../images/icons/error.png' width='50' height='50'><br><br>Failed to Load Room Details !</th></tr>");
 			}
 		})
 		.fail(function()
 		{
 			$.growl.error({ message: "Failed to Get Selected Room Details !" });
-			$("#modal-edit-room table#edit-room-room-devices").append("<tr class='uk-animation-scale-down uk-text-center'><th><img src='../images/icons/error.png' width='50' height='50'><br><br>Failed to Load Room Details !</th></tr>");
+			$("#modal-edit-room table#edit-room-room-devices").append("<tr class='uk-animation-scale-down uk-text-center'><th style='color: #C0392B;'><img src='../images/icons/error.png' width='50' height='50'><br><br>Failed to Load Room Details !</th></tr>");
 		});
 	});
 
@@ -2002,7 +2002,7 @@ $(function()
 			$.growl.error({ message: "Failed to Delete <span style='color: var(--secondary-color)'>"+$("#edit-room-name").val()+"</span> Room, Please Try Again !" });
 		});
 	});
-})
+});
 /*=========================
 		Users
 =========================*/
@@ -2014,6 +2014,117 @@ $(window).on("load", function()
 	$("#users-btn, #mobile-users-btn").click(function()
 	{
 		DisplayUsersListUsersSection();
+	});
+});
+/* Load Data to Add User Modal */
+
+/*=========================
+		Settings
+=========================*/
+/* Load User's Setting */
+$(window).on("load", function()
+{
+	if (localStorage.getItem("LightWays_THEME") == "DARK")
+	{
+		$("#setting-theme").attr("checked", "checked");
+	}
+	else
+	{
+		$("#setting-theme").removeAttr("checked");
+	}
+
+	var fname;
+	var lname;
+	var new_fname;
+	var new_lname;
+
+	$.ajax
+	({
+		url: "../php/user.php",
+		type: "POST",
+		dataType: "json",
+	})
+	.done(function(response)
+	{
+		if (response.length != 0)
+		{
+			fname = response.fname;
+			lname = response.lname;
+			$("#setting-fname").val(fname);
+			$("#setting-lname").val(lname);
+		}
+		else
+		{
+			$.growl.error({ message: "Oops, There was an Error Loading Your Data!" });
+		}
+	})
+	.fail(function()
+	{
+		$.growl.error({ message: "Oops, There was an Error Loading Your Data!" });
+	});
+
+	/* Cancel Settings Form Account */
+	$("#setting-cancel-btn").click(function(e)
+	{
+		e.preventDefault();
+
+		ResetSettingsAccountForm();
+		$("#setting-fname").val(fname);
+		$("#setting-lname").val(lname);
+	});
+
+	/* Update Settings Form Account */
+	$("#setting-save-btn").click(function(e)
+	{
+		e.preventDefault();
+
+		new_fname = $("#setting-fname").val();
+		new_lname = $("#setting-lname").val();
+
+		if (!new_fname)
+		{
+			$("#setting-fname").css("border", "1px solid #F0506E");
+			$("#setting-fname-error").show();
+		}
+		else
+		{
+			$("#setting-fname").css("border", "1px solid var(--secondary-color)");
+			$("#setting-fname-error").hide();
+		}
+
+		if (!new_lname)
+		{
+			$("#setting-lname").css("border", "1px solid #F0506E");
+			$("#setting-lname-error").show();
+		}
+		else
+		{
+			$("#setting-lname").css("border", "1px solid var(--secondary-color)");
+			$("#setting-lname-error").hide();
+		}
+	});
+});
+/* Turn ON and OFF Dark Theme */
+$(function()
+{
+	$("#setting-theme").click(function()
+	{
+		if($(this).is(":checked"))
+		{
+			localStorage.setItem("LightWays_THEME", "DARK");
+			$(document.body).css("--primary-color", "#252729");
+			$(document.body).css("--secondary-color", "#B7B2A8");
+			$(document.body).css("--body-color", "#202223");
+			$(document.body).css("--text-color", "#D6D3CD");
+		}
+		else
+		{
+			localStorage.setItem("LightWays_THEME", "LIGHT");
+			$(document.body).css("--primary-color", "#D2D2EC");
+			$(document.body).css("--secondary-color", "#A1A5BE");
+			$(document.body).css("--body-color", "#E7E7E4");
+			$(document.body).css("--text-color", "#333333");
+		}
 	});
 });
 /*==================================================
@@ -2103,9 +2214,9 @@ function LoadFloorsLightsSection()
 	.fail(function()
 	{
 		$("#lights table#lights-room-devices tbody").empty();
-		$("#lights table#lights-room-devices tbody").append("<tr class='uk-animation-scale-down uk-text-center'><th><img src='../images/icons/error.png' width='50' height='50'><br><br>Failed to Load Floors !</th></tr>");
+		$("#lights table#lights-room-devices tbody").append("<tr class='uk-animation-scale-down uk-text-center'><th style='color: #C0392B;'><img src='../images/icons/error.png' width='50' height='50'><br><br>Failed to Load Floors !</th></tr>");
 		$("#lights #lights-room-groups").empty();
-		$("#lights #lights-room-groups").append("<table><tr class='uk-animation-scale-down uk-text-center'><th><img src='../images/icons/error.png' width='50' height='50'><br><br>Failed to Load Groups !</th></tr></table>");
+		$("#lights #lights-room-groups").append("<table><tr class='uk-animation-scale-down uk-text-center'><th style='color: #C0392B;'><img src='../images/icons/error.png' width='50' height='50'><br><br>Failed to Load Groups !</th></tr></table>");
 	});
 }
 /* Load Rooms Related to a Floor Function */
@@ -2154,7 +2265,7 @@ function LoadRoomsLightsSection(floor)
 		$("#lights #lights-room-name").html(); // Remove Room Name if it is Displayed
 		$("#lights #lights-room-devices-number").html(); // Remove Devices Number if it is Displayed
 		$("#lights #lights-room table#lights-room-devices tbody").empty();
-		$("#lights #lights-room table#lights-room-devices tbody").append("<tr class='uk-animation-scale-down uk-text-center'><th><img src='../images/icons/error.png' width='50' height='50'><br><br>Failed to Load Rooms !</th></tr>");
+		$("#lights #lights-room table#lights-room-devices tbody").append("<tr class='uk-animation-scale-down uk-text-center'><th style='color: #C0392B;'><img src='../images/icons/error.png' width='50' height='50'><br><br>Failed to Load Rooms !</th></tr>");
 	});
 
 	/* When Changing Rooms Select */
@@ -2285,7 +2396,7 @@ function LoadDevicesLightsSection(room)
 	.fail(function()
 	{
 		$("#lights table#lights-room-devices tbody").empty();
-		$("#lights table#lights-room-devices tbody").append("<tr class='uk-animation-scale-down uk-text-center'><th><img src='../images/icons/error.png' width='50' height='50'><br><br>Failed to Load Devices !</th></tr>");
+		$("#lights table#lights-room-devices tbody").append("<tr class='uk-animation-scale-down uk-text-center'><th style='color: #C0392B;'><img src='../images/icons/error.png' width='50' height='50'><br><br>Failed to Load Devices !</th></tr>");
 	});
 }
 /* Load Groups Related to a Room Function */
@@ -2342,7 +2453,7 @@ function LoadGroupsLightsSection(room)
 	.fail(function()
 	{
 		$("#lights #lights-room-groups").empty();
-		$("#lights #lights-room-groups").append("<table><tr class='uk-animation-scale-down uk-text-center'><th><img src='../images/icons/error.png' width='50' height='50'><br><br>Failed to Load Groups !</th></tr></table>");
+		$("#lights #lights-room-groups").append("<table><tr class='uk-animation-scale-down uk-text-center'><th style='color: #C0392B;'><img src='../images/icons/error.png' width='50' height='50'><br><br>Failed to Load Groups !</th></tr></table>");
 	});
 
 	$("#lights #lights-room-groups").off("click").on("click", "button", function()
@@ -2408,7 +2519,7 @@ function DisplayGroupsListGroupsSection()
 				var devices = response[i].devices; // Get Group Devices Number
 				var checked = "checked";
 				var shadow = "uk-box-shadow-medium";
-				var bgcolor = "#333333";
+				var bgcolor = "var(--text-color)";
 
 				if (status == "OFF")
 				{
@@ -2430,7 +2541,7 @@ function DisplayGroupsListGroupsSection()
 	.fail(function()
 	{
 		$("#groups #groups-list").empty();
-		$("#groups #groups-list").append("<table class='uk-margin-small-top'><tr class='uk-animation-scale-down uk-text-center'><th><img src='../images/icons/error.png' width='50' height='50'><br><br>Failed to Load Groups !</th></tr></table>");
+		$("#groups #groups-list").append("<table class='uk-margin-small-top'><tr class='uk-animation-scale-down uk-text-center'><th style='color: #C0392B;'><img src='../images/icons/error.png' width='50' height='50'><br><br>Failed to Load Groups !</th></tr></table>");
 	});
 }
 /* Change Group Status Function */
@@ -2533,7 +2644,7 @@ function LoadRoomsAddGroupsSection(floor)
 	.fail(function()
 	{
 		$("#modal-add-group #add-group-room table").empty();
-		$("#modal-add-group #add-group-room table").append("<tr class='uk-animation-scale-down uk-text-center'><th><img src='../images/icons/error.png' width='50' height='50'><br><br>Failed to Load Rooms !</th></tr>")
+		$("#modal-add-group #add-group-room table").append("<tr class='uk-animation-scale-down uk-text-center'><th style='color: #C0392B;'><img src='../images/icons/error.png' width='50' height='50'><br><br>Failed to Load Rooms !</th></tr>")
 	});
 
 	$("#add-group-search-room").change(function()
@@ -2647,7 +2758,7 @@ function DisplayDevicesAddGroupsSection(room)
 	.fail(function()
 	{
 		$("#modal-add-group #add-group-room table").empty();
-		$("#modal-add-group #add-group-room table").append("<tr class='uk-animation-scale-down uk-text-center'><th><img src='../images/icons/error.png' width='45' height='45'><br><br>Failed to Load Devices !</th></tr>");
+		$("#modal-add-group #add-group-room table").append("<tr class='uk-animation-scale-down uk-text-center'><th style='color: #C0392B;'><img src='../images/icons/error.png' width='45' height='45'><br><br>Failed to Load Devices !</th></tr>");
 	});
 }
 /* Reset Add Group Modal Function */
@@ -2700,7 +2811,7 @@ function LoadRoomsEditGroupsSection(floor)
 	.fail(function()
 	{
 		$("#modal-edit-group #edit-group-room table").empty();
-		$("#modal-edit-group #edit-group-room table").append("<tr class='uk-animation-scale-down uk-text-center'><th><img src='../images/icons/error.png' width='50' height='50'><br><br>Failed to Load Rooms !</th></tr>");
+		$("#modal-edit-group #edit-group-room table").append("<tr class='uk-animation-scale-down uk-text-center'><th style='color: #C0392B;'><img src='../images/icons/error.png' width='50' height='50'><br><br>Failed to Load Rooms !</th></tr>");
 	});
 
 	/* When Changing Rooms Select */
@@ -2815,7 +2926,7 @@ function DisplayDevicesEditGroupsSection(room)
 	.fail(function()
 	{
 		$("#modal-edit-group #edit-group-room table").empty();
-		$("#modal-edit-group #edit-group-room table").append("<tr class='uk-animation-scale-down uk-text-center'><th><img src='../images/icons/error.png' width='45' height='45'><br><br>Failed to Load Devices !</th></tr>");
+		$("#modal-edit-group #edit-group-room table").append("<tr class='uk-animation-scale-down uk-text-center'><th style='color: #C0392B;'><img src='../images/icons/error.png' width='45' height='45'><br><br>Failed to Load Devices !</th></tr>");
 	});
 }
 /* Reset Edit Group Modal Function */
@@ -2871,7 +2982,7 @@ function DisplayFloorsListFloorsSection()
 	.fail(function()
 	{
 		$("#floors #floors-list").empty();
-		$("#floors #floors-list").append("<table class='uk-margin-small-top'><tr class='uk-animation-scale-down uk-text-center'><th><img src='../images/icons/error.png' width='50' height='50'><br><br>Failed to Load Floors !</th></tr></table>");
+		$("#floors #floors-list").append("<table class='uk-margin-small-top'><tr class='uk-animation-scale-down uk-text-center'><th style='color: #C0392B;'><img src='../images/icons/error.png' width='50' height='50'><br><br>Failed to Load Floors !</th></tr></table>");
 	}); 
 }
 /* Reset Add Floor Modal Function */
@@ -2944,7 +3055,7 @@ function DisplayRoomsListRoomsSection()
 	.fail(function()
 	{
 		$("#rooms #rooms-list").empty();
-		$("#rooms #rooms-list").append("<table class='uk-margin-small-top'><tr class='uk-animation-scale-down uk-text-center'><th><img src='../images/icons/error.png' width='50' height='50'><br><br>Failed to Load Rooms !</th></tr></table>");
+		$("#rooms #rooms-list").append("<table class='uk-margin-small-top'><tr class='uk-animation-scale-down uk-text-center'><th style='color: #C0392B;'><img src='../images/icons/error.png' width='50' height='50'><br><br>Failed to Load Rooms !</th></tr></table>");
 	}); 
 }
 /* Display Devices to Add Room Modal Function */
@@ -3086,6 +3197,29 @@ function DisplayUsersListUsersSection()
 	.fail(function()
 	{
 		$("#users #users-list table").empty();
-		$("#users #users-list table").append("<thead><tr class='uk-animation-scale-down uk-text-center'><th style='border: 1px solid var(--secondary-color); border-radius: .25rem;'><img src='../images/icons/error.png' width='50' height='50'><br><br>Failed to Load Users !</th></tr></thead>");
+		$("#users #users-list table").append("<thead><tr class='uk-animation-scale-down uk-text-center'><th style='border: 1px solid var(--secondary-color); border-radius: .25rem; color: #C0392B;'><img src='../images/icons/error.png' width='50' height='50'><br><br>Failed to Load Users !</th></tr></thead>");
 	}); 
+}
+/*==================================================
+		Settings Section Functions
+==================================================*/
+/* Reset Settings Form Account */
+function ResetSettingsAccountForm()
+{
+	$("#setting-old-password").val("");
+	$("#setting-new-password").val("");
+	$("#setting-confirm-new-password").val("");
+
+	$("#setting-fname").css("border", "1px solid var(--secondary-color)");
+	$("#setting-lname").css("border", "1px solid var(--secondary-color)");
+	$("#setting-old-password").css("border", "1px solid var(--secondary-color)");
+	$("#setting-new-password").css("border", "1px solid var(--secondary-color)");
+	$("#setting-confirm-new-password").css("border", "1px solid var(--secondary-color)");
+
+	$("#setting-fname-error").hide();
+	$("#setting-lname-error").hide();
+	$("#setting-old-password-error").hide();
+	$("#setting-new-password-error").hide();
+	$("#setting-confirm-new-password-error").hide();
+	$("#setting-wrong-old-password").hide();
 }

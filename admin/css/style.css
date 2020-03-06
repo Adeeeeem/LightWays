@@ -43,7 +43,7 @@
 #lights form select{width: 65%; border: none; background-color: transparent; padding: 0; margin-top: -5px !important;}
 #lights hr.select-hr{background-position: 60%; max-width: 60%; margin-top: -5px; background-image: radial-gradient(closest-side, var(--secondary-color), hsla(232, 18%, 69%, 0) 150%); height: 1px;}
 #lights #lights-room{margin-top: -45px !important;}
-#lights #lights-room-name{font-size: 1.5rem !important; letter-spacing: 1px; margin-bottom: 0; margin-top: -20px;}
+#lights #lights-room-name{font-size: 1.5rem !important; letter-spacing: 1px; margin-bottom: 0; margin-top: -20px; color: var(--text-color);}
 #lights #lights-room-devices-number{padding: 0 !important; margin: 0 !important; color: var(--orange-color); font-size: 0.8rem;}
 /* Devices Display Table */
 #lights table#lights-room-devices{border: 1px solid var(--secondary-color); border-radius: .25rem; padding: 10px; width: 100%;}
@@ -138,7 +138,7 @@
 /* Floor */
 #floors article.floor-details{background-color: var(--primary-color); border: 1px solid var(--secondary-color); border-radius: 0.5rem; height: 65px; cursor: pointer; margin-bottom: 25px; position: relative;}
 #floors article.floor-details div.uk-width-1-1{overflow: hidden; white-space: nowrap; text-overflow: ellipsis; margin-right: 20px; padding-left: 30px !important;}
-#floors article.floor-details h4{font-weight: 600; margin-top: 7px !important; color: #333333;}
+#floors article.floor-details h4{font-weight: 600; margin-top: 7px !important; color: var(--text-color);}
 #floors article.floor-details h6{color: var(--secondary-color);}
 /* Error Table */
 #floors #floors-list table{border: 1px solid var(--secondary-color); border-radius: .25rem; padding: 10px; width: 100%;}
@@ -150,7 +150,7 @@
 #modal-edit-floor #floor-details-table table{border: 1px solid var(--secondary-color); border-radius: .25rem; font-weight: bold; padding: 0; font-size: 0.75rem;}
 #modal-edit-floor #floor-details-table table *+.uk-grid-margin, #modal-edit-floor #floor-details-table table .uk-grid+.uk-grid, #modal-edit-floor #floor-details-table table .uk-grid>.uk-grid-margin{margin-top: 5px;}
 #modal-edit-floor #floor-details-table table thead{background-color: var(--primary-color); border-radius: .25rem;}
-#modal-edit-floor #floor-details-table table th{font-weight: bold; color: #333333; font-size: 0.9rem; padding-left: 5px; padding-right: 5px; padding-top: 10px; padding-bottom: 10px;}
+#modal-edit-floor #floor-details-table table th{font-weight: bold; color: var(--text-color); font-size: 0.9rem; padding-left: 5px; padding-right: 5px; padding-top: 10px; padding-bottom: 10px;}
 #modal-edit-floor #floor-details-table table td{padding: 5px;}
 #modal-edit-floor #floor-details-table table tr{border-radius: .25rem;}
 #modal-edit-floor #floor-details-table table tr:hover{background-color: var(--primary-color);}
@@ -171,10 +171,10 @@
 #rooms #rooms-list{height: calc(110vh - 225px); overflow-y: auto; overflow-x: hidden;}
 /* Room */
 #rooms div.uk-section{padding-top: 0; padding-bottom: 0; border: 1px solid var(--secondary-color); border-radius: 0.25rem; padding: 10px; margin-top: 10px; background-color: var(--primary-color);}
-#rooms h4.section-title{margin-top: 10px; margin-bottom: 10px; font-weight: 600;}
+#rooms h4.section-title{margin-top: 10px; margin-bottom: 10px; font-weight: 600; color: var(--text-color) !important;}
 #rooms article.room-details{background-color: var(--body-color); border: 1px solid var(--secondary-color); border-radius: 0.5rem; height: 65px; cursor: pointer; margin-bottom: 25px; position: relative;}
 #rooms article.room-details div.uk-width-1-1{overflow: hidden; white-space: nowrap; text-overflow: ellipsis; margin-right: 20px; padding-left: 30px !important;}
-#rooms article.room-details h4{font-weight: 400; margin-top: 7px !important; color: #333333;}
+#rooms article.room-details h4{font-weight: 400; margin-top: 7px !important; color: var(--text-color);}
 #rooms article.room-details h6{color: var(--secondary-color);}
 /* Error Table */
 #rooms #rooms-list table{border: 1px solid var(--secondary-color); border-radius: .25rem; padding: 10px; width: 100%; background-color: var(--body-color);}
@@ -190,7 +190,8 @@
 #modal-add-room #add-room-room table{border: 1px solid var(--secondary-color); border-radius: .25rem; padding: 10px; border-collapse: separate; margin-top: 20px;}
 #modal-add-room #add-room-room table td{padding: 0 !important;}
 #modal-add-room #add-room-room table td div{padding: 2px !important;}
-#modal-add-room #add-room-room table td div img{padding: 2px !important; border: 2px solid black; border-radius: 50%; cursor: pointer;}
+#modal-add-room #add-room-room table td div img{border-radius: 50%; cursor: pointer;}
+#modal-add-room #add-room-room table td div img.SELECTED{padding: 2px !important; border: 2px solid black;}
 /* Display Rotated Devices */
 #modal-add-room #add-room-room table.rotated td div{padding: 5px !important;}
 #modal-add-room #add-room-room table.rotated td div img{-webkit-transform: rotate(270deg); -moz-transform: rotate(270deg); -ms-transform: rotate(270deg); -o-transform: rotate(270deg); transform: rotate(270deg);}
@@ -236,3 +237,24 @@
 /* Display Users Table */
 #users table{border-radius: .25rem; padding: 10px; border-collapse: separate; margin-top: 20px;}
 #users table tr td{border-bottom: 1px solid var(--primary-color);}
+/*=========================
+		Settings
+=========================*/
+#settings form{margin-top: 100px!important; width: 60%;}
+#settings hr{background-position: 85%; max-width: 85%; margin-top: -5px; background-image: radial-gradient(closest-side, var(--secondary-color), hsla(232, 18%, 69%, 0) 150%); height: 1px;}
+#settings div.change-password-title{font-size: 0.8rem; color: var(--secondary-color);}
+#settings #setting-language{border: 1px solid var(--secondary-color); width: 228px;}
+/* Dark Theme Button */
+#settings div.uk-width-1-3.uk-text-left{line-height: 1;}
+#settings .uk-switch{position: relative; display: inline-block; height: 25px; width: 50px;}
+#settings .uk-switch input{display:none;}
+#settings .uk-switch-slider{background-color: rgba(0,0,0,0.22); position: absolute; top: 0; left: 0; right: 0; bottom: 0; border-radius: 500px; cursor: pointer; transition-property: background-color; transition-duration: .2s; box-shadow: inset 0 0 2px rgba(0,0,0,0.07);}
+#settings .uk-switch-slider:before{ content: ''; background-color: #FFFFFF; position: absolute; width: 21px; height: 21px; left: 2px; bottom: 2px; border-radius: 50%; transition-property: transform, box-shadow; transition-duration: .2s;}
+#settings input:checked + .uk-switch-slider{background-color: var(--orange-color) !important;}
+#settings input:checked + .uk-switch-slider:before {transform: translateX(26px);}
+#settings .uk-switch-slider{background-color: var(--secondary-color);}
+/* Save & Cancel Buttons */
+#settings button{color: var(--orange-color);}
+#settings button.uk-button-text::before{border-bottom: 2px solid var(--orange-color);}
+#settings div.setting-cancel-btn{padding-right: 50px !important;}
+#settings div.setting-save-btn{padding-left: 50px !important;}

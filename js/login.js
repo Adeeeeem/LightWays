@@ -1,4 +1,4 @@
-// If user is already connected take him to Home Page
+/* If user is already connected take him to Home Page */
 $(window).on("load", function()
 {
 	$.ajax
@@ -21,7 +21,6 @@ $(window).on("load", function()
 		}
 	});
 });
-
 /* When Clicking on Login Button */
 $(function()
 {
@@ -39,7 +38,7 @@ $(function()
 		}
 		else
 		{
-			$("#login-username").css("border", "none");
+			$("#login-username").css("border", "1px solid var(--secondary-color)");
 			$("#login-username-error").hide();
 		}
 
@@ -50,7 +49,7 @@ $(function()
 		}
 		else
 		{
-			$("#login-password").css("border", "none");
+			$("#login-password").css("border", "1px solid var(--secondary-color)");
 			$("#login-password-error").hide();
 		}
 
@@ -67,7 +66,9 @@ $(function()
 				{
 					case "Error": // Error
 						ResetLoginForm();
-						$.growl.error({ message: "An error occurred !" });
+						$.growl.error({ message: "Oops, There was an Error!" });
+						$("#login-username").css("border", "1px solid #F32013");
+						$("#login-password").css("border", "1px solid #F32013");
 					break;
 
 					case "Empty": // Empty
@@ -91,22 +92,24 @@ $(function()
 
 					case "User": // Normal User
 						window.location.href="user/";
+						localStorage.setItem("LightWays_SECTION", "#lights-btn"); // Reset Saved Tabs
 					break;
 
 					case "Admin": // Admin
 						window.location.href="admin/";
-						localStorage.setItem("LastSectionOpen", "#lights-btn"); // Reset Saved Tabs
+						localStorage.setItem("LightWays_ADMIN_SECTION", "#lights-btn"); // Reset Saved Tabs
 					break;
 				}
 		})
 		.fail(function()
 		{
 			ResetLoginForm();
-			$.growl.error({ message: "An error occurred !" });
+			$.growl.error({ message: "Oops, There was an Error!" });
+			$("#login-username").css("border", "1px solid #F32013");
+			$("#login-password").css("border", "1px solid #F32013");
 		});
 	});
 });
-
 /* Reset Login Form */
 function ResetLoginForm()
 {
