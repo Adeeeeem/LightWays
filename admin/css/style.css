@@ -1,0 +1,205 @@
+/*==================================================
+				Hidden Elements
+==================================================*/
+#mobile-menu-open-btn, #mobile-menu, #groups, #scenes, #statistics, #floors, #rooms, #users, #settings, #contact{display: none;}
+/*==================================================
+				Menu
+==================================================*/
+/* Menu */
+#menu{position: fixed; left: 0; top: 0; bottom: 0; overflow-y: auto; width: 250px; background-color: var(--primary-color);}
+#menu-logo img{width: 200px; height: 75px;}
+#menu button{background-color: var(--primary-color); font-weight: bold; color: var(--secondary-color); font-size: 13px; letter-spacing: 1px; text-transform: uppercase; margin-top: 10px;}
+#menu button:hover, #menu button:focus, #menu button.active{color: var(--blue-color);}
+#menu button img{width: 25px; height: 25px; margin-right: 25px;}
+#groups-btn img{width: 33px !important; height: 33px !important; margin-left: -3px; margin-right: 20px !important;}
+#logout-btn img{margin-left: 2px; margin-right: 23px !important;}
+#menu ul.configuration-btn{padding-top: 5px;}
+#configuration-btn{padding-top: 0; height: 38px;}
+#menu div.uk-accordion-content{margin-top: 0; padding-left: 35px;}
+/* Mobile Menu */
+#mobile-menu{height: 100%; width: 100%; position: fixed; top: 0; left: 0; background-color: var(--primary-color); overflow-y: auto; z-index: 2;}
+#mobile-menu-close-btn{font-size: 75px; color: var(--orange-color); cursor: pointer; font-weight: 400; margin: 0; padding: 0; margin-right: 20px; margin-top: -20px;}
+#mobile-menu-logo img{width: 180px; height: 75px; margin-left: 34px;}
+#mobile-menu button{background-color: var(--primary-color); color: var(--secondary-color); font-size: 15px; letter-spacing: 1px; text-transform: uppercase; padding-left: 50px; padding-top: 5px;}
+#mobile-menu button:hover, #mobile-menu button:focus, #mobile-menu button.active{color: var(--blue-color);}
+#mobile-menu button img{width: 20px; height: 20px; margin-right: 20px; margin-top: -6px;}
+#mobile-groups-btn img{width: 30px !important; height: 30px !important; margin-left: -3px; margin-right: 13px !important;}
+#mobile-menu ul.mobile-configuration-btn{padding-top: 5px;}
+#mobile-configuration-btn{padding-top: 0; height: 43px;}
+#mobile-menu div.uk-accordion-content{margin-top: 0; padding-left: 25px;}
+/*==================================================
+				Sections
+==================================================*/
+#sections{margin-left: 250px;}
+#sections nav{margin-top: 30px; z-index: 0;}
+#mobile-menu-open-btn{font-size: 35px; color: var(--orange-color); cursor: pointer; margin: 0; padding: 0; margin-left: 15px;}
+#sections hr.title-hr{background-position: 100%; max-width: 100%; margin-top: 5px; height: 3px; background-image: radial-gradient(closest-side, var(--orange-color), hsla(232, 18%, 69%, 0) 100%);}
+#section-title{font-size: 17px; text-transform: uppercase; letter-spacing: 2px; margin-top: 30px;}
+/*=========================
+		Lights
+=========================*/
+#lights form label{color: var(--blue-color); padding-bottom: 0 !important; margin-bottom: 0 !important; padding-left: 6rem;}
+#lights form div.uk-form-controls{text-align: center !important;}
+#lights form select{width: 65%; border: none; background-color: transparent; padding: 0; margin-top: -5px !important;}
+#lights hr.select-hr{background-position: 60%; max-width: 60%; margin-top: -5px; background-image: radial-gradient(closest-side, var(--secondary-color), hsla(232, 18%, 69%, 0) 150%); height: 1px;}
+#lights #lights-room{margin-top: -45px !important;}
+#lights #lights-room-name{font-size: 1.5rem !important; letter-spacing: 1px; margin-bottom: 0; margin-top: -20px;}
+#lights #lights-room-devices-number{padding: 0 !important; margin: 0 !important; color: var(--orange-color); font-size: 0.8rem;}
+/* Devices Display Table */
+#lights table#lights-room-devices{border: 1px solid var(--secondary-color); border-radius: .25rem; padding: 10px; width: 100%;}
+#lights table#lights-room-devices th{padding: 16px 12px; text-align: left; vertical-align: bottom; font-size: .875rem; font-weight: 400; color: #999999; text-transform: uppercase;}
+#lights table#lights-room-devices td{padding: 0 !important;}
+#lights table#lights-room-devices td div{padding: 10px !important;}
+#lights table#lights-room-devices td div img{padding: 5px !important; border: 2px solid black; border-radius: 50%; cursor: pointer;}
+#lights table#lights-room-devices td div img.ON{background-color: #FFCC00;}
+#lights table#lights-room-devices td div img.OFF{background-color: var(--primary-color);}
+/* Rotated Devices Display Table */
+#lights table#lights-room-devices.rotated td div{padding: 5px !important;}
+#lights table#lights-room-devices.rotated td div img{-webkit-transform: rotate(270deg); -moz-transform: rotate(270deg); -ms-transform: rotate(270deg); -o-transform: rotate(270deg); transform: rotate(270deg); width: 50px; height: 50px; padding: 2px !important;}
+/* Groups Display Table */
+#lights #lights-room-groups{border: 1px solid var(--secondary-color); border-radius: .25rem; padding: 10px !important; display: flex; flex-wrap: wrap; justify-content: center;}
+#lights *+.uk-grid-margin, #lights .uk-grid+.uk-grid, #lights .uk-grid>.uk-grid-margin{margin-top: 10px;}
+#lights #lights-room-groups button{border: 1px solid var(--primary-color); border-radius: 0.25rem; display: inline-block; cursor: pointer; margin-left: 15px; margin-right: 15px; height: 40px; padding: 0px;}
+#lights #lights-room-groups th{padding: 16px 12px; text-align: left; vertical-align: bottom; font-size: .875rem; font-weight: 400; color: #999999; text-transform: uppercase;}
+/* Rotated Groups Display Table */
+#lights #lights-room-groups.rotated button{display: inline-block; -webkit-transform: rotate(270deg); -moz-transform: rotate(270deg); -ms-transform: rotate(270deg); -o-transform: rotate(270deg); transform: rotate(270deg);}
+/*=========================
+		Groups
+=========================*/
+#groups .add-group{margin-top: 1rem;}
+#groups #add-group-btn{background-color: transparent; text-transform: uppercase; letter-spacing: 1px; font-size: 13px !important;}
+#groups #add-group-btn img{margin-top: -4px; margin-right: 4px !important;}
+#groups hr{border: 0; margin: 0.25em auto; max-width: 100%; background-position: 50%; box-sizing: border-box; height: 2px; background-image: radial-gradient(closest-side, hsla(232, 18%, 69%, 1.0),  hsla(232, 18%, 69%, 0) 100%); position: relative;}
+#groups #groups-list{height: calc(110vh - 225px); overflow-y: auto; overflow-x: hidden;}
+/* Group */
+#groups article.group-details{background-color: var(--primary-color); border: 1px solid var(--secondary-color); border-radius: 0.5rem; height: 65px; cursor: pointer; margin-bottom: 25px; position: relative;}
+#groups article.group-details div.uk-width-expand{overflow: hidden; white-space: nowrap; text-overflow: ellipsis; margin-right: 20px; padding-left: 30px !important;}
+#groups article.group-details h4{font-weight: 600; margin-top: 7px !important;}
+#groups article.group-details h4, #groups article.group-details h6{margin-left: -15px !important;}
+#groups article.group-details div.uk-width-auto{padding-left: 0;}
+/* Error Table */
+#groups #groups-list table{border: 1px solid var(--secondary-color); border-radius: .25rem; padding: 10px; width: 100%;}
+#groups #groups-list table th{padding: 16px 12px; text-align: left; vertical-align: bottom; font-size: .875rem; font-weight: 400; color: #999; text-transform: uppercase;}
+/* Control Group Button */
+#groups .uk-switch{position: relative; display: inline-block; height: 25px; width: 50px; margin-top: 20px;}
+#groups .uk-switch input{display:none;}
+#groups .uk-switch-slider{background-color: rgba(0,0,0,0.22); position: absolute; top: 0; left: 0; right: 0; bottom: 0; border-radius: 500px; cursor: pointer; transition-property: background-color; transition-duration: .2s; box-shadow: inset 0 0 2px rgba(0,0,0,0.07);}
+#groups .uk-switch-slider:before{ content: ''; background-color: #FFFFFF; position: absolute; width: 21px; height: 21px; left: 2px; bottom: 2px; border-radius: 50%; transition-property: transform, box-shadow; transition-duration: .2s;}
+#groups input:checked + .uk-switch-slider{background-color: var(--orange-color) !important;}
+#groups input:checked + .uk-switch-slider:before {transform: translateX(26px);}
+#groups .uk-switch-slider{background-color: var(--secondary-color);}
+/* Add Group Modal */
+#modal-add-group div.add-group-search-room div{padding: 0; margin: 0;}
+#modal-add-group div.add-group-search-room label{color: var(--blue-color); padding-left: 0.5rem; margin-bottom: 0 !important; font-size: 10px;}
+#modal-add-group #add-group-search-floor, #modal-add-group #add-group-search-room{background-color: transparent;}
+#modal-add-group hr.select-hr{background-position: 85%; max-width: 85%; margin-top: -5px; background-image: radial-gradient(closest-side, var(--secondary-color), hsla(232, 18%, 69%, 0) 150%); height: 1px;}
+#modal-add-group #add-group-room table{border: 1px solid var(--secondary-color); border-radius: .25rem; padding: 10px; border-collapse: separate;}
+#modal-add-group #add-group-room table td{padding: 0 !important;}
+#modal-add-group #add-group-room table td div{padding: 7px !important;}
+#modal-add-group #add-group-room table td div img{padding: 5px !important; border: 2px solid black; border-radius: 50%; cursor: pointer;}
+/* Display Rotated Devices */
+#modal-add-group #add-group-room table.rotated td div{padding: 5px !important;}
+#modal-add-group #add-group-room table.rotated td div img{-webkit-transform: rotate(270deg); -moz-transform: rotate(270deg); -ms-transform: rotate(270deg); -o-transform: rotate(270deg); transform: rotate(270deg);}
+/* Edit Group Modal */
+#modal-edit-group div.edit-group-search-room div{padding: 0; margin: 0;}
+#modal-edit-group div.edit-group-search-room label{color: var(--blue-color); padding-left: 0.5rem; margin-bottom: 0 !important; font-size: 10px;}
+#modal-edit-group #edit-group-search-floor, #modal-edit-group #edit-group-search-room{background-color: transparent;}
+#modal-edit-group hr.select-hr{background-position: 85%; max-width: 85%; margin-top: -5px; background-image: radial-gradient(closest-side, var(--secondary-color), hsla(232, 18%, 69%, 0) 150%); height: 1px;}
+#modal-edit-group #edit-group-room table{border: 1px solid var(--secondary-color); border-radius: .25rem; padding: 10px; border-collapse: separate;}
+#modal-edit-group #edit-group-room table td{padding: 0 !important;}
+#modal-edit-group #edit-group-room table td div{padding: 7px !important;}
+#modal-edit-group #edit-group-room table td div img{padding: 5px !important; border: 2px solid black; border-radius: 50%; cursor: pointer;}
+#modal-edit-group #delete-group-btn{color: #C0392B;}
+#modal-edit-group #delete-group-btn img{margin-top: -3px;}
+/* Display Rotated Devices */
+#modal-edit-group #edit-group-room table.rotated td div{padding: 5px !important;}
+#modal-edit-group #edit-group-room table.rotated td div img{-webkit-transform: rotate(270deg); -moz-transform: rotate(270deg); -ms-transform: rotate(270deg); -o-transform: rotate(270deg); transform: rotate(270deg);}
+/* Delete Group Modal */
+#modal-delete-group div.uk-padding-small{border: 2px solid #C0392B; border-radius: 50%;}
+#modal-delete-group h2.uk-modal-title{font-size: 1.45rem; margin-top: 10px;}
+#modal-delete-group button.uk-modal-close{background-color: #C0392B; color: #FFFFFF;}
+#modal-delete-group button#delete-group-confirm-btn{background-color: #2ECC71; color: #FFFFFF;}
+/*=========================
+		Scenes
+=========================*/
+
+/*=========================
+		Statistics
+=========================*/
+
+/*=========================
+		Floors
+=========================*/
+#floors .add-floor{margin-top: 1rem;}
+#floors #add-floor-btn{background-color: transparent; text-transform: uppercase; letter-spacing: 1px; font-size: 13px !important;}
+#floors #add-floor-btn img{margin-top: -4px; margin-right: 4px !important;}
+#floors hr{border: 0; margin: 0.25em auto; max-width: 100%; background-position: 50%; box-sizing: border-box; height: 2px; background-image: radial-gradient(closest-side, hsla(232, 18%, 69%, 1.0),  hsla(232, 18%, 69%, 0) 100%); position: relative;}
+#floors #floors-list{height: calc(110vh - 225px); overflow-y: auto; overflow-x: hidden;}
+/* Floor */
+#floors article.floor-details{background-color: var(--primary-color); border: 1px solid var(--secondary-color); border-radius: 0.5rem; height: 65px; cursor: pointer; margin-bottom: 25px; position: relative;}
+#floors article.floor-details div.uk-width-1-1{overflow: hidden; white-space: nowrap; text-overflow: ellipsis; margin-right: 20px; padding-left: 30px !important;}
+#floors article.floor-details h4{font-weight: 600; margin-top: 7px !important; color: #333333;}
+#floors article.floor-details h6{color: var(--secondary-color);}
+/* Error Table */
+#floors #floors-list table{border: 1px solid var(--secondary-color); border-radius: .25rem; padding: 10px; width: 100%;}
+#floors #floors-list table th{padding: 16px 12px; text-align: left; vertical-align: bottom; font-size: .875rem; font-weight: 400; color: #999; text-transform: uppercase;}
+/* Edit Floor Modal */
+#modal-edit-floor #delete-floor-btn{color: #C0392B;}
+#modal-edit-floor #delete-floor-btn img{margin-top: -3px;}
+/* Floor Details Table */
+#modal-edit-floor #floor-details-table table{border: 1px solid var(--secondary-color); border-radius: .25rem; font-weight: bold; padding: 0; font-size: 0.75rem;}
+#modal-edit-floor #floor-details-table table *+.uk-grid-margin, #modal-edit-floor #floor-details-table table .uk-grid+.uk-grid, #modal-edit-floor #floor-details-table table .uk-grid>.uk-grid-margin{margin-top: 5px;}
+#modal-edit-floor #floor-details-table table thead{background-color: var(--primary-color); border-radius: .25rem;}
+#modal-edit-floor #floor-details-table table th{font-weight: bold; color: #333333; font-size: 0.9rem; padding-left: 5px; padding-right: 5px; padding-top: 10px; padding-bottom: 10px;}
+#modal-edit-floor #floor-details-table table td{padding: 5px;}
+#modal-edit-floor #floor-details-table table tr{border-radius: .25rem;}
+#modal-edit-floor #floor-details-table table tr:hover{background-color: var(--primary-color);}
+/* Delete Floor Modal */
+#modal-delete-floor div.uk-padding-small{border: 2px solid #C0392B; border-radius: 50%;}
+#modal-delete-floor h2.uk-modal-title{font-size: 1.45rem; margin-top: 10px;}
+#modal-delete-floor h2.uk-modal-title span{color: var(--secondary-color);}
+#modal-delete-floor h5{color: #C0392B; line-height: 1; font-size: 15px; margin-top: 25px; font-weight: 500;}
+#modal-delete-floor button.uk-modal-close{background-color: #C0392B; color: #FFFFFF;}
+#modal-delete-floor button#delete-floor-confirm-btn{background-color: #2ECC71; color: #FFFFFF;}
+/*=========================
+		Rooms
+=========================*/
+#rooms .add-room{margin-top: 1rem;}
+#rooms #add-room-btn{background-color: transparent; text-transform: uppercase; letter-spacing: 1px; font-size: 13px !important;}
+#rooms #add-room-btn img{margin-top: -4px; margin-right: 4px !important;}
+#rooms hr{border: 0; margin: 0.25em auto; max-width: 100%; background-position: 50%; box-sizing: border-box; height: 2px; background-image: radial-gradient(closest-side, hsla(232, 18%, 69%, 1.0),  hsla(232, 18%, 69%, 0) 100%); position: relative;}
+#rooms #rooms-list{height: calc(110vh - 225px); overflow-y: auto; overflow-x: hidden;}
+/* Room */
+#rooms div.uk-section{padding-top: 0; padding-bottom: 0; border: 1px solid var(--secondary-color); border-radius: 0.25rem; padding: 10px; margin-top: 10px; background-color: var(--primary-color);}
+#rooms h4.section-title{margin-top: 10px; margin-bottom: 10px; font-weight: 600;}
+#rooms article.room-details{background-color: var(--body-color); border: 1px solid var(--secondary-color); border-radius: 0.5rem; height: 65px; cursor: pointer; margin-bottom: 25px; position: relative;}
+#rooms article.room-details div.uk-width-1-1{overflow: hidden; white-space: nowrap; text-overflow: ellipsis; margin-right: 20px; padding-left: 30px !important;}
+#rooms article.room-details h4{font-weight: 400; margin-top: 7px !important; color: #333333;}
+#rooms article.room-details h6{color: var(--secondary-color);}
+/* Error Table */
+#rooms #rooms-list table{border: 1px solid var(--secondary-color); border-radius: .25rem; padding: 10px; width: 100%; background-color: var(--body-color);}
+#rooms #rooms-list table th{padding: 16px 12px; text-align: left; vertical-align: bottom; font-size: .875rem; font-weight: 400; color: #999; text-transform: uppercase;}
+/* Add Room Modal */
+#modal-add-room div.add-room-search-floor div{padding: 0; margin: 0;}
+#modal-add-room div.add-room-search-floor label{color: var(--blue-color); padding-left: 0.5rem; margin-bottom: 0 !important; font-size: 10px;}
+#modal-add-room #add-room-search-floor{background-color: transparent;}
+#modal-add-room hr.select-hr{background-position: 85%; max-width: 85%; margin-top: -5px; background-image: radial-gradient(closest-side, var(--secondary-color), hsla(232, 18%, 69%, 0) 150%); height: 1px;}
+#modal-add-room div.add-room-width-height div.uk-width-1-2:first-child{padding-right: 5px;}
+#modal-add-room div.add-room-width-height div.uk-width-1-2:nth-child(2){padding-left: 5px;}
+#modal-add-room div.add-room-width-height div.uk-form-controls small{font-size: 11px; color: var(--secondary-color);}
+#modal-add-room #add-room-room table{border: 1px solid var(--secondary-color); border-radius: .25rem; padding: 10px; border-collapse: collapse; margin-top: 20px;}
+#modal-add-room #add-room-room table td{padding: 0 !important;}
+#modal-add-room #add-room-room table td div{padding: 7px !important;}
+#modal-add-room #add-room-room table td div img{padding: 5px !important; border: 2px solid black; border-radius: 50%; cursor: pointer;}
+/* Display Rotated Devices */
+#modal-add-room #add-room-room table.rotated td div{padding: 5px !important;}
+#modal-add-room #add-room-room table.rotated td div img{-webkit-transform: rotate(270deg); -moz-transform: rotate(270deg); -ms-transform: rotate(270deg); -o-transform: rotate(270deg); transform: rotate(270deg);}
+/* Add Room Device Modal */
+#modal-add-room-device #delete-room-device-btn{color: #C0392B;}
+#modal-add-room-device #delete-room-device-btn img{margin-top: -3px;}
+/* Edit Room Modal */
+#modal-edit-room #delete-room-btn{color: #C0392B;}
+#modal-edit-room #delete-room-btn img{margin-top: -3px;}
+/*=========================
+		Users
+=========================*/

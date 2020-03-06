@@ -1,0 +1,198 @@
+/*==================================================
+				Media Queries
+==================================================*/
+/* Large Devices */
+@media (min-width: 1200px) and (max-width: 1299px)
+{
+
+}
+/* Medium Devices */
+@media (min-width: 992px) and (max-width: 1199px)
+{
+	input, select{height: 37px !important; font-size: 14px !important;}
+	/*==================================================
+					Menu
+	==================================================*/
+	/* Left Menu */
+	#menu{width: 200px;}
+	#menu-logo img{width: 150px; height: 60px;}
+	#menu button{font-size: 10px;}
+	#menu button img{width: 17px; height: 17px; margin-right: 20px; margin-top: -3px;}
+	#groups-btn img{width: 24px !important; height: 24px !important; margin-left: -3px; margin-right: 17px !important;}
+	/*==================================================
+					Sections
+	==================================================*/
+	#sections{margin-left: 200px;}
+	/*=========================
+			Lights
+	=========================*/
+	#lights form label{padding-left: 2.1rem; font-size: 11px;}
+	#lights form select{width: 80%;}
+	/*=========================
+			Groups
+	=========================*/
+	#groups #add-group-btn{font-size: 11px !important;}
+	#groups #add-group-btn img{margin-top: -2px;}
+	/*=========================
+			Floors
+	=========================*/
+	#floors #add-floor-btn{font-size: 11px !important;}
+	#floors #add-floor-btn img{margin-top: -2px;}
+	/*=========================
+			Rooms
+	=========================*/
+	#rooms #add-room-btn{font-size: 11px !important;}
+	#rooms #add-room-btn img{margin-top: -2px;}
+}
+/* Small Devices */
+@media (min-width: 768px) and (max-width: 991px)
+{
+	input, select{height: 35px !important; font-size: 13px !important;}
+	/*==================================================
+					Menu
+	==================================================*/
+	/* Left Menu */
+	#menu{width: 200px;}
+	#menu-logo img{width: 150px; height: 60px;}
+	#menu button{font-size: 10px;}
+	#menu button img{width: 17px; height: 17px; margin-right: 20px; margin-top: -3px;}
+	#groups-btn img{width: 24px !important; height: 24px !important; margin-left: -3px; margin-right: 15px !important;}
+	#menu div.uk-accordion-content{padding-left: 20px;}
+	/*==================================================
+					Sections
+	==================================================*/
+	#sections{margin-left: 200px;}
+	/*=========================
+			Lights
+	=========================*/
+	#lights form label{padding-left: 1.9rem; font-size: 9px;}
+	#lights form select{width: 80%;}
+	#lights hr.select-hr{background-position: 70%; max-width: 70%;}
+	#lights #lights-room{margin-top: -30px !important;}
+	#lights #lights-room #lights-room-name{margin-top: 20px !important; font-size: 1.3rem !important;}
+	#lights #lights-room #lights-room-devices-number{font-size: 0.8rem;}
+	/* Groups Display Table */
+	#lights #lights-room-groups button{width: 100px !important; height: 30px; font-size: .5rem !important; line-height: 1;}
+	/*=========================
+			Groups
+	=========================*/
+	#groups #add-group-btn{font-size: 10px !important;}
+	#groups #add-group-btn img{margin-top: -3px;}
+	/*=========================
+			Floors
+	=========================*/
+	#floors #add-floor-btn{font-size: 10px !important;}
+	#floors #add-floor-btn img{margin-top: -3px;}
+	/* Floor Details Table */
+	#modal-edit-floor #floor-details-table table{font-size: 0.75rem;}
+	#modal-edit-floor #floor-details-table table th{font-size: 0.9rem;}
+	/*=========================
+			Rooms
+	=========================*/
+	#rooms #add-room-btn{font-size: 10px !important;}
+	#rooms #add-room-btn img{margin-top: -3px;}
+}
+/* Extra Small Devices */
+@media (max-width: 767px)
+{
+	input, select{height: 35px !important; font-size: 14px !important;}
+	/*==================================================
+					Menu
+	==================================================*/
+	/* Left Menu */
+	#menu{display: none;}
+	/*==================================================
+					Sections
+	==================================================*/
+	#sections{margin-left: 0;}
+	nav{margin-top: 5px !important;}
+	#mobile-menu-open-btn{display: block;}
+	/*=========================
+			Lights
+	=========================*/
+	#lights {margin-top: 15px !important;}
+	#lights form {margin-top: 15px !important;}
+	#lights form label{padding-left: 0.7rem; font-size: 9px;}
+	#lights form select{width: 90%;}
+	#lights hr.select-hr{background-position: 75%; max-width: 75%;}
+	#lights #lights-room{margin-top: -25px !important;}
+	#lights #lights-room #lights-room-name{margin-top: 20px !important; font-size: 1.2rem !important;}
+	#lights #lights-room #lights-room-devices-number{font-size: 0.7rem;}
+	/* Devices Display Table */
+	#lights table#lights-room-devices td div{padding: 5px !important;}
+	/* Groups Display Table */
+	#lights #lights-room-groups button{width: 100px !important; height: 30px; font-size: .5rem !important; line-height: 1;}
+	/*=========================
+			Groups
+	=========================*/
+	#groups #add-group-btn{font-size: 10px !important;}
+	#groups #add-group-btn img{margin-top: -3px;}
+	/* Add Group Modal */
+	#modal-add-group #add-group-room table td div{padding: 5px !important;}
+	/* Edit Group Modal */
+	#modal-edit-group #edit-group-room table td div{padding: 5px !important;}
+	/*=========================
+			Floors
+	=========================*/
+	#floors #add-floor-btn{font-size: 10px !important;}
+	#floors #add-floor-btn img{margin-top: -3px;}
+	/* Floor Details Table */
+	#modal-edit-floor #floor-details-table table{font-size: 0.6rem;}
+	#modal-edit-floor #floor-details-table table th{font-size: 0.7rem;}
+	/*=========================
+			Rooms
+	=========================*/
+	#rooms #add-room-btn{font-size: 10px !important;}
+	#rooms #add-room-btn img{margin-top: -3px;}
+	/* Add Room Modal */
+	#modal-add-room div.add-room-width-height div.uk-form-controls small{font-size: 10px;}
+	#modal-add-room #add-room-room table td div{padding: 5px !important;}
+}
+/* Extra X-Small Devices */
+@media (max-width: 480px)
+{
+	/*==================================================
+					Sections
+	==================================================*/
+	/*=========================
+			Lights
+	=========================*/
+	#lights form label{padding-left: 0.2rem;}
+	#lights form select{font-size: 10px;}
+	#lights #lights-room{margin-top: -20px !important;}
+	#lights #lights-room #lights-room-name{margin-top: 15px !important; font-size: 1rem !important;}
+	#lights #lights-room #lights-room-devices-number{font-size: 0.5rem;}
+	/* Devices Display Table */
+	#lights table#lights-room-devices td div{padding: 2px !important;}
+	#lights table#lights-room-devices td div img{padding: 2px !important;}
+	/* Groups Display Table */
+	#lights #lights-room-groups button{width: 75px !important; height: 25px; font-size: .4rem !important; line-height: 1;}
+	/*=========================
+			Groups
+	=========================*/
+	#groups .add-group{margin-top: 0;}
+	#groups #add-group-btn{padding-left: 10px; padding-right: 10px;}
+	/* Add Group Modal */
+	#modal-add-group #add-group-room table td div{padding: 2px !important;}
+	#modal-add-group #add-group-room table td div img{padding: 2px !important;}
+	/* Edit Group Modal */
+	#modal-edit-group #edit-group-room table td div{padding: 2px !important;}
+	#modal-edit-group #edit-group-room table td div img{padding: 2px !important;}
+	/* Delete Group Modal */
+	#modal-delete-group h2.uk-modal-title{font-size: 1.2rem;}
+	#modal-delete-group button{font-size: 0.7rem; line-height: 1; padding: 0;}
+	/*=========================
+			Floors
+	=========================*/
+	#floors .add-floor{margin-top: 0;}
+	#floors #add-floor-btn{padding-left: 10px; padding-right: 10px;}
+	/*=========================
+			Rooms
+	=========================*/
+	#rooms .add-room{margin-top: 0;}
+	#rooms #add-room-btn{padding-left: 10px; padding-right: 10px;}
+	/* Add Room Modal */
+	#modal-add-room div.add-room-width-height div.uk-form-controls small{font-size: 6px;}
+	#modal-add-room #add-room-room table td div{padding: 2px !important;}
+	#modal-add-room #add-room-room table td div img{padding: 2px !important;}
+}

@@ -1,0 +1,8 @@
+/*==================================================
+			Login Form
+==================================================*/
+#login-form{background-color: var(--body-color); border-radius: .25rem;}
+#login-form div.uk-card-header{padding-top: 0;}
+#login-form div.uk-card-body{padding-top: 15px; padding-bottom: 15px;}
+#login-btn{height: 40px !important; border-radius: 0.5rem; border: 2px solid var(--orange-color); background-color: #FFFFFF; letter-spacing: 2px; color: var(--orange-color);}
+#login-btn:focus, #login-btn:hover{border: 2px solid var(--blue-color); color: var(--blue-color);}

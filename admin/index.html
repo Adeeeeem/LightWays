@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<!-- Title -->
+	<title>LightWays</title>
+	<!-- The Author of this page -->
+	<meta name="author" content="Mohamed Adem Ben Moussa">
+	<meta name="author" content="Mohamed Mehdi Charni">
+	<!-- Specify the character encoding of your content -->
+	<meta charset="UTF-8">
+	<!-- Tell Internet Explorer to use the latest Rendering Engine -->
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<!-- Setting the viewport to make your website look good on all devices -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- Icon -->
+	<link rel="shortcut icon" type="image/png" href="../images/icon.png">
+	<!-- UIkit CSS 3.3.2 -->
+	<link rel="stylesheet" type="text/css" href="../css/uikit/uikit.min.css">
+	<!-- Main CSS -->
+	<link rel="stylesheet" type="text/css" href="../css/main.css">
+	<!-- Style CSS -->
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<!-- Responsive CSS -->
+	<link rel="stylesheet" type="text/css" href="css/responsive.css">
+	<!-- jQuery JavaScript 3.4.1 -->
+	<script type="text/javascript" src="../js/jquery/jquery-3.4.1.min.js"></script>
+	<!-- Preloader JavaScript -->
+	<script type="text/javascript" src="../js/preloader.js"></script>
+	<!-- Session JavaScript -->
+	<script type="text/javascript" src="js/session.js"></script>
+</head>
+<body>
+
+	<!-- Preloader -->
+	<div id="preloader">
+		<div id="status">
+			&nbsp;
+		</div>
+	</div>
+
+	<!-- Sections Menu -->
+	<div id="menu">
+		<div id="menu-logo" class="uk-width-1-1 uk-text-center"><img class="uk-margin-small-top" src="../images/logo.png"></div>
+		<div class="uk-margin-medium-top uk-margin-large-bottom">
+			<button id="lights-btn" class="uk-button uk-width-1-1 uk-text-left active"><img src="../images/icons/bulb.png">Lights</button>
+			<button id="groups-btn" class="uk-button uk-width-1-1 uk-text-left"><img src="../images/icons/groups.png">Groups</button>
+			<button id="scenes-btn" class="uk-button uk-width-1-1 uk-text-left"><img src="../images/icons/scenes.png">Scenes</button>
+			<button id="statistics-btn" class="uk-button uk-width-1-1 uk-text-left"><img src="../images/icons/statistics.png">Statistics</button>
+			<ul class="uk-margin-remove" uk-accordion>
+				<li>
+					<button id="configuration-btn" class="uk-button uk-width-1-1 uk-text-left uk-accordion-title"><img src="../images/icons/configuration.png">Configuration</button>
+					<div class="uk-accordion-content uk-text-left">
+						<button id="floors-btn" class="uk-button uk-width-1-1 uk-text-left"><img class="uk-margin-small-right" src="../images/icons/floor.png">Floors</button>
+						<button id="rooms-btn" class="uk-button uk-width-1-1 uk-text-left"><img class="uk-margin-small-right" src="../images/icons/room.png">Rooms</button>
+						<button id="users-btn" class="uk-button uk-width-1-1 uk-text-left"><img class="uk-margin-small-right" src="../images/icons/users.png">Users</button>
+					</div>
+				</li>
+			</ul>
+			<button id="settings-btn" class="uk-button uk-width-1-1 uk-text-left"><img src="../images/icons/settings.png">Settings</button>
+			<button id="contact-btn" class="uk-button uk-width-1-1 uk-text-left"><img src="../images/icons/contact.png">Contact</button>
+			<button id="logout-btn" class="uk-button uk-width-1-1 uk-text-left logout"><img src="../images/icons/logout.png">Logout</button>
+		</div>
+	</div>
+
+	<!-- Sections Mobile Menu -->
+	<div id="mobile-menu">
+		<!-- Mobile Menu Close Button -->
+		<span id="mobile-menu-close-btn" class="uk-align-right">&times;</span>
+		<!-- Mobile Menu Logo -->
+		<div id="mobile-menu-logo" class="uk-width-1-1 uk-text-center uk-align-center"><img src="../images/logo.png"></div>
+		<div class="uk-margin-small-top uk-margin-large-bottom">
+			<button id="mobile-lights-btn" class="uk-button uk-width-1-1 uk-text-left active"><img src="../images/icons/bulb.png">Lights</button>
+			<button id="mobile-groups-btn" class="uk-button uk-width-1-1 uk-text-left"><img src="../images/icons/groups.png">Groups</button>
+			<button id="mobile-scenes-btn" class="uk-button uk-width-1-1 uk-text-left"><img src="../images/icons/scenes.png">Scenes</button>
+			<button id="mobile-statistics-btn" class="uk-button uk-width-1-1 uk-text-left"><img src="../images/icons/statistics.png">Statistics</button>
+			<ul class="uk-margin-remove" uk-accordion>
+				<li>
+					<button id="mobile-configuration-btn" class="uk-button uk-width-1-1 uk-text-left uk-accordion-title"><img src="../images/icons/configuration.png">Configuration</button>
+					<div class="uk-accordion-content uk-text-left">
+						<button id="mobile-floors-btn" class="uk-button uk-width-1-1 uk-text-left"><img class="uk-margin-small-right" src="../images/icons/floor.png">Floors</button>
+						<button id="mobile-rooms-btn" class="uk-button uk-width-1-1 uk-text-left"><img class="uk-margin-small-right" src="../images/icons/room.png">Rooms</button>
+						<button id="mobile-users-btn" class="uk-button uk-width-1-1 uk-text-left"><img class="uk-margin-small-right" src="../images/icons/users.png">Users</button>
+					</div>
+				</li>
+			</ul>
+			<button id="mobile-settings-btn" class="uk-button uk-width-1-1 uk-text-left"><img src="../images/icons/settings.png">Settings</button>
+			<button id="mobile-contact-btn" class="uk-button uk-width-1-1 uk-text-left"><img src="../images/icons/contact.png">Contact</button>
+			<button id="mobile-logout-btn" class="uk-button uk-width-1-1 uk-text-left"><img src="../images/icons/logout.png">Logout</button>
+		</div>
+	</div>
+
+	<!-- Sections -->
+	<div id="sections" class="uk-text-center uk-padding-small">
+		<!-- Section Title and Mobile Menu Button -->
+		<nav class="uk-navbar-container uk-navbar-transparent" uk-navbar>
+			<div class="uk-navbar-left">
+				<ul class="uk-navbar-nav">
+					<li><span id="mobile-menu-open-btn" type="button">&#9776;</span></li>
+				</ul>
+			</div>
+
+			<div class="uk-navbar-center">
+				<ul class="uk-navbar-nav">
+					<li>
+						<!-- Section Title -->
+						<div id="section-title">
+							<span class="uk-text-middle">Lights</span>
+						</div>
+						<hr class="title-hr">
+					</li>
+				</ul>
+			</div>
+		</nav>
+		<!-- Lights Section -->
+		<div id="lights" class="uk-margin-medium-top uk-animation-fade">
+			<!-- Floors & Rooms Navigation -->
+			<form class="uk-margin-small-top" uk-grid>
+				<!-- Floors Navigation -->
+				<div class="uk-width-1-2">
+					<div class="uk-margin uk-text-left">
+						<label class="uk-form-label" for="lights-floors-navigation">Floors</label>
+						<div class="uk-form-controls">
+							<select id="lights-floors-navigation" class="uk-input uk-select">
+								<!-- Data Will be Loaded from JavaScript -->
+							</select>
+							<hr class="uk-align-center select-hr">
+						</div>
+					</div>
+				</div>
+				<!-- Rooms Navigation -->
+				<div class="uk-width-1-2">	
+					<div class="uk-margin uk-text-left">
+						<label class="uk-form-label" for="lights-rooms-navigation">Rooms</label>
+						<div class="uk-form-controls">
+							<select id="lights-rooms-navigation" class="uk-input uk-select">
+								<!-- Data Will be Loaded from JavaScript -->
+							</select>
+							<hr class="uk-align-center select-hr">
+						</div>
+					</div>
+				</div>
+			</form>
+			<!-- Room Will be Displayed Here -->
+			<div id="lights-room" class="uk-margin-small-top uk-margin-small-bottom uk-text-center">
+				<!-- Room Name -->
+				<h3 id="lights-room-name" class="uk-margin-medium-top"></h3>
+				<small id="lights-room-devices-number"></small>
+				<!-- Room Devices -->
+				<table id="lights-room-devices" class="uk-margin-small-top">
+					<tbody>
+						<!-- Devices Will be Displayed here from JavaScript -->
+					</tbody>
+				</table>
+				<!-- Room Groups -->
+				<div id="lights-room-groups" class="uk-width-1-1 uk-text-center uk-margin-small-top" uk-grid>
+					<!-- Groups Will be Displayed here from JavaScript -->
+				</div>
+			</div>
+		</div>
+			
+		<!-- Groups Section -->
+		<div id="groups" class="uk-margin-medium-top uk-animation-fade">
+			<!-- Add New Group Button -->
+			<div class="uk-width-1-1 uk-text-left add-group">
+				<button id="add-group-btn" class="uk-button" uk-toggle="target: #modal-add-group">
+					<img class="uk-margin-small-right" src="../images/icons/plus.png" width="20" height="20">Add New Group
+				</button>
+			</div>
+			<hr>
+			<!-- Groups List -->
+			<div id="groups-list" class="uk-container uk-text-left">
+				<!-- Data Will be Loaded from JavaScript -->
+			</div>
+		</div>
+
+		<!-- Scenes Section -->
+		<div id="scenes" class="uk-margin-medium-top uk-animation-fade">
+			cc
+		</div>
+
+		<!-- Statistics Section -->
+		<div id="statistics" class="uk-margin-medium-top uk-animation-fade">
+			dd
+		</div>
+		<!-- Manage Floors Section -->
+		<div id="floors" class="uk-margin-medium-top uk-animation-fade">
+			<!-- Add New Floor Button -->
+			<div class="uk-width-1-1 uk-text-left add-floor">
+				<button id="add-floor-btn" class="uk-button" uk-toggle="target: #modal-add-floor">
+					<img class="uk-margin-small-right" src="../images/icons/plus.png" width="20" height="20">Add New Floor
+				</button>
+			</div>
+			<hr>
+			<!-- Floors List -->
+			<div id="floors-list" class="uk-container uk-text-center">
+				<!-- Data Will be Loaded from JavaScript -->
+			</div>
+		</div>
+		<!-- Manage Rooms Section -->
+		<div id="rooms" class="uk-margin-medium-top uk-animation-fade">
+			<!-- Add New Room Button -->
+			<div class="uk-width-1-1 uk-text-left add-room">
+				<button id="add-room-btn" class="uk-button" uk-toggle="target: #modal-add-room">
+					<img class="uk-margin-small-right" src="../images/icons/plus.png" width="20" height="20">Add New Room
+				</button>
+			</div>
+			<hr>
+			<!-- Rooms List -->
+			<div id="rooms-list" class="uk-container uk-text-center">
+				<!-- Data Will be Loaded from JavaScript -->
+			</div>
+		</div>
+		<!-- Manage Users Section -->
+		<div id="users" class="uk-margin-medium-top uk-animation-fade">
+			c
+		</div>
+		<!-- Settings Section -->
+		<div id="settings" class="uk-margin-medium-top uk-animation-fade">
+			ff
+		</div>
+
+		<!-- Contact Section -->
+		<div id="contact" class="uk-margin-medium-top uk-animation-fade">
+			gg
+		</div>
+	</div>
+
+	<!-- UIkit JavaScript 3.3.2 -->
+	<script type="text/javascript" src="../js/uikit/uikit.min.js"></script>
+	<!-- Growl JavaScript 1.3.5 -->
+	<script type="text/javascript" src="../js/growl/growl.min.js"></script>
+	<!-- Growl CSS 1.3.5 -->
+	<link rel="stylesheet" type="text/css" href="../css/growl/growl.min.css">
+	<!-- Style JavaScript -->
+	<script type="text/javascript" src="js/script.js"></script>
+
+	<!-- Modals -->
+	<!-- Add New Group Modal -->
+	<div id="modal-add-group" class="modal" uk-modal="bg-close: false; keyboard: false; escClose: false; modal: false">
+		<div class="uk-modal-dialog uk-margin-auto-vertical">
+			<!-- Title -->
+			<div class="uk-modal-header uk-text-center">
+				<h2 class="uk-modal-title">Add Group</h2>
+			</div>
+			<!-- Form -->
+			<form class="uk-form-stacked">
+				<div class="uk-modal-body">
+					<div class="uk-margin">
+						<label class="uk-form-label" for="add-group-name">Group Name</label>
+						<div class="uk-form-controls">
+							<input id="add-group-name" class="uk-input" type="text">
+						</div>
+						<div class=" uk-animation-toggle">
+							<div class="uk-animation-shake">
+								<small id="add-group-name-error" class="error">Please Enter a Group Name !</small>
+							</div>
+						</div>
+					</div>
+					<div class="uk-margin">
+						<label class="uk-form-label" for="add-group-color">Group Color</label>
+						<div class="uk-form-controls">
+							<input id="add-group-color" class="uk-input" type="color" value="#FFA200">
+						</div>
+					</div>
+					<div class="uk-margin">
+						<label class="uk-form-label uk-text-center uk-margin-small-bottom">Add Devices to Group</label>
+						<div class="uk-form-controls">
+							<!-- Floors & Rooms Search -->
+							<div class="add-group-search-room" uk-grid>
+								<div class="uk-width-1-2">
+									<div class="uk-margin">
+										<label class="uk-form-label" for="add-group-search-floor">Floor</label>
+										<div class="uk-form-controls">
+											<select id="add-group-search-floor" class="uk-input uk-select">
+												<!-- Data Will be Loaded from JavaScript -->
+											</select>
+											<hr class="uk-align-center select-hr">
+										</div>
+									</div>
+								</div>
+								<div class="uk-width-1-2">
+									<div class="uk-margin">
+										<label class="uk-form-label" for="add-group-search-room">Room</label>
+										<div class="uk-form-controls">
+											<select id="add-group-search-room" class="uk-input uk-select">
+												<!-- Data Will be Loaded from JavaScript -->
+											</select>
+											<hr class="uk-align-center select-hr">
+										</div>
+									</div>
+								</div>
+							</div>
+							<div id="add-group-room" class="uk-text-center">
+								<table class="uk-table">
+									<!-- Devices Will be Displayed from JavaScript -->
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- Footer Buttons -->
+				<div class="uk-modal-footer uk-text-right">
+					<div class="uk-button-group uk-width-1-1">
+						<button class="uk-button uk-width-1-1 uk-modal-close" type="button">Cancel</button>
+						<button id="add-group-confirm-btn" class="uk-button uk-width-1-1" type="button">Save</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+	<!-- Edit Group Modal -->
+	<div id="modal-edit-group" class="modal" uk-modal="bg-close: false; keyboard: false; escClose: false; modal: false">
+		<div class="uk-modal-dialog uk-margin-auto-vertical">
+			<!-- Title -->
+			<div class="uk-modal-header uk-text-center">
+				<h2 class="uk-modal-title">Edit Group</h2>
+			</div>
+			<form class="uk-form-stacked">
+				<!-- Body -->
+				<div class="uk-modal-body">
+					<div class="uk-margin">
+						<!-- Change Group Name -->
+						<label class="uk-form-label" for="edit-group-name">Change Group Name</label>
+						<div class="uk-form-controls">
+							<input id="edit-group-name" class="uk-input" type="text">
+						</div>
+						<div class=" uk-animation-toggle">
+							<div class="uk-animation-shake">
+								<small id="edit-group-name-error" class="error">Group Name Can't be Empty !</small>
+							</div>
+						</div>
+					</div>
+					<!-- Change Group Color -->
+					<div class="uk-margin">
+						<label class="uk-form-label" for="edit-group-color">Change Group Color</label>
+						<div class="uk-form-controls">
+							<input id="edit-group-color" class="uk-input" type="color">
+						</div>
+					</div>
+					<div class="uk-margin">
+						<label class="uk-form-label uk-text-center uk-margin-small-bottom">Manage Group Devices</label>
+						<div class="uk-form-controls">
+							<!-- Floors & Rooms Search -->
+							<div class="edit-group-search-room" uk-grid>
+								<div class="uk-width-1-2">
+									<div class="uk-margin">
+										<label class="uk-form-label" for="edit-group-search-floor">Floor</label>
+										<div class="uk-form-controls">
+											<select id="edit-group-search-floor" class="uk-input uk-select">
+												<!-- Data Will be Loaded from JavaScript -->
+											</select>
+											<hr class="uk-align-center select-hr">
+										</div>
+									</div>
+								</div>
+								<div class="uk-width-1-2">
+									<div class="uk-margin">
+										<label class="uk-form-label" for="edit-group-search-room">Room</label>
+										<div class="uk-form-controls">
+											<select id="edit-group-search-room" class="uk-input uk-select">
+												<!-- Data Will be Loaded from JavaScript -->
+											</select>
+											<hr class="uk-align-center select-hr">
+										</div>
+									</div>
+								</div>
+							</div>
+							<div id="edit-group-room" class="uk-text-center">
+								<table class="uk-table uk-table-divider">
+									<!-- Devices Will be Displayed from JavaScript -->
+								</table>
+							</div>
+						</div>
+					</div>
+					<!-- Delete Group Button -->
+					<button id="delete-group-btn" class="uk-button uk-button-link" uk-toggle="target: #modal-delete-group"><img src="../images/icons/delete.png" class="uk-margin-small-right" width="15" height="15">Delete Group ?</button>
+				</div>
+				<!-- Footer Buttons -->
+				<div class="uk-modal-footer uk-text-right">
+					<div class="uk-button-group uk-width-1-1">
+						<button class="uk-button uk-width-1-1 uk-modal-close" type="button">Cancel</button>
+						<button id="edit-group-confirm-btn" class="uk-button uk-width-1-1" type="button">Save</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+	<!-- Delete Group Modal -->
+	<div id="modal-delete-group" class="modal" uk-modal="stack: true">
+		<div class="uk-modal-dialog uk-margin-auto-vertical">
+			<!-- Body -->
+			<div class="uk-modal-body uk-text-center">
+				<img src="../images/icons/caution.png" width="50" height="50">
+				<h2 class="uk-modal-title">Are you Sure you want to<br>Delete <span></span> Group ?</h2>
+			</div>
+			<!-- Footer Buttons -->
+			<div class="uk-modal-footer uk-text-right">
+				<div class="uk-button-group uk-width-1-1">
+					<button class="uk-button uk-width-1-1 uk-modal-close" type="button">Cancel</button>
+					<button id="delete-group-confirm-btn" class="uk-button uk-width-1-1" type="button">Yes, Delete it !</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Add New Floor Modal -->
+	<div id="modal-add-floor" class="modal" uk-modal="bg-close: false; keyboard: false; escClose: false; modal: false">
+		<div class="uk-modal-dialog uk-margin-auto-vertical">
+			<!-- Title -->
+			<div class="uk-modal-header uk-text-center">
+				<h2 class="uk-modal-title">Add Floor</h2>
+			</div>
+			<!-- Form -->
+			<form class="uk-form-stacked">
+				<div class="uk-modal-body">
+					<div class="uk-margin">
+						<label class="uk-form-label" for="add-floor-name">Floor Name</label>
+						<div class="uk-form-controls">
+							<input id="add-floor-name" class="uk-input" type="text">
+						</div>
+						<div class=" uk-animation-toggle">
+							<div class="uk-animation-shake">
+								<small id="add-floor-name-error" class="error">Please Enter a Floor Name !</small>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- Footer Buttons -->
+				<div class="uk-modal-footer uk-text-right">
+					<div class="uk-button-group uk-width-1-1">
+						<button class="uk-button uk-width-1-1 uk-modal-close" type="button">Cancel</button>
+						<button id="add-floor-confirm-btn" class="uk-button uk-width-1-1" type="button">Save</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+	<!-- Edit Floor Modal -->
+	<div id="modal-edit-floor" class="modal" uk-modal="bg-close: false; keyboard: false; escClose: false; modal: false">
+		<div class="uk-modal-dialog uk-margin-auto-vertical">
+			<!-- Title -->
+			<div class="uk-modal-header uk-text-center">
+				<h2 class="uk-modal-title">Edit Floor</h2>
+			</div>
+			<form class="uk-form-stacked">
+				<!-- Body -->
+				<div class="uk-modal-body">
+					<div class="uk-margin">
+						<!-- Change Floor Name -->
+						<label class="uk-form-label" for="edit-floor-name">Change Floor Name</span></label>
+						<div class="uk-form-controls">
+							<input id="edit-floor-name" class="uk-input" type="text">
+						</div>
+						<div class=" uk-animation-toggle">
+							<div class="uk-animation-shake">
+								<small id="edit-floor-name-error" class="error">Floor Name Can't be Empty !</small>
+							</div>
+						</div>
+					</div>
+					<!-- Floor Details -->
+					<div id="floor-details-table" class="uk-text-center">
+						<table class="uk-table uk-table-hover uk-table-divider">
+							<!-- Devices Will be Displayed from JavaScript -->
+						</table>
+					</div>
+					<!-- Delete Floor Button -->
+					<button id="delete-floor-btn" class="uk-button uk-button-link" uk-toggle="target: #modal-delete-floor"><img src="../images/icons/delete.png" class="uk-margin-small-right" width="15" height="15">Delete Floor ?</button>
+				</div>
+				<!-- Footer Buttons -->
+				<div class="uk-modal-footer uk-text-right">
+					<div class="uk-button-group uk-width-1-1">
+						<button class="uk-button uk-width-1-1 uk-modal-close" type="button">Cancel</button>
+						<button id="edit-floor-confirm-btn" class="uk-button uk-width-1-1" type="button">Save</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+	<!-- Delete Floor Modal -->
+	<div id="modal-delete-floor" class="modal" uk-modal="stack: true">
+		<div class="uk-modal-dialog uk-margin-auto-vertical">
+			<!-- Body -->
+			<div class="uk-modal-body uk-text-center">
+				<img src="../images/icons/caution.png" width="50" height="50">
+				<h2 class="uk-modal-title">Are you Sure you want to<br>Delete <span></span> Floor ?</h2>
+				<h5></h5>
+			</div>
+			<!-- Footer Buttons -->
+			<div class="uk-modal-footer uk-text-right">
+				<div class="uk-button-group uk-width-1-1">
+					<button class="uk-button uk-width-1-1 uk-modal-close" type="button">Cancel</button>
+					<button id="delete-floor-confirm-btn" class="uk-button uk-width-1-1" type="button">Yes, Delete it !</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Add New Room Modal -->
+	<div id="modal-add-room" class="modal" uk-modal="bg-close: false; keyboard: false; escClose: false; modal: false">
+		<div class="uk-modal-dialog uk-margin-auto-vertical">
+			<!-- Title -->
+			<div class="uk-modal-header uk-text-center">
+				<h2 class="uk-modal-title">Add Room</h2>
+			</div>
+			<!-- Form -->
+			<form class="uk-form-stacked">
+				<div class="uk-modal-body">
+					<!-- Room's Name -->
+					<div class="uk-margin">
+						<label class="uk-form-label" for="add-room-name">Room Name</label>
+						<div class="uk-form-controls">
+							<input id="add-room-name" class="uk-input" type="text">
+						</div>
+						<div class=" uk-animation-toggle">
+							<div class="uk-animation-shake">
+								<small id="add-room-name-error" class="error">Please Enter a Room Name !</small>
+							</div>
+						</div>
+					</div>
+					<!-- Room's Floor -->
+					<div class="uk-margin add-room-search-floor">
+						<label class="uk-form-label" for="add-room-search-floor">Floor</label>
+						<div class="uk-form-controls">
+							<select id="add-room-search-floor" class="uk-input uk-select">
+								<!-- Data Will be Loaded from JavaScript -->
+							</select>
+							<hr class="uk-align-center select-hr">
+						</div>
+					</div>
+					<!-- Room Width and Height -->
+					<div class="add-room-width-height" uk-grid>
+						<div class="uk-width-1-2">
+							<div class="uk-margin">
+								<label class="uk-form-label" for="add-room-width">Width</label>
+								<div class="uk-form-controls">
+									<input id="add-room-width" class="uk-input" type="number" step="1">
+									<small>Number of Devices in Room's Width !</small>
+								</div>
+								<div class=" uk-animation-toggle">
+									<div class="uk-animation-shake">
+										<small id="add-room-width-error" class="error">Please Enter a Room Width !</small>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="uk-width-1-2">
+							<div class="uk-margin">
+								<label class="uk-form-label" for="add-room-height">Height</label>
+								<div class="uk-form-controls">
+									<input id="add-room-height" class="uk-input" type="number" step="1">
+									<small>Number of Devices in Room's Height !</small>
+								</div>
+								<div class=" uk-animation-toggle">
+									<div class="uk-animation-shake">
+										<small id="add-room-height-error" class="error">Please Enter a Room Height !</small>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div id="add-room-room" class="uk-text-center">
+						<table class="uk-table uk-table-divider">
+							<!-- Devices Will be Displayed from JavaScript -->
+						</table>
+					</div>
+				</div>
+				<!-- Footer Buttons -->
+				<div class="uk-modal-footer">
+					<div class="uk-button-group uk-width-1-1">
+						<button class="uk-button uk-width-1-1 uk-modal-close" type="button">Cancel</button>
+						<button id="add-room-confirm-btn" class="uk-button uk-width-1-1" type="button">Save</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+	<!-- Add New Device to New Room Modal -->
+	<div id="modal-add-room-device" class="modal" uk-modal="stack: true; bg-close: false; keyboard: false; escClose: false; modal: false">
+		<div class="uk-modal-dialog uk-margin-auto-vertical">
+			<!-- Body -->
+			<div class="uk-modal-body">
+				<!-- Device Type -->
+				<div class="uk-margin">
+					<label class="uk-form-label" for="add-room-device-type">Type</label>
+					<div class="uk-form-controls">
+						<select id="add-room-device-type" class="uk-input uk-select">
+							<option value="NONE" selected>Choose Device's Type</option>
+							<option value="LAMP">LAMP</option>
+							<option value="TV">TV</option>
+							<option value="FRIDGE">FRIDGE</option>
+							<option value="AIR CONDITIONER">AIR CONDITIONER</option>
+							<option value="OTHER">OTHER</option>
+						</select>
+					</div>
+					<div class=" uk-animation-toggle">
+						<div class="uk-animation-shake">
+							<small id="add-room-device-type-error" class="error">Please Choose a Device Type !</small>
+						</div>
+					</div>
+				</div>
+				<!-- Device Pin -->
+				<div class="uk-margin">
+					<label class="uk-form-label" for="add-room-device-pin">Pin</label>
+					<div class="uk-form-controls">
+						<input id="add-room-device-pin" class="uk-input" type="number" step="1" placeholder="Pin Number (Port)">
+					</div>
+					<div class=" uk-animation-toggle">
+						<div class="uk-animation-shake">
+							<small id="add-room-device-pin-error" class="error">Please Choose a Device Pin !</small>
+						</div>
+					</div>
+				</div>
+				<button id="delete-room-device-btn" class="uk-button uk-button-link" ><img src="../images/icons/delete.png" class="uk-margin-small-right" width="15" height="15">Delete Device ?</button>
+			</div>
+			<!-- Footer Buttons -->
+			<div class="uk-modal-footer">
+				<div class="uk-button-group uk-width-1-1">
+					<button class="uk-button uk-width-1-1 uk-modal-close" type="button">Cancel</button>
+					<button id="add-room-device-confirm-btn" class="uk-button uk-width-1-1" type="button">Save</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Edit Room Modal -->
+	<div id="modal-edit-room" class="modal" uk-modal="bg-close: false; keyboard: false; escClose: false; modal: false">
+		<div class="uk-modal-dialog uk-margin-auto-vertical">
+			<!-- Title -->
+			<div class="uk-modal-header uk-text-center">
+				<h2 class="uk-modal-title">Edit Room</h2>
+			</div>
+			<form class="uk-form-stacked">
+				<!-- Body -->
+				<div class="uk-modal-body">
+					
+					<!-- Delete Room Button -->
+					<button id="delete-room-btn" class="uk-button uk-button-link" uk-toggle="target: #modal-delete-room"><img src="../images/icons/delete.png" class="uk-margin-small-right" width="15" height="15">Delete Room ?</button>
+				</div>
+				<!-- Footer Buttons -->
+				<div class="uk-modal-footer uk-text-right">
+					<div class="uk-button-group uk-width-1-1">
+						<button class="uk-button uk-width-1-1 uk-modal-close" type="button">Cancel</button>
+						<button id="edit-room-confirm-btn" class="uk-button uk-width-1-1" type="button">Save</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,61 @@
+/*==================================================
+	Fonts :
+		Raleway
+	Coolors :
+		#D2D2EC Periwinkle Gray
+		#A1A5BE Cadet Blue
+		#E7E7E4 Cararra
+		#FFA200 Orange Peel
+		#0685D5 Lochmara
+==================================================*/
+/* Get Raleway Font */
+@import "fonts/raleway.css";
+/*==================================================
+				Variables
+==================================================*/
+:root
+{
+	--primary-color: #D2D2EC;
+	--secondary-color: #A1A5BE;
+	--body-color: #E7E7E4;
+	--orange-color: #FFA200;
+	--blue-color: #0685D5;
+}
+/*==================================================
+				HTML & Body
+==================================================*/
+*{margin: 0; padding: 0;}
+html, body{height: 100%; width: 100%; font-family: "Raleway", sans serif !important; color: #333333 !important; font-weight: bold; overflow-x: hidden; background-color: var(--body-color); background: linear-gradient(45deg, var(--body-color) 0%, var(--body-color) 50%, var(--primary-color) 95%); background-repeat: no-repeat; background-attachment: fixed;}
+label{font-weight: bold;}
+input, select{height: 40px !important; padding: auto 0; border-radius: 0.5rem !important;}
+table th, table td{text-align: center !important; vertical-align: middle !important;}
+/*==================================================
+			Custom UIkit Preferences
+==================================================*/
+.uk-grid{margin-left: 0 !important;}
+.uk-grid>*{padding-left: 0 !important;}
+.uk-modal-title {font-size: 1.7rem;}
+div.uk-modal-dialog{overflow-x: hidden;}
+div.uk-modal-dialog, div.uk-modal-body{background-color:  var(--body-color); border-radius: 0.5rem;}
+div.uk-modal-header{background-color: var(--primary-color); padding-top: 10px; padding-bottom: 10px;}
+div.uk-modal-footer{background-color: var(--primary-color); height: 45px !important; padding: 0;}
+button.uk-modal-close-default{background-color: transparent; font-size: 70px; color: var(--orange-color); font-weight: 400; cursor: pointer; margin-top: -10px;}
+button.uk-modal-close-default:hover, button.uk-modal-close-default:focus{color: var(--blue-color);}
+.uk-modal-footer button{text-transform: uppercase; background-color: var(--primary-color); height: 45px !important;}
+.uk-modal-footer button:hover, .uk-modal-footer button:focus{background-color: var(--secondary-color);}
+label.uk-form-label{font-size: 12px; letter-spacing: 1px;}
+.uk-accordion-title::before{display: none;}
+input.uk-input{border: 1px solid var(--secondary-color);}
+/*==================================================
+				Preloader
+==================================================*/
+#preloader{background-color: #FFFFFF; position: fixed; top: 0; bottom: 0; left: 0; right: 0; z-index: 9999;}
+#status{background-image: url("../images/preloader.gif"); background-repeat: no-repeat; width: 80px; height: 80px; position: absolute; left: 50%; top: 50%; margin-top: -40px; margin-left: -40px;}
+/*==================================================
+				Custom Elements
+==================================================*/
+small.error{color: #F32013; font-size: 10px; letter-spacing: 1px; font-weight: 600;}
+/*==================================================
+				Hidden Elements
+==================================================*/
+small.error{display: none;}
