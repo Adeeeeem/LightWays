@@ -50,7 +50,7 @@
 #lights table#lights-room-devices th{padding: 16px 12px; text-align: left; vertical-align: bottom; font-size: .875rem; font-weight: 400; color: #999999; text-transform: uppercase;}
 #lights table#lights-room-devices td{padding: 0 !important;}
 #lights table#lights-room-devices td div{padding: 10px !important;}
-#lights table#lights-room-devices td div img{padding: 5px !important; border: 2px solid black; border-radius: 50%; cursor: pointer;}
+#lights table#lights-room-devices td div img{padding: 5px !important; border: 2px solid var(--text-color); border-radius: 50%; cursor: pointer;}
 #lights table#lights-room-devices td div img.ON{background-color: #FFCC00;}
 #lights table#lights-room-devices td div img.OFF{background-color: var(--primary-color);}
 /* Rotated Devices Display Table */
@@ -96,7 +96,7 @@
 #modal-add-group #add-group-room table{border: 1px solid var(--secondary-color); border-radius: .25rem; padding: 10px; border-collapse: separate;}
 #modal-add-group #add-group-room table td{padding: 0 !important;}
 #modal-add-group #add-group-room table td div{padding: 7px !important;}
-#modal-add-group #add-group-room table td div img{padding: 5px !important; border: 2px solid black; border-radius: 50%; cursor: pointer;}
+#modal-add-group #add-group-room table td div img{padding: 5px !important; border: 2px solid var(--text-color); border-radius: 50%; cursor: pointer;}
 /* Display Rotated Devices */
 #modal-add-group #add-group-room table.rotated td div{padding: 5px !important;}
 #modal-add-group #add-group-room table.rotated td div img{-webkit-transform: rotate(270deg); -moz-transform: rotate(270deg); -ms-transform: rotate(270deg); -o-transform: rotate(270deg); transform: rotate(270deg);}
@@ -108,7 +108,7 @@
 #modal-edit-group #edit-group-room table{border: 1px solid var(--secondary-color); border-radius: .25rem; padding: 10px; border-collapse: separate;}
 #modal-edit-group #edit-group-room table td{padding: 0 !important;}
 #modal-edit-group #edit-group-room table td div{padding: 7px !important;}
-#modal-edit-group #edit-group-room table td div img{padding: 5px !important; border: 2px solid black; border-radius: 50%; cursor: pointer;}
+#modal-edit-group #edit-group-room table td div img{padding: 5px !important; border: 2px solid var(--text-color); border-radius: 50%; cursor: pointer;}
 #modal-edit-group #delete-group-btn{color: #C0392B;}
 #modal-edit-group #delete-group-btn img{margin-top: -3px;}
 /* Display Rotated Devices */
@@ -191,7 +191,7 @@
 #modal-add-room #add-room-room table td{padding: 0 !important;}
 #modal-add-room #add-room-room table td div{padding: 2px !important;}
 #modal-add-room #add-room-room table td div img{border-radius: 50%; cursor: pointer;}
-#modal-add-room #add-room-room table td div img.SELECTED{padding: 2px !important; border: 2px solid black;}
+#modal-add-room #add-room-room table td div img.SELECTED{padding: 2px !important; border: 2px solid var(--text-color);}
 /* Display Rotated Devices */
 #modal-add-room #add-room-room table.rotated td div{padding: 5px !important;}
 #modal-add-room #add-room-room table.rotated td div img{-webkit-transform: rotate(270deg); -moz-transform: rotate(270deg); -ms-transform: rotate(270deg); -o-transform: rotate(270deg); transform: rotate(270deg);}
@@ -206,7 +206,7 @@
 #modal-edit-room table#edit-room-room-devices{border: 1px solid var(--secondary-color); border-radius: .25rem; padding: 10px; border-collapse: separate; margin-top: 20px;}
 #modal-edit-room table#edit-room-room-devices td{padding: 0 !important;}
 #modal-edit-room table#edit-room-room-devices td div{padding: 2px !important;}
-#modal-edit-room table#edit-room-room-devices td div img{padding: 2px !important; border: 2px solid black; border-radius: 50%; cursor: pointer;}
+#modal-edit-room table#edit-room-room-devices td div img{padding: 2px !important; border: 2px solid var(--text-color); border-radius: 50%; cursor: pointer;}
 /* Display Rotated Devices */
 #modal-edit-room table#edit-room-room-devices.rotated td div{padding: 5px !important;}
 #modal-edit-room table#edit-room-room-devices.rotated td div img{-webkit-transform: rotate(270deg); -moz-transform: rotate(270deg); -ms-transform: rotate(270deg); -o-transform: rotate(270deg); transform: rotate(270deg);}
