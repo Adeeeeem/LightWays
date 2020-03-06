@@ -18,7 +18,7 @@
 		if ( (is_string($username)) && (is_string($password)) )
 		{
 			/* Preparing Request */
-			$request = "SELECT * FROM USERS WHERE USER_LOGIN = :username LIMIT 1;"; // Search For User
+			$request = "SELECT USER_LOGIN FROM USERS WHERE USER_LOGIN = :username LIMIT 1;"; // Search For User
 			/* Preparing Statement */
 			$statement = $DB_CONNECTION->prepare($request);
 			/* Binding Parameter */
@@ -29,7 +29,7 @@
 			if ($statement->rowCount()) // User Exists
 			{
 				/* Preparing Request */
-				$request = "SELECT * FROM USERS WHERE USER_LOGIN = :username AND BINARY USER_PASSWORD = :password LIMIT 1;"; // Check For Password
+				$request = "SELECT USER_LOGIN, USER_TYPE FROM USERS WHERE USER_LOGIN = :username AND BINARY USER_PASSWORD = :password LIMIT 1;"; // Check For Password
 				/* Preparing Statement */
 				$statement = $DB_CONNECTION->prepare($request);
 				/* Binding Parameter */

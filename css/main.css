@@ -25,7 +25,7 @@
 				HTML & Body
 ==================================================*/
 *{margin: 0; padding: 0;}
-html, body{height: 100%; width: 100%; font-family: "Raleway", sans serif !important; color: #333333 !important; font-weight: bold; overflow-x: hidden; background-color: var(--body-color); background: linear-gradient(45deg, var(--body-color) 0%, var(--body-color) 50%, var(--primary-color) 95%); background-repeat: no-repeat; background-attachment: fixed;}
+html, body{height: 100%; width: 100%; font-family: "Raleway", sans serif !important; color: #333333 !important; font-weight: bold; overflow-x: hidden; background-color: var(--body-color);}
 label{font-weight: bold;}
 input, select{height: 40px !important; padding: auto 0; border-radius: 0.5rem !important;}
 table th, table td{text-align: center !important; vertical-align: middle !important;}
@@ -46,6 +46,7 @@ button.uk-modal-close-default:hover, button.uk-modal-close-default:focus{color: 
 label.uk-form-label{font-size: 12px; letter-spacing: 1px;}
 .uk-accordion-title::before{display: none;}
 input.uk-input{border: 1px solid var(--secondary-color);}
+.uk-table-hover tbody tr:hover,.uk-table-hover>tr:hover{background-color: var(--primary-color);}
 /*==================================================
 				Preloader
 ==================================================*/

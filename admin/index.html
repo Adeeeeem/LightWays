@@ -157,7 +157,6 @@
 				</div>
 			</div>
 		</div>
-			
 		<!-- Groups Section -->
 		<div id="groups" class="uk-margin-medium-top uk-animation-fade">
 			<!-- Add New Group Button -->
@@ -172,15 +171,13 @@
 				<!-- Data Will be Loaded from JavaScript -->
 			</div>
 		</div>
-
 		<!-- Scenes Section -->
 		<div id="scenes" class="uk-margin-medium-top uk-animation-fade">
-			cc
+			ss
 		</div>
-
 		<!-- Statistics Section -->
 		<div id="statistics" class="uk-margin-medium-top uk-animation-fade">
-			dd
+			ii
 		</div>
 		<!-- Manage Floors Section -->
 		<div id="floors" class="uk-margin-medium-top uk-animation-fade">
@@ -212,16 +209,27 @@
 		</div>
 		<!-- Manage Users Section -->
 		<div id="users" class="uk-margin-medium-top uk-animation-fade">
-			c
+			<!-- Add New User Button -->
+			<div class="uk-width-1-1 uk-text-left add-user">
+				<button id="add-user-btn" class="uk-button" uk-toggle="target: #modal-add-user">
+					<img class="uk-margin-small-right" src="../images/icons/plus.png" width="20" height="20">Add New User
+				</button>
+			</div>
+			<hr>
+			<!-- Users List -->
+			<div id="users-list" class="uk-container uk-text-center">
+				<table class="uk-table uk-table-hover uk-margin-small-top">
+					<!-- Data Will be Loaded from JavaScript -->
+				</table>
+			</div>
 		</div>
 		<!-- Settings Section -->
 		<div id="settings" class="uk-margin-medium-top uk-animation-fade">
-			ff
+			gg
 		</div>
-
 		<!-- Contact Section -->
 		<div id="contact" class="uk-margin-medium-top uk-animation-fade">
-			gg
+			cc
 		</div>
 	</div>
 
@@ -576,6 +584,10 @@
 	<!-- Add New Device to New Room Modal -->
 	<div id="modal-add-room-device" class="modal" uk-modal="stack: true; bg-close: false; keyboard: false; escClose: false; modal: false">
 		<div class="uk-modal-dialog uk-margin-auto-vertical">
+			<!-- Title -->
+			<div class="uk-modal-header uk-text-center">
+				<h2 class="uk-modal-title">Add Device</h2>
+			</div>
 			<!-- Body -->
 			<div class="uk-modal-body">
 				<!-- Device Type -->
@@ -630,7 +642,36 @@
 			<form class="uk-form-stacked">
 				<!-- Body -->
 				<div class="uk-modal-body">
-					
+					<div class="uk-margin">
+						<!-- Change Room Name -->
+						<label class="uk-form-label" for="edit-room-name">Change Room Name</span></label>
+						<div class="uk-form-controls">
+							<input id="edit-room-name" class="uk-input" type="text">
+						</div>
+						<div class=" uk-animation-toggle">
+							<div class="uk-animation-shake">
+								<small id="edit-room-name-error" class="error">Room Name Can't be Empty !</small>
+							</div>
+						</div>
+					</div>
+					<!-- Room's Floor -->
+					<div class="uk-margin edit-room-search-floor">
+						<label class="uk-form-label" for="edit-room-search-floor">Change Floor</label>
+						<div class="uk-form-controls">
+							<select id="edit-room-search-floor" class="uk-input uk-select">
+								<!-- Data Will be Loaded from JavaScript -->
+							</select>
+							<hr class="uk-align-center select-hr">
+						</div>
+					</div>
+					<div id="edit-room-room" class="uk-text-center">
+						<table id="edit-room-room-devices" class="uk-table uk-table-divider">
+							<!-- Devices Will be Displayed from JavaScript -->
+						</table>
+						<div id="edit-room-room-groups" class="uk-width-1-1 uk-text-center uk-margin-small-top uk-grid uk-grid-stack" uk-grid>
+							<!-- Groups Will be Displayed from JavaScript -->
+						</div>
+					</div>
 					<!-- Delete Room Button -->
 					<button id="delete-room-btn" class="uk-button uk-button-link" uk-toggle="target: #modal-delete-room"><img src="../images/icons/delete.png" class="uk-margin-small-right" width="15" height="15">Delete Room ?</button>
 				</div>
@@ -642,6 +683,74 @@
 					</div>
 				</div>
 			</form>
+		</div>
+	</div>
+	<!-- Edit Device in Room Modal -->
+	<div id="modal-edit-room-device" class="modal" uk-modal="stack: true; bg-close: false; keyboard: false; escClose: false; modal: false">
+		<div class="uk-modal-dialog uk-margin-auto-vertical">
+			<!-- Title -->
+			<div class="uk-modal-header uk-text-center">
+				<h2 class="uk-modal-title">Edit Device</h2>
+			</div>
+			<!-- Body -->
+			<div class="uk-modal-body">
+				<!-- Device Type -->
+				<div class="uk-margin">
+					<label class="uk-form-label" for="edit-room-device-type">Type</label>
+					<div class="uk-form-controls">
+						<select id="edit-room-device-type" class="uk-input uk-select">
+							<option value="NONE" selected>Choose Device's Type</option>
+							<option value="LAMP">LAMP</option>
+							<option value="TV">TV</option>
+							<option value="FRIDGE">FRIDGE</option>
+							<option value="AIR CONDITIONER">AIR CONDITIONER</option>
+							<option value="OTHER">OTHER</option>
+						</select>
+					</div>
+					<div class=" uk-animation-toggle">
+						<div class="uk-animation-shake">
+							<small id="edit-room-device-type-error" class="error">Please Choose a Device Type !</small>
+						</div>
+					</div>
+				</div>
+				<!-- Device Pin -->
+				<div class="uk-margin">
+					<label class="uk-form-label" for="edit-room-device-pin">Pin</label>
+					<div class="uk-form-controls">
+						<input id="edit-room-device-pin" class="uk-input" type="number" step="1" placeholder="Pin Number (Port)">
+					</div>
+					<div class=" uk-animation-toggle">
+						<div class="uk-animation-shake">
+							<small id="edit-room-device-pin-error" class="error">Please Choose a Device Pin !</small>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- Footer Buttons -->
+			<div class="uk-modal-footer">
+				<div class="uk-button-group uk-width-1-1">
+					<button class="uk-button uk-width-1-1 uk-modal-close" type="button">Cancel</button>
+					<button id="edit-room-device-confirm-btn" class="uk-button uk-width-1-1" type="button">Save</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Delete Room Modal -->
+	<div id="modal-delete-room" class="modal" uk-modal="stack: true">
+		<div class="uk-modal-dialog uk-margin-auto-vertical">
+			<!-- Body -->
+			<div class="uk-modal-body uk-text-center">
+				<img src="../images/icons/caution.png" width="50" height="50">
+				<h2 class="uk-modal-title">Are you Sure you want to<br>Delete <span></span> Room ?</h2>
+				<h5></h5>
+			</div>
+			<!-- Footer Buttons -->
+			<div class="uk-modal-footer uk-text-right">
+				<div class="uk-button-group uk-width-1-1">
+					<button class="uk-button uk-width-1-1 uk-modal-close" type="button">Cancel</button>
+					<button id="delete-room-confirm-btn" class="uk-button uk-width-1-1" type="button">Yes, Delete it !</button>
+				</div>
+			</div>
 		</div>
 	</div>
 </body>

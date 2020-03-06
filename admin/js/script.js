@@ -140,6 +140,21 @@ $(function()
 $(window).on("load", function()
 {
 	LoadFloorsLightsSection();
+
+	/* When Changing Floors Select */
+	$("#lights-floors-navigation").change(function()
+	{
+		// Get Selected Option Value
+		var floor = $("#lights-floors-navigation").val();
+		// Empty The Rooms List
+		$("#lights #lights-rooms-navigation").empty();
+		// Remove Room Name if it is Displayed
+		$("#lights #lights-room-name").html("");
+		// Remove Devices Number if it is Displayed
+		$("#lights #lights-room-devices-number").html("");
+		// Load Rooms corresponding to the selected Floor
+		LoadRoomsLightsSection(floor);
+	});
 });
 /* Turn ON and OFF Devices */
 $(function()
@@ -890,6 +905,11 @@ $(function()
 				SelectedDevices = []; // Clear Selected Devices Array
 				SelectedDevicesRoom = []; // Clear Selected Devices Rooms
 				LoadGroupsLightsSection($("#lights-rooms-navigation").val());
+
+				if ($("#groups #groups-list").find("article").length == 0)
+				{
+					$("#groups #groups-list").append("<table class='uk-margin-small-top'><tr class='uk-animation-scale-down uk-text-center'><th><img src='../images/icons/notfound.png' width='50' height='50'><br><br>No Groups Found !<br><small>Make Sure You Add Groups...</small></th></tr></table>");
+				}
 			}
 			else
 			{
@@ -1096,7 +1116,7 @@ $(function()
 		}
 	});
 
-	/* Delete Group */
+	/* Delete Floor */
 	$("#delete-floor-btn").click(function(e)
 	{
 		e.preventDefault();
@@ -1108,7 +1128,7 @@ $(function()
 		$("#modal-delete-floor h5").html(rooms+", "+devices+" and "+groups+"<br>Will be Deleted Permanently !");
 	});
 
-	/* Confirm Delete Group */
+	/* Confirm Delete Floor */
 	$("#delete-floor-confirm-btn").click(function()
 	{
 		$.ajax
@@ -1129,6 +1149,11 @@ $(function()
 				$.growl.notice({ message: "Floor has been Successfully Deleted!" }); // Success Notification
 				ResetEditFloorModal(); // Reset Modal
 				LoadFloorsLightsSection();
+
+				if ($("#floors #floors-list").find("article").length == 0)
+				{
+					$("#floors #floors-list").append("<table class='uk-margin-small-top'><tr class='uk-animation-scale-down uk-text-center'><th><img src='../images/icons/notfound.png' width='50' height='50'><br><br>No Floors Found !<br><small>Make Sure You Add Floors...</small></th></tr></table>");
+				}
 			}
 			else
 			{
@@ -1155,7 +1180,7 @@ $(window).on("load", function()
 		DisplayRoomsListRoomsSection();
 	});
 });
-/* Load Floors to Add Room Modal */
+/* Load Data to Add Room Modal */
 $(function()
 {
 	var width; // Room's Width
@@ -1469,17 +1494,528 @@ $(function()
 {
 	var room; // Room ID
 	var name; // Room NAME
+	var width; // Room WIDTH
+	var height; // Room HEIGHT
 	var SelectedDeviceType = [];
 	var SelectedDevicePin = [];
 	var SelectedDeviceCoords = [];
+	var SelectedDeviceColor = [];
+	var SelectedDeviceId = [];
+	var device;
+	var id;
+	var room_floor;
+	var groups = [];
 
 	/* Loading Room Details and Assign its Devices to Selected Devices Array */
 	$("#rooms #rooms-list").off("click").on("click", "article.room-details", function()
 	{
 		room = $(this).attr("id"); // Assign Room ID
 		UIkit.modal("#modal-edit-room").toggle(); // Show Modal
+		$("#modal-edit-room table").empty();
+		$("#modal-edit-room #edit-room-room-groups").empty();
+
+		$.ajax
+		({
+			url: "../php/room_details.php",
+			type: "POST",
+			dataType: "json",
+			data: {room: room},
+		})
+		.done(function(response)
+		{
+			var len = response.length;
+
+			if (len != 0)
+			{
+				name = response[0].name;
+				room_floor = response[0].floor;
+				width = response[0].width;
+				height = response[0].height;
+
+				$("#edit-room-name").val(name);
+
+				// Load Floors
+				$.ajax
+				({
+					url: "../php/floors.php",
+					type: "POST",
+					dataType: "json"
+				})
+				.done(function(response)
+				{
+					var len = response.length;
+
+					if (len != 0)
+					{
+						for (var i = 0; i < len; i++)
+						{
+							$("#edit-room-search-floor").append("<option value='"+response[i].id+"'>"+response[i].name+"</option>");
+						}
+
+						$("#edit-room-search-floor").val(room_floor).prop("selected", true); // Set Floor Room Selected
+					}
+				});
+
+				if (response[0].device != null)
+				{
+
+					var rotate = false;
+							
+					if ($(window).width() < 768)
+					{
+						if (width > 3)
+						{
+							if (width != height)
+							{
+								rotate = true;
+							}
+						}
+					}
+					else
+					{
+						if (width > 10)
+						{
+							rotate = true;
+						}
+					}
+
+					if (rotate)
+					{
+						for (var line = 1; line <= width; line++)
+						{
+							var lin = eval(width-line+1);
+
+							$("#modal-edit-room table#edit-room-room-devices").append("<tr id='"+lin+"' class='uk-animation-scale-down uk-text-center'></tr>");
+
+							for (var column = 1; column <= height; column++)
+							{
+								$("#modal-edit-room table#edit-room-room-devices tr#"+lin).append("<td id='"+column+"-"+lin+"'></td>");
+							}
+						}
+						$("#modal-edit-room table#edit-room-room-devices").addClass("rotated");
+					}
+					else
+					{
+						for (var line = 1; line <= height; line++)
+						{
+							$("#modal-edit-room table#edit-room-room-devices").append("<tr id='"+line+"' class='uk-animation-scale-down uk-text-center'></tr>");
+
+							for (var column = 1; column <= width; column++)
+							{
+								$("#modal-edit-room table#edit-room-room-devices tr#"+line).append("<td id='"+line+"-"+column+"'></td>");
+							}
+						}
+						$("#modal-edit-room table#edit-room-room-devices").removeClass("rotated");
+					}
+
+				
+					for (var i = 0; i < len; i++)
+					{
+						var bgcolor = "var(--primary-color)";
+
+						if (response[i].color != null)
+						{
+							bgcolor = response[i].color;
+						}
+
+						$("#modal-edit-room table#edit-room-room-devices td#"+response[i].lin+"-"+response[i].col).html("<div class='device'><img id='"+response[i].device+"' src='../images/devices/"+response[i].type+"_ON.png' style='background-color: "+bgcolor+";' width='50' height='50'></div>");
+
+						SelectedDeviceType.push(response[i].type);
+						SelectedDevicePin.push(response[i].pin);
+						SelectedDeviceCoords.push(response[i].lin+"-"+response[i].col);
+						SelectedDeviceColor.push(bgcolor);
+						SelectedDeviceId.push(response[i].device);
+					}
+				}
+				else
+				{
+					$.growl({ title: "This Room Has no Devices.", message: "Make Sure You Add Devices!" });
+					$("#modal-edit-room table#edit-room-room-devices").append("<tr class='uk-animation-scale-down uk-text-center'><th><img src='../images/icons/notfound.png' width='50' height='50'><br><br>No Devices Found in This Room !<br><small>Make Sure You Add Devices...</small></th></tr>");
+				}
+
+				// Load Groups
+				$.ajax
+				({
+					url: "../php/room_groups.php",
+					type: "POST",
+					dataType: "json",
+					data: {room: room},
+				})
+				.done(function(response)
+				{
+					var len = response.length;
+
+					if (len != 0)
+					{
+						for (var i = 0; i < len; i++)
+						{
+							if (!groups.includes(response[i].name))
+							{
+								groups.push(response[i].name);
+
+								$("#modal-edit-room #edit-room-room-groups").append("<button id='"+response[i].id+"' class='uk-button uk-animation-scale-down "+response[i].status+"' style='background-color: "+response[i].color+";' disabled><span>"+response[i].name+"</span></button>");
+							}
+						}
+					}
+					else
+					{
+						$("#modal-edit-room #edit-room-room-groups").append("<table><tr class='uk-animation-scale-down uk-text-center'><th><img src='../images/icons/notfound.png' width='50' height='50'><br><br>No Groups Found in This Room !<br><small>Make Sure You Add Groups...</small></th></tr></table>");
+					}
+				})
+				.fail(function()
+				{
+					$("#modal-edit-room #edit-room-room-groups").append("<table><tr class='uk-animation-scale-down uk-text-center'><th><img src='../images/icons/error.png' width='50' height='50'><br><br>Failed to Load Groups !</th></tr></table>");
+				});
+			}
+			else
+			{
+				$.growl.error({ message: "Failed to Get Selected Room Details !" });
+				$("#modal-edit-room table#edit-room-room-devices").append("<tr class='uk-animation-scale-down uk-text-center'><th><img src='../images/icons/error.png' width='50' height='50'><br><br>Failed to Load Room Details !</th></tr>");
+			}
+		})
+		.fail(function()
+		{
+			$.growl.error({ message: "Failed to Get Selected Room Details !" });
+			$("#modal-edit-room table#edit-room-room-devices").append("<tr class='uk-animation-scale-down uk-text-center'><th><img src='../images/icons/error.png' width='50' height='50'><br><br>Failed to Load Room Details !</th></tr>");
+		});
+	});
+
+	var windom_width = $(window).width(); // Get Window Width
+	/* When Charnging Window Size */
+	$(window).resize(function()
+	{
+		if ($(window).width() != windom_width) // to Avoid on Mobile Scroll
+		{
+			// Get the New Window Width
+			windom_width = $(window).width();
+
+			$("#modal-edit-room table#edit-room-room-devices").empty();
+
+			if (SelectedDeviceCoords.length != 0)
+			{
+				var rotate = false;
+						
+				if ($(window).width() < 768)
+				{
+					if (width > 3)
+					{
+						if (width != height)
+						{
+							rotate = true;
+						}
+					}
+				}
+				else
+				{
+					if (width > 10)
+					{
+						rotate = true;
+					}
+				}
+
+				if (rotate)
+				{
+					for (var line = 1; line <= width; line++)
+					{
+						var lin = eval(width-line+1);
+
+						$("#modal-edit-room table#edit-room-room-devices").append("<tr id='"+lin+"' class='uk-animation-scale-down uk-text-center'></tr>");
+
+						for (var column = 1; column <= height; column++)
+						{
+							$("#modal-edit-room table#edit-room-room-devices tr#"+lin).append("<td id='"+column+"-"+lin+"'></td>");
+						}
+					}
+					$("#modal-edit-room table#edit-room-room-devices").addClass("rotated");
+				}
+				else
+				{
+					for (var line = 1; line <= height; line++)
+					{
+						$("#modal-edit-room table#edit-room-room-devices").append("<tr id='"+line+"' class='uk-animation-scale-down uk-text-center'></tr>");
+
+						for (var column = 1; column <= width; column++)
+						{
+							$("#modal-edit-room table#edit-room-room-devices tr#"+line).append("<td id='"+line+"-"+column+"'></td>");
+						}
+					}
+					$("#modal-edit-room table#edit-room-room-devices").removeClass("rotated");
+				}
+
+				for (var i = 0; i < SelectedDeviceCoords.length; i++)
+				{
+					$("#modal-edit-room table#edit-room-room-devices td#"+SelectedDeviceCoords[i]).html("<div class='device'><img id='"+SelectedDeviceId[i]+"' src='../images/devices/"+SelectedDeviceType[i]+"_ON.png' style='background-color: "+SelectedDeviceColor[i]+";' width='50' height='50'></div>");
+				}
+			}
+			else
+			{
+				$("#modal-edit-room table#edit-room-room-devices").append("<tr class='uk-animation-scale-down uk-text-center'><th><img src='../images/icons/notfound.png' width='50' height='50'><br><br>No Devices Found in This Room !<br><small>Make Sure You Add Devices...</small></th></tr>");
+			}
+		}
+	});
+
+	/* Cancel Edit Room */
+	$("#modal-edit-room button.uk-modal-close").click(function()
+	{
+		ResetEditRoomModal();
+		width = "";
+		height = "";
+		room = "";
+		name = "";
+		device = "";
+		id = "";
+		SelectedDeviceType = [];
+		SelectedDevicePin = [];
+		SelectedDeviceCoords = [];
+		SelectedDeviceColor = [];
+		SelectedDeviceId = [];
+		room_floor = "";
+		groups = [];
+	});
+
+	/* Show Edit Device Modal */
+	$("#modal-edit-room table#edit-room-room-devices").off("click").on("click", " img", function()
+	{
+		device = $(this);
+		UIkit.modal("#modal-edit-room-device").toggle();
+		id = device.attr("id");
+
+		for (var i = 0; i < SelectedDeviceId.length; i++) // Loop Array Search for the Item to Delete
+		{
+			if (SelectedDeviceId[i] == id)
+			{
+				$("#edit-room-device-type").val(SelectedDeviceType[i]);
+				$("#edit-room-device-pin").val(SelectedDevicePin[i]);
+			}
+		}
+	});
+
+	/* Cancel Edit Room Device */
+	$("#modal-edit-room-device button.uk-modal-close").click(function()
+	{
+		ResetEditRoomDeviceModal();
+	});
+
+	/* Confirm Edit Room Device */
+	$("#edit-room-device-confirm-btn").click(function()
+	{
+		var type = $("#edit-room-device-type").val();
+		var pin = $("#edit-room-device-pin").val();
+
+		if (type == "NONE")
+		{
+			$("#edit-room-device-type").css("border", "1px solid #F0506E");
+			$("#edit-room-device-type-error").show();
+		}
+
+		if (!pin)
+		{
+			$("#edit-room-device-pin").css("border", "1px solid #F0506E");
+			$("#edit-room-device-pin-error").show();
+		}
+
+		if ( (type != "NONE") && (pin) )
+		{
+			for (var i = 0; i < SelectedDeviceId.length; i++) // Loop Array Search for the Item to Delete
+			{
+				if (SelectedDeviceId[i] == id)
+				{
+					SelectedDeviceType[i] = type;
+					SelectedDevicePin[i] = pin;
+				}
+			}
+
+			$("#modal-edit-room #edit-room-room table img#"+id).attr("src", "../images/devices/"+type+"_ON.png");
+
+			UIkit.modal("#modal-edit-room-device").hide();
+			ResetEditRoomDeviceModal(); // Reset Modal
+		}
+	});
+
+	/* Confirm Edit Room */
+	$("#edit-room-confirm-btn").click(function()
+	{
+		var room_name = $("#edit-room-name").val(); // Get Room's Name
+		var new_room_floor = $("#edit-room-search-floor").val(); // Get Room's Floor
+
+		if (!room_name)
+		{
+			$("#edit-room-name").css("border", "1px solid #F0506E");
+			$("#edit-room-name-error").show();
+		}
+		else
+		{
+			$("#edit-room-name").css("border", "var(--secondary-color)");
+			$("#edit-room-name-error").hide();
+		}
+
+		if(room_name)
+		{
+			var SelectedDeviceIdJson = JSON.stringify(SelectedDeviceId); // Get Selected Devices Id
+			var SelectedDeviceTypeJson = JSON.stringify(SelectedDeviceType); // Get Selected Devices Type
+			var SelectedDevicePinJson = JSON.stringify(SelectedDevicePin); // Get Selected Devices Pin
+
+			$.ajax
+			({
+				url: "../php/update_room.php",
+				type: "POST",
+				dataType: "json",
+				data: {room: room, name: room_name, floor: new_room_floor, devices_id: SelectedDeviceIdJson, devices_type: SelectedDeviceTypeJson, devices_pin: SelectedDevicePinJson},
+			})
+			.done(function(response)
+			{
+				UIkit.modal("#modal-edit-room").hide(); // Hide Modal
+				ResetEditRoomModal(); // Reset Modal
+
+				if (response.result)
+				{
+					$.growl.notice({ message: "Room has been Successfully Updated !" }); // Success Notification
+
+					if (room_floor != new_room_floor)
+					{
+						$("#rooms-list div#"+room_floor+".uk-section article#"+room).remove();
+
+						if ($("#rooms-list div#"+new_room_floor+".uk-section").find("table.uk-margin-small-top").length > 0)
+						{
+							$("#rooms-list div#"+new_room_floor+".uk-section table.uk-margin-small-top").remove();
+						}
+
+						// Update in Rooms Section List
+						$("#rooms-list div#"+new_room_floor+".uk-section").append("<article id='"+room+"' class='uk-comment room-details uk-margin-small-top uk-animation-scale-down'><header class='uk-comment-header uk-grid-medium uk-flex-middle uk-margin-small-left uk-margin-small-right uk-grid uk-grid-stack' uk-grid><div class='uk-width-1-1 uk-first-column'><h4 class='uk-comment-title uk-margin-remove'>"+room_name+"</h4><div uk-grid><div class='uk-width-1-2'><h6 class='uk-comment-meta uk-margin-remove-top devices'>"+SelectedDeviceId.length+" Devices</h6></div><div class='uk-width-1-2'><h6 class='uk-comment-meta uk-margin-remove-top groups'>"+groups.length+" Groups</h6></div></div></div></header></article>");
+
+						if ($("#rooms-list div#"+room_floor+".uk-section").find("article").length == 0)
+						{
+							$("#rooms-list div#"+room_floor+".uk-section").append("<table class='uk-margin-small-top'><tr class='uk-animation-scale-down uk-text-center'><th><img src='../images/icons/notfound.png' width='50' height='50'><br><br>No Rooms Found !<br><small>Make Sure You Add Rooms...</small></th></tr></table>");
+						}
+					}
+					else
+					{
+						$("#rooms-list div#"+room_floor+".uk-section article#"+room+" h4").html(room_name);
+					}
+
+					// Refresh Lights Section List
+					LoadFloorsLightsSection();
+				}
+				else
+				{
+					$.growl.error({ message: "Oops, There was an Error! Please Try Again." });
+				}
+
+				width = "";
+				height = "";
+				room = "";
+				name = "";
+				device = "";
+				id = "";
+				SelectedDeviceType = [];
+				SelectedDevicePin = [];
+				SelectedDeviceCoords = [];
+				SelectedDeviceColor = [];
+				SelectedDeviceId = [];
+				room_floor = "";
+				groups = [];
+			})
+			.fail(function()
+			{
+				$.growl.error({ message: "Oops, There was an Error! Please Try Again." });
+				UIkit.modal("#modal-edit-room").hide();
+				ResetEditRoomModal();
+				width = "";
+				height = "";
+				room = "";
+				name = "";
+				device = "";
+				id = "";
+				SelectedDeviceType = [];
+				SelectedDevicePin = [];
+				SelectedDeviceCoords = [];
+				SelectedDeviceColor = [];
+				SelectedDeviceId = [];
+				room_floor = "";
+				groups = [];
+			});
+		}
+	});
+
+	$("#delete-room-btn").click(function(e)
+	{
+		e.preventDefault();
+
+		$("#modal-delete-room h2.uk-modal-title span").html($("#edit-room-name").val());
+		$("#modal-delete-room h5").html(SelectedDeviceId.length+" Devices and "+groups.length+" Groups<br>Will be Deleted Permanently !");
+	});
+
+	/* Confirm Delete Room */
+	$("#delete-room-confirm-btn").click(function()
+	{
+		$.ajax
+		({
+			url: "../php/delete_room.php",
+			type: "POST",
+			dataType: "json",
+			data: {room: room},
+		})
+		.done(function(response)
+		{
+			UIkit.modal("#modal-delete-room").hide(); // Hide Delete Modal
+
+			if (response.result)
+			{
+				UIkit.modal("#modal-edit-room").hide(); // Hide Edit Modal
+				$.growl.notice({ message: "Room has been Successfully Deleted!" }); // Success Notification
+
+				$("#rooms-list div#"+room_floor+".uk-section article#"+room).remove();
+
+				if ($("#rooms-list div#"+room_floor+".uk-section").find("article").length == 0)
+				{
+					$("#rooms-list div#"+room_floor+".uk-section").append("<table class='uk-margin-small-top'><tr class='uk-animation-scale-down uk-text-center'><th><img src='../images/icons/notfound.png' width='50' height='50'><br><br>No Rooms Found !<br><small>Make Sure You Add Rooms...</small></th></tr></table>");
+				}
+
+				if ($("#lights-floors-navigation").val() == room_floor)
+				{
+					LoadRoomsLightsSection(room_floor)
+				}
+
+				ResetEditRoomModal(); // Reset Modal
+				width = "";
+				height = "";
+				room = "";
+				name = "";
+				device = "";
+				id = "";
+				SelectedDeviceType = [];
+				SelectedDevicePin = [];
+				SelectedDeviceCoords = [];
+				SelectedDeviceColor = [];
+				SelectedDeviceId = [];
+				room_floor = "";
+				groups = [];
+			}
+			else
+			{
+				$.growl.error({ message: "Failed to Delete <span style='color: var(--secondary-color)'>"+$("#edit-room-name").val()+"</span> Room, Please Try Again !" });
+			}
+		})
+		.fail(function()
+		{
+			UIkit.modal("#modal-delete-room").hide(); // Hide Modal
+			$.growl.error({ message: "Failed to Delete <span style='color: var(--secondary-color)'>"+$("#edit-room-name").val()+"</span> Room, Please Try Again !" });
+		});
 	});
 })
+/*=========================
+		Users
+=========================*/
+/* Load Users into Users List */
+$(window).on("load", function()
+{
+	DisplayUsersListUsersSection();
+
+	$("#users-btn, #mobile-users-btn").click(function()
+	{
+		DisplayUsersListUsersSection();
+	});
+});
 /*==================================================
 				Functions
 ==================================================*/
@@ -1570,21 +2106,6 @@ function LoadFloorsLightsSection()
 		$("#lights table#lights-room-devices tbody").append("<tr class='uk-animation-scale-down uk-text-center'><th><img src='../images/icons/error.png' width='50' height='50'><br><br>Failed to Load Floors !</th></tr>");
 		$("#lights #lights-room-groups").empty();
 		$("#lights #lights-room-groups").append("<table><tr class='uk-animation-scale-down uk-text-center'><th><img src='../images/icons/error.png' width='50' height='50'><br><br>Failed to Load Groups !</th></tr></table>");
-	});
-
-	/* When Changing Floors Select */
-	$("#lights-floors-navigation").change(function()
-	{
-		// Get Selected Option Value
-		var floor = $("#lights-floors-navigation").val();
-		// Empty The Rooms List
-		$("#lights-rooms-navigation").empty();
-		// Remove Room Name if it is Displayed
-		$("#lights #lights-room-name").html("");
-		// Remove Devices Number if it is Displayed
-		$("#lights #lights-room-devices-number").html("");
-		// Load Rooms corresponding to the selected Floor
-		LoadRoomsLightsSection(floor);
 	});
 }
 /* Load Rooms Related to a Floor Function */
@@ -2382,7 +2903,7 @@ function DisplayRoomsListRoomsSection()
 	})
 	.done(function(response)
 	{
-		// Empty The Group List
+		// Empty The Rooms List
 		$("#rooms #rooms-list").empty();
 
 		var len = response.length;
@@ -2480,13 +3001,15 @@ function DisplayDevicesAddRoomRoomsSection(width, height)
 		$("#modal-add-room #add-room-room table").removeClass("rotated");
 	}
 }
-/* Reset Add Floor Modal Function */
+/* Reset Add Room Modal Function */
 function ResetAddRoomModal()
 {
 	$("#add-room-name").val(""); // Clear Room Name
 	$("#add-room-width").val(""); // Clear Room Width
 	$("#add-room-height").val(""); // Clear Room Height
-	$("#add-room-name").css("border", "1px solid var(--secondary-color)");// Remove Red Border from Input
+	$("#add-room-name").css("border", "1px solid var(--secondary-color)"); // Remove Red Border from Input
+	$("#add-room-width").css("border", "1px solid var(--secondary-color)"); // Remove Red Border from Input
+	$("#add-room-height").css("border", "1px solid var(--secondary-color)"); // Remove Red Border from Input
 	$("#add-room-name-error").hide(); // Hide Error
 	$("#add-room-width-error").hide(); // Clear Room Width
 	$("#add-room-height-error").hide(); // Clear Room Height
@@ -2504,4 +3027,65 @@ function ResetAddRoomDeviceModal()
 
 	$("#add-room-device-type-error").hide();
 	$("#add-room-device-pin-error").hide(); 
+}
+/* Reset Edit Room Modal Function */
+function ResetEditRoomModal()
+{
+	$("#edit-room-name").val("");
+	$("#edit-room-search-floor").empty();
+	$("#modal-edit-room #edit-room-room-devices").empty();
+	$("#modal-edit-room #edit-room-room-groups").empty();
+	$("#edit-room-name").css("border", "1px solid var(--secondary-color)");
+	$("#edit-room-name-error").hide(); // Hide Error
+}
+/* Reset Edit Room Device Modal Function */
+function ResetEditRoomDeviceModal()
+{
+	$("#edit-room-device-type").val($("#edit-room-device-type option:first").val());
+	$("#edit-room-device-pin").val("");
+
+	$("#edit-room-device-type").css("border", "1px solid var(--secondary-color)");
+	$("#edit-room-device-pin").css("border", "1px solid var(--secondary-color)");
+
+	$("#edit-room-device-type-error").hide();
+	$("#edit-room-device-pin-error").hide(); 
+}
+/*==================================================
+		Users Section Functions
+==================================================*/
+/* Display Users List in Users Section */
+function DisplayUsersListUsersSection()
+{
+	$.ajax
+	({
+		url: "../php/users_list.php",
+		type: "POST",
+		dataType: "json",
+	})
+	.done(function(response)
+	{
+		// Empty The Users List
+		$("#users #users-list table").empty();
+
+		var len = response.length;
+
+		if (len != 0)
+		{
+			$("#users #users-list table").append("<thead><tr class='uk-animation-scale-down uk-text-center'><th>Name</th><th>Type</th></thead><tbody></tbody>");
+
+			for (var i = 0; i < len; i++)
+			{
+				$("#users #users-list table tbody").append("<tr id='"+response[i].username+"' class='uk-animation-scale-down uk-text-center'><td>"+response[i].name+"</td><td>"+response[i].type+"</td></tr>");
+			}
+		}
+		else
+		{
+			$("#users #users-list table").append("<thead><tr class='uk-animation-scale-down uk-text-center'><th style='border: 1px solid var(--secondary-color); border-radius: .25rem;'><img src='../images/icons/notfound.png' width='50' height='50'><br><br>No Users Found !</th></tr></thead>");
+		}
+	})
+	.fail(function()
+	{
+		$("#users #users-list table").empty();
+		$("#users #users-list table").append("<thead><tr class='uk-animation-scale-down uk-text-center'><th style='border: 1px solid var(--secondary-color); border-radius: .25rem;'><img src='../images/icons/error.png' width='50' height='50'><br><br>Failed to Load Users !</th></tr></thead>");
+	}); 
 }

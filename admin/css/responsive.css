@@ -43,6 +43,11 @@
 	=========================*/
 	#rooms #add-room-btn{font-size: 11px !important;}
 	#rooms #add-room-btn img{margin-top: -2px;}
+	/*=========================
+			Users
+	=========================*/
+	#users #add-user-btn{font-size: 11px !important;}
+	#users #add-user-btn img{margin-top: -2px;}
 }
 /* Small Devices */
 @media (min-width: 768px) and (max-width: 991px)
@@ -91,6 +96,11 @@
 	=========================*/
 	#rooms #add-room-btn{font-size: 10px !important;}
 	#rooms #add-room-btn img{margin-top: -3px;}
+	/*=========================
+			Users
+	=========================*/
+	#users #add-user-btn{font-size: 10px !important;}
+	#users #add-user-btn img{margin-top: -3px;}
 }
 /* Extra Small Devices */
 @media (max-width: 767px)
@@ -146,7 +156,14 @@
 	#rooms #add-room-btn img{margin-top: -3px;}
 	/* Add Room Modal */
 	#modal-add-room div.add-room-width-height div.uk-form-controls small{font-size: 10px;}
-	#modal-add-room #add-room-room table td div{padding: 5px !important;}
+	#modal-add-room #add-room-room table td div{padding: 1px !important;}
+	/* Edit Room Modal */
+	#modal-edit-room #edit-room-room table td div{padding: 1px !important;}
+	/*=========================
+			Users
+	=========================*/
+	#users #add-user-btn{font-size: 10px !important;}
+	#users #add-user-btn img{margin-top: -3px;}
 }
 /* Extra X-Small Devices */
 @media (max-width: 480px)
@@ -193,6 +210,14 @@
 	#rooms #add-room-btn{padding-left: 10px; padding-right: 10px;}
 	/* Add Room Modal */
 	#modal-add-room div.add-room-width-height div.uk-form-controls small{font-size: 6px;}
-	#modal-add-room #add-room-room table td div{padding: 2px !important;}
-	#modal-add-room #add-room-room table td div img{padding: 2px !important;}
+	#modal-add-room #add-room-room table td div{padding: 1px !important;}
+	#modal-add-room #add-room-room table td div img{padding: 1px !important;}
+	/* Edit Room Modal */
+	#modal-edit-room #edit-room-room table td div{padding: 1px !important;}
+	#modal-edit-room #edit-room-room table td div img{padding: 1px !important;}
+	/*=========================
+			Users
+	=========================*/
+	#users .add-user{margin-top: 0;}
+	#users #add-user-btn{padding-left: 10px; padding-right: 10px;}
 }

@@ -52,7 +52,7 @@
 					$col = substr($device_coords[$i], strrpos($device_coords[$i], "-", 0) + 1, strlen($device_coords[$i])); // Get Device Column
 
 					/* Add Device to Room */
-					$request = "INSERT INTO  DEVICES (DEVICE_PIN, DEVICE_TYPE, DEVICE_LINE, DEVICE_COLUMN, DEVICE_STATUS, ROOM_ID) VALUES (:pin, :type, :lin, :col, 'OFF', :room);";
+					$request = "INSERT INTO DEVICES (DEVICE_PIN, DEVICE_TYPE, DEVICE_LINE, DEVICE_COLUMN, DEVICE_STATUS, ROOM_ID) VALUES (:pin, :type, :lin, :col, 'OFF', :room);";
 					/* Preparing Statement */
 					$statement = $DB_CONNECTION->prepare($request);
 					/* Binding Parameter */

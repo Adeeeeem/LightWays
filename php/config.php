@@ -10,7 +10,7 @@
 	/* Password */
 	$DB_PASSWORD = "";
 	/* Database Name */
-	$DB_DATABASE = "LightWays";
+	$DB_DATABASE = "LightWaysTesting"; // LightWays
 	/* Data Source Name */
 	$DSN = "mysql:host=".$DB_HOST."; dbname=".$DB_DATABASE."; charset=utf8";
 	/* Options */
@@ -32,7 +32,7 @@
 	{
 		$value = trim($value);
 		$value = stripslashes($value);
-		$value = htmlspecialchars($value, ENT_QUOTES | ENT_HTML401 | ENT_HTML5, "UTF-8");
+		$value = htmlspecialchars($value, ENT_HTML401 | ENT_HTML5, "UTF-8");
 		$value = strip_tags($value);
 
 		return $value;
