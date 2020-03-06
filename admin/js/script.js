@@ -2102,6 +2102,139 @@ $(window).on("load", function()
 			$("#setting-lname").css("border", "1px solid var(--secondary-color)");
 			$("#setting-lname-error").hide();
 		}
+
+		/* Update Name */
+		if (new_fname && new_lname)
+		{
+			if ((fname != new_fname) || (lname != new_lname))
+			{
+				$.ajax
+				({
+					url: "../php/update_user.php",
+					type: "POST",
+					dataType: "json",
+					data: {fname: new_fname, lname: new_lname},
+				})
+				.done(function(response)
+				{
+					ResetSettingsAccountForm();
+
+					if (response.result)
+					{
+						$.growl.notice({ message: "Name has been Successfully Updated!" });
+						$("#setting-fname").val(new_fname);
+						$("#setting-lname").val(new_lname);
+					}
+					else
+					{
+						$.growl.error({ message: "Oops, There was an Error Updating Your Name !" });
+						$("#setting-fname").val(fname);
+						$("#setting-lname").val(lname);
+					}
+				})
+				.fail(function()
+				{
+					$.growl.error({ message: "Oops, There was an Error Updating Your Name !" });
+					ResetSettingsAccountForm();
+					$("#setting-fname").val(fname);
+					$("#setting-lname").val(lname);
+				});
+				
+			}
+		}
+
+		var old_password = $("#setting-old-password").val();
+		var new_password = $("#setting-new-password").val();
+		var confirm_password = $("#setting-confirm-new-password").val();
+
+		if ((old_password) || (new_password) || (confirm_password))
+		{
+			$.ajax
+			({
+				url: "../php/get_password.php",
+				type: "POST",
+				dataType: "json",
+			})
+			.done(function(response)
+			{
+				if (old_password != response.pw)
+				{
+					$("#setting-old-password").css("border", "1px solid #F0506E");
+					$("#setting-old-password-error").show();
+				}
+				else
+				{
+					$("#setting-old-password").css("border", "1px solid var(--secondary-color)");
+					$("#setting-old-password-error").hide();
+				}
+
+				if (!new_password)
+				{
+					$("#setting-new-password").css("border", "1px solid #F0506E");
+					$("#setting-new-password-error").show();
+				}
+				else
+				{
+					$("#setting-new-password").css("border", "1px solid var(--secondary-color)");
+					$("#setting-new-password-error").hide();
+				}
+
+				if (!confirm_password)
+				{
+					$("#setting-confirm-new-password").css("border", "1px solid #F0506E");
+					$("#setting-confirm-new-password-error").show();
+				}
+				else
+				{
+					$("#setting-confirm-new-password").css("border", "1px solid var(--secondary-color)");
+					$("#setting-confirm-new-password-error").hide();
+				}
+
+				/* Password Doesn't Match */
+				if (new_password != confirm_password)
+				{
+					$("#setting-confirm-new-password").css("border", "1px solid #F0506E");
+					$("#setting-confirm-new-password-error").show();
+				}
+
+				if (old_password && new_password && confirm_password && (new_password == confirm_password) && (old_password == response.pw))
+				{
+					if (old_password == new_password)
+					{
+						$.growl({ title: "Same Password", message: "Your Old Password Matches Your New Password !" });
+					}
+					else
+					{
+						$.ajax
+						({
+							url: "../php/change_password.php",
+							type: "POST",
+							dataType: "json",
+							data: {password: new_password},
+						})
+						.done(function(response)
+						{
+							ResetSettingsAccountForm();
+
+							if (response.result)
+							{
+								$.growl.notice({ message: "Password has been Successfully Changed !" });
+								response.pw = "";
+							}
+							else
+							{
+								$.growl.error({ message: "Oops, There was an Error Changing Your Password !" });
+							}
+						})
+						.fail(function()
+						{
+							$.growl.error({ message: "Oops, There was an Error Changing Your Password !" });
+							ResetSettingsAccountForm();
+						});
+					}
+				}
+			});
+		}
 	});
 });
 /* Turn ON and OFF Dark Theme */
@@ -3221,5 +3354,4 @@ function ResetSettingsAccountForm()
 	$("#setting-old-password-error").hide();
 	$("#setting-new-password-error").hide();
 	$("#setting-confirm-new-password-error").hide();
-	$("#setting-wrong-old-password").hide();
 }

@@ -3,9 +3,9 @@
 
 	header("Content-Type: application/json");
 
-	/* Get Group Received ID */
+	/* Get Floor Received ID */
 	$floor = $_POST["floor"];
-	/* Get Group Received NAME */
+	/* Get Floor Received NAME */
 	$name = $_POST["name"];
 	/* Avoid any XSS or SQL Injection */
 	$floor = Security($floor);
@@ -18,7 +18,7 @@
 	{
 		if ( (is_numeric($floor)) && (is_string($name)) )
 		{
-			/* Update Group */
+			/* Update Floor */
 			/* Preparing Request */
 			$request = "UPDATE FLOORS SET FLOOR_NAME = :name WHERE FLOOR_ID = :floor;";
 			/* Preparing Statement */
