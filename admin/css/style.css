@@ -1,7 +1,7 @@
 /*==================================================
 				Hidden Elements
 ==================================================*/
-#mobile-menu-open-btn, #mobile-menu, #groups, #scenes, #statistics, #floors, #rooms, #users, #settings, #contact{display: none;}
+#mobile-menu-open-btn, #mobile-menu, #groups, #statistics, #floors, #rooms, #users, #settings, #support{display: none;}
 /*==================================================
 				Menu
 ==================================================*/
@@ -10,7 +10,7 @@
 #menu-logo img{width: 200px; height: 75px;}
 #menu button{background-color: var(--primary-color); font-weight: bold; color: var(--secondary-color); font-size: 13px; letter-spacing: 1px; text-transform: uppercase; margin-top: 10px;}
 #menu button:hover, #menu button:focus, #menu button.active{color: var(--blue-color);}
-#menu button img{width: 25px; height: 25px; margin-right: 25px;}
+#menu button img{width: 25px; height: 25px; margin-right: 25px; margin-top: -5px;}
 #groups-btn img{width: 33px !important; height: 33px !important; margin-left: -3px; margin-right: 20px !important;}
 #logout-btn img{margin-left: 2px; margin-right: 23px !important;}
 #menu ul.configuration-btn{padding-top: 5px;}
@@ -22,7 +22,7 @@
 #mobile-menu-logo img{width: 180px; height: 75px; margin-left: 34px;}
 #mobile-menu button{background-color: var(--primary-color); color: var(--secondary-color); font-size: 15px; letter-spacing: 1px; text-transform: uppercase; padding-left: 50px; padding-top: 5px;}
 #mobile-menu button:hover, #mobile-menu button:focus, #mobile-menu button.active{color: var(--blue-color);}
-#mobile-menu button img{width: 20px; height: 20px; margin-right: 20px; margin-top: -6px;}
+#mobile-menu button img{width: 20px; height: 20px; margin-right: 20px; margin-top: -5px;}
 #mobile-groups-btn img{width: 30px !important; height: 30px !important; margin-left: -3px; margin-right: 13px !important;}
 #mobile-menu ul.mobile-configuration-btn{padding-top: 5px;}
 #mobile-configuration-btn{padding-top: 0; height: 43px;}
@@ -85,7 +85,7 @@
 #groups .uk-switch input{display:none;}
 #groups .uk-switch-slider{background-color: rgba(0,0,0,0.22); position: absolute; top: 0; left: 0; right: 0; bottom: 0; border-radius: 500px; cursor: pointer; transition-property: background-color; transition-duration: .2s; box-shadow: inset 0 0 2px rgba(0,0,0,0.07);}
 #groups .uk-switch-slider:before{ content: ''; background-color: #FFFFFF; position: absolute; width: 21px; height: 21px; left: 2px; bottom: 2px; border-radius: 50%; transition-property: transform, box-shadow; transition-duration: .2s;}
-#groups input:checked + .uk-switch-slider{background-color: var(--orange-color) !important;}
+#groups input:checked + .uk-switch-slider{background-color: var(--blue-color) !important;}
 #groups input:checked + .uk-switch-slider:before {transform: translateX(26px);}
 #groups .uk-switch-slider{background-color: var(--secondary-color);}
 /* Add Group Modal */
@@ -119,10 +119,6 @@
 #modal-delete-group h2.uk-modal-title{font-size: 1.45rem; margin-top: 10px; color: var(--text-color);}
 #modal-delete-group button.uk-modal-close{background-color: #C0392B; color: #FFFFFF;}
 #modal-delete-group button#delete-group-confirm-btn{background-color: #2ECC71; color: #FFFFFF;}
-/*=========================
-		Scenes
-=========================*/
-
 /*=========================
 		Statistics
 =========================*/

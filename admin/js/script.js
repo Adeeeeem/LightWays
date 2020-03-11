@@ -35,13 +35,6 @@ $(function()
 		DisplaySection("#groups", "Groups", "#groups-btn, #mobile-groups-btn");
 	});
 
-	// When Clicking on Scenes Button in Menu
-	$("#scenes-btn, #mobile-scenes-btn").click(function()
-	{
-		// Display Scenes Section
-		DisplaySection("#scenes", "Scenes", "#scenes-btn, #mobile-scenes-btn");
-	});
-
 	// When Clicking on Statistics Button in Menu
 	$("#statistics-btn, #mobile-statistics-btn").click(function()
 	{
@@ -89,11 +82,11 @@ $(function()
 		DisplaySection("#settings", "Settings", "#settings-btn, #mobile-settings-btn");
 	});
 
-	// When Clicking on Contact Button in Menu
-	$("#contact-btn, #mobile-contact-btn").click(function()
+	// When Clicking on Support Button in Menu
+	$("#support-btn, #mobile-support-btn").click(function()
 	{
-		// Display Contact Section
-		DisplaySection("#contact", "Contact", "#contact-btn, #mobile-contact-btn");
+		// Display Support Section
+		DisplaySection("#support", "Support", "#support-btn, #mobile-support-btn");
 	});
 });
 /* Save Last Open Tab and Open it when Refreshing */
@@ -103,13 +96,12 @@ $(function()
 		
 	$("#lights-btn, #mobile-lights-btn").click(function(){localStorage.setItem("LightWays_ADMIN_SECTION", "#lights-btn");});
 	$("#groups-btn, #mobile-groups-btn").click(function(){localStorage.setItem("LightWays_ADMIN_SECTION", "#groups-btn");});
-	$("#scenes-btn, #mobile-scenes-btn").click(function(){localStorage.setItem("LightWays_ADMIN_SECTION", "#scenes-btn");});
 	$("#statistics-btn, #mobile-statistics-btn").click(function(){localStorage.setItem("LightWays_ADMIN_SECTION", "#statistics-btn");});
 	$("#floors-btn, #mobile-floors-btn").click(function(){localStorage.setItem("LightWays_ADMIN_SECTION", "#floors-btn")});
 	$("#rooms-btn, #mobile-rooms-btn").click(function(){localStorage.setItem("LightWays_ADMIN_SECTION", "#rooms-btn")});
 	$("#users-btn, #mobile-users-btn").click(function(){localStorage.setItem("LightWays_ADMIN_SECTION", "#users-btn")});
 	$("#settings-btn, #mobile-settings-btn").click(function(){localStorage.setItem("LightWays_ADMIN_SECTION", "#settings-btn");});
-	$("#contact-btn, #mobile-contact-btn").click(function(){localStorage.setItem("LightWays_ADMIN_SECTION", "#contact-btn");});
+	$("#support-btn, #mobile-support-btn").click(function(){localStorage.setItem("LightWays_ADMIN_SECTION", "#support-btn");});
 
 	$(localStorage.getItem("LightWays_ADMIN_SECTION")).click();
 });
@@ -924,13 +916,9 @@ $(function()
 	});
 });
 /*=========================
-		Scenes
-=========================*/
-
-/*=========================
 		Statistics
 =========================*/
-
+//
 /*=========================
 		Floors
 =========================*/
@@ -2276,7 +2264,7 @@ function HideAllSections()
 	$("#rooms").hide();
 	$("#users").hide();
 	$("#settings").hide();
-	$("#contact").hide();
+	$("#support").hide();
 
 	// Remove Active Class From the Selected Section
 	$("#lights-btn, #mobile-lights-btn").removeClass("active");
@@ -2288,7 +2276,7 @@ function HideAllSections()
 	$("#rooms-btn, #mobile-rooms-btn").removeClass("active");
 	$("#users-btn, #mobile-users-btn").removeClass("active");
 	$("#settings-btn, #mobile-settings-btn").removeClass("active");
-	$("#contact-btn, #mobile-contact-btn").removeClass("active");
+	$("#support-btn, #mobile-support-btn").removeClass("active");
 }
 /* Display Section Function */
 function DisplaySection(Section, Title, Button)
@@ -2658,7 +2646,6 @@ function DisplayGroupsListGroupsSection()
 
 				if (status == "OFF")
 				{
-					overlay = "<div class='overlay'></div>"; // Add Overlay to Group
 					shadow = "";
 					bgcolor = "var(--secondary-color)";
 					checked = "";
@@ -3075,13 +3062,9 @@ function ResetEditGroupModal()
 	$("#edit-group-search-room").empty(); // Clear Rooms List
 }
 /*==================================================
-		Scenes Section Functions
-==================================================*/
-
-/*==================================================
 		Statistics Section Functions
 ==================================================*/
-
+//
 /*==================================================
 		Floors Section Functions
 ==================================================*/
