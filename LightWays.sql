@@ -36,8 +36,7 @@ CREATE TABLE `DEVICES` (
   `DEVICE_COLUMN` int(2) NOT NULL,
   `DEVICE_STATUS` enum('ON','OFF') NOT NULL,
   `ROOM_ID` int(10) NOT NULL,
-  `GROUP_ID` int(10) DEFAULT NULL,
-  `SCENE_ID` INT(10) DEFAULT NULL
+  `GROUP_ID` int(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -73,7 +72,7 @@ CREATE TABLE `GROUPS` (
 
 CREATE TABLE `PERMISSIONS` (
   `PERMISSION_ID` int(10) NOT NULL,
-  `PERMISSION_TYPE` enum('FLOOR','ROOM','GROUP','SCENE','DEVICE') NOT NULL,
+  `PERMISSION_TYPE` enum('FLOOR','ROOM','GROUP','DEVICE') NOT NULL,
   `USER_LOGIN` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -89,21 +88,6 @@ CREATE TABLE `ROOMS` (
   `ROOM_WIDTH` int(2) NOT NULL,
   `ROOM_HEIGHT` int(2) NOT NULL,
   `FLOOR_ID` int(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `SCENES`
---
-
-CREATE TABLE `SCENES` (
-  `SCENE_ID` int(10) NOT NULL,
-  `SCENE_NAME` varchar(30) NOT NULL,
-  `SCENE_START` time NOT NULL,
-  `SCENE_END` time NOT NULL,
-  `SCENE_DAYS` varchar(7) NOT NULL,
-  `SCENE_STATUS` enum('ON','OFF') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -137,8 +121,7 @@ INSERT INTO `USERS` (`USER_LOGIN`, `USER_PASSWORD`, `USER_FNAME`, `USER_LNAME`, 
 ALTER TABLE `DEVICES`
   ADD PRIMARY KEY (`DEVICE_ID`),
   ADD KEY `fk_room_device` (`ROOM_ID`),
-  ADD KEY `fk_group_device` (`GROUP_ID`),
-  ADD KEY `fk_scene_device` (`SCENE_ID`);
+  ADD KEY `fk_group_device` (`GROUP_ID`);
 
 --
 -- Indexes for table `FLOORS`
@@ -165,12 +148,6 @@ ALTER TABLE `PERMISSIONS`
 ALTER TABLE `ROOMS`
   ADD PRIMARY KEY (`ROOM_ID`),
   ADD KEY `fk_floor_room` (`FLOOR_ID`);
-
---
--- Indexes for table `SCENES`
---
-ALTER TABLE `SCENES`
-  ADD PRIMARY KEY (`SCENE_ID`);
 
 --
 -- Indexes for table `USERS`
@@ -207,12 +184,6 @@ ALTER TABLE `ROOMS`
   MODIFY `ROOM_ID` int(10) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `SCENES`
---
-ALTER TABLE `SCENES`
-  MODIFY `SCENE_ID` int(10) NOT NULL AUTO_INCREMENT;
-
---
 -- Constraints for dumped tables
 --
 
@@ -221,8 +192,7 @@ ALTER TABLE `SCENES`
 --
 ALTER TABLE `DEVICES`
   ADD CONSTRAINT `fk_group_device` FOREIGN KEY (`GROUP_ID`) REFERENCES `GROUPS` (`GROUP_ID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_room_device` FOREIGN KEY (`ROOM_ID`) REFERENCES `ROOMS` (`ROOM_ID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_scene_device` FOREIGN KEY (`SCENE_ID`) REFERENCES `SCENES` (`SCENE_ID`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_room_device` FOREIGN KEY (`ROOM_ID`) REFERENCES `ROOMS` (`ROOM_ID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `GROUPS`
