@@ -52,7 +52,7 @@
 #lights table#lights-room-devices td div{padding: 10px !important;}
 #lights table#lights-room-devices td div img{padding: 5px !important; border: 2px solid var(--text-color); border-radius: 50%; cursor: pointer;}
 #lights table#lights-room-devices td div img.ON{background-color: #FFCC00;}
-#lights table#lights-room-devices td div img.OFF{background-color: var(--primary-color);}
+#lights table#lights-room-devices td div img.OFF{background-color: var(--device-color);}
 /* Rotated Devices Display Table */
 #lights table#lights-room-devices.rotated td div{padding: 5px !important;}
 #lights table#lights-room-devices.rotated td div img{-webkit-transform: rotate(270deg); -moz-transform: rotate(270deg); -ms-transform: rotate(270deg); -o-transform: rotate(270deg); transform: rotate(270deg); width: 50px; height: 50px; padding: 2px !important;}

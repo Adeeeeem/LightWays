@@ -174,7 +174,7 @@ $(function()
 					// Change Status to OFF
 					$(device).removeClass("ON");
 					$(device).addClass("OFF");
-					$(device).css("background-color", "var(--primary-color)")
+					$(device).css("background-color", "var(--device-color)")
 					// Change Icon
 					image = image.replace("_ON", "_OFF");
 				}
@@ -346,7 +346,7 @@ $(function()
 				if (selected == "SELECTED") // If It's Already Selected
 				{
 					device.removeClass("SELECTED");
-					device.css("background-color", "var(--primary-color)");
+					device.css("background-color", "var(--device-color)");
 					for (var i = 0; i < SelectedDevices.length; i++) // Loop Array Search for the Item to Delete
 					{
 						if (SelectedDevices[i] == id)
@@ -690,7 +690,7 @@ $(function()
 				if (selected == "SELECTED") // If It's Already Selected
 				{
 					device.removeClass("SELECTED");
-					device.css("background-color", "var(--primary-color)");
+					device.css("background-color", "var(--device-color)");
 					for (var i = 0; i < SelectedDevices.length; i++) // Loop Array Search for the Item to Delete
 					{
 						if (SelectedDevices[i] == id)
@@ -1599,7 +1599,7 @@ $(function()
 				
 					for (var i = 0; i < len; i++)
 					{
-						var bgcolor = "var(--primary-color)";
+						var bgcolor = "var(--device-color)";
 
 						if (response[i].color != null)
 						{
@@ -2506,7 +2506,7 @@ function LoadDevicesLightsSection(room)
 			for (var i = 0; i < len; i++)
 			{
 				$("#lights table#lights-room-devices tbody td#"+response[i].lin+"-"+response[i].col).attr("class", "device");
-				$("#lights table#lights-room-devices tbody td#"+response[i].lin+"-"+response[i].col+" div").html("<img id='"+response[i].id+"' class='"+response[i].status+"' src='../images/devices/"+response[i].type+"_"+response[i].status+".png' width='50' height='50'>");
+				$("#lights table#lights-room-devices tbody td#"+response[i].lin+"-"+response[i].col+" div").html("<img id='"+response[i].id+"' class='"+response[i].status+"' src='../images/devices/"+response[i].type+"_"+response[i].status+".png' width='50' height='50' uk-tooltip='<center>Type "+response[i].type+"<br>Pin "+response[i].pin+"</center>'>");
 			}
 		}
 		else
@@ -2713,7 +2713,7 @@ function GroupStatus(group, status, flag)
 				}
 				else
 				{
-					$(device).css("background-color", "var(--primary-color)");
+					$(device).css("background-color", "var(--device-color)");
 				}
 			}
 		}
@@ -2869,7 +2869,7 @@ function DisplayDevicesAddGroupsSection(room)
 
 			for (var i = 0; i < len; i++)
 			{
-				$("#modal-add-group #add-group-room table td#"+response[i].lin+"-"+response[i].col).html("<div class='device'><img id='"+response[i].id+"' src='../images/devices/"+response[i].type+"_ON.png' style='background-color: var(--primary-color);' width='50' height='50'></div>");
+				$("#modal-add-group #add-group-room table td#"+response[i].lin+"-"+response[i].col).html("<div class='device'><img id='"+response[i].id+"' src='../images/devices/"+response[i].type+"_ON.png' style='background-color: var(--device-color);' width='50' height='50'></div>");
 			}
 		}
 		else
@@ -2890,7 +2890,7 @@ function ResetAddGroupModal()
 	$("#add-group-name").css("border", "1px solid var(--secondary-color)"); // Remove Red Border from Input
 	$("#add-group-name-error").hide(); // Hide Error
 	$("#add-group-color").val("#FFA200"); // Asign Orange as Group Color
-	$("#modal-add-group #add-group-room table img.SELECTED").css("background-color", "var(--primary-color");
+	$("#modal-add-group #add-group-room table img.SELECTED").css("background-color", "var(--device-color");
 	$("#modal-add-group #add-group-room table img.SELECTED").removeClass("SELECTED"); // Reset All Devices
 	$("#add-group-search-floor").empty(); // Clear Floors List
 	$("#add-group-search-room").empty(); // Clear Rooms List
@@ -3037,7 +3037,7 @@ function DisplayDevicesEditGroupsSection(room)
 
 			for (var i = 0; i < len; i++)
 			{
-				$("#modal-edit-group #edit-group-room table td#"+response[i].lin+"-"+response[i].col).html("<div class='device'><img id='"+response[i].id+"' src='../images/devices/"+response[i].type+"_ON.png' style='background-color: var(--primary-color);' width='50' height='50'></div>");
+				$("#modal-edit-group #edit-group-room table td#"+response[i].lin+"-"+response[i].col).html("<div class='device'><img id='"+response[i].id+"' src='../images/devices/"+response[i].type+"_ON.png' style='background-color: var(--device-color);' width='50' height='50'></div>");
 			}
 		}
 		else
@@ -3056,7 +3056,7 @@ function ResetEditGroupModal()
 {
 	$("#edit-group-name").css("border", "1px solid var(--secondary-color)"); // Remove Red Border from Input
 	$("#edit-group-name-error").hide(); // Hide Error
-	$("#modal-edit-group #edit-group-room table img.SELECTED").css("background-color", "var(--primary-color"); // Reset Devices Color
+	$("#modal-edit-group #edit-group-room table img.SELECTED").css("background-color", "var(--device-color"); // Reset Devices Color
 	$("#modal-edit-group #edit-group-room table img.SELECTED").removeClass("SELECTED"); // Reset All Devices
 	$("#edit-group-search-floor").empty(); // Clear Floors List
 	$("#edit-group-search-room").empty(); // Clear Rooms List
