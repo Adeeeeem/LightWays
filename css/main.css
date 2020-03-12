@@ -38,6 +38,7 @@ table th, table td{text-align: center !important; vertical-align: middle !import
 .uk-grid{margin-left: 0 !important;}
 .uk-grid>*{padding-left: 0 !important;}
 div.uk-modal-dialog{overflow-x: hidden;}
+div.uk-modal-dialog.big-width{width: 95%;}
 div.uk-modal-dialog, div.uk-modal-body{background-color:  var(--body-color); border-radius: 0.5rem;}
 div.uk-modal-dialog .uk-modal-title{font-size: 1.7rem; color: var(--text-color);}
 div.uk-modal-header{background-color: var(--primary-color); padding-top: 10px; padding-bottom: 10px;}

@@ -1233,49 +1233,6 @@ $(function()
 		}
 	});
 
-	var windom_width = $(window).width(); // Get Window Width
-	/* When Charnging Window Size */
-	$(window).resize(function()
-	{
-		if ($(window).width() != windom_width) // to Avoid on Mobile Scroll
-		{
-			// Get the New Window Width
-			windom_width = $(window).width();
-
-
-			width = $("#add-room-width").val();
-			height = $("#add-room-height").val();
-
-			if ( (width != "") && (height != "") )
-			{
-				if (parseInt(height, 10) > parseInt(width, 10))
-				{
-					var x = width;
-					width = height;
-					height = x;
-
-					$("#add-room-width").val(width);
-					$("#add-room-height").val(height);
-				}
-
-				DisplayDevicesAddRoomRoomsSection(width, height);
-			}
-		}
-	});
-
-	/* If Window Resize, Re-Select Selected Devices */
-	$("#modal-add-room #add-room-room table").bind("DOMNodeInserted DOMSubtreeModified DOMNodeRemoved", function()
-	{
-		setTimeout(function()
-		{
-			for (var i = 0; i < SelectedDeviceCoords.length; i++)
-			{
-				$("#modal-add-room #add-room-room table td#"+SelectedDeviceCoords[i]+" img").addClass("SELECTED");
-				$("#modal-add-room #add-room-room table td#"+SelectedDeviceCoords[i]+" img").attr("src", "../images/devices/"+SelectedDeviceType[i]+"_ON.png");
-			}
-		}, 100);
-	});
-
 	/* Show Add Device Modal */
 	$("#modal-add-room #add-room-room table").off("click").on("click", " img", function()
 	{
@@ -1546,54 +1503,14 @@ $(function()
 
 				if (response[0].device != null)
 				{
-
-					var rotate = false;
-							
-					if ($(window).width() < 768)
+					for (var line = 1; line <= height; line++)
 					{
-						if (width > 3)
-						{
-							if (width != height)
-							{
-								rotate = true;
-							}
-						}
-					}
-					else
-					{
-						if (width > 10)
-						{
-							rotate = true;
-						}
-					}
+						$("#modal-edit-room table#edit-room-room-devices").append("<tr id='"+line+"' class='uk-animation-scale-down uk-text-center'></tr>");
 
-					if (rotate)
-					{
-						for (var line = 1; line <= width; line++)
+						for (var column = 1; column <= width; column++)
 						{
-							var lin = eval(width-line+1);
-
-							$("#modal-edit-room table#edit-room-room-devices").append("<tr id='"+lin+"' class='uk-animation-scale-down uk-text-center'></tr>");
-
-							for (var column = 1; column <= height; column++)
-							{
-								$("#modal-edit-room table#edit-room-room-devices tr#"+lin).append("<td id='"+column+"-"+lin+"'></td>");
-							}
+							$("#modal-edit-room table#edit-room-room-devices tr#"+line).append("<td id='"+line+"-"+column+"'></td>");
 						}
-						$("#modal-edit-room table#edit-room-room-devices").addClass("rotated");
-					}
-					else
-					{
-						for (var line = 1; line <= height; line++)
-						{
-							$("#modal-edit-room table#edit-room-room-devices").append("<tr id='"+line+"' class='uk-animation-scale-down uk-text-center'></tr>");
-
-							for (var column = 1; column <= width; column++)
-							{
-								$("#modal-edit-room table#edit-room-room-devices tr#"+line).append("<td id='"+line+"-"+column+"'></td>");
-							}
-						}
-						$("#modal-edit-room table#edit-room-room-devices").removeClass("rotated");
 					}
 
 				
@@ -1681,53 +1598,14 @@ $(function()
 
 			if (SelectedDeviceCoords.length != 0)
 			{
-				var rotate = false;
-						
-				if ($(window).width() < 768)
+				for (var line = 1; line <= height; line++)
 				{
-					if (width > 3)
-					{
-						if (width != height)
-						{
-							rotate = true;
-						}
-					}
-				}
-				else
-				{
-					if (width > 10)
-					{
-						rotate = true;
-					}
-				}
+					$("#modal-edit-room table#edit-room-room-devices").append("<tr id='"+line+"' class='uk-animation-scale-down uk-text-center'></tr>");
 
-				if (rotate)
-				{
-					for (var line = 1; line <= width; line++)
+					for (var column = 1; column <= width; column++)
 					{
-						var lin = eval(width-line+1);
-
-						$("#modal-edit-room table#edit-room-room-devices").append("<tr id='"+lin+"' class='uk-animation-scale-down uk-text-center'></tr>");
-
-						for (var column = 1; column <= height; column++)
-						{
-							$("#modal-edit-room table#edit-room-room-devices tr#"+lin).append("<td id='"+column+"-"+lin+"'></td>");
-						}
+						$("#modal-edit-room table#edit-room-room-devices tr#"+line).append("<td id='"+line+"-"+column+"'></td>");
 					}
-					$("#modal-edit-room table#edit-room-room-devices").addClass("rotated");
-				}
-				else
-				{
-					for (var line = 1; line <= height; line++)
-					{
-						$("#modal-edit-room table#edit-room-room-devices").append("<tr id='"+line+"' class='uk-animation-scale-down uk-text-center'></tr>");
-
-						for (var column = 1; column <= width; column++)
-						{
-							$("#modal-edit-room table#edit-room-room-devices tr#"+line).append("<td id='"+line+"-"+column+"'></td>");
-						}
-					}
-					$("#modal-edit-room table#edit-room-room-devices").removeClass("rotated");
 				}
 
 				for (var i = 0; i < SelectedDeviceCoords.length; i++)
@@ -2403,25 +2281,6 @@ function LoadRoomsLightsSection(floor)
 		// Load Groups corresponding to the selected Room
 		setTimeout("LoadGroupsLightsSection("+room+")", 100);
 	});
-
-	var width = $(window).width(); // Get Window Width
-	/* When Charnging Window Size */
-	$(window).resize(function()
-	{
-		if ($(window).width() != width) // to Avoid on Mobile Scroll
-		{
-			// Get the New Window Width
-			width = $(window).width();
-			// Get Selected Option Value
-			var room = $("#lights-rooms-navigation").val();
-			// Empty The Rooms List
-			$("#lights table#lights-room-devices tbody").empty();
-			// Load Rooms corresponding to the selected Floor
-			LoadDevicesLightsSection(room);
-			// Load Groups corresponding to the selected Room
-			setTimeout("LoadGroupsLightsSection("+room+")", 100);
-		}
-	});
 }
 /* Load Devices Related to a Room Function */
 function LoadDevicesLightsSection(room)
@@ -2449,58 +2308,15 @@ function LoadDevicesLightsSection(room)
 
 			var width = response[0].width; // Get Room Width
 			var height = response[0].height; // Get Room Height
-			var rotate = false;
 
-			if ($(window).width() < $(window).height())
+			for (var line = 1; line <= height; line++)
 			{
-				if ($(window).width() < 768)
-				{
-					if (width > 4)
-					{
-						if (width != height)
-						{
-							rotate = true;
-						}
-					}
-				}
-				else
-				{
-					if (width > 15)
-					{
-						rotate = true;
-					}
-				}
-			}
+				$("#lights table#lights-room-devices tbody").append("<tr id='"+line+"' class='uk-animation-scale-down uk-text-center'></tr>");
 
-			if (rotate)
-			{
-				for (var line = 1; line <= width; line++)
+				for (var column = 1; column <= width; column++)
 				{
-					var lin = eval(width-line+1);
-
-					$("#lights table#lights-room-devices tbody").append("<tr id='"+lin+"' class='uk-animation-scale-down uk-text-center'></tr>");
-
-					for (var column = 1; column <= height; column++)
-					{
-						$("#lights table#lights-room-devices tbody tr#"+lin).append("<td id='"+column+"-"+lin+"'><div></div></td>");
-					}
+					$("#lights table#lights-room-devices tbody tr#"+line).append("<td id='"+line+"-"+column+"'><div></div></td>");
 				}
-				$("#lights table#lights-room-devices").addClass("rotated");
-				$("#lights #lights-room-groups").addClass("rotated");
-			}
-			else
-			{
-				for (var line = 1; line <= height; line++)
-				{
-					$("#lights table#lights-room-devices tbody").append("<tr id='"+line+"' class='uk-animation-scale-down uk-text-center'></tr>");
-
-					for (var column = 1; column <= width; column++)
-					{
-						$("#lights table#lights-room-devices tbody tr#"+line).append("<td id='"+line+"-"+column+"'><div></div></td>");
-					}
-				}
-				$("#lights table#lights-room-devices").removeClass("rotated");
-				$("#lights #lights-room-groups").removeClass("rotated");
 			}
 
 			for (var i = 0; i < len; i++)
@@ -2520,6 +2336,59 @@ function LoadDevicesLightsSection(room)
 	{
 		$("#lights table#lights-room-devices tbody").empty();
 		$("#lights table#lights-room-devices tbody").append("<tr class='uk-animation-scale-down uk-text-center'><th style='color: #C0392B;'><img src='../images/icons/error.png' width='50' height='50'><br><br>Failed to Load Devices !</th></tr>");
+	});
+
+	/* When Activating Full Screen */
+	$("#fullscreen-btn-on").click(function()
+	{
+		$("#fullscreen-btn-on").hide();
+		$("#lights #fullscreen").addClass("fullscreen");
+		$("#fullscreen-btn-off").show();
+		
+		if (document.documentElement.requestFullscreen)
+		{
+			document.documentElement.requestFullscreen();
+		}
+		else if (document.documentElement.mozRequestFullScreen)
+		{
+			document.documentElement.mozRequestFullScreen();
+		}
+		else if (document.documentElement.webkitRequestFullscreen)
+		{
+			document.documentElement.webkitRequestFullscreen();
+		}
+		else if (document.documentElement.msRequestFullscreen)
+		{
+			document.documentElement.msRequestFullscreen();
+		}
+
+		screen.orientation.lock("landscape-primary");
+	});
+
+	$("#fullscreen-btn-off").click(function()
+	{
+		$("#fullscreen-btn-off").hide();
+		$("#lights #fullscreen").removeClass("fullscreen");
+		$("#fullscreen-btn-on").show();
+		
+		if (document.exitFullscreen)
+		{
+			document.exitFullscreen();
+		}
+		else if (document.webkitExitFullscreen)
+		{
+			document.webkitExitFullscreen();
+		}
+		else if (document.mozCancelFullScreen)
+		{
+			document.mozCancelFullScreen();
+		}
+		else if (document.msExitFullscreen)
+		{
+			document.msExitFullscreen();
+		}
+
+		screen.orientation.unlock();
 	});
 }
 /* Load Groups Related to a Room Function */
@@ -2547,7 +2416,7 @@ function LoadGroupsLightsSection(room)
 			{
 				if (response[i].status == "ON")
 				{
-					$("#lights table#lights-room-devices tbody img#"+response[i].device+".ON").css("background-color", response[i].color);
+					$("#lights table#lights-room-devices tbody img#"+response[i].device+".ON").css({"background-color": "#FFCC00", "border": "2px solid "+response[i].color});
 				}
 
 				if (!groups.includes(response[i].name))
@@ -2709,11 +2578,12 @@ function GroupStatus(group, status, flag)
 
 				if ($(device).attr("class") == "ON")
 				{
-					$(device).css("background-color", response[i].color);
+					$(device).css({"background-color": "#FFCC00", "border": "2px solid "+response[i].color});
 				}
 				else
 				{
 					$(device).css("background-color", "var(--device-color)");
+					$(device).css({"background-color": "var(--device-color)", "border": "2px solid var(--text-color)"});
 				}
 			}
 		}
@@ -2778,23 +2648,6 @@ function LoadRoomsAddGroupsSection(floor)
 		// Display The Selected Room's Devices
 		DisplayDevicesAddGroupsSection(room);
 	});
-
-	var width = $(window).width(); // Get Window Width
-	/* When Charnging Window Size */
-	$(window).resize(function()
-	{
-		if ($(window).width() != width) // to Avoid on Mobile Scroll
-		{
-			// Get the New Window Width
-			width = $(window).width();
-			// Get Selected Option Value
-			var room = $("#add-group-search-room").val();
-			// Empty The Rooms List
-			$("#modal-add-group #add-group-room table").empty();
-			// Load Rooms corresponding to the selected Floor
-			DisplayDevicesAddGroupsSection(room);
-		}
-	});
 }
 /* Load Devices Related to a Room Function Add Group Modal */
 function DisplayDevicesAddGroupsSection(room)
@@ -2815,57 +2668,17 @@ function DisplayDevicesAddGroupsSection(room)
 		{
 			var width = response[0].width; // Get Room Width
 			var height = response[0].height; // Get Room Height
-			var rotate = false;
 
-			if ($(window).width() < $(window).height())
+			for (var line = 1; line <= height; line++)
 			{
-				if ($(window).width() < 768)
+				$("#modal-add-group #add-group-room table").append("<tr id='"+line+"' class='uk-animation-scale-down uk-text-center'></tr>");
+
+				for (var column = 1; column <= width; column++)
 				{
-					if (width > 3)
-					{
-						if (width != height)
-						{
-							rotate = true;
-						}
-					}
-				}
-				else
-				{
-					if (width > 10)
-					{
-						rotate = true;
-					}
+					$("#modal-add-group #add-group-room table tr#"+line).append("<td id='"+line+"-"+column+"'></td>");
 				}
 			}
 
-			if (rotate)
-			{
-				for (var line = 1; line <= width; line++)
-				{
-					var lin = eval(width-line+1);
-
-					$("#modal-add-group #add-group-room table").append("<tr id='"+lin+"' class='uk-animation-scale-down uk-text-center'></tr>");
-
-					for (var column = 1; column <= height; column++)
-					{
-						$("#modal-add-group #add-group-room table tr#"+lin).append("<td id='"+column+"-"+lin+"'></td>");
-					}
-				}
-				$("#modal-add-group #add-group-room table").addClass("rotated");
-			}
-			else
-			{
-				for (var line = 1; line <= height; line++)
-				{
-					$("#modal-add-group #add-group-room table").append("<tr id='"+line+"' class='uk-animation-scale-down uk-text-center'></tr>");
-
-					for (var column = 1; column <= width; column++)
-					{
-						$("#modal-add-group #add-group-room table tr#"+line).append("<td id='"+line+"-"+column+"'></td>");
-					}
-				}
-				$("#modal-add-group #add-group-room table").removeClass("rotated");
-			}
 
 			for (var i = 0; i < len; i++)
 			{
@@ -2946,23 +2759,6 @@ function LoadRoomsEditGroupsSection(floor)
 		// Load Rooms corresponding to the selected Floor
 		DisplayDevicesEditGroupsSection(room);
 	});
-
-	var width = $(window).width(); // Get Window Width
-	/* When Charnging Window Size */
-	$(window).resize(function()
-	{
-		if ($(window).width() != width) // to Avoid on Mobile Scroll
-		{
-			// Get the New Window Width
-			width = $(window).width();
-			// Get Selected Option Value
-			var room = $("#edit-group-search-room").val();
-			// Empty The Rooms List
-			$("#modal-edit-group #edit-group-room table").empty();
-			// Load Rooms corresponding to the selected Floor
-			DisplayDevicesEditGroupsSection(room);
-		}
-	});
 }
 /* Load Devices Related to a Room Function Add Group Modal */
 function DisplayDevicesEditGroupsSection(room)
@@ -2983,56 +2779,15 @@ function DisplayDevicesEditGroupsSection(room)
 		{
 			var width = response[0].width; // Get Room Width
 			var height = response[0].height; // Get Room Height
-			var rotate = false;
 
-			if ($(window).width() < $(window).height())
+			for (var line = 1; line <= height; line++)
 			{
-				if ($(window).width() < 768)
-				{
-					if (width > 3)
-					{
-						if (width != height)
-						{
-							rotate = true;
-						}
-					}
-				}
-				else
-				{
-					if (width > 10)
-					{
-						rotate = true;
-					}
-				}
-			}
+				$("#modal-edit-group #edit-group-room table").append("<tr id='"+line+"' class='uk-animation-scale-down uk-text-center'></tr>");
 
-			if (rotate)
-			{
-				for (var line = 1; line <= width; line++)
+				for (var column = 1; column <= width; column++)
 				{
-					var lin = eval(width-line+1);
-
-					$("#modal-edit-group #edit-group-room table").append("<tr id='"+lin+"' class='uk-animation-scale-down uk-text-center'></tr>");
-
-					for (var column = 1; column <= height; column++)
-					{
-						$("#modal-edit-group #edit-group-room table tr#"+lin).append("<td id='"+column+"-"+lin+"'></td>");
-					}
+					$("#modal-edit-group #edit-group-room table tr#"+line).append("<td id='"+line+"-"+column+"'></td>");
 				}
-				$("#modal-edit-group #edit-group-room table").addClass("rotated");
-			}
-			else
-			{
-				for (var line = 1; line <= height; line++)
-				{
-					$("#modal-edit-group #edit-group-room table").append("<tr id='"+line+"' class='uk-animation-scale-down uk-text-center'></tr>");
-
-					for (var column = 1; column <= width; column++)
-					{
-						$("#modal-edit-group #edit-group-room table tr#"+line).append("<td id='"+line+"-"+column+"'></td>");
-					}
-				}
-				$("#modal-edit-group #edit-group-room table").removeClass("rotated");
 			}
 
 			for (var i = 0; i < len; i++)
@@ -3181,53 +2936,14 @@ function DisplayDevicesAddRoomRoomsSection(width, height)
 {
 	$("#modal-add-room #add-room-room table").empty();
 
-	var rotate = false;
-			
-	if ($(window).width() < 768)
+	for (var line = 1; line <= height; line++)
 	{
-		if (width > 3)
-		{
-			if (width != height)
-			{
-				rotate = true;
-			}
-		}
-	}
-	else
-	{
-		if (width > 10)
-		{
-			rotate = true;
-		}
-	}
+		$("#modal-add-room #add-room-room table").append("<tr id='"+line+"' class='uk-animation-scale-down uk-text-center'></tr>");
 
-	if (rotate)
-	{
-		for (var line = 1; line <= width; line++)
+		for (var column = 1; column <= width; column++)
 		{
-			var lin = eval(width-line+1);
-
-			$("#modal-add-room #add-room-room table").append("<tr id='"+lin+"' class='uk-animation-scale-down uk-text-center'></tr>");
-
-			for (var column = 1; column <= height; column++)
-			{
-				$("#modal-add-room #add-room-room table tr#"+lin).append("<td id='"+column+"-"+lin+"'><div><img src='../images/icons/disabled.png' width='50' height='50'></div></td>");
-			}
+			$("#modal-add-room #add-room-room table tr#"+line).append("<td id='"+line+"-"+column+"'><div><img src='../images/icons/disabled.png' width='50' height='50'></div></td>");
 		}
-		$("#modal-add-room #add-room-room table").addClass("rotated");
-	}
-	else
-	{
-		for (var line = 1; line <= height; line++)
-		{
-			$("#modal-add-room #add-room-room table").append("<tr id='"+line+"' class='uk-animation-scale-down uk-text-center'></tr>");
-
-			for (var column = 1; column <= width; column++)
-			{
-				$("#modal-add-room #add-room-room table tr#"+line).append("<td id='"+line+"-"+column+"'><div><img src='../images/icons/disabled.png' width='50' height='50'></div></td>");
-			}
-		}
-		$("#modal-add-room #add-room-room table").removeClass("rotated");
 	}
 }
 /* Reset Add Room Modal Function */

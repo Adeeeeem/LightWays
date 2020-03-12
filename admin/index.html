@@ -11,7 +11,7 @@
 	<!-- Tell Internet Explorer to use the latest Rendering Engine -->
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<!-- Setting the viewport to make your website look good on all devices -->
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 	<!-- Icon -->
 	<link rel="shortcut icon" type="image/png" href="../images/icon.png">
 	<!-- UIkit CSS 3.3.2 -->
@@ -143,15 +143,22 @@
 				<!-- Room Name -->
 				<h3 id="lights-room-name" class="uk-margin-medium-top"></h3>
 				<small id="lights-room-devices-number"></small>
-				<!-- Room Devices -->
-				<table id="lights-room-devices" class="uk-margin-small-top">
-					<tbody>
-						<!-- Devices Will be Displayed here from JavaScript -->
-					</tbody>
-				</table>
-				<!-- Room Groups -->
-				<div id="lights-room-groups" class="uk-width-1-1 uk-text-center uk-margin-small-top" uk-grid>
-					<!-- Groups Will be Displayed here from JavaScript -->
+				<!-- Room Devices & Groups -->
+				<div id="fullscreen">
+					<div id="fullscreen-btn-on" class="uk-width-auto uk-align-right"><span uk-icon="icon: expand; ratio: 1.2"></span></div>
+					<div id="fullscreen-btn-off" class="uk-width-auto uk-align-right"><span uk-icon="icon: shrink; ratio: 1.2"></span></div>
+					<!-- Room Devices -->
+					<center id="center">
+						<table id="lights-room-devices" class="uk-margin-small-top">
+							<tbody>
+								<!-- Devices Will be Displayed here from JavaScript -->
+							</tbody>
+						</table>
+						<!-- Room Groups -->
+						<div id="lights-room-groups" class="uk-width-1-1 uk-text-center uk-margin-small-top" uk-grid>
+							<!-- Groups Will be Displayed here from JavaScript -->
+						</div>
+					</center>
 				</div>
 			</div>
 		</div>
@@ -349,7 +356,7 @@
 	<!-- Modals -->
 	<!-- Add New Group Modal -->
 	<div id="modal-add-group" class="modal" uk-modal="bg-close: false; keyboard: false; escClose: false; modal: false">
-		<div class="uk-modal-dialog uk-margin-auto-vertical">
+		<div class="uk-modal-dialog uk-margin-auto-vertical big-width">
 			<!-- Title -->
 			<div class="uk-modal-header uk-text-center">
 				<h2 class="uk-modal-title">Add Group</h2>
@@ -422,7 +429,7 @@
 	</div>
 	<!-- Edit Group Modal -->
 	<div id="modal-edit-group" class="modal" uk-modal="bg-close: false; keyboard: false; escClose: false; modal: false">
-		<div class="uk-modal-dialog uk-margin-auto-vertical">
+		<div class="uk-modal-dialog uk-margin-auto-vertical big-width">
 			<!-- Title -->
 			<div class="uk-modal-header uk-text-center">
 				<h2 class="uk-modal-title">Edit Group</h2>
@@ -607,7 +614,7 @@
 	</div>
 	<!-- Add New Room Modal -->
 	<div id="modal-add-room" class="modal" uk-modal="bg-close: false; keyboard: false; escClose: false; modal: false">
-		<div class="uk-modal-dialog uk-margin-auto-vertical">
+		<div class="uk-modal-dialog uk-margin-auto-vertical big-width">
 			<!-- Title -->
 			<div class="uk-modal-header uk-text-center">
 				<h2 class="uk-modal-title">Add Room</h2>
@@ -643,7 +650,7 @@
 							<div class="uk-margin">
 								<label class="uk-form-label" for="add-room-width">Width</label>
 								<div class="uk-form-controls">
-									<input id="add-room-width" class="uk-input" type="number" step="1">
+									<input id="add-room-width" class="uk-input" type="number" step="1" min="1">
 									<small>Number of Devices in Room's Width !</small>
 								</div>
 								<div class=" uk-animation-toggle">
@@ -657,7 +664,7 @@
 							<div class="uk-margin">
 								<label class="uk-form-label" for="add-room-height">Height</label>
 								<div class="uk-form-controls">
-									<input id="add-room-height" class="uk-input" type="number" step="1">
+									<input id="add-room-height" class="uk-input" type="number" step="1" min="1">
 									<small>Number of Devices in Room's Height !</small>
 								</div>
 								<div class=" uk-animation-toggle">
@@ -737,7 +744,7 @@
 	</div>
 	<!-- Edit Room Modal -->
 	<div id="modal-edit-room" class="modal" uk-modal="bg-close: false; keyboard: false; escClose: false; modal: false">
-		<div class="uk-modal-dialog uk-margin-auto-vertical">
+		<div class="uk-modal-dialog uk-margin-auto-vertical big-width">
 			<!-- Title -->
 			<div class="uk-modal-header uk-text-center">
 				<h2 class="uk-modal-title">Edit Room</h2>

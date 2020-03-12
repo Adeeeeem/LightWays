@@ -1,7 +1,7 @@
 /*==================================================
 				Hidden Elements
 ==================================================*/
-#mobile-menu-open-btn, #mobile-menu, #groups, #statistics, #floors, #rooms, #users, #settings, #support{display: none;}
+#mobile-menu-open-btn, #mobile-menu, #groups, #statistics, #floors, #rooms, #users, #settings, #support, #fullscreen-btn-off{display: none;}
 /*==================================================
 				Menu
 ==================================================*/
@@ -45,6 +45,12 @@
 #lights #lights-room{margin-top: -45px !important;}
 #lights #lights-room-name{font-size: 1.5rem !important; letter-spacing: 1px; margin-bottom: 0; margin-top: -20px; color: var(--text-color);}
 #lights #lights-room-devices-number{padding: 0 !important; margin: 0 !important; color: var(--orange-color); font-size: 0.8rem;}
+#lights div#fullscreen.fullscreen{position: fixed; top: 0; right: 0; bottom: 0; left: 0; background-color: var(--body-color); z-index: 1000; width: 100%; height: 100%; margin: 0 !important; overflow-x: scroll;}
+#lights div#fullscreen div#fullscreen-btn-on{margin: 0 !important; margin-bottom: 10px !important; cursor: pointer;}
+#lights div#fullscreen div#fullscreen-btn-off{margin: 0 !important; margin-bottom: 10px !important; margin-top: 10px !important; margin-right: 10px !important; cursor: pointer;}
+#lights div#fullscreen.fullscreen #center{padding-bottom: 10px;}
+#lights div#fullscreen.fullscreen table#lights-room-devices{width: calc(100% - 20px); table-layout: fixed;}
+#lights div#fullscreen.fullscreen #lights-room-groups{width: calc(100% - 20px);}
 /* Devices Display Table */
 #lights table#lights-room-devices{border: 1px solid var(--secondary-color); border-radius: .25rem; padding: 10px; width: 100%;}
 #lights table#lights-room-devices th{padding: 16px 12px; text-align: left; vertical-align: bottom; font-size: .875rem; font-weight: 400; color: #999999; text-transform: uppercase;}
@@ -53,16 +59,11 @@
 #lights table#lights-room-devices td div img{padding: 5px !important; border: 2px solid var(--text-color); border-radius: 50%; cursor: pointer;}
 #lights table#lights-room-devices td div img.ON{background-color: #FFCC00;}
 #lights table#lights-room-devices td div img.OFF{background-color: var(--device-color);}
-/* Rotated Devices Display Table */
-#lights table#lights-room-devices.rotated td div{padding: 5px !important;}
-#lights table#lights-room-devices.rotated td div img{-webkit-transform: rotate(270deg); -moz-transform: rotate(270deg); -ms-transform: rotate(270deg); -o-transform: rotate(270deg); transform: rotate(270deg); width: 50px; height: 50px; padding: 2px !important;}
 /* Groups Display Table */
 #lights #lights-room-groups{border: 1px solid var(--secondary-color); border-radius: .25rem; padding: 10px !important; display: flex; flex-wrap: wrap; justify-content: center;}
 #lights *+.uk-grid-margin, #lights .uk-grid+.uk-grid, #lights .uk-grid>.uk-grid-margin{margin-top: 10px;}
 #lights #lights-room-groups button{border: 1px solid var(--primary-color); border-radius: 0.25rem; display: inline-block; cursor: pointer; margin-left: 15px; margin-right: 15px; height: 40px; padding: 0px;}
 #lights #lights-room-groups th{padding: 16px 12px; text-align: left; vertical-align: bottom; font-size: .875rem; font-weight: 400; color: #999999; text-transform: uppercase;}
-/* Rotated Groups Display Table */
-#lights #lights-room-groups.rotated button{display: inline-block; -webkit-transform: rotate(270deg); -moz-transform: rotate(270deg); -ms-transform: rotate(270deg); -o-transform: rotate(270deg); transform: rotate(270deg);}
 /*=========================
 		Groups
 =========================*/
@@ -85,7 +86,7 @@
 #groups .uk-switch input{display:none;}
 #groups .uk-switch-slider{background-color: rgba(0,0,0,0.22); position: absolute; top: 0; left: 0; right: 0; bottom: 0; border-radius: 500px; cursor: pointer; transition-property: background-color; transition-duration: .2s; box-shadow: inset 0 0 2px rgba(0,0,0,0.07);}
 #groups .uk-switch-slider:before{ content: ''; background-color: #FFFFFF; position: absolute; width: 21px; height: 21px; left: 2px; bottom: 2px; border-radius: 50%; transition-property: transform, box-shadow; transition-duration: .2s;}
-#groups input:checked + .uk-switch-slider{background-color: var(--blue-color) !important;}
+#groups input:checked + .uk-switch-slider{background-color: var(--orange-color) !important;}
 #groups input:checked + .uk-switch-slider:before {transform: translateX(26px);}
 #groups .uk-switch-slider{background-color: var(--secondary-color);}
 /* Add Group Modal */
@@ -97,9 +98,6 @@
 #modal-add-group #add-group-room table td{padding: 0 !important;}
 #modal-add-group #add-group-room table td div{padding: 7px !important;}
 #modal-add-group #add-group-room table td div img{padding: 5px !important; border: 2px solid var(--text-color); border-radius: 50%; cursor: pointer;}
-/* Display Rotated Devices */
-#modal-add-group #add-group-room table.rotated td div{padding: 5px !important;}
-#modal-add-group #add-group-room table.rotated td div img{-webkit-transform: rotate(270deg); -moz-transform: rotate(270deg); -ms-transform: rotate(270deg); -o-transform: rotate(270deg); transform: rotate(270deg);}
 /* Edit Group Modal */
 #modal-edit-group div.edit-group-search-room div{padding: 0; margin: 0;}
 #modal-edit-group div.edit-group-search-room label{color: var(--blue-color); padding-left: 0.5rem; margin-bottom: 0 !important; font-size: 10px;}
@@ -111,9 +109,6 @@
 #modal-edit-group #edit-group-room table td div img{padding: 5px !important; border: 2px solid var(--text-color); border-radius: 50%; cursor: pointer;}
 #modal-edit-group #delete-group-btn{color: #C0392B;}
 #modal-edit-group #delete-group-btn img{margin-top: -3px;}
-/* Display Rotated Devices */
-#modal-edit-group #edit-group-room table.rotated td div{padding: 5px !important;}
-#modal-edit-group #edit-group-room table.rotated td div img{-webkit-transform: rotate(270deg); -moz-transform: rotate(270deg); -ms-transform: rotate(270deg); -o-transform: rotate(270deg); transform: rotate(270deg);}
 /* Delete Group Modal */
 #modal-delete-group div.uk-padding-small{border: 2px solid #C0392B; border-radius: 50%;}
 #modal-delete-group h2.uk-modal-title{font-size: 1.45rem; margin-top: 10px; color: var(--text-color);}
@@ -186,11 +181,8 @@
 #modal-add-room #add-room-room table{border: 1px solid var(--secondary-color); border-radius: .25rem; padding: 10px; border-collapse: separate; margin-top: 20px;}
 #modal-add-room #add-room-room table td{padding: 0 !important;}
 #modal-add-room #add-room-room table td div{padding: 2px !important;}
-#modal-add-room #add-room-room table td div img{border-radius: 50%; cursor: pointer;}
+#modal-add-room #add-room-room table td div img{border-radius: 50%; cursor: pointer; background-color: var(--device-color);}
 #modal-add-room #add-room-room table td div img.SELECTED{padding: 2px !important; border: 2px solid var(--text-color);}
-/* Display Rotated Devices */
-#modal-add-room #add-room-room table.rotated td div{padding: 5px !important;}
-#modal-add-room #add-room-room table.rotated td div img{-webkit-transform: rotate(270deg); -moz-transform: rotate(270deg); -ms-transform: rotate(270deg); -o-transform: rotate(270deg); transform: rotate(270deg);}
 /* Add Room Device Modal */
 #modal-add-room-device #delete-room-device-btn{color: #C0392B;}
 #modal-add-room-device #delete-room-device-btn img{margin-top: -3px;}
@@ -203,9 +195,6 @@
 #modal-edit-room table#edit-room-room-devices td{padding: 0 !important;}
 #modal-edit-room table#edit-room-room-devices td div{padding: 2px !important;}
 #modal-edit-room table#edit-room-room-devices td div img{padding: 2px !important; border: 2px solid var(--text-color); border-radius: 50%; cursor: pointer;}
-/* Display Rotated Devices */
-#modal-edit-room table#edit-room-room-devices.rotated td div{padding: 5px !important;}
-#modal-edit-room table#edit-room-room-devices.rotated td div img{-webkit-transform: rotate(270deg); -moz-transform: rotate(270deg); -ms-transform: rotate(270deg); -o-transform: rotate(270deg); transform: rotate(270deg);}
 /* Display Groups */
 #modal-edit-room #edit-room-room-groups{border: 1px solid var(--secondary-color); border-radius: .25rem; padding: 10px !important; justify-content: center;}
 #modal-edit-room #edit-room-room-groups *+.uk-grid-margin, #modal-edit-room #edit-room-room-groups .uk-grid+.uk-grid, #modal-edit-room #edit-room-room-groups .uk-grid>.uk-grid-margin{margin-top: 10px;}
