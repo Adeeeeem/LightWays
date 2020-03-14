@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 14, 2020 at 03:08 AM
+-- Generation Time: Mar 14, 2020 at 03:24 AM
 -- Server version: 10.4.8-MariaDB
 -- PHP Version: 7.3.11
 
@@ -186,7 +186,8 @@ ALTER TABLE `HISTORY`
 -- Indexes for table `PERMISSIONS`
 --
 ALTER TABLE `PERMISSIONS`
-  ADD PRIMARY KEY (`PERMISSION_ID`,`PERMISSION_TYPE`,`USER_LOGIN`);
+  ADD PRIMARY KEY (`PERMISSION_ID`,`PERMISSION_TYPE`,`USER_LOGIN`),
+  ADD KEY `fk_user_permission` (`USER_LOGIN`);
 
 --
 -- Indexes for table `ROOMS`
@@ -270,6 +271,12 @@ ALTER TABLE `FLOORS`
 --
 ALTER TABLE `GROUPS`
   ADD CONSTRAINT `fk_room_group` FOREIGN KEY (`ROOM_ID`) REFERENCES `ROOMS` (`ROOM_ID`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `PERMISSIONS`
+--
+ALTER TABLE `PERMISSIONS`
+  ADD CONSTRAINT `fk_user_permission` FOREIGN KEY (`USER_LOGIN`) REFERENCES `USERS` (`USER_LOGIN`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `ROOMS`
