@@ -40,6 +40,11 @@
 	#groups #add-group-btn{font-size: 11px !important;}
 	#groups #add-group-btn img{margin-top: -2px;}
 	/*=========================
+			Cards
+	=========================*/
+	#cards #add-card-btn{font-size: 11px !important;}
+	#cards #add-card-btn img{margin-top: -2px;}
+	/*=========================
 			Floors
 	=========================*/
 	#floors #add-floor-btn{font-size: 11px !important;}
@@ -107,6 +112,14 @@
 	/* Error Table */
 	#groups #groups-list table th{font-size: 0.7rem; padding: 14px 10px;}
 	#groups #groups-list table th img{width: 40px;}
+	/*=========================
+			Cards
+	=========================*/
+	#cards #add-card-btn{font-size: 10px !important;}
+	#cards #add-card-btn img{margin-top: -3px;}
+	/* Error Table */
+	#cards #cards-list table th{font-size: 0.7rem; padding: 14px 10px;}
+	#cards #cards-list table th img{width: 40px;}
 	/*=========================
 			Floors
 	=========================*/
@@ -190,6 +203,14 @@
 	/* Edit Group Modal */
 	#modal-edit-group #edit-group-room table td div{padding: 5px !important;}
 	/*=========================
+			Cards
+	=========================*/
+	#cards #add-card-btn{font-size: 10px !important;}
+	#cards #add-card-btn img{margin-top: -3px;}
+	/* Error Table */
+	#cards #cards-list table th{font-size: 0.65rem; padding: 12px 10px;}
+	#cards #cards-list table th img{width: 45px;}
+	/*=========================
 			Floors
 	=========================*/
 	#floors #add-floor-btn{font-size: 10px !important;}
@@ -272,6 +293,14 @@
 	/* Delete Group Modal */
 	#modal-delete-group h2.uk-modal-title{font-size: 1.2rem;}
 	#modal-delete-group button{font-size: 0.7rem; line-height: 1; padding: 0;}
+	/*=========================
+			Cards
+	=========================*/
+	#cards .add-card{margin-top: 0;}
+	#cards #add-card-btn{padding-left: 10px; padding-right: 10px;}
+	/* Error Table */
+	#cards #cards-list table th{font-size: 0.5rem; padding: 8px 10px;}
+	#cards #cards-list table th img{width: 35px;}
 	/*=========================
 			Floors
 	=========================*/

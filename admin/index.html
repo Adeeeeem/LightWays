@@ -49,12 +49,14 @@
 				<li>
 					<button id="configuration-btn" class="uk-button uk-width-1-1 uk-text-left uk-accordion-title"><img src="../images/icons/configuration.png">Configuration</button>
 					<div class="uk-accordion-content uk-text-left">
+						<button id="cards-btn" class="uk-button uk-width-1-1 uk-text-left"><img class="uk-margin-small-right" src="../images/icons/card.png">Cards</button>
 						<button id="floors-btn" class="uk-button uk-width-1-1 uk-text-left"><img class="uk-margin-small-right" src="../images/icons/floor.png">Floors</button>
 						<button id="rooms-btn" class="uk-button uk-width-1-1 uk-text-left"><img class="uk-margin-small-right" src="../images/icons/room.png">Rooms</button>
 						<button id="users-btn" class="uk-button uk-width-1-1 uk-text-left"><img class="uk-margin-small-right" src="../images/icons/users.png">Users</button>
 					</div>
 				</li>
 			</ul>
+			<button id="history-btn" class="uk-button uk-width-1-1 uk-text-left"><img src="../images/icons/history.png">History</button>
 			<button id="settings-btn" class="uk-button uk-width-1-1 uk-text-left"><img src="../images/icons/settings.png">Settings</button>
 			<button id="support-btn" class="uk-button uk-width-1-1 uk-text-left"><img src="../images/icons/support.png">Support</button>
 			<button id="logout-btn" class="uk-button uk-width-1-1 uk-text-left logout"><img src="../images/icons/logout.png">Logout</button>
@@ -75,12 +77,14 @@
 				<li>
 					<button id="mobile-configuration-btn" class="uk-button uk-width-1-1 uk-text-left uk-accordion-title"><img src="../images/icons/configuration.png">Configuration</button>
 					<div class="uk-accordion-content uk-text-left">
+						<button id="mobile-cards-btn" class="uk-button uk-width-1-1 uk-text-left"><img class="uk-margin-small-right" src="../images/icons/card.png">Cards</button>
 						<button id="mobile-floors-btn" class="uk-button uk-width-1-1 uk-text-left"><img class="uk-margin-small-right" src="../images/icons/floor.png">Floors</button>
 						<button id="mobile-rooms-btn" class="uk-button uk-width-1-1 uk-text-left"><img class="uk-margin-small-right" src="../images/icons/room.png">Rooms</button>
 						<button id="mobile-users-btn" class="uk-button uk-width-1-1 uk-text-left"><img class="uk-margin-small-right" src="../images/icons/users.png">Users</button>
 					</div>
 				</li>
 			</ul>
+			<button id="mobile-history-btn" class="uk-button uk-width-1-1 uk-text-left"><img src="../images/icons/history.png">History</button>
 			<button id="mobile-settings-btn" class="uk-button uk-width-1-1 uk-text-left"><img src="../images/icons/settings.png">Settings</button>
 			<button id="mobile-support-btn" class="uk-button uk-width-1-1 uk-text-left"><img src="../images/icons/support.png">Support</button>
 			<button id="mobile-logout-btn" class="uk-button uk-width-1-1 uk-text-left"><img src="../images/icons/logout.png">Logout</button>
@@ -180,6 +184,20 @@
 		<div id="statistics" class="uk-margin-medium-top uk-animation-fade">
 			ii
 		</div>
+		<!-- Manage Cards Section -->
+		<div id="cards" class="uk-margin-medium-top uk-animation-fade">
+			<!-- Add New Card Button -->
+			<div class="uk-width-1-1 uk-text-left add-card">
+				<button id="add-card-btn" class="uk-button" uk-toggle="target: #modal-add-card">
+					<img class="uk-margin-small-right" src="../images/icons/plus.png" width="20" height="20">Add New Card
+				</button>
+			</div>
+			<hr>
+			<!-- Cards List -->
+			<div id="cards-list" class="uk-container uk-text-center">
+				<!-- Data Will be Loaded from JavaScript -->
+			</div>
+		</div>
 		<!-- Manage Floors Section -->
 		<div id="floors" class="uk-margin-medium-top uk-animation-fade">
 			<!-- Add New Floor Button -->
@@ -224,11 +242,16 @@
 				</table>
 			</div>
 		</div>
+		<!-- History Section -->
+		<div id="history" class="uk-margin-medium-top uk-animation-fade">
+			cc
+		</div>
 		<!-- Settings Section -->
 		<div id="settings" class="uk-margin-medium-top uk-animation-fade">
 			<center>
 				<form class="uk-form-horizontal uk-margin-large">
 					<hr>
+					<div class="uk-margin uk-text-center change-name-title">Change Name</div>
 					<!-- First Name -->
 					<div class="uk-margin">
 						<label class="uk-form-label" for="setting-fname">First Name</label>
@@ -307,6 +330,7 @@
 						</div>
 					</div>
 					<hr>
+					<div class="uk-margin uk-text-center preference-title">Preference</div>
 					<div class="uk-margin uk-text-center" uk-grid>
 						<div class="uk-width-2-3">
 							<label class="uk-form-label" for="setting-confirm-new-password">Dark Theme</label>
@@ -492,7 +516,7 @@
 						</div>
 					</div>
 					<!-- Delete Group Button -->
-					<button id="delete-group-btn" class="uk-button uk-button-link" uk-toggle="target: #modal-delete-group"><img src="../images/icons/delete.png" class="uk-margin-small-right" width="15" height="15">Delete Group ?</button>
+					<button id="delete-group-btn" class="uk-button uk-button-link" uk-toggle="target: #modal-delete-group"><img src="../images/icons/delete.png" class="uk-margin-small-right" width="10" height="10">Delete Group ?</button>
 				</div>
 				<!-- Footer Buttons -->
 				<div class="uk-modal-footer uk-text-right">
@@ -517,6 +541,114 @@
 				<div class="uk-button-group uk-width-1-1">
 					<button class="uk-button uk-width-1-1 uk-modal-close" type="button">Cancel</button>
 					<button id="delete-group-confirm-btn" class="uk-button uk-width-1-1" type="button">Yes, Delete it !</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Add New Card Modal -->
+	<div id="modal-add-card" class="modal" uk-modal="bg-close: false; keyboard: false; escClose: false; modal: false">
+		<div class="uk-modal-dialog uk-margin-auto-vertical">
+			<!-- Title -->
+			<div class="uk-modal-header uk-text-center">
+				<h2 class="uk-modal-title">Add Card</h2>
+			</div>
+			<!-- Form -->
+			<form class="uk-form-stacked">
+				<div class="uk-modal-body">
+					<div class="uk-margin">
+						<label class="uk-form-label" for="add-card-name">Card Name</label>
+						<div class="uk-form-controls">
+							<input id="add-card-name" class="uk-input" type="text" placeholder="Card Name">
+						</div>
+						<div class=" uk-animation-toggle">
+							<div class="uk-animation-shake">
+								<small id="add-card-name-error" class="error">Please Enter a Card Name !</small>
+							</div>
+						</div>
+					</div>
+					<div class="uk-margin">
+						<label class="uk-form-label" for="add-card-ip">Card IP Address</label>
+						<div class="uk-form-controls">
+							<input id="add-card-ip" class="uk-input" type="text" placeholder="Card IP : XXX.XXX.XXX.XXX">
+						</div>
+						<div class=" uk-animation-toggle">
+							<div class="uk-animation-shake">
+								<small id="add-card-ip-error" class="error">Please Enter a Card IP Address !</small>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- Footer Buttons -->
+				<div class="uk-modal-footer uk-text-right">
+					<div class="uk-button-group uk-width-1-1">
+						<button class="uk-button uk-width-1-1 uk-modal-close" type="button">Cancel</button>
+						<button id="add-card-confirm-btn" class="uk-button uk-width-1-1" type="button">Save</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+	<!-- Edit Card Modal -->
+	<div id="modal-edit-card" class="modal" uk-modal="bg-close: false; keyboard: false; escClose: false; modal: false">
+		<div class="uk-modal-dialog uk-margin-auto-vertical">
+			<!-- Title -->
+			<div class="uk-modal-header uk-text-center">
+				<h2 class="uk-modal-title">Edit Card</h2>
+			</div>
+			<form class="uk-form-stacked">
+				<!-- Body -->
+				<div class="uk-modal-body">
+					<!-- Change Card Name -->
+					<div class="uk-margin">
+						<label class="uk-form-label" for="edit-card-name">Change Card Name</span></label>
+						<div class="uk-form-controls">
+							<input id="edit-card-name" class="uk-input" type="text" placeholder="Card Name">
+						</div>
+						<div class=" uk-animation-toggle">
+							<div class="uk-animation-shake">
+								<small id="edit-card-name-error" class="error">Card Name Can't be Empty !</small>
+							</div>
+						</div>
+					</div>
+					<!-- Change Card IP -->
+					<div class="uk-margin">
+						<label class="uk-form-label" for="edit-card-ip">Change Card IP</span></label>
+						<div class="uk-form-controls">
+							<input id="edit-card-ip" class="uk-input" type="text" placeholder="Card IP : XXX.XXX.XXX.XXX">
+						</div>
+						<div class=" uk-animation-toggle">
+							<div class="uk-animation-shake">
+								<small id="edit-card-ip-error" class="error">Card IP Can't be Empty !</small>
+							</div>
+						</div>
+					</div>
+					<!-- Delete Card Button -->
+					<button id="delete-card-btn" class="uk-button uk-button-link" uk-toggle="target: #modal-delete-card"><img src="../images/icons/delete.png" class="uk-margin-small-right" width="10" height="10">Delete Card ?</button>
+				</div>
+				<!-- Footer Buttons -->
+				<div class="uk-modal-footer uk-text-right">
+					<div class="uk-button-group uk-width-1-1">
+						<button class="uk-button uk-width-1-1 uk-modal-close" type="button">Cancel</button>
+						<button id="edit-card-confirm-btn" class="uk-button uk-width-1-1" type="button">Save</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+	<!-- Delete Card Modal -->
+	<div id="modal-delete-card" class="modal" uk-modal="stack: true">
+		<div class="uk-modal-dialog uk-margin-auto-vertical">
+			<!-- Body -->
+			<div class="uk-modal-body uk-text-center">
+				<img src="../images/icons/caution.png" width="50" height="50">
+				<h2 class="uk-modal-title">Are you Sure you want to<br>Delete <span></span> Card ?</h2>
+				<h5></h5>
+			</div>
+			<!-- Footer Buttons -->
+			<div class="uk-modal-footer uk-text-right">
+				<div class="uk-button-group uk-width-1-1">
+					<button class="uk-button uk-width-1-1 uk-modal-close" type="button">Cancel</button>
+					<button id="delete-card-confirm-btn" class="uk-button uk-width-1-1" type="button">Yes, Delete it !</button>
 				</div>
 			</div>
 		</div>
@@ -582,7 +714,7 @@
 						</table>
 					</div>
 					<!-- Delete Floor Button -->
-					<button id="delete-floor-btn" class="uk-button uk-button-link" uk-toggle="target: #modal-delete-floor"><img src="../images/icons/delete.png" class="uk-margin-small-right" width="15" height="15">Delete Floor ?</button>
+					<button id="delete-floor-btn" class="uk-button uk-button-link" uk-toggle="target: #modal-delete-floor"><img src="../images/icons/delete.png" class="uk-margin-small-right" width="10" height="10">Delete Floor ?</button>
 				</div>
 				<!-- Footer Buttons -->
 				<div class="uk-modal-footer uk-text-right">
@@ -641,7 +773,11 @@
 							<select id="add-room-search-floor" class="uk-input uk-select">
 								<!-- Data Will be Loaded from JavaScript -->
 							</select>
-							<hr class="uk-align-center select-hr">
+						</div>
+						<div class=" uk-animation-toggle">
+							<div class="uk-animation-shake">
+								<small id="add-room-search-floor-error" class="error">Please Choose a Floor !</small>
+							</div>
 						</div>
 					</div>
 					<!-- Room Width and Height -->
@@ -715,7 +851,21 @@
 					</div>
 					<div class=" uk-animation-toggle">
 						<div class="uk-animation-shake">
-							<small id="add-room-device-type-error" class="error">Please Choose a Device Type !</small>
+							<small id="add-room-device-type-error" class="error">Please Choose a Card !</small>
+						</div>
+					</div>
+				</div>
+				<!-- Device Card -->
+				<div class="uk-margin">
+					<label class="uk-form-label" for="add-room-device-card">Card</label>
+					<div class="uk-form-controls">
+						<select id="add-room-device-card" class="uk-input uk-select">
+							<!-- Card Will be Loaded From JavaScript -->
+						</select>
+					</div>
+					<div class=" uk-animation-toggle">
+						<div class="uk-animation-shake">
+							<small id="add-room-device-card-error" class="error">Please Choose a Device Type !</small>
 						</div>
 					</div>
 				</div>
@@ -731,7 +881,7 @@
 						</div>
 					</div>
 				</div>
-				<button id="delete-room-device-btn" class="uk-button uk-button-link" ><img src="../images/icons/delete.png" class="uk-margin-small-right" width="15" height="15">Delete Device ?</button>
+				<button id="delete-room-device-btn" class="uk-button uk-button-link" ><img src="../images/icons/delete.png" class="uk-margin-small-right" width="10" height="10">Delete Device ?</button>
 			</div>
 			<!-- Footer Buttons -->
 			<div class="uk-modal-footer">
@@ -783,7 +933,7 @@
 						</div>
 					</div>
 					<!-- Delete Room Button -->
-					<button id="delete-room-btn" class="uk-button uk-button-link" uk-toggle="target: #modal-delete-room"><img src="../images/icons/delete.png" class="uk-margin-small-right" width="15" height="15">Delete Room ?</button>
+					<button id="delete-room-btn" class="uk-button uk-button-link" uk-toggle="target: #modal-delete-room"><img src="../images/icons/delete.png" class="uk-margin-small-right" width="10" height="10">Delete Room ?</button>
 				</div>
 				<!-- Footer Buttons -->
 				<div class="uk-modal-footer uk-text-right">

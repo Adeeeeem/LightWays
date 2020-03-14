@@ -51,6 +51,14 @@ $(function()
 		}
 	});
 
+	// When Clicking on Cards Button in Menu
+	$("#cards-btn, #mobile-cards-btn").click(function()
+	{
+		// Display Cards Section
+		DisplaySection("#cards", "Cards", "#cards-btn, #mobile-cards-btn");
+		$("#configuration-btn, #mobile-configuration-btn").addClass("active");
+	});
+
 	// When Clicking on Floors Button in Menu
 	$("#floors-btn, #mobile-floors-btn").click(function()
 	{
@@ -75,6 +83,13 @@ $(function()
 		$("#configuration-btn, #mobile-configuration-btn").addClass("active");
 	});
 
+	// When Clicking on History Button in Menu
+	$("#history-btn, #mobile-history-btn").click(function()
+	{
+		// Display History Section
+		DisplaySection("#history", "History", "#history-btn, #mobile-history-btn");
+	});
+
 	// When Clicking on Settings Button in Menu
 	$("#settings-btn, #mobile-settings-btn").click(function()
 	{
@@ -97,9 +112,11 @@ $(function()
 	$("#lights-btn, #mobile-lights-btn").click(function(){localStorage.setItem("LightWays_ADMIN_SECTION", "#lights-btn");});
 	$("#groups-btn, #mobile-groups-btn").click(function(){localStorage.setItem("LightWays_ADMIN_SECTION", "#groups-btn");});
 	$("#statistics-btn, #mobile-statistics-btn").click(function(){localStorage.setItem("LightWays_ADMIN_SECTION", "#statistics-btn");});
+	$("#cards-btn, #mobile-cards-btn").click(function(){localStorage.setItem("LightWays_ADMIN_SECTION", "#cards-btn")});
 	$("#floors-btn, #mobile-floors-btn").click(function(){localStorage.setItem("LightWays_ADMIN_SECTION", "#floors-btn")});
 	$("#rooms-btn, #mobile-rooms-btn").click(function(){localStorage.setItem("LightWays_ADMIN_SECTION", "#rooms-btn")});
 	$("#users-btn, #mobile-users-btn").click(function(){localStorage.setItem("LightWays_ADMIN_SECTION", "#users-btn")});
+	$("#history-btn, #mobile-history-btn").click(function(){localStorage.setItem("LightWays_ADMIN_SECTION", "#history-btn");});
 	$("#settings-btn, #mobile-settings-btn").click(function(){localStorage.setItem("LightWays_ADMIN_SECTION", "#settings-btn");});
 	$("#support-btn, #mobile-support-btn").click(function(){localStorage.setItem("LightWays_ADMIN_SECTION", "#support-btn");});
 
@@ -312,6 +329,7 @@ $(function()
 	$("#modal-add-group").off("click").on("click", "#add-group-room table img", function()
 	{
 		var device = $(this);
+		var color = device.css("background-color");
 		var id = device.attr("id");
 		room = $("#add-group-search-room").val();
 		
@@ -340,27 +358,34 @@ $(function()
 					}
 				}
 
-				var selected = device.attr("class");
-				var image = device.attr("src");
-
-				if (selected == "SELECTED") // If It's Already Selected
+				if (SelectedDevicesRoom.length > 1)
 				{
-					device.removeClass("SELECTED");
-					device.css("background-color", "var(--device-color)");
-					for (var i = 0; i < SelectedDevices.length; i++) // Loop Array Search for the Item to Delete
-					{
-						if (SelectedDevices[i] == id)
-						{
-							SelectedDevices.splice(i, 1); // Delete when Found
-						}
-					}
+					$.growl({ title: "Info", message: "Group's Devices Must Belong to the same Room !" });
 				}
 				else
 				{
-					device.addClass("SELECTED");
-					device.css("background-color", $("#add-group-color").val());
-					// Add to Array
-					SelectedDevices.unshift(id);
+					var selected = device.attr("class");
+					var image = device.attr("src");
+
+					if (selected == "SELECTED") // If It's Already Selected
+					{
+						device.removeClass("SELECTED");
+						device.css("background-color", "var(--device-color)");
+						for (var i = 0; i < SelectedDevices.length; i++) // Loop Array Search for the Item to Delete
+						{
+							if (SelectedDevices[i] == id)
+							{
+								SelectedDevices.splice(i, 1); // Delete when Found
+							}
+						}
+					}
+					else
+					{
+						device.addClass("SELECTED");
+						device.css("background-color", $("#add-group-color").val());
+						// Add to Array
+						SelectedDevices.unshift(id);
+					}
 				}
 
 				var count = 0;
@@ -381,15 +406,10 @@ $(function()
 						}
 					}
 				}
-
-				if (SelectedDevicesRoom.length > 1)
-				{
-					$.growl({ title: "Info", message: "Group's Devices Must Belong to the same Room !" });
-				}
 			}
 			else
 			{
-				$.growl({ title: "Device Already in a Group", message: "This Device Belongs to <span style='color: var(--orange-color);'>"+response.name+"</span> Group!" });
+				$.growl({ title: "Device Already in a Group", message: "This Device Belongs to <span style='color: "+color+";'>"+response.name+"</span> Group!" });
 			}
 		})
 		.fail(function()
@@ -920,6 +940,249 @@ $(function()
 =========================*/
 //
 /*=========================
+		Cards
+=========================*/
+/* Load Cards into Cards List */
+$(window).on("load", function()
+{
+	LoadCardsSection();
+
+	$("#cards-btn, #mobile-cards-btn").click(function()
+	{
+		LoadCardsSection();
+	});
+});
+/* Confirm Adding Card */
+$(function()
+{
+	/* When Cancelling or Closing, Reset Form */
+	$("#modal-add-card button.uk-modal-close").click(function()
+	{
+		ResetAddCardModal(); // Reset Modal
+	});
+
+ 	/* When Confirming */
+	$("#add-card-confirm-btn").click(function()
+	{
+		var card = $("#add-card-name").val(); // Get Card Name
+		var ip = $("#add-card-ip").val(); // Get Card IP
+
+		if (!card)
+		{
+			$("#add-card-name").css("border", "1px solid #F0506E");
+			$("#add-card-name-error").show();
+		}
+		else
+		{
+			$("#add-card-name").css("border", "1px solid var(--secondary-color)");
+			$("#add-card-name-error").hide();
+		}
+
+		if (!ip)
+		{
+			$("#add-card-ip").css("border", "1px solid #F0506E");
+			$("#add-card-ip-error").show();
+		}
+		else
+		{
+			$("#add-card-ip").css("border", "1px solid var(--secondary-color)");
+			$("#add-card-ip-error").hide();
+		}
+
+		if (card && ip)
+		{
+			$.ajax
+			({
+				url: "../php/add_card.php",
+				type: "POST",
+				dataType: "json",
+				data: {card: card, ip: ip}
+			})
+			.done(function(response)
+			{
+				var len = response.length;
+
+				UIkit.modal("#modal-add-card").hide(); // Hide Modal
+				ResetAddCardModal(); // Reset Modal
+
+				if (len != 0)
+				{
+					$.growl.notice({ message: "Card has been Successfully Added !" }); // Success Notification	
+
+					if($("#cards #cards-list").find("table").length > 0)
+					{
+						$("#cards #cards-list table").remove();
+					}
+
+					$("#cards #cards-list").append("<article id='"+response.card+"' class='uk-comment card-details uk-margin-small-top uk-animation-scale-down uk-box-shadow-medium'><header class='uk-comment-header uk-grid-medium uk-flex-middle uk-margin-small-left uk-margin-small-right uk-grid uk-grid-stack' uk-grid><div class='uk-width-1-1'><h4 class='uk-comment-title uk-margin-remove'>"+response.name+"</h4><h6 class='uk-comment-meta uk-margin-remove-top devices'>0 Devices</h6></div></header></article>");
+				}
+				else
+				{
+					$.growl.error({ message: "Oops, There was an Error! Please Try Again." });
+				}
+			})
+			.fail(function()
+			{
+				UIkit.modal("#modal-add-card").hide(); // Hide Modal
+				ResetAddCardModal(); // Reset Modal
+				$.growl.error({ message: "Oops, There was an Error! Please Try Again." });
+			});
+		}
+	});
+});
+/* Load Data to Edit Card Modal and Get Cards Details */
+$(function()
+{
+	var card; // Card ID
+	var devices // Number of Devices Related to the Card
+
+	/* Loading Card Details and Assign */
+	$("#cards #cards-list").off("click").on("click", "article.card-details", function()
+	{
+		card = $(this).attr("id"); // Assign Card ID
+		UIkit.modal("#modal-edit-card").toggle(); // Show Modal
+
+		$.ajax
+		({
+			url: "../php/card_details.php",
+			type: "POST",
+			dataType: "json",
+			data: {card: card},
+		})
+		.done(function(response)
+		{
+			if (response.name != null)
+			{
+				$("#edit-card-name").val(response.name);
+				$("#edit-card-ip").val(response.ip);
+				devices = response.devices;
+			}
+			else
+			{
+				$.growl.error({ message: "Failed to Get Selected Card Details !" });
+			}
+		})
+		.fail(function()
+		{
+			$.growl.error({ message: "Failed to Get Selected Card Details !" });
+		});
+	});
+
+	/* When Cancelling or Closing, Reset Form */
+	$("#modal-edit-card button.uk-modal-close").click(function()
+	{
+		ResetEditCardModal(); // Reset Modal
+	});
+
+	/* When Confirming */
+	$("#edit-card-confirm-btn").click(function()
+	{
+		var new_card_name = $("#edit-card-name").val(); // Get Card Name
+		var new_card_ip = $("#edit-card-ip").val(); // Get Card IP
+
+		if (!new_card_name)
+		{
+			$("#edit-card-name").css("border", "1px solid #F0506E");
+			$("#edit-card-name-error").show();
+		}
+		else
+		{
+			$("#edit-card-name").css("border", "1px solid var(--secondary-color)");
+			$("#edit-card-name-error").hide();
+		}
+
+		if (!new_card_ip)
+		{
+			$("#edit-card-ip").css("border", "1px solid #F0506E");
+			$("#edit-card-ip-error").show();
+		}
+		else
+		{
+			$("#edit-card-ip").css("border", "1px solid var(--secondary-color)");
+			$("#edit-card-ip-error").hide();
+		}
+
+		if (new_card_name && new_card_ip)
+		{
+			$.ajax
+			({
+				url: "../php/update_card.php",
+				type: "POST",
+				dataType: "json",
+				data: {card: card, name: new_card_name, ip: new_card_ip}
+			})
+			.done(function(response)
+			{
+				if (response.result)
+				{
+					$.growl.notice({ message: "Card has been Successfully Updated !" }); // Success Notification
+					$("#cards #cards-list article#"+card+" h4").html(new_card_name);
+				}
+				else
+				{
+					$.growl.error({ message: "Oops, There was an Error! Please Try Again." });
+				}
+
+				UIkit.modal("#modal-edit-card").hide(); // Hide Modal
+				ResetEditCardModal(); // Reset Modal
+			})
+			.fail(function()
+			{
+				UIkit.modal("#modal-edit-card").hide(); // Hide Modal
+				ResetEditCardModal(); // Reset Modal
+				$.growl.error({ message: "Oops, There was an Error! Please Try Again." });
+			});
+		}
+	});
+
+	/* Delete Card */
+	$("#delete-card-btn").click(function(e)
+	{
+		e.preventDefault();
+
+		$("#modal-delete-card h2.uk-modal-title span").html($("#edit-card-name").val());
+		$("#modal-delete-card h5").html(devices+" Devices<br>Will be Deleted Permanently !");
+	});
+
+	/* Confirm Delete Card */
+	$("#delete-card-confirm-btn").click(function()
+	{
+		$.ajax
+		({
+			url: "../php/delete_card.php",
+			type: "POST",
+			dataType: "json",
+			data: {card: card},
+		})
+		.done(function(response)
+		{
+			UIkit.modal("#modal-delete-card").hide(); // Hide Delete Modal
+
+			if (response.result)
+			{
+				$("#cards #cards-list article#"+card+".card-details").remove();
+				UIkit.modal("#modal-edit-card").hide(); // Hide Edit Modal
+				$.growl.notice({ message: "Card has been Successfully Deleted!" }); // Success Notification
+				ResetEditCardModal(); // Reset Modal
+
+				if ($("#cards #cards-list").find("article").length == 0)
+				{
+					$("#cards #cards-list").append("<table class='uk-margin-small-top'><tr class='uk-animation-scale-down uk-text-center'><th><img src='../images/icons/notfound.png' width='50' height='50'><br><br>No Cards Found !<br><small>Make Sure You Add Cards...</small></th></tr></table>");
+				}
+			}
+			else
+			{
+				$.growl.error({ message: "Failed to Delete <span style='color: var(--secondary-color)'>"+$("#edit-card-name").val()+"</span> Card, Please Try Again !" });
+			}
+		})
+		.fail(function()
+		{
+			UIkit.modal("#modal-delete-card").hide(); // Hide Modal
+			$.growl.error({ message: "Failed to Delete <span style='color: var(--secondary-color)'>"+$("#edit-card-name").val()+"</span> Card, Please Try Again !" });
+		});
+	});
+});
+/*=========================
 		Floors
 =========================*/
 /* Load Floors into Floors List */
@@ -944,7 +1207,7 @@ $(function()
  	/* When Confirming */
 	$("#add-floor-confirm-btn").click(function()
 	{
-		var floor = $("#add-floor-name").val(); // Get Group Name
+		var floor = $("#add-floor-name").val(); // Get Floor Name
 
 		if (!floor)
 		{
@@ -971,9 +1234,15 @@ $(function()
 				{
 					$.growl.notice({ message: "Floor has been Successfully Added !" }); // Success Notification	
 
+					if ($("#lights-floors-navigation").val() == undefined)
+					{
+						// Empty The Group List
+						$("#floors #floors-list").empty();
+					}
+
 					$("#floors #floors-list").append("<article id='"+response.floor+"' class='uk-comment floor-details uk-margin-small-top uk-animation-scale-down uk-box-shadow-medium'><header class='uk-comment-header uk-grid-medium uk-flex-middle uk-margin-small-left uk-margin-small-right uk-grid uk-grid-stack' uk-grid><div class='uk-width-1-1'><h4 class='uk-comment-title uk-margin-remove'>"+response.name+"</h4><div uk-grid><div class='uk-width-1-3'><h6 class='uk-comment-meta uk-margin-remove-top rooms'>0 Rooms</h6></div><div class='uk-width-1-3'><h6 class='uk-comment-meta uk-margin-remove-top devices'>0 Devices</h6></div><div class='uk-width-1-3'><h6 class='uk-comment-meta uk-margin-remove-top groups'>0 Groups</h6></div></div></div></header></article>");
 
-					$("#lights-floors-navigation").append("<option value='"+response.floor+"'>"+response.name+"</option>");
+					LoadFloorsLightsSection();
 				}
 				else
 				{
@@ -1062,7 +1331,7 @@ $(function()
 
 	/* When Confirming */
 	$("#edit-floor-confirm-btn").click(function()
-	{		
+	{
 		var new_floor_name = $("#edit-floor-name").val(); // Get Floor Name
 
 		if (!new_floor_name)
@@ -1178,6 +1447,7 @@ $(function()
 	var SelectedDeviceType = [];
 	var SelectedDevicePin = [];
 	var SelectedDeviceCoords = [];
+	var SelectedDeviceCard = [];
 
 	/* Load Floors */
 	$("#rooms #add-room-btn").click(function()
@@ -1230,6 +1500,35 @@ $(function()
 			SelectedDeviceType = [];
 			SelectedDevicePin = [];
 			SelectedDeviceCoords = [];
+			SelectedDeviceCard = [];
+		}
+	});
+
+	$("#add-room-width").change(function()
+	{
+		if ($("#add-room-width").val() <= 0)
+		{
+			$("#add-room-width").css("border", "1px solid #F0506E");
+			$("#add-room-width-error").show();
+		}
+		else
+		{
+			$("#add-room-width").css("border", "var(--secondary-color)");
+			$("#add-room-width-error").hide();
+		}
+	});
+
+	$("#add-room-height").change(function()
+	{
+		if ($("#add-room-height").val() <= 0)
+		{
+			$("#add-room-height").css("border", "1px solid #F0506E");
+			$("#add-room-height-error").show();
+		}
+		else
+		{
+			$("#add-room-height").css("border", "var(--secondary-color)");
+			$("#add-room-height-error").hide();
 		}
 	});
 
@@ -1247,6 +1546,7 @@ $(function()
 				if (SelectedDeviceCoords[i] == coords)
 				{
 					$("#add-room-device-type").val(SelectedDeviceType[i]);
+					$("#add-room-device-card").val(SelectedDeviceCard[i]);
 					$("#add-room-device-pin").val(SelectedDevicePin[i]);
 				}
 			}
@@ -1271,6 +1571,7 @@ $(function()
 			{
 				SelectedDeviceCoords.splice(i, 1); // Delete when Found
 				SelectedDeviceType.splice(i, 1);
+				SelectedDeviceCard.splice(i, 1);
 				SelectedDevicePin.splice(i, 1);
 			}
 		}
@@ -1283,6 +1584,7 @@ $(function()
 	$("#add-room-device-confirm-btn").click(function()
 	{
 		var type = $("#add-room-device-type").val();
+		var card = $("#add-room-device-card").val();
 		var pin = $("#add-room-device-pin").val();
 
 		if (type == "NONE")
@@ -1291,18 +1593,25 @@ $(function()
 			$("#add-room-device-type-error").show();
 		}
 
+		if (card == null)
+		{
+			$("#add-room-device-card").css("border", "1px solid #F0506E");
+			$("#add-room-device-card-error").show();
+		}
+
 		if (!pin)
 		{
 			$("#add-room-device-pin").css("border", "1px solid #F0506E");
 			$("#add-room-device-pin-error").show();
 		}
 
-		if ( (type != "NONE") && (pin) )
+		if ( (type != "NONE") && (pin) && (card != null) )
 		{
 			if (!SelectedDeviceCoords.includes(coords))
 			{
 				SelectedDeviceCoords.push(coords);
 				SelectedDeviceType.push(type);
+				SelectedDeviceCard.push(card);
 				SelectedDevicePin.push(pin);
 				$("#modal-add-room #add-room-room table td#"+coords+" img").addClass("SELECTED");
 			}
@@ -1322,6 +1631,7 @@ $(function()
 		height = "";
 		SelectedDevicePin = [];
 		SelectedDeviceType = [];
+		SelectedDeviceCard = [];
 		SelectedDeviceCoords = [];
 	});
 
@@ -1344,7 +1654,18 @@ $(function()
 			$("#add-room-name-error").hide();
 		}
 
-		if (!room_width)
+		if (room_floor == null)
+		{
+			$("#add-room-search-floor").css("border", "1px solid #F0506E");
+			$("#add-room-search-floor-error").show();
+		}
+		else
+		{
+			$("#add-room-name").css("border", "var(--secondary-color)");
+			$("#add-room-name-error").hide();
+		}
+
+		if (!room_width || room_width <= 0)
 		{
 			$("#add-room-width").css("border", "1px solid #F0506E");
 			$("#add-room-width-error").show();
@@ -1355,7 +1676,7 @@ $(function()
 			$("#add-room-width-error").hide();
 		}
 
-		if (!room_height)
+		if (!room_height || room_height <= 0)
 		{
 			$("#add-room-height").css("border", "1px solid #F0506E");
 			$("#add-room-height-error").show();
@@ -1366,10 +1687,11 @@ $(function()
 			$("#add-room-height-error").hide();
 		}
 
-		if ( (room_name) && (room_width) && (room_height) )
+		if ( (room_name) && (room_floor != null) && (room_width) && (room_width > 0) && (room_height) && (room_height > 0) )
 		{
 			var SelectedDeviceCoordsJson = JSON.stringify(SelectedDeviceCoords); // Get Selected Devices Coords
 			var SelectedDeviceTypeJson = JSON.stringify(SelectedDeviceType); // Get Selected Devices Type
+			var SelectedDeviceCardJson = JSON.stringify(SelectedDeviceCard); // Get Selected Devices Card
 			var SelectedDevicePinJson = JSON.stringify(SelectedDevicePin); // Get Selected Devices Pin
 
 			$.ajax
@@ -1377,7 +1699,7 @@ $(function()
 				url: "../php/add_room.php",
 				type: "POST",
 				dataType: "json",
-				data: {name: room_name, width: room_width, height: room_height, floor: room_floor, devices_coords: SelectedDeviceCoordsJson, devices_type: SelectedDeviceTypeJson, devices_pin: SelectedDevicePinJson},
+				data: {name: room_name, width: room_width, height: room_height, floor: room_floor, devices_coords: SelectedDeviceCoordsJson, devices_type: SelectedDeviceTypeJson, devices_card: SelectedDeviceCardJson, devices_pin: SelectedDevicePinJson},
 			})
 			.done(function(response)
 			{
@@ -1418,6 +1740,7 @@ $(function()
 				height = "";
 				SelectedDevicePin = [];
 				SelectedDeviceType = [];
+				SelectedDeviceCard = [];
 				SelectedDeviceCoords = [];
 			})
 			.fail(function()
@@ -1429,6 +1752,7 @@ $(function()
 				height = "";
 				SelectedDevicePin = [];
 				SelectedDeviceType = [];
+				SelectedDeviceCard = [];
 				SelectedDeviceCoords = [];
 			});
 		}
@@ -2136,23 +2460,25 @@ function HideAllSections()
 {
 	$("#lights").hide();
 	$("#groups").hide();
-	$("#scenes").hide();
 	$("#statistics").hide();
+	$("#cards").hide();
 	$("#floors").hide();
 	$("#rooms").hide();
 	$("#users").hide();
+	$("#history").hide();
 	$("#settings").hide();
 	$("#support").hide();
 
 	// Remove Active Class From the Selected Section
 	$("#lights-btn, #mobile-lights-btn").removeClass("active");
 	$("#groups-btn, #mobile-groups-btn").removeClass("active");
-	$("#scenes-btn, #mobile-scenes-btn").removeClass("active");
 	$("#statistics-btn, #mobile-statistics-btn").removeClass("active");
 	$("#configuration-btn, #mobile-configuration-btn").removeClass("active");
+	$("#cards-btn, #mobile-cards-btn").removeClass("active");
 	$("#floors-btn, #mobile-floors-btn").removeClass("active");
 	$("#rooms-btn, #mobile-rooms-btn").removeClass("active");
 	$("#users-btn, #mobile-users-btn").removeClass("active");
+	$("#history-btn, #mobile-history-btn").removeClass("active");
 	$("#settings-btn, #mobile-settings-btn").removeClass("active");
 	$("#support-btn, #mobile-support-btn").removeClass("active");
 }
@@ -2626,6 +2952,8 @@ function LoadRoomsAddGroupsSection(floor)
 			var room = $("#add-group-search-room").val();
 			// Display The Selected Room's Devices in Group Add Section
 			DisplayDevicesAddGroupsSection(room);
+			// Load Divces Already in Groups to the selected Room
+			setTimeout("LoadReservedDevicesAddGroupsSection("+room+")", 100);
 		}
 		else
 		{
@@ -2647,6 +2975,8 @@ function LoadRoomsAddGroupsSection(floor)
 		$("#modal-add-group #add-group-room table").empty();
 		// Display The Selected Room's Devices
 		DisplayDevicesAddGroupsSection(room);
+		// Load Divces Already in Groups to the selected Room
+		setTimeout("LoadReservedDevicesAddGroupsSection("+room+")", 100);
 	});
 }
 /* Load Devices Related to a Room Function Add Group Modal */
@@ -2694,6 +3024,29 @@ function DisplayDevicesAddGroupsSection(room)
 	{
 		$("#modal-add-group #add-group-room table").empty();
 		$("#modal-add-group #add-group-room table").append("<tr class='uk-animation-scale-down uk-text-center'><th style='color: #C0392B;'><img src='../images/icons/error.png' width='45' height='45'><br><br>Failed to Load Devices !</th></tr>");
+	});
+}
+// Load Divces Already in Groups to the selected Room
+function LoadReservedDevicesAddGroupsSection(room)
+{
+	$.ajax
+	({
+		url: "../php/reserved_devices.php",
+		type: "POST",
+		dataType: "json",
+		data: {room: room}
+	})
+	.done(function(response)
+	{
+		var len = response.length;
+
+		if (len != 0)
+		{
+			for (var i = 0; i < len; i++)
+			{
+				$("#modal-add-group #add-group-room table img#"+response[i].id).css("background-color", response[i].color);
+			}
+		}
 	});
 }
 /* Reset Add Group Modal Function */
@@ -2821,6 +3174,68 @@ function ResetEditGroupModal()
 ==================================================*/
 //
 /*==================================================
+		Cards Section Functions
+==================================================*/
+/* Load Cards to Cards List */
+function LoadCardsSection()
+{
+	$.ajax
+	({
+		url: "../php/cards.php",
+		type: "POST",
+		dataType: "json",
+	})
+	.done(function(response)
+	{
+		// Empty The Group List
+		$("#cards #cards-list").empty();
+
+		var len = response.length;
+
+		if (len != 0)
+		{
+			for (var i = 0; i < len; i++)
+			{
+				// Display Card
+				$("#cards #cards-list").append("<article id='"+response[i].id+"' class='uk-comment card-details uk-margin-small-top uk-animation-scale-down uk-box-shadow-medium'><header class='uk-comment-header uk-grid-medium uk-flex-middle uk-margin-small-left uk-margin-small-right uk-grid uk-grid-stack' uk-grid><div class='uk-width-1-1'><h4 class='uk-comment-title uk-margin-remove'>"+response[i].name+"</h4><h6 class='uk-comment-meta uk-margin-remove-top devices'>"+response[i].devices+" Devices</h6></div></header></article>");
+			}
+		}
+		else
+		{
+			$("#cards #cards-list").append("<table class='uk-margin-small-top'><tr class='uk-animation-scale-down uk-text-center'><th><img src='../images/icons/notfound.png' width='50' height='50'><br><br>No Cards Found !<br><small>Make Sure You Add Cards...</small></th></tr></table>");
+		}
+	})
+	.fail(function()
+	{
+		$("#cards #cards-list").empty();
+		$("#cards #cards-list").append("<table class='uk-margin-small-top'><tr class='uk-animation-scale-down uk-text-center'><th style='color: #C0392B;'><img src='../images/icons/error.png' width='50' height='50'><br><br>Failed to Load Cards !</th></tr></table>");
+	});
+}
+/* Reset Add Card Modal Function */
+function ResetAddCardModal()
+{
+	$("#add-card-name").val("");
+	$("#add-card-ip").val("");
+
+	$("#add-card-name").css("border", "1px solid var(--secondary-color)"); // Remove Red Border from Input
+	$("#add-card-ip").css("border", "1px solid var(--secondary-color)"); // Remove Red Border from Input
+
+	$("#add-card-name-error").hide();
+	$("#add-card-ip-error").hide();
+}
+/* Reset Edit Group Modal Function */
+function ResetEditCardModal()
+{
+	$("#edit-card-name").val(""); // Clear Card Name
+	$("#edit-card-ip").val(""); // Clear Card Name
+
+	$("#edit-card-name").css("border", "1px solid var(--secondary-color)"); // Remove Red Border from Input
+	$("#edit-card-ip").css("border", "1px solid var(--secondary-color)"); // Remove Red Border from Input
+
+	$("#edit-card-name-error").hide(); // Hide Error
+	$("#edit-card-ip-error").hide(); // Hide Error
+}
+/*==================================================
 		Floors Section Functions
 ==================================================*/
 /* Display Floors List in Floors Section */
@@ -2862,7 +3277,7 @@ function DisplayFloorsListFloorsSection()
 function ResetAddFloorModal()
 {
 	$("#add-floor-name").val(""); // Clear Floor Name
-	$("#add-floor-name").css("border", "1px solid var(--secondary-color)");// Remove Red Border from Input
+	$("#add-floor-name").css("border", "1px solid var(--secondary-color)"); // Remove Red Border from Input
 	$("#add-floor-name-error").hide(); // Hide Error
 }
 /* Reset Edit Floor Modal Function */
@@ -2953,9 +3368,11 @@ function ResetAddRoomModal()
 	$("#add-room-width").val(""); // Clear Room Width
 	$("#add-room-height").val(""); // Clear Room Height
 	$("#add-room-name").css("border", "1px solid var(--secondary-color)"); // Remove Red Border from Input
+	$("#add-room-search-floor").css("border", "1px solid var(--secondary-color)");
 	$("#add-room-width").css("border", "1px solid var(--secondary-color)"); // Remove Red Border from Input
 	$("#add-room-height").css("border", "1px solid var(--secondary-color)"); // Remove Red Border from Input
 	$("#add-room-name-error").hide(); // Hide Error
+	$("#add-room-search-floor-error").hide();
 	$("#add-room-width-error").hide(); // Clear Room Width
 	$("#add-room-height-error").hide(); // Clear Room Height
 	$("#add-room-search-floor").empty(); // Empty Floors List
@@ -2968,9 +3385,11 @@ function ResetAddRoomDeviceModal()
 	$("#add-room-device-pin").val("");
 
 	$("#add-room-device-type").css("border", "1px solid var(--secondary-color)");
+	$("#add-room-device-card").css("border", "1px solid var(--secondary-color)");
 	$("#add-room-device-pin").css("border", "1px solid var(--secondary-color)");
 
 	$("#add-room-device-type-error").hide();
+	$("#add-room-device-card-error").hide();
 	$("#add-room-device-pin-error").hide(); 
 }
 /* Reset Edit Room Modal Function */

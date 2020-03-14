@@ -1,14 +1,14 @@
 /*==================================================
 				Hidden Elements
 ==================================================*/
-#mobile-menu-open-btn, #mobile-menu, #groups, #statistics, #floors, #rooms, #users, #settings, #support, #fullscreen-btn-off{display: none;}
+#mobile-menu-open-btn, #mobile-menu, #groups, #statistics, #cards, #floors, #rooms, #users, #history, #settings, #support, #fullscreen-btn-off{display: none;}
 /*==================================================
 				Menu
 ==================================================*/
 /* Menu */
 #menu{position: fixed; left: 0; top: 0; bottom: 0; overflow-y: auto; width: 250px; background-color: var(--primary-color);}
 #menu-logo img{width: 200px; height: 75px;}
-#menu button{background-color: var(--primary-color); font-weight: bold; color: var(--secondary-color); font-size: 13px; letter-spacing: 1px; text-transform: uppercase; margin-top: 10px;}
+#menu button{background-color: var(--primary-color); font-weight: bold; color: var(--secondary-color); font-size: 13px; letter-spacing: 1px; text-transform: uppercase; margin-top: 7px;}
 #menu button:hover, #menu button:focus, #menu button.active{color: var(--blue-color);}
 #menu button img{width: 25px; height: 25px; margin-right: 25px; margin-top: -5px;}
 #groups-btn img{width: 33px !important; height: 33px !important; margin-left: -3px; margin-right: 20px !important;}
@@ -107,8 +107,8 @@
 #modal-edit-group #edit-group-room table td{padding: 0 !important;}
 #modal-edit-group #edit-group-room table td div{padding: 7px !important;}
 #modal-edit-group #edit-group-room table td div img{padding: 5px !important; border: 2px solid var(--text-color); border-radius: 50%; cursor: pointer;}
-#modal-edit-group #delete-group-btn{color: #C0392B;}
-#modal-edit-group #delete-group-btn img{margin-top: -3px;}
+#modal-edit-group #delete-group-btn{color: #C0392B; font-size: 0.7rem !important;}
+#modal-edit-group #delete-group-btn img{margin-top: -2px;}
 /* Delete Group Modal */
 #modal-delete-group div.uk-padding-small{border: 2px solid #C0392B; border-radius: 50%;}
 #modal-delete-group h2.uk-modal-title{font-size: 1.45rem; margin-top: 10px; color: var(--text-color);}
@@ -118,6 +118,32 @@
 		Statistics
 =========================*/
 
+/*=========================
+		Cards
+=========================*/
+#cards .add-card{margin-top: 1rem;}
+#cards #add-card-btn{background-color: transparent; text-transform: uppercase; letter-spacing: 1px; font-size: 13px !important;}
+#cards #add-card-btn img{margin-top: -4px; margin-right: 4px !important;}
+#cards hr{border: 0; margin: 0.25em auto; max-width: 100%; background-position: 50%; box-sizing: border-box; height: 2px; background-image: radial-gradient(closest-side, hsla(232, 18%, 69%, 1.0),  hsla(232, 18%, 69%, 0) 100%); position: relative;}
+#cards #cards-list{height: calc(110vh - 225px); overflow-y: auto; overflow-x: hidden;}
+/* Card */
+#cards article.card-details{background-color: var(--primary-color); border: 1px solid var(--secondary-color); border-radius: 0.5rem; height: 65px; cursor: pointer; margin-bottom: 25px; position: relative;}
+#cards article.card-details div.uk-width-1-1{overflow: hidden; white-space: nowrap; text-overflow: ellipsis; margin-right: 20px; padding-left: 30px !important;}
+#cards article.card-details h4{font-weight: 600; margin-top: 7px !important; color: var(--text-color);}
+#cards article.card-details h6{color: var(--secondary-color);}
+/* Error Table */
+#cards #cards-list table{border: 1px solid var(--secondary-color); border-radius: .25rem; padding: 10px; width: 100%;}
+#cards #cards-list table th{padding: 16px 12px; text-align: left; vertical-align: bottom; font-size: .875rem; font-weight: 400; color: #999; text-transform: uppercase;}
+/* Edit Card Modal */
+#modal-edit-card #delete-card-btn{color: #C0392B; font-size: 0.7rem !important;}
+#modal-edit-card #delete-card-btn img{margin-top: -2px;}
+/* Delete Floor Modal */
+#modal-delete-card div.uk-padding-small{border: 2px solid #C0392B; border-radius: 50%;}
+#modal-delete-card h2.uk-modal-title{font-size: 1.45rem; margin-top: 10px; color: var(--text-color);}
+#modal-delete-card h2.uk-modal-title span{color: var(--secondary-color);}
+#modal-delete-card h5{color: #C0392B; line-height: 1; font-size: 15px; margin-top: 25px; font-weight: 500;}
+#modal-delete-card button.uk-modal-close{background-color: #C0392B; color: #FFFFFF;}
+#modal-delete-card button#delete-card-confirm-btn{background-color: #2ECC71; color: #FFFFFF;}
 /*=========================
 		Floors
 =========================*/
@@ -135,8 +161,8 @@
 #floors #floors-list table{border: 1px solid var(--secondary-color); border-radius: .25rem; padding: 10px; width: 100%;}
 #floors #floors-list table th{padding: 16px 12px; text-align: left; vertical-align: bottom; font-size: .875rem; font-weight: 400; color: #999; text-transform: uppercase;}
 /* Edit Floor Modal */
-#modal-edit-floor #delete-floor-btn{color: #C0392B;}
-#modal-edit-floor #delete-floor-btn img{margin-top: -3px;}
+#modal-edit-floor #delete-floor-btn{color: #C0392B; font-size: 0.7rem !important;}
+#modal-edit-floor #delete-floor-btn img{margin-top: -2px;}
 /* Floor Details Table */
 #modal-edit-floor #floor-details-table table{border: 1px solid var(--secondary-color); border-radius: .25rem; font-weight: bold; padding: 0; font-size: 0.75rem;}
 #modal-edit-floor #floor-details-table table *+.uk-grid-margin, #modal-edit-floor #floor-details-table table .uk-grid+.uk-grid, #modal-edit-floor #floor-details-table table .uk-grid>.uk-grid-margin{margin-top: 5px;}
@@ -162,7 +188,7 @@
 #rooms #rooms-list{height: calc(110vh - 225px); overflow-y: auto; overflow-x: hidden;}
 /* Room */
 #rooms div.uk-section{padding-top: 0; padding-bottom: 0; border: 1px solid var(--secondary-color); border-radius: 0.25rem; padding: 10px; margin-top: 10px; background-color: var(--primary-color);}
-#rooms h4.section-title{margin-top: 10px; margin-bottom: 10px; font-weight: 600; color: var(--text-color) !important;}
+#rooms h4.section-title{margin-top: 10px; margin-bottom: 10px; font-weight: 600; color: var(--text-color) !important; font-size: 1rem;}
 #rooms article.room-details{background-color: var(--body-color); border: 1px solid var(--secondary-color); border-radius: 0.5rem; height: 65px; cursor: pointer; margin-bottom: 25px; position: relative;}
 #rooms article.room-details div.uk-width-1-1{overflow: hidden; white-space: nowrap; text-overflow: ellipsis; margin-right: 20px; padding-left: 30px !important;}
 #rooms article.room-details h4{font-weight: 400; margin-top: 7px !important; color: var(--text-color);}
@@ -173,8 +199,6 @@
 /* Add Room Modal */
 #modal-add-room div.add-room-search-floor div{padding: 0; margin: 0;}
 #modal-add-room div.add-room-search-floor label{color: var(--blue-color); padding-left: 0.5rem; margin-bottom: 0 !important; font-size: 10px;}
-#modal-add-room #add-room-search-floor{background-color: transparent; border: none;}
-#modal-add-room hr.select-hr{background-position: 85%; max-width: 85%; margin-top: -5px; background-image: radial-gradient(closest-side, var(--secondary-color), hsla(232, 18%, 69%, 0) 150%); height: 1px;}
 #modal-add-room div.add-room-width-height div.uk-width-1-2:first-child{padding-right: 5px;}
 #modal-add-room div.add-room-width-height div.uk-width-1-2:nth-child(2){padding-left: 5px;}
 #modal-add-room div.add-room-width-height div.uk-form-controls small{font-size: 11px; color: var(--secondary-color);}
@@ -184,8 +208,8 @@
 #modal-add-room #add-room-room table td div img{border-radius: 50%; cursor: pointer; background-color: var(--device-color);}
 #modal-add-room #add-room-room table td div img.SELECTED{padding: 2px !important; border: 2px solid var(--text-color);}
 /* Add Room Device Modal */
-#modal-add-room-device #delete-room-device-btn{color: #C0392B;}
-#modal-add-room-device #delete-room-device-btn img{margin-top: -3px;}
+#modal-add-room-device #delete-room-device-btn{color: #C0392B; font-size: 0.7rem !important;}
+#modal-add-room-device #delete-room-device-btn img{margin-top: -2px;}
 /* Edit Room Modal */
 #modal-edit-room div.edit-room-search-floor div{padding: 0; margin: 0;}
 #modal-edit-room div.edit-room-search-floor label{color: var(--blue-color); padding-left: 0.5rem; margin-bottom: 0 !important; font-size: 10px;}
@@ -202,8 +226,8 @@
 /* Error Table */
 #modal-edit-room #edit-room-room-groups table th{padding: 16px 12px; text-align: left; vertical-align: bottom; font-size: .875rem; font-weight: 400; color: #999; text-transform: uppercase;}
 /* Delete Room Button */
-#modal-edit-room #delete-room-btn{color: #C0392B; margin-top: 15px;}
-#modal-edit-room #delete-room-btn img{margin-top: -3px;}
+#modal-edit-room #delete-room-btn{color: #C0392B; margin-top: 15px; font-size: 0.7rem !important;}
+#modal-edit-room #delete-room-btn img{margin-top: -2px;}
 /* Delete Room Modal */
 #modal-delete-room div.uk-padding-small{border: 2px solid #C0392B; border-radius: 50%;}
 #modal-delete-room h2.uk-modal-title{font-size: 1.45rem; margin-top: 10px; color: var(--text-color);}
@@ -227,7 +251,7 @@
 =========================*/
 #settings form{margin-top: 100px!important; width: 60%;}
 #settings hr{background-position: 85%; max-width: 85%; margin-top: -5px; background-image: radial-gradient(closest-side, var(--secondary-color), hsla(232, 18%, 69%, 0) 150%); height: 1px;}
-#settings div.change-password-title{font-size: 0.8rem; color: var(--secondary-color);}
+#settings div.change-name-title, #settings div.change-password-title, #settings div.preference-title{font-size: 0.8rem; color: var(--secondary-color);}
 #settings #setting-language{border: 1px solid var(--secondary-color); width: 228px;}
 /* Dark Theme Button */
 #settings div.uk-width-1-3.uk-text-left{line-height: 1;}

@@ -38,10 +38,12 @@ table th, table td{text-align: center !important; vertical-align: middle !import
 .uk-grid{margin-left: 0 !important;}
 .uk-grid>*{padding-left: 0 !important;}
 div.uk-modal-dialog{overflow-x: hidden;}
+div.uk-open>.uk-modal-dialog{padding-bottom: 0;}
 div.uk-modal-dialog.big-width{width: 95%;}
 div.uk-modal-dialog, div.uk-modal-body{background-color:  var(--body-color); border-radius: 0.5rem;}
 div.uk-modal-dialog .uk-modal-title{font-size: 1.7rem; color: var(--text-color);}
 div.uk-modal-header{background-color: var(--primary-color); padding-top: 10px; padding-bottom: 10px;}
+div.uk-modal-body{padding-bottom: 10px;}
 div.uk-modal-footer{background-color: var(--primary-color); height: 45px !important; padding: 0;}
 button.uk-modal-close-default{background-color: transparent; font-size: 70px; color: var(--orange-color); font-weight: 400; cursor: pointer; margin-top: -10px;}
 button.uk-modal-close-default:hover, button.uk-modal-close-default:focus{color: var(--blue-color);}

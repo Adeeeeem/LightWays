@@ -14,11 +14,12 @@
 		{
 			/* Insert New Floor */
 			/* Preparing Request */
-			$request = "INSERT INTO FLOORS (FLOOR_NAME) VALUES (:floor);";
+			$request = "INSERT INTO FLOORS (FLOOR_NAME, USER_LOGIN) VALUES (:floor, :user);";
 			/* Preparing Statement */
 			$statement = $DB_CONNECTION->prepare($request);
 			/* Binding Parameter */
 			$statement->bindParam(':floor', $floor, PDO::PARAM_STR, 30);
+			$statement->bindParam(':user', $_SESSION["6C3Zq5Bpwm"], PDO::PARAM_STR, 30);
 			/* Execute Query */
 			$statement->execute();
 
