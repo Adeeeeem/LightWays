@@ -52,9 +52,11 @@ button.uk-modal-close-default:hover, button.uk-modal-close-default:focus{color: 
 label.uk-form-label{font-size: 12px; letter-spacing: 1px; color: var(--text-color) !important;}
 .uk-accordion-title::before{display: none;}
 input.uk-input, select.uk-input, input.uk-input:focus, select.uk-input:focus{border: 1px solid var(--secondary-color); background-color: var(--input-color);}
+input.uk-checkbox{width: 17px; height: 17px !important; background-color: var(--device-color);}
+input.uk-checkbox:checked:focus, input.uk-checkbox:checked{background-color: var(--orange-color);}
 .uk-table-hover tbody tr:hover,.uk-table-hover>tr:hover{background-color: var(--primary-color);}
-div.uk-tooltip-inner{}
 div.uk-tooltip-inner span{color: var(--orange-color);}
+.uk-list ul{padding-left: 100px;}
 /*==================================================
 				Preloader
 ==================================================*/

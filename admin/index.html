@@ -758,7 +758,7 @@
 					<div class="uk-margin">
 						<label class="uk-form-label" for="add-room-name">Room Name</label>
 						<div class="uk-form-controls">
-							<input id="add-room-name" class="uk-input" type="text">
+							<input id="add-room-name" class="uk-input" type="text" placeholder="Room Name">
 						</div>
 						<div class=" uk-animation-toggle">
 							<div class="uk-animation-shake">
@@ -786,7 +786,7 @@
 							<div class="uk-margin">
 								<label class="uk-form-label" for="add-room-width">Width</label>
 								<div class="uk-form-controls">
-									<input id="add-room-width" class="uk-input" type="number" step="1" min="1">
+									<input id="add-room-width" class="uk-input" type="number" step="1" min="1" placeholder="Number of Devices in Room's Width">
 									<small>Number of Devices in Room's Width !</small>
 								</div>
 								<div class=" uk-animation-toggle">
@@ -800,7 +800,7 @@
 							<div class="uk-margin">
 								<label class="uk-form-label" for="add-room-height">Height</label>
 								<div class="uk-form-controls">
-									<input id="add-room-height" class="uk-input" type="number" step="1" min="1">
+									<input id="add-room-height" class="uk-input" type="number" step="1" min="1" placeholder="Number of Devices in Room's Height">
 									<small>Number of Devices in Room's Height !</small>
 								</div>
 								<div class=" uk-animation-toggle">
@@ -906,7 +906,7 @@
 						<!-- Change Room Name -->
 						<label class="uk-form-label" for="edit-room-name">Change Room Name</span></label>
 						<div class="uk-form-controls">
-							<input id="edit-room-name" class="uk-input" type="text">
+							<input id="edit-room-name" class="uk-input" type="text" placeholder="Room Name">
 						</div>
 						<div class=" uk-animation-toggle">
 							<div class="uk-animation-shake">
@@ -973,6 +973,20 @@
 						</div>
 					</div>
 				</div>
+				<!-- Device Card -->
+				<div class="uk-margin">
+					<label class="uk-form-label" for="edit-room-device-card">Card</label>
+					<div class="uk-form-controls">
+						<select id="edit-room-device-card" class="uk-input uk-select">
+							<!-- Card Will be Loaded From JavaScript -->
+						</select>
+					</div>
+					<div class=" uk-animation-toggle">
+						<div class="uk-animation-shake">
+							<small id="edit-room-device-card-error" class="error">Please Choose a Device Card !</small>
+						</div>
+					</div>
+				</div>
 				<!-- Device Pin -->
 				<div class="uk-margin">
 					<label class="uk-form-label" for="edit-room-device-pin">Pin</label>
@@ -1014,5 +1028,82 @@
 		</div>
 	</div>
 	<!-- Add New User Modal -->
+	<div id="modal-add-user" class="modal" uk-modal="bg-close: false; keyboard: false; escClose: false; modal: false">
+		<div class="uk-modal-dialog uk-margin-auto-vertical">
+			<!-- Title -->
+			<div class="uk-modal-header uk-text-center">
+				<h2 class="uk-modal-title">Add User</h2>
+			</div>
+			<!-- Form -->
+			<form class="uk-form-stacked">
+				<div class="uk-modal-body">
+					<!-- User Login -->
+					<div class="uk-margin">
+						<label class="uk-form-label" for="add-user-login">Login</label>
+						<div class="uk-form-controls">
+							<input id="add-user-login" class="uk-input" type="text" placeholder="Login">
+						</div>
+						<div class=" uk-animation-toggle">
+							<div class="uk-animation-shake">
+								<small id="add-user-login-error" class="error">Please Enter a User Login !</small>
+							</div>
+						</div>
+					</div>
+					<!-- User Password -->
+					<div class="uk-margin">
+						<label class="uk-form-label" for="add-user-password">Password</label>
+						<div class="uk-form-controls">
+							<input id="add-user-password" class="uk-input" type="text" placeholder="Password">
+						</div>
+						<div class=" uk-animation-toggle">
+							<div class="uk-animation-shake">
+								<small id="add-user-password-error" class="error">Please Enter a User Password !</small>
+							</div>
+						</div>
+					</div>
+					<!-- User First Name -->
+					<div class="uk-margin">
+						<label class="uk-form-label" for="add-user-fname">First Name</label>
+						<div class="uk-form-controls">
+							<input id="add-user-fname" class="uk-input" type="text" placeholder="First Name">
+						</div>
+						<div class=" uk-animation-toggle">
+							<div class="uk-animation-shake">
+								<small id="add-user-fname-error" class="error">Please Enter a User First Name !</small>
+							</div>
+						</div>
+					</div>
+					<!-- User Last Name -->
+					<div class="uk-margin">
+						<label class="uk-form-label" for="add-user-lname">Last Name</label>
+						<div class="uk-form-controls">
+							<input id="add-user-lname" class="uk-input" type="text" placeholder="Last Name">
+						</div>
+						<div class=" uk-animation-toggle">
+							<div class="uk-animation-shake">
+								<small id="add-user-lname-error" class="error">Please Enter a User Last Name !</small>
+							</div>
+						</div>
+					</div>
+					<!-- User Permissions -->
+					<div class="uk-margin">
+						<label class="uk-form-label">Permissions</label>
+						<div id="add-user-permissions" class="uk-form-controls">
+							<ul id="available-permissions" class="uk-list">
+								
+							</ul>
+						</div>
+					</div>
+				</div>
+				<!-- Footer Buttons -->
+				<div class="uk-modal-footer uk-text-right">
+					<div class="uk-button-group uk-width-1-1">
+						<button class="uk-button uk-width-1-1 uk-modal-close" type="button">Cancel</button>
+						<button id="add-user-confirm-btn" class="uk-button uk-width-1-1" type="button">Save</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
 </body>
 </html>

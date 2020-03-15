@@ -1615,17 +1615,32 @@ $(function()
 			$("#add-room-device-type").css("border", "1px solid #F0506E");
 			$("#add-room-device-type-error").show();
 		}
+		else
+		{
+			$("#add-room-device-type").css("border", "var(--secondary-color)");
+			$("#add-room-device-type-error").hide()
+		}
 
 		if (card == null)
 		{
 			$("#add-room-device-card").css("border", "1px solid #F0506E");
 			$("#add-room-device-card-error").show();
 		}
+		else
+		{
+			$("#add-room-device-card").css("border", "var(--secondary-color)");
+			$("#add-room-device-card-error").hide()
+		}
 
 		if (!pin)
 		{
 			$("#add-room-device-pin").css("border", "1px solid #F0506E");
 			$("#add-room-device-pin-error").show();
+		}
+		else
+		{
+			$("#add-room-device-pin").css("border", "var(--secondary-color)");
+			$("#add-room-device-pin-error").hide();	
 		}
 
 		if ( (type != "NONE") && (pin) && (card != null) )
@@ -1801,6 +1816,7 @@ $(function()
 	var width; // Room WIDTH
 	var height; // Room HEIGHT
 	var SelectedDeviceType = [];
+	var SelectedDeviceCard = [];
 	var SelectedDevicePin = [];
 	var SelectedDeviceCoords = [];
 	var SelectedDeviceColor = [];
@@ -1831,6 +1847,30 @@ $(function()
 
 			if (len != 0)
 			{
+				/* Load Cards */
+				$.ajax
+				({
+					url: "../php/cards.php",
+					type: "POST",
+					dataType: "json",
+				})
+				.done(function(response)
+				{
+					var len = response.length;
+
+					if (len != 0)
+					{
+						for (var i = 0; i < len; i++)
+						{
+							$("#modal-edit-room-device #edit-room-device-card").append("<option value='"+response[i].id+"'>"+response[i].name+" - "+response[i].ip+"</option>");
+						}
+					}
+				})
+				.fail(function()
+				{
+					$.growl.error({ message: "Failed to Load Cards!" });
+				});
+
 				name = response[0].name;
 				room_floor = response[0].floor;
 				width = response[0].width;
@@ -1885,6 +1925,7 @@ $(function()
 						$("#modal-edit-room table#edit-room-room-devices td#"+response[i].lin+"-"+response[i].col).html("<div class='device'><img id='"+response[i].device+"' src='../images/devices/"+response[i].type+"_ON.png' style='background-color: "+bgcolor+";' width='50' height='50'></div>");
 
 						SelectedDeviceType.push(response[i].type);
+						SelectedDeviceCard.push(response[i].card);
 						SelectedDevicePin.push(response[i].pin);
 						SelectedDeviceCoords.push(response[i].lin+"-"+response[i].col);
 						SelectedDeviceColor.push(bgcolor);
@@ -1944,41 +1985,6 @@ $(function()
 		});
 	});
 
-	var windom_width = $(window).width(); // Get Window Width
-	/* When Charnging Window Size */
-	$(window).resize(function()
-	{
-		if ($(window).width() != windom_width) // to Avoid on Mobile Scroll
-		{
-			// Get the New Window Width
-			windom_width = $(window).width();
-
-			$("#modal-edit-room table#edit-room-room-devices").empty();
-
-			if (SelectedDeviceCoords.length != 0)
-			{
-				for (var line = 1; line <= height; line++)
-				{
-					$("#modal-edit-room table#edit-room-room-devices").append("<tr id='"+line+"' class='uk-animation-scale-down uk-text-center'></tr>");
-
-					for (var column = 1; column <= width; column++)
-					{
-						$("#modal-edit-room table#edit-room-room-devices tr#"+line).append("<td id='"+line+"-"+column+"'></td>");
-					}
-				}
-
-				for (var i = 0; i < SelectedDeviceCoords.length; i++)
-				{
-					$("#modal-edit-room table#edit-room-room-devices td#"+SelectedDeviceCoords[i]).html("<div class='device'><img id='"+SelectedDeviceId[i]+"' src='../images/devices/"+SelectedDeviceType[i]+"_ON.png' style='background-color: "+SelectedDeviceColor[i]+";' width='50' height='50'></div>");
-				}
-			}
-			else
-			{
-				$("#modal-edit-room table#edit-room-room-devices").append("<tr class='uk-animation-scale-down uk-text-center'><th><img src='../images/icons/notfound.png' width='40' height='40'><br><br>No Devices Found in This Room !<br><small>Make Sure You Add Devices...</small></th></tr>");
-			}
-		}
-	});
-
 	/* Cancel Edit Room */
 	$("#modal-edit-room button.uk-modal-close").click(function()
 	{
@@ -1990,6 +1996,7 @@ $(function()
 		device = "";
 		id = "";
 		SelectedDeviceType = [];
+		SelectedDeviceCard = [];
 		SelectedDevicePin = [];
 		SelectedDeviceCoords = [];
 		SelectedDeviceColor = [];
@@ -2010,6 +2017,7 @@ $(function()
 			if (SelectedDeviceId[i] == id)
 			{
 				$("#edit-room-device-type").val(SelectedDeviceType[i]);
+				$("#edit-room-device-card").val(SelectedDeviceCard[i]);
 				$("#edit-room-device-pin").val(SelectedDevicePin[i]);
 			}
 		}
@@ -2025,6 +2033,7 @@ $(function()
 	$("#edit-room-device-confirm-btn").click(function()
 	{
 		var type = $("#edit-room-device-type").val();
+		var card = $("#edit-room-device-card").val();
 		var pin = $("#edit-room-device-pin").val();
 
 		if (type == "NONE")
@@ -2032,20 +2041,42 @@ $(function()
 			$("#edit-room-device-type").css("border", "1px solid #F0506E");
 			$("#edit-room-device-type-error").show();
 		}
+		else
+		{
+			$("#edit-room-device-type").css("border", "var(--secondary-color)");
+			$("#edit-room-device-type-error").hide()
+		}
+
+		if (card == null)
+		{
+			$("#edit-room-device-card").css("border", "1px solid #F0506E");
+			$("#edit-room-device-card-error").show();
+		}
+		else
+		{
+			$("#edit-room-device-card").css("border", "var(--secondary-color)");
+			$("#edit-room-device-card-error").hide()
+		}
 
 		if (!pin)
 		{
 			$("#edit-room-device-pin").css("border", "1px solid #F0506E");
 			$("#edit-room-device-pin-error").show();
 		}
+		else
+		{
+			$("#edit-room-device-pin").css("border", "var(--secondary-color)");
+			$("#edit-room-device-pin-error").hide();	
+		}
 
-		if ( (type != "NONE") && (pin) )
+		if ( (type != "NONE") && (pin) && (card != null) )
 		{
 			for (var i = 0; i < SelectedDeviceId.length; i++) // Loop Array Search for the Item to Delete
 			{
 				if (SelectedDeviceId[i] == id)
 				{
 					SelectedDeviceType[i] = type;
+					SelectedDeviceCard[i] = card;
 					SelectedDevicePin[i] = pin;
 				}
 			}
@@ -2078,6 +2109,7 @@ $(function()
 		{
 			var SelectedDeviceIdJson = JSON.stringify(SelectedDeviceId); // Get Selected Devices Id
 			var SelectedDeviceTypeJson = JSON.stringify(SelectedDeviceType); // Get Selected Devices Type
+			var SelectedDeviceCardJson = JSON.stringify(SelectedDeviceCard); // Get Selected Devices Card
 			var SelectedDevicePinJson = JSON.stringify(SelectedDevicePin); // Get Selected Devices Pin
 
 			$.ajax
@@ -2085,7 +2117,7 @@ $(function()
 				url: "../php/update_room.php",
 				type: "POST",
 				dataType: "json",
-				data: {room: room, name: room_name, floor: new_room_floor, devices_id: SelectedDeviceIdJson, devices_type: SelectedDeviceTypeJson, devices_pin: SelectedDevicePinJson},
+				data: {room: room, name: room_name, floor: new_room_floor, devices_id: SelectedDeviceIdJson, devices_type: SelectedDeviceTypeJson, devices_card: SelectedDeviceCardJson, devices_pin: SelectedDevicePinJson},
 			})
 			.done(function(response)
 			{
@@ -2133,6 +2165,7 @@ $(function()
 				device = "";
 				id = "";
 				SelectedDeviceType = [];
+				SelectedDeviceCard = [];
 				SelectedDevicePin = [];
 				SelectedDeviceCoords = [];
 				SelectedDeviceColor = [];
@@ -2152,6 +2185,7 @@ $(function()
 				device = "";
 				id = "";
 				SelectedDeviceType = [];
+				SelectedDeviceCard = [];
 				SelectedDevicePin = [];
 				SelectedDeviceCoords = [];
 				SelectedDeviceColor = [];
@@ -2242,7 +2276,10 @@ $(window).on("load", function()
 	});
 });
 /* Load Data to Add User Modal */
-
+$(function()
+{
+	
+});
 /*=========================
 		Settings
 =========================*/
@@ -3438,6 +3475,7 @@ function ResetEditRoomModal()
 	$("#modal-edit-room #edit-room-room-groups").empty();
 	$("#edit-room-name").css("border", "1px solid var(--secondary-color)");
 	$("#edit-room-name-error").hide(); // Hide Error
+	$("#edit-room-device-card").empty(); // Empty Cards List
 }
 /* Reset Edit Room Device Modal Function */
 function ResetEditRoomDeviceModal()
@@ -3446,9 +3484,11 @@ function ResetEditRoomDeviceModal()
 	$("#edit-room-device-pin").val("");
 
 	$("#edit-room-device-type").css("border", "1px solid var(--secondary-color)");
+	$("#edit-room-device-card").css("border", "1px solid var(--secondary-color)");
 	$("#edit-room-device-pin").css("border", "1px solid var(--secondary-color)");
 
 	$("#edit-room-device-type-error").hide();
+	$("#edit-room-device-card-error").hide();
 	$("#edit-room-device-pin-error").hide(); 
 }
 /*==================================================

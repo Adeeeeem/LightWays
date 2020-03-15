@@ -13,6 +13,8 @@
 	$devices_id = json_decode(stripslashes($_POST["devices_id"]));
 	/* Get Devices Type Array */
 	$device_type = json_decode(stripslashes($_POST["devices_type"]));
+	/* Get Devices Card Array */
+	$device_card = json_decode(stripslashes($_POST["devices_card"]));
 	/* Get Devices Pin Array */
 	$device_pin = json_decode(stripslashes($_POST["devices_pin"]));
 	/* Avoid any XSS or SQL Injection */
@@ -43,12 +45,13 @@
 			for ($i = 0; $i < count($devices_id); $i++)
 			{
 				/* Update Device in Room */
-				$request = "UPDATE DEVICES SET DEVICE_PIN = :pin, DEVICE_TYPE = :type WHERE DEVICE_ID = :id;";
+				$request = "UPDATE DEVICES SET DEVICE_PIN = :pin, DEVICE_TYPE = :type, CARD_ID = :card WHERE DEVICE_ID = :id;";
 				/* Preparing Statement */
 				$statement = $DB_CONNECTION->prepare($request);
 				/* Binding Parameter */
 				$statement->bindParam(':pin', $device_pin[$i], PDO::PARAM_INT);
 				$statement->bindParam(':type', $device_type[$i], PDO::PARAM_STR, 20);
+				$statement->bindParam(':card', $device_card[$i], PDO::PARAM_INT);
 				$statement->bindParam(':id', $devices_id[$i], PDO::PARAM_INT);
 				/* Execute Query */
 				$statement->execute();
