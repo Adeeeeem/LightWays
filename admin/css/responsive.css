@@ -59,6 +59,11 @@
 	=========================*/
 	#users #add-user-btn{font-size: 11px !important;}
 	#users #add-user-btn img{margin-top: -2px;}
+	/* Display users Table */
+	#users table{padding: 5px; margin-top: 15px;}
+	#users table tr th{font-size: 0.85rem; padding: 12px 8px;}
+	#users table tr td{font-size: 0.8rem; padding: 12px 0;}
+	#users table img{width: 18px;}
 	/*=========================
 			Settings
 	=========================*/
@@ -98,36 +103,23 @@
 	#lights #lights-room #lights-room-devices-number{font-size: 0.8rem;}
 	/* Devices Display Table */
 	#lights table#lights-room-devices td div{padding: 5px !important;}
-	#lights table#lights-room-devices th{font-size: 0.7rem; padding: 14px 10px;}
-	#lights table#lights-room-devices th img{width: 40px;}
 	/* Groups Display Table */
 	#lights #lights-room-groups button{width: 100px !important; height: 30px; font-size: .5rem !important; line-height: 1;}
-	#lights #lights-room-groups th{font-size: 0.7rem; padding: 14px 10px;}
-	#lights #lights-room-groups th img{width: 40px;}
 	/*=========================
 			Groups
 	=========================*/
 	#groups #add-group-btn{font-size: 10px !important;}
 	#groups #add-group-btn img{margin-top: -3px;}
-	/* Error Table */
-	#groups #groups-list table th{font-size: 0.7rem; padding: 14px 10px;}
-	#groups #groups-list table th img{width: 40px;}
 	/*=========================
 			Cards
 	=========================*/
 	#cards #add-card-btn{font-size: 10px !important;}
 	#cards #add-card-btn img{margin-top: -3px;}
-	/* Error Table */
-	#cards #cards-list table th{font-size: 0.7rem; padding: 14px 10px;}
-	#cards #cards-list table th img{width: 40px;}
 	/*=========================
 			Floors
 	=========================*/
 	#floors #add-floor-btn{font-size: 10px !important;}
 	#floors #add-floor-btn img{margin-top: -3px;}
-	/* Error Table */
-	#floors #floors-list table th{font-size: 0.7rem; padding: 14px 10px;}
-	#floors #floors-list table th img{width: 40px;}
 	/* Floor Details Table */
 	#modal-edit-floor #floor-details-table table{font-size: 0.75rem;}
 	#modal-edit-floor #floor-details-table table th{font-size: 0.9rem;}
@@ -136,17 +128,16 @@
 	=========================*/
 	#rooms #add-room-btn{font-size: 10px !important;}
 	#rooms #add-room-btn img{margin-top: -3px;}
-	/* Error Table */
-	#rooms #rooms-list table th{font-size: 0.7rem; padding: 14px 10px;}
-	#rooms #rooms-list table th img{width: 40px;}
-	/* Edit Room Modal */
-	#modal-edit-room #edit-room-room-groups table th{font-size: 0.7rem; padding: 14px 10px;}
-	#modal-edit-room #edit-room-room-groups table th img{width: 40px;}
 	/*=========================
 			Users
 	=========================*/
 	#users #add-user-btn{font-size: 10px !important;}
 	#users #add-user-btn img{margin-top: -3px;}
+	/* Display users Table */
+	#users table{padding: 5px; margin-top: 15px;}
+	#users table tr th{font-size: 0.8rem; padding: 12px 8px;}
+	#users table tr td{font-size: 0.7rem; padding: 12px 0;}
+	#users table img{width: 17px;}
 	/*=========================
 			Settings
 	=========================*/
@@ -184,20 +175,13 @@
 	#lights #lights-room #lights-room-devices-number{font-size: 0.7rem;}
 	/* Devices Display Table */
 	#lights table#lights-room-devices td div{padding: 5px !important;}
-	#lights table#lights-room-devices th{font-size: 0.65rem; padding: 12px 10px;}
-	#lights table#lights-room-devices th img{width: 45px;}
 	/* Groups Display Table */
-	#lights #lights-room-groups button{width: 100px !important; height: 30px; font-size: .5rem !important; line-height: 1;}
-	#lights #lights-room-groups th{font-size: 0.65rem; padding: 12px 10px;}
-	#lights #lights-room-groups th img{width: 45px;}
+	#lights #lights-room-groups button{width: 100px !important; height: 25px; font-size: .45rem !important; line-height: 1;}
 	/*=========================
 			Groups
 	=========================*/
 	#groups #add-group-btn{font-size: 10px !important;}
 	#groups #add-group-btn img{margin-top: -3px;}
-	/* Error Table */
-	#groups #groups-list table th{font-size: 0.65rem; padding: 12px 10px;}
-	#groups #groups-list table th img{width: 45px;}
 	/* Add Group Modal */
 	#modal-add-group #add-group-room table td div{padding: 5px !important;}
 	/* Edit Group Modal */
@@ -207,9 +191,6 @@
 	=========================*/
 	#cards #add-card-btn{font-size: 10px !important;}
 	#cards #add-card-btn img{margin-top: -3px;}
-	/* Error Table */
-	#cards #cards-list table th{font-size: 0.65rem; padding: 12px 10px;}
-	#cards #cards-list table th img{width: 45px;}
 	/*=========================
 			Floors
 	=========================*/
@@ -218,29 +199,26 @@
 	/* Floor Details Table */
 	#modal-edit-floor #floor-details-table table{font-size: 0.6rem;}
 	#modal-edit-floor #floor-details-table table th{font-size: 0.7rem;}
-	/* Error Table */
-	#floors #floors-list table th{font-size: 0.65rem; padding: 12px 10px;}
-	#floors #floors-list table th img{width: 45px;}
 	/*=========================
 			Rooms
 	=========================*/
 	#rooms #add-room-btn{font-size: 10px !important;}
 	#rooms #add-room-btn img{margin-top: -3px;}
-	/* Error Table */
-	#rooms #rooms-list table th{font-size: 0.65rem; padding: 12px 10px;}
-	#rooms #rooms-list table th img{width: 45px;}
 	/* Add Room Modal */
 	#modal-add-room div.add-room-width-height div.uk-form-controls small{font-size: 10px;}
 	#modal-add-room #add-room-room table td div{padding: 1px !important;}
 	/* Edit Room Modal */
 	#modal-edit-room #edit-room-room table td div{padding: 1px !important;}
-	#modal-edit-room #edit-room-room-groups table th{font-size: 0.65rem; padding: 12px 10px;}
-	#modal-edit-room #edit-room-room-groups table th img{width: 45px;}
 	/*=========================
 			Users
 	=========================*/
 	#users #add-user-btn{font-size: 10px !important;}
 	#users #add-user-btn img{margin-top: -3px;}
+	/* Display users Table */
+	#users table{padding: 5px; margin-top: 15px;}
+	#users table tr th{font-size: 0.8rem; padding: 12px 8px;}
+	#users table tr td{font-size: 0.75rem; padding: 12px 0;}
+	#users table img{width: 15px;}
 	/*=========================
 			Settings
 	=========================*/
@@ -267,12 +245,8 @@
 	/* Devices Display Table */
 	#lights table#lights-room-devices td div{padding: 2px !important;}
 	#lights table#lights-room-devices td div img{padding: 2px !important;}
-	#lights table#lights-room-devices th{font-size: 0.5rem; padding: 8px 10px;}
-	#lights table#lights-room-devices th img{width: 35px;}
 	/* Groups Display Table */
-	#lights #lights-room-groups button{width: 75px !important; height: 25px; font-size: .4rem !important; line-height: 1;}
-	#lights #lights-room-groups th{font-size: 0.5rem; padding: 8px 10px;}
-	#lights #lights-room-groups th img{width: 35px;}
+	#lights #lights-room-groups button{width: 75px !important; height: 20px; font-size: .4rem !important; line-height: 1;}
 	/*=========================
 			Groups
 	=========================*/
@@ -281,9 +255,6 @@
 	/* Group */
 	#groups article.group-details h4{font-size: 15px;}
 	#groups article.group-details h6{font-size: 11px;}
-	/* Error Table */
-	#groups #groups-list table th{font-size: 0.5rem; padding: 8px 10px;}
-	#groups #groups-list table th img{width: 35px;}
 	/* Add Group Modal */
 	#modal-add-group #add-group-room table td div{padding: 2px !important;}
 	#modal-add-group #add-group-room table td div img{padding: 2px !important;}
@@ -298,25 +269,16 @@
 	=========================*/
 	#cards .add-card{margin-top: 0;}
 	#cards #add-card-btn{padding-left: 10px; padding-right: 10px;}
-	/* Error Table */
-	#cards #cards-list table th{font-size: 0.5rem; padding: 8px 10px;}
-	#cards #cards-list table th img{width: 35px;}
 	/*=========================
 			Floors
 	=========================*/
 	#floors .add-floor{margin-top: 0;}
 	#floors #add-floor-btn{padding-left: 10px; padding-right: 10px;}
-	/* Error Table */
-	#floors #floors-list table th{font-size: 0.5rem; padding: 8px 10px;}
-	#floors #floors-list table th img{width: 35px;}
 	/*=========================
 			Rooms
 	=========================*/
 	#rooms .add-room{margin-top: 0;}
 	#rooms #add-room-btn{padding-left: 10px; padding-right: 10px;}
-	/* Error Table */
-	#rooms #rooms-list table th{font-size: 0.5rem; padding: 8px 10px;}
-	#rooms #rooms-list table th img{width: 35px;}
 	/* Add Room Modal */
 	#modal-add-room div.add-room-width-height div.uk-form-controls small{font-size: 6px;}
 	#modal-add-room #add-room-room table td div{padding: 1px !important;}
@@ -324,13 +286,15 @@
 	/* Edit Room Modal */
 	#modal-edit-room #edit-room-room table td div{padding: 1px !important;}
 	#modal-edit-room #edit-room-room table td div img{padding: 1px !important;}
-	#modal-edit-room #edit-room-room-groups table th{font-size: 0.5rem; padding: 8px 10px;}
-	#modal-edit-room #edit-room-room-groups table th img{width: 35px;}
 	/*=========================
 			Users
 	=========================*/
 	#users .add-user{margin-top: 0;}
 	#users #add-user-btn{padding-left: 10px; padding-right: 10px;}
+	/* Display users Table */
+	#users table{padding: 5px; margin-top: 15px;}
+	#users table tr th{font-size: 0.7rem;}
+	#users table tr td{font-size: 0.55rem;}
 	/*=========================
 			Settings
 	=========================*/

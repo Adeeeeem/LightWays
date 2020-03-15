@@ -53,6 +53,8 @@ label.uk-form-label{font-size: 12px; letter-spacing: 1px; color: var(--text-colo
 .uk-accordion-title::before{display: none;}
 input.uk-input, select.uk-input, input.uk-input:focus, select.uk-input:focus{border: 1px solid var(--secondary-color); background-color: var(--input-color);}
 .uk-table-hover tbody tr:hover,.uk-table-hover>tr:hover{background-color: var(--primary-color);}
+div.uk-tooltip-inner{}
+div.uk-tooltip-inner span{color: var(--orange-color);}
 /*==================================================
 				Preloader
 ==================================================*/

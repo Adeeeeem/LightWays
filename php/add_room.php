@@ -15,6 +15,8 @@
 	$device_coords = json_decode(stripslashes($_POST["devices_coords"]));
 	/* Get Devices Type Array */
 	$device_type = json_decode(stripslashes($_POST["devices_type"]));
+	/* Get Devices Card Array */
+	$device_card = json_decode(stripslashes($_POST["devices_card"]));
 	/* Get Devices Pin Array */
 	$device_pin = json_decode(stripslashes($_POST["devices_pin"]));
 	/* Avoid any XSS or SQL Injection */
@@ -52,7 +54,7 @@
 					$col = substr($device_coords[$i], strrpos($device_coords[$i], "-", 0) + 1, strlen($device_coords[$i])); // Get Device Column
 
 					/* Add Device to Room */
-					$request = "INSERT INTO DEVICES (DEVICE_PIN, DEVICE_TYPE, DEVICE_LINE, DEVICE_COLUMN, DEVICE_STATUS, ROOM_ID) VALUES (:pin, :type, :lin, :col, 'OFF', :room);";
+					$request = "INSERT INTO DEVICES (DEVICE_PIN, DEVICE_TYPE, DEVICE_LINE, DEVICE_COLUMN, DEVICE_STATUS, CARD_ID, ROOM_ID) VALUES (:pin, :type, :lin, :col, 'OFF', :card, :room);";
 					/* Preparing Statement */
 					$statement = $DB_CONNECTION->prepare($request);
 					/* Binding Parameter */
@@ -60,6 +62,7 @@
 					$statement->bindParam(':type', $device_type[$i], PDO::PARAM_STR, 20);
 					$statement->bindParam(':lin', $lin, PDO::PARAM_INT);
 					$statement->bindParam(':col', $col, PDO::PARAM_INT);
+					$statement->bindParam(':card', $device_card[$i], PDO::PARAM_INT);
 					$statement->bindParam(':room', $room, PDO::PARAM_INT);
 					/* Execute Query */
 					$statement->execute();
