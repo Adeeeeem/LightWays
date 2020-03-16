@@ -2397,6 +2397,28 @@ $(function()
 			$("#modal-add-user li#"+floor+".floor-permissions input:checkbox:lt(1)").prop("checked", false);
 		}
 	});
+
+	$("#modal-add-user #add-user-permissions").on("change", "input.group-permissions-input", function()
+	{
+		var self = $(this);
+		var id = self.parent().parent().attr("id");
+		var room = self.parent().parent().parent().parent().attr("id");
+		var floor = self.parent().parent().parent().parent().parent().parent().attr("id");
+
+		if (self.is(":checked"))
+		{
+			$("#modal-add-user li#"+room+".room-permissions input:checkbox:lt(1)").prop("checked", true);
+			$("#modal-add-user li#"+floor+".floor-permissions input:checkbox:lt(1)").prop("checked", true);
+		}
+		else
+		{
+			if ($("#modal-add-user li#"+room+".room-permissions ul.room-permissions-inner input[type=checkbox]:checked").length == 0)
+			{
+				$("#modal-add-user li#"+room+".room-permissions input:checkbox:lt(1)").prop("checked", false);
+				$("#modal-add-user li#"+floor+".floor-permissions input:checkbox:lt(1)").prop("checked", false);
+			}
+		}
+	});
 });
 /*=========================
 		Settings
