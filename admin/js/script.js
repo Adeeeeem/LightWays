@@ -1198,13 +1198,7 @@ $(window).on("load", function()
 /* Confirm Adding Floor */
 $(function()
 {
-	/* When Cancelling or Closing, Reset Form */
-	$("#modal-add-floor button.uk-modal-close").click(function()
-	{
-		ResetAddFloorModal(); // Reset Modal
-	});
-
- 	/* When Confirming */
+	/* When Confirming */
 	$("#add-floor-confirm-btn").click(function()
 	{
 		var floor = $("#add-floor-name").val(); // Get Floor Name
@@ -1256,6 +1250,12 @@ $(function()
 				$.growl.error({ message: "Oops, There was an Error! Please Try Again." });
 			});
 		}
+	});
+
+	/* When Cancelling or Closing, Reset Form */
+	$("#modal-add-floor button.uk-modal-close").click(function()
+	{
+		ResetAddFloorModal(); // Reset Modal
 	});
 });
 /* Load Data to Edit Floor Modal and Get Floors Details */
@@ -1711,8 +1711,8 @@ $(function()
 		}
 		else
 		{
-			$("#add-room-name").css("border", "var(--secondary-color)");
-			$("#add-room-name-error").hide();
+			$("#add-room-search-floor").css("border", "var(--secondary-color)");
+			$("#add-room-search-floor-error").hide();
 		}
 
 		if (!room_width || room_width <= 0)
@@ -2278,7 +2278,125 @@ $(window).on("load", function()
 /* Load Data to Add User Modal */
 $(function()
 {
-	
+	$("#users #add-user-btn").click(function()
+	{
+		// Load Floors
+		$.ajax
+		({
+			url: "../php/floors.php",
+			type: "POST",
+			dataType: "json",
+		})
+		.done(function(response)
+		{
+			$("#modal-add-user #add-user-permissions").empty();
+
+			var len = response.length;
+
+			if (len != 0)
+			{
+				$("#modal-add-user #add-user-permissions").append("<ul id='available-permissions' class='uk-list uk-padding-small-left'></ul>")
+
+				for (var i = 0; i < len; i++)
+				{
+					$("#modal-add-user #available-permissions").append("<li id='"+response[i].id+"' class='floor-permissions'><label><input class='uk-checkbox floor-permissions-input' type='checkbox'> "+response[i].name+"</label><ul class='floor-permissions-inner'></ul></li>")
+				}
+
+				// Load Rooms
+				$.ajax
+				({
+					url: "../php/rooms_permissions_list.php",
+					type: "POST",
+					dataType: "json",
+				})
+				.done(function(response)
+				{
+					var len = response.length;
+
+					if (len != 0)
+					{
+						for (var i = 0; i < len; i++)
+						{
+							if (response[i].room != null)
+							{
+								$("#modal-add-user li#"+response[i].floor+".floor-permissions ul.floor-permissions-inner").append("<li id='"+response[i].room+"' class='room-permissions'><label><input class='uk-checkbox room-permissions-input' type='checkbox'> "+response[i].name+"</label><ul class='room-permissions-inner'></ul></li>");
+							}
+						}
+
+						// Load Groups
+						$.ajax
+						({
+							url: "../php/groups_permissions_list.php",
+							type: "POST",
+							dataType: "json",
+						})
+						.done(function(response)
+						{
+							var len = response.length;
+
+							if (len != 0)
+							{
+								for (var i = 0; i < len; i++)
+								{
+									if (response[i].id != null)
+									{
+										$("#modal-add-user li#"+response[i].room+".room-permissions ul.room-permissions-inner").append("<li id='"+response[i].id+"' class='group-permissions'><label><input class='uk-checkbox group-permissions-input' type='checkbox'> "+response[i].name+"</label></li>");
+									}
+								}
+							}
+						})
+						.fail(function()
+						{
+							$.growl.error({ message: "Failed to Load Data !" });
+							$("#modal-add-user #add-user-permissions").empty();
+							$("#modal-add-user #add-user-permissions").append("<table><tr class='uk-animation-scale-down uk-text-center'><tr class='uk-animation-scale-down uk-text-center'><th style='color: #C0392B;'><img src='../images/icons/error.png' width='40' height='40'><br><br>Failed to Load Data !</th></tr></table>");
+						});
+					}
+				})
+				.fail(function()
+				{
+					$.growl.error({ message: "Failed to Load Data !" });
+					$("#modal-add-user #add-user-permissions").empty();
+					$("#modal-add-user #add-user-permissions").append("<table><tr class='uk-animation-scale-down uk-text-center'><tr class='uk-animation-scale-down uk-text-center'><th style='color: #C0392B;'><img src='../images/icons/error.png' width='40' height='40'><br><br>Failed to Load Data !</th></tr></table>");
+				});
+			}
+			else
+			{
+				$("#modal-add-user #add-user-permissions").append("<table><tr class='uk-animation-scale-down uk-text-center'><tr class='uk-animation-scale-down uk-text-center'><th><img src='../images/icons/notfound.png' width='40' height='40'><br><br>There is no Data !</th></tr></table>");
+			}
+		})
+		.fail(function()
+		{
+			$.growl.error({ message: "Failed to Load Data !" });
+			$("#modal-add-user #add-user-permissions").empty();
+			$("#modal-add-user #add-user-permissions").append("<table><tr class='uk-animation-scale-down uk-text-center'><tr class='uk-animation-scale-down uk-text-center'><th style='color: #C0392B;'><img src='../images/icons/error.png' width='40' height='40'><br><br>Failed to Load Data !</th></tr></table>");
+		});
+	});
+
+	$("#modal-add-user #add-user-permissions").on("change", "input.floor-permissions-input", function()
+	{
+		var self = $(this);
+		var id = self.parent().parent().attr("id");
+		$("#modal-add-user li#"+id+".floor-permissions input:checkbox").prop("checked", self.prop("checked"));
+	});
+
+	$("#modal-add-user #add-user-permissions").on("change", "input.room-permissions-input", function()
+	{
+		var self = $(this);
+		var id = self.parent().parent().attr("id");
+		var floor = self.parent().parent().parent().parent().attr("id");
+
+		$("#modal-add-user li#"+id+".room-permissions input:checkbox").prop("checked", self.prop("checked"));
+
+		if ($("#modal-add-user li#"+floor+".floor-permissions ul.floor-permissions-inner input[type=checkbox]:checked").length != 0)
+		{
+			$("#modal-add-user li#"+floor+".floor-permissions input:checkbox:lt(1)").prop("checked", true);
+		}
+		else
+		{
+			$("#modal-add-user li#"+floor+".floor-permissions input:checkbox:lt(1)").prop("checked", false);
+		}
+	});
 });
 /*=========================
 		Settings

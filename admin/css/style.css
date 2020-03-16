@@ -249,7 +249,13 @@
 #users table td{border-bottom: 1px solid var(--primary-color); font-size: 0.9rem; padding: 10px 0;}
 #users table img{cursor: pointer;}
 /* Add User Modal */
-#modal-add-user #add-user-permissions{padding-left: 100px;}
+/*#modal-add-user #add-user-permissions{padding-left: 50px;}*/
+#modal-add-user #available-permissions{margin: 10px 0 10px 0; padding-left: 50px;}
+#modal-add-user #available-permissions li{margin-top: 10px;}
+#modal-add-user #available-permissions label{font-size: 12px; letter-spacing: 1px;}
+/* Error Table */
+#modal-add-user table{border: 1px solid var(--secondary-color); border-radius: .25rem; padding: 10px; width: 100%; background-color: var(--body-color);}
+#modal-add-user table th{padding: 0 !important; text-align: left; vertical-align: bottom; font-size: .75rem; font-weight: 400; color: #999; text-transform: uppercase;}
 /*=========================
 		Settings
 =========================*/
