@@ -295,6 +295,9 @@
 	#users table{padding: 5px; margin-top: 15px;}
 	#users table tr th{font-size: 0.7rem;}
 	#users table tr td{font-size: 0.55rem;}
+	/* Delete Group Modal */
+	#modal-delete-user h2.uk-modal-title{font-size: 1.2rem;}
+	#modal-delete-user button{font-size: 0.7rem; line-height: 1; padding: 0;}
 	/*=========================
 			Settings
 	=========================*/

@@ -15,6 +15,16 @@
 	{
 		if (is_numeric($group))
 		{
+			/* Turn OFF All Room's Lights */
+			/* Preparing Request */
+			$request = "UPDATE DEVICES NATURAL JOIN ROOMS SET DEVICE_STATUS = 'OFF' WHERE ROOM_ID = :group;";
+			/* Preparing Statement */
+			$statement = $DB_CONNECTION->prepare($request);
+			/* Binding Parameter */
+			$statement->bindParam(':group', $group, PDO::PARAM_INT);
+			/* Execute Query */
+			$statement->execute();
+			
 			/* Delete Group */
 			/* Preparing Request */
 			$request = "DELETE FROM GROUPS WHERE GROUP_ID = :group;";

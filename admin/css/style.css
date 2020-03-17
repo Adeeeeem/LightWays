@@ -248,14 +248,20 @@
 #users table th{padding: 12px 8px;}
 #users table td{border-bottom: 1px solid var(--primary-color); font-size: 0.9rem; padding: 10px 0;}
 #users table img{cursor: pointer;}
-/* Add User Modal */
-/*#modal-add-user #add-user-permissions{padding-left: 50px;}*/
-#modal-add-user #available-permissions{margin: 10px 0 10px 0; padding-left: 50px;}
-#modal-add-user #available-permissions li{margin-top: 10px;}
-#modal-add-user #available-permissions label{font-size: 12px; letter-spacing: 1px;}
+/* Add & Edit User Modal */
+#modal-add-user #available-permissions, #modal-edit-user #available-permissions{margin: 10px 0 10px 0; padding-left: 50px;}
+#modal-add-user #available-permissions li, #modal-edit-user #available-permissions li{margin-top: 10px;}
+#modal-add-user #available-permissions label, #modal-edit-user #available-permissions label{font-size: 12px; letter-spacing: 1px;}
 /* Error Table */
-#modal-add-user table{border: 1px solid var(--secondary-color); border-radius: .25rem; padding: 10px; width: 100%; background-color: var(--body-color);}
-#modal-add-user table th{padding: 0 !important; text-align: left; vertical-align: bottom; font-size: .75rem; font-weight: 400; color: #999; text-transform: uppercase;}
+#modal-add-user table, #modal-edit-user table{border: 1px solid var(--secondary-color); border-radius: .25rem; padding: 10px; width: 100%; background-color: var(--body-color);}
+#modal-add-user table th, #modal-edit-user table th{padding: 0 !important; text-align: left; vertical-align: bottom; font-size: .75rem; font-weight: 400; color: #999; text-transform: uppercase;}
+/* Delete User Modal */
+#modal-delete-user div.uk-padding-small{border: 2px solid #C0392B; border-radius: 50%;}
+#modal-delete-user h2.uk-modal-title{font-size: 1.45rem; margin-top: 10px; color: var(--text-color);}
+#modal-delete-user h2.uk-modal-title span{color: var(--secondary-color);}
+#modal-delete-user h5{color: #C0392B; line-height: 1; font-size: 15px; margin-top: 25px; font-weight: 500;}
+#modal-delete-user button.uk-modal-close{background-color: #C0392B; color: #FFFFFF;}
+#modal-delete-user button#delete-user-confirm-btn{background-color: #2ECC71; color: #FFFFFF;}
 /*=========================
 		Settings
 =========================*/

@@ -191,7 +191,7 @@ $(function()
 					// Change Status to OFF
 					$(device).removeClass("ON");
 					$(device).addClass("OFF");
-					$(device).css({"background-color": "var(--device-color)", "border": "2px solid var(--text-color)"});
+					$(device).css({"background-color": "var(--device-color)", "border-color": "var(--text-color)"});
 					// Change Icon
 					image = image.replace("_ON", "_OFF");
 				}
@@ -453,7 +453,7 @@ $(function()
 
 		if (!group)
 		{
-			$("#add-group-name").css("border", "1px solid #F0506E");
+			$("#add-group-name").css("border-color", "#F0506E");
 			$("#add-group-name-error").show();
 		}
 		else
@@ -817,7 +817,7 @@ $(function()
 
 		if (!new_group_name)
 		{
-			$("#edit-group-name").css("border", "1px solid #F0506E");
+			$("#edit-group-name").css("border-color", "#F0506E");
 			$("#edit-group-name-error").show();
 		}
 		else
@@ -969,23 +969,23 @@ $(function()
 
 		if (!card)
 		{
-			$("#add-card-name").css("border", "1px solid #F0506E");
+			$("#add-card-name").css("border-color", "#F0506E");
 			$("#add-card-name-error").show();
 		}
 		else
 		{
-			$("#add-card-name").css("border", "1px solid var(--secondary-color)");
+			$("#add-card-name").css("border-color", "var(--secondary-color)");
 			$("#add-card-name-error").hide();
 		}
 
 		if (!ip)
 		{
-			$("#add-card-ip").css("border", "1px solid #F0506E");
+			$("#add-card-ip").css("border-color", "#F0506E");
 			$("#add-card-ip-error").show();
 		}
 		else
 		{
-			$("#add-card-ip").css("border", "1px solid var(--secondary-color)");
+			$("#add-card-ip").css("border-color", "var(--secondary-color)");
 			$("#add-card-ip-error").hide();
 		}
 
@@ -1082,23 +1082,23 @@ $(function()
 
 		if (!new_card_name)
 		{
-			$("#edit-card-name").css("border", "1px solid #F0506E");
+			$("#edit-card-name").css("border-color", "#F0506E");
 			$("#edit-card-name-error").show();
 		}
 		else
 		{
-			$("#edit-card-name").css("border", "1px solid var(--secondary-color)");
+			$("#edit-card-name").css("border-color", "var(--secondary-color)");
 			$("#edit-card-name-error").hide();
 		}
 
 		if (!new_card_ip)
 		{
-			$("#edit-card-ip").css("border", "1px solid #F0506E");
+			$("#edit-card-ip").css("border-color", "#F0506E");
 			$("#edit-card-ip-error").show();
 		}
 		else
 		{
-			$("#edit-card-ip").css("border", "1px solid var(--secondary-color)");
+			$("#edit-card-ip").css("border-color", "var(--secondary-color)");
 			$("#edit-card-ip-error").hide();
 		}
 
@@ -1205,7 +1205,7 @@ $(function()
 
 		if (!floor)
 		{
-			$("#add-floor-name").css("border", "1px solid #F0506E");
+			$("#add-floor-name").css("border-color", "#F0506E");
 			$("#add-floor-name-error").show();
 		}
 		else
@@ -1336,7 +1336,7 @@ $(function()
 
 		if (!new_floor_name)
 		{
-			$("#edit-floor-name").css("border", "1px solid #F0506E");
+			$("#edit-floor-name").css("border-color", "#F0506E");
 			$("#edit-floor-name-error").show();
 		}
 		else
@@ -1531,12 +1531,12 @@ $(function()
 	{
 		if ($("#add-room-width").val() <= 0)
 		{
-			$("#add-room-width").css("border", "1px solid #F0506E");
+			$("#add-room-width").css("border-color", "F0506E");
 			$("#add-room-width-error").show();
 		}
 		else
 		{
-			$("#add-room-width").css("border", "var(--secondary-color)");
+			$("#add-room-width").css("border-color", "var(--secondary-color)");
 			$("#add-room-width-error").hide();
 		}
 	});
@@ -1545,12 +1545,12 @@ $(function()
 	{
 		if ($("#add-room-height").val() <= 0)
 		{
-			$("#add-room-height").css("border", "1px solid #F0506E");
+			$("#add-room-height").css("border-color", "#F0506E");
 			$("#add-room-height-error").show();
 		}
 		else
 		{
-			$("#add-room-height").css("border", "var(--secondary-color)");
+			$("#add-room-height").css("border-color", "var(--secondary-color)");
 			$("#add-room-height-error").hide();
 		}
 	});
@@ -1612,35 +1612,35 @@ $(function()
 
 		if (type == "NONE")
 		{
-			$("#add-room-device-type").css("border", "1px solid #F0506E");
+			$("#add-room-device-type").css("border-color", "#F0506E");
 			$("#add-room-device-type-error").show();
 		}
 		else
 		{
-			$("#add-room-device-type").css("border", "var(--secondary-color)");
+			$("#add-room-device-type").css("border-color", "var(--secondary-color)");
 			$("#add-room-device-type-error").hide()
 		}
 
 		if (card == null)
 		{
-			$("#add-room-device-card").css("border", "1px solid #F0506E");
+			$("#add-room-device-card").css("border-color", "#F0506E");
 			$("#add-room-device-card-error").show();
 		}
 		else
 		{
-			$("#add-room-device-card").css("border", "var(--secondary-color)");
+			$("#add-room-device-card").css("border-color", "var(--secondary-color)");
 			$("#add-room-device-card-error").hide()
 		}
 
 		if (!pin)
 		{
-			$("#add-room-device-pin").css("border", "1px solid #F0506E");
+			$("#add-room-device-pin").css("border-color", "#F0506E");
 			$("#add-room-device-pin-error").show();
 		}
 		else
 		{
-			$("#add-room-device-pin").css("border", "var(--secondary-color)");
-			$("#add-room-device-pin-error").hide();	
+			$("#add-room-device-pin").css("border-color", "var(--secondary-color)");
+			$("#add-room-device-pin-error").hide();
 		}
 
 		if ( (type != "NONE") && (pin) && (card != null) )
@@ -1695,45 +1695,45 @@ $(function()
 
 		if (!room_name)
 		{
-			$("#add-room-name").css("border", "1px solid #F0506E");
+			$("#add-room-name").css("border-color", "#F0506E");
 			$("#add-room-name-error").show();
 		}
 		else
 		{
-			$("#add-room-name").css("border", "var(--secondary-color)");
+			$("#add-room-name").css("border-color", "var(--secondary-color)");
 			$("#add-room-name-error").hide();
 		}
 
 		if (room_floor == null)
 		{
-			$("#add-room-search-floor").css("border", "1px solid #F0506E");
+			$("#add-room-search-floor").css("border-color", "#F0506E");
 			$("#add-room-search-floor-error").show();
 		}
 		else
 		{
-			$("#add-room-search-floor").css("border", "var(--secondary-color)");
+			$("#add-room-search-floor").css("border-color", "var(--secondary-color)");
 			$("#add-room-search-floor-error").hide();
 		}
 
 		if (!room_width || room_width <= 0)
 		{
-			$("#add-room-width").css("border", "1px solid #F0506E");
+			$("#add-room-width").css("border-color", "#F0506E");
 			$("#add-room-width-error").show();
 		}
 		else
 		{
-			$("#add-room-width").css("border", "var(--secondary-color)");
+			$("#add-room-width").css("border-color", "var(--secondary-color)");
 			$("#add-room-width-error").hide();
 		}
 
 		if (!room_height || room_height <= 0)
 		{
-			$("#add-room-height").css("border", "1px solid #F0506E");
+			$("#add-room-height").css("border-color", "#F0506E");
 			$("#add-room-height-error").show();
 		}
 		else
 		{
-			$("#add-room-height").css("border", "var(--secondary-color)");
+			$("#add-room-height").css("border-color", "var(--secondary-color)");
 			$("#add-room-height-error").hide();
 		}
 
@@ -2038,34 +2038,34 @@ $(function()
 
 		if (type == "NONE")
 		{
-			$("#edit-room-device-type").css("border", "1px solid #F0506E");
+			$("#edit-room-device-type").css("border-color", "#F0506E");
 			$("#edit-room-device-type-error").show();
 		}
 		else
 		{
-			$("#edit-room-device-type").css("border", "var(--secondary-color)");
+			$("#edit-room-device-type").css("border-color", "var(--secondary-color)");
 			$("#edit-room-device-type-error").hide()
 		}
 
 		if (card == null)
 		{
-			$("#edit-room-device-card").css("border", "1px solid #F0506E");
+			$("#edit-room-device-card").css("border-color", "#F0506E");
 			$("#edit-room-device-card-error").show();
 		}
 		else
 		{
-			$("#edit-room-device-card").css("border", "var(--secondary-color)");
+			$("#edit-room-device-card").css("border-color", "var(--secondary-color)");
 			$("#edit-room-device-card-error").hide()
 		}
 
 		if (!pin)
 		{
-			$("#edit-room-device-pin").css("border", "1px solid #F0506E");
+			$("#edit-room-device-pin").css("border-color", "#F0506E");
 			$("#edit-room-device-pin-error").show();
 		}
 		else
 		{
-			$("#edit-room-device-pin").css("border", "var(--secondary-color)");
+			$("#edit-room-device-pin").css("border-color", "var(--secondary-color)");
 			$("#edit-room-device-pin-error").hide();	
 		}
 
@@ -2096,12 +2096,12 @@ $(function()
 
 		if (!room_name)
 		{
-			$("#edit-room-name").css("border", "1px solid #F0506E");
+			$("#edit-room-name").css("border-color", "#F0506E");
 			$("#edit-room-name-error").show();
 		}
 		else
 		{
-			$("#edit-room-name").css("border", "var(--secondary-color)");
+			$("#edit-room-name").css("border-color", "var(--secondary-color)");
 			$("#edit-room-name-error").hide();
 		}
 
@@ -2324,7 +2324,7 @@ $(function()
 						}
 
 						// Load Groups
-						$.ajax
+						/*$.ajax
 						({
 							url: "../php/groups_permissions_list.php",
 							type: "POST",
@@ -2350,7 +2350,7 @@ $(function()
 							$.growl.error({ message: "Failed to Load Data !" });
 							$("#modal-add-user #add-user-permissions").empty();
 							$("#modal-add-user #add-user-permissions").append("<table><tr class='uk-animation-scale-down uk-text-center'><tr class='uk-animation-scale-down uk-text-center'><th style='color: #C0392B;'><img src='../images/icons/error.png' width='40' height='40'><br><br>Failed to Load Data !</th></tr></table>");
-						});
+						});*/
 					}
 				})
 				.fail(function()
@@ -2398,7 +2398,7 @@ $(function()
 		}
 	});
 
-	$("#modal-add-user #add-user-permissions").on("change", "input.group-permissions-input", function()
+	/*$("#modal-add-user #add-user-permissions").on("change", "input.group-permissions-input", function()
 	{
 		var self = $(this);
 		var id = self.parent().parent().attr("id");
@@ -2412,12 +2412,469 @@ $(function()
 		}
 		else
 		{
-			if ($("#modal-add-user li#"+room+".room-permissions ul.room-permissions-inner input[type=checkbox]:checked").length == 0)
+			if ($("#modal-add-user li#"+floor+".floor-permissions ul.floor-permissions-inner input[type=checkbox]:checked").length == 0)
 			{
 				$("#modal-add-user li#"+room+".room-permissions input:checkbox:lt(1)").prop("checked", false);
 				$("#modal-add-user li#"+floor+".floor-permissions input:checkbox:lt(1)").prop("checked", false);
 			}
+			else
+			{
+				if ($("#modal-add-user li#"+room+".room-permissions ul.room-permissions-inner input[type=checkbox]:checked").length == 0)
+				{
+					$("#modal-add-user li#"+room+".room-permissions input:checkbox:lt(1)").prop("checked", false);
+					$("#modal-add-user li#"+floor+".floor-permissions input:checkbox:lt(1)").prop("checked", false);
+				}
+			}
 		}
+	});*/
+
+	var PermissionsList = [];
+	var TypeList = [];
+
+	$("#modal-add-user #add-user-confirm-btn").click(function()
+	{
+		var login = $("#add-user-login").val();
+		var password = $("#add-user-password").val();
+		var fname = $("#add-user-fname").val();
+		var lname = $("#add-user-lname").val();
+
+		if (!login)
+		{
+			$("#add-user-login").css("border-color", "#F0506E");
+			$("#add-user-login-error").show();
+		}
+		else
+		{
+			$("#add-user-login").css("border-color", "var(--secondary-color)");
+			$("#add-user-login-error").hide();
+		}
+
+		if (!password)
+		{
+			$("#add-user-password").css("border-color", "#F0506E");
+			$("#add-user-password-error").show();
+		}
+		else
+		{
+			$("#add-user-password").css("border-color", "var(--secondary-color)");
+			$("#add-user-password-error").hide();
+		}
+
+		if (!fname)
+		{
+			$("#add-user-fname").css("border-color", "#F0506E");
+			$("#add-user-fname-error").show();
+		}
+		else
+		{
+			$("#add-user-fname").css("border-color", "var(--secondary-color)");
+			$("#add-user-fname-error").hide();
+		}
+
+		if (!lname)
+		{
+			$("#add-user-lname").css("border-color", "#F0506E");
+			$("#add-user-lname-error").show();
+		}
+		else
+		{
+			$("#add-user-lname").css("border-color", "var(--secondary-color)");
+			$("#add-user-lname-error").hide();
+		}
+
+		if (login && password && fname && lname)
+		{
+			$("#modal-add-user #add-user-permissions input[type=checkbox]:checked").each(function()
+			{
+				var self = $(this).parent().parent();
+				PermissionsList.push(self.attr("id"));
+				
+				if ($(this).hasClass("floor-permissions-input"))
+				{
+					TypeList.push("FLOOR");
+				}
+				else if ($(this).hasClass("room-permissions-input"))
+				{
+					TypeList.push("ROOM");
+				}
+				else if ($(this).hasClass("group-permissions-input"))
+				{
+					TypeList.push("GROUP");
+				}
+			});
+
+			var PermissionsListJson = JSON.stringify(PermissionsList)
+			var TypeListJson = JSON.stringify(TypeList);
+
+			$.ajax
+			({
+				url: "../php/add_user.php",
+				type: "POST",
+				dataType: "json",
+				data: {login: login, password: password, fname: fname, lname: lname, permissions_devices: PermissionsListJson, permissions_types: TypeListJson},
+			})
+			.done(function(response)
+			{
+				var len = response.length;
+
+				if (len != 0)
+				{
+					$.growl.notice({ message: "User has been Successfully Added !" }); // Success Notification
+
+					if ($("#users #users-list table").find("tbody").length == 0)
+					{
+						$("#users #users-list table").empty();
+						$("#users #users-list table").append("<thead><tr class='uk-animation-scale-down uk-text-center'><th>Name</th><th>Edit</th><th>Delete</th></thead><tbody></tbody>");
+					}
+
+					$("#users #users-list table tbody").append("<tr id='"+response.user+"' class='uk-animation-scale-down uk-text-center'><td>"+response.name+"</td><td><img class='edit' src='../images/icons/edit.png' width='20' height='20'></td><td><img class='delete' src='../images/icons/remove.png' width='20' height='20'></td></tr>");
+				}
+				else
+				{
+					$.growl.error({ message: "Oops, There was an Error! Please Try Again." });
+				}
+
+				UIkit.modal("#modal-add-user").hide();
+				ResetAddUserModal();
+				PermissionsList = [];
+				TypeList = [];
+			})
+			.fail(function()
+			{
+				$.growl.error({ message: "Oops, There was an Error! Please Try Again." });
+				UIkit.modal("#modal-add-user").hide();
+				ResetAddUserModal();
+				PermissionsList = [];
+				TypeList = [];
+			});
+		}
+	});
+
+	/* Cancel Add User */
+	$("#modal-add-user button.uk-modal-close").click(function()
+	{
+		UIkit.modal("#modal-add-user").hide();
+		ResetAddUserModal();
+		PermissionsList = [];
+		TypeList = [];
+	});
+});
+/* Load Data to Edit User Modal */
+$(function()
+{
+	var old_login;
+
+	$("#users #users-list").off("click").on("click", "img.edit", function()
+	{
+		old_login = $(this).parent().parent().attr("id");
+		
+		UIkit.modal("#modal-edit-user").toggle(); // Show Modal
+
+		// Load Floors
+		$.ajax
+		({
+			url: "../php/floors.php",
+			type: "POST",
+			dataType: "json",
+		})
+		.done(function(response)
+		{
+			$("#modal-edit-user #edit-user-permissions").empty();
+
+			var len = response.length;
+
+			if (len != 0)
+			{
+				$("#modal-edit-user #edit-user-permissions").append("<ul id='available-permissions' class='uk-list uk-padding-small-left'></ul>")
+
+				for (var i = 0; i < len; i++)
+				{
+					$("#modal-edit-user #available-permissions").append("<li id='"+response[i].id+"' class='floor-permissions'><label><input class='uk-checkbox floor-permissions-input' type='checkbox'> "+response[i].name+"</label><ul class='floor-permissions-inner'></ul></li>")
+				}
+
+				// Load Rooms
+				$.ajax
+				({
+					url: "../php/rooms_permissions_list.php",
+					type: "POST",
+					dataType: "json",
+				})
+				.done(function(response)
+				{
+					var len = response.length;
+
+					if (len != 0)
+					{
+						for (var i = 0; i < len; i++)
+						{
+							if (response[i].room != null)
+							{
+								$("#modal-edit-user li#"+response[i].floor+".floor-permissions ul.floor-permissions-inner").append("<li id='"+response[i].room+"' class='room-permissions'><label><input class='uk-checkbox room-permissions-input' type='checkbox'> "+response[i].name+"</label><ul class='room-permissions-inner'></ul></li>");
+							}
+						}
+					}
+
+					$.ajax
+					({
+						url: "../php/get_user.php",
+						type: "POST",
+						dataType: "json",
+						data: {login: old_login},
+					})
+					.done(function(response)
+					{
+						var len = response.length;
+
+						if (len != 0)
+						{
+							$("#edit-user-login").val(response[0].login);
+							$("#edit-user-password").val(response[0].password);
+							$("#edit-user-fname").val(response[0].fname);
+							$("#edit-user-lname").val(response[0].lname);
+
+							for (var i = 0; i < len; i++)
+							{
+								switch (response[i].type)
+								{
+									case "FLOOR":
+											$("#modal-edit-user li#"+response[i].permission+".floor-permissions input.floor-permissions-input").prop("checked", true);
+										break;
+									case "ROOM":
+											$("#modal-edit-user li#"+response[i].permission+".room-permissions input.room-permissions-input").prop("checked", true);
+										break;
+								}
+							}
+						}
+						else
+						{
+							$.growl.error({ message: "Failed to Load Selected User Data !" });
+							$("#modal-edit-user #edit-user-permissions").empty();
+							$("#modal-edit-user #edit-user-permissions").append("<table><tr class='uk-animation-scale-down uk-text-center'><tr class='uk-animation-scale-down uk-text-center'><th style='color: #C0392B;'><img src='../images/icons/error.png' width='40' height='40'><br><br>Failed to Load Data !</th></tr></table>");
+						}
+					})
+					.fail(function()
+					{
+						$.growl.error({ message: "Failed to Load Selected User Data !" });
+						$("#modal-edit-user #edit-user-permissions").empty();
+						$("#modal-edit-user #edit-user-permissions").append("<table><tr class='uk-animation-scale-down uk-text-center'><tr class='uk-animation-scale-down uk-text-center'><th style='color: #C0392B;'><img src='../images/icons/error.png' width='40' height='40'><br><br>Failed to Load Data !</th></tr></table>");
+					});
+				})
+				.fail(function()
+				{
+					$.growl.error({ message: "Failed to Load Data !" });
+					$("#modal-edit-user #edit-user-permissions").empty();
+					$("#modal-edit-user #edit-user-permissions").append("<table><tr class='uk-animation-scale-down uk-text-center'><tr class='uk-animation-scale-down uk-text-center'><th style='color: #C0392B;'><img src='../images/icons/error.png' width='40' height='40'><br><br>Failed to Load Data !</th></tr></table>");
+				});
+			}
+			else
+			{
+				$("#modal-edit-user #edit-user-permissions").append("<table><tr class='uk-animation-scale-down uk-text-center'><tr class='uk-animation-scale-down uk-text-center'><th><img src='../images/icons/notfound.png' width='40' height='40'><br><br>There is no Data !</th></tr></table>");
+			}
+		})
+		.fail(function()
+		{
+			$.growl.error({ message: "Failed to Load Data !" });
+			$("#modal-edit-user #edit-user-permissions").empty();
+			$("#modal-edit-user #edit-user-permissions").append("<table><tr class='uk-animation-scale-down uk-text-center'><tr class='uk-animation-scale-down uk-text-center'><th style='color: #C0392B;'><img src='../images/icons/error.png' width='40' height='40'><br><br>Failed to Load Data !</th></tr></table>");
+		});
+	});
+
+	$("#modal-edit-user #edit-user-permissions").on("change", "input.floor-permissions-input", function()
+	{
+		var self = $(this);
+		var id = self.parent().parent().attr("id");
+		$("#modal-edit-user li#"+id+".floor-permissions input:checkbox").prop("checked", self.prop("checked"));
+	});
+
+	$("#modal-edit-user #edit-user-permissions").on("change", "input.room-permissions-input", function()
+	{
+		var self = $(this);
+		var id = self.parent().parent().attr("id");
+		var floor = self.parent().parent().parent().parent().attr("id");
+
+		$("#modal-edit-user li#"+id+".room-permissions input:checkbox").prop("checked", self.prop("checked"));
+
+		if ($("#modal-edit-user li#"+floor+".floor-permissions ul.floor-permissions-inner input[type=checkbox]:checked").length != 0)
+		{
+			$("#modal-edit-user li#"+floor+".floor-permissions input:checkbox:lt(1)").prop("checked", true);
+		}
+		else
+		{
+			$("#modal-edit-user li#"+floor+".floor-permissions input:checkbox:lt(1)").prop("checked", false);
+		}
+	});
+
+	var PermissionsList = [];
+	var TypeList = [];
+
+	$("#modal-edit-user #edit-user-confirm-btn").click(function()
+	{
+		var login = $("#edit-user-login").val();
+		var password = $("#edit-user-password").val();
+		var fname = $("#edit-user-fname").val();
+		var lname = $("#edit-user-lname").val();
+
+		if (!login)
+		{
+			$("#edit-user-login").css("border-color", "#F0506E");
+			$("#edit-user-login-error").show();
+		}
+		else
+		{
+			$("#edit-user-login").css("border-color", "var(--secondary-color)");
+			$("#edit-user-login-error").hide();
+		}
+
+		if (!password)
+		{
+			$("#edit-user-password").css("border-color", "#F0506E");
+			$("#edit-user-password-error").show();
+		}
+		else
+		{
+			$("#edit-user-password").css("border-color", "var(--secondary-color)");
+			$("#edit-user-password-error").hide();
+		}
+
+		if (!fname)
+		{
+			$("#edit-user-fname").css("border-color", "#F0506E");
+			$("#edit-user-fname-error").show();
+		}
+		else
+		{
+			$("#edit-user-fname").css("border-color", "var(--secondary-color)");
+			$("#edit-user-fname-error").hide();
+		}
+
+		if (!lname)
+		{
+			$("#edit-user-lname").css("border-color", "#F0506E");
+			$("#edit-user-lname-error").show();
+		}
+		else
+		{
+			$("#edit-user-lname").css("border-color", "var(--secondary-color)");
+			$("#edit-user-lname-error").hide();
+		}
+
+		if (login && password && fname && lname)
+		{
+			$("#modal-edit-user #edit-user-permissions input[type=checkbox]:checked").each(function()
+			{
+				var self = $(this).parent().parent();
+				PermissionsList.push(self.attr("id"));
+				
+				if ($(this).hasClass("floor-permissions-input"))
+				{
+					TypeList.push("FLOOR");
+				}
+				else if ($(this).hasClass("room-permissions-input"))
+				{
+					TypeList.push("ROOM");
+				}
+				else if ($(this).hasClass("group-permissions-input"))
+				{
+					TypeList.push("GROUP");
+				}
+			});
+
+			var PermissionsListJson = JSON.stringify(PermissionsList)
+			var TypeListJson = JSON.stringify(TypeList);
+
+			$.ajax
+			({
+				url: "../php/update_employee.php",
+				type: "POST",
+				dataType: "json",
+				data: {old_login: old_login, login: login, password: password, fname: fname, lname: lname, permissions_devices: PermissionsListJson, permissions_types: TypeListJson},
+			})
+			.done(function(response)
+			{
+				if (response.result)
+				{
+					$.growl.notice({ message: "User has been Successfully Updated !" }); // Success Notification
+
+					$("#users #users-list tr#"+old_login).attr("id", login);
+					$("#users #users-list tr#"+login+" td:first-child").html(fname+" "+lname);
+				}
+				else
+				{
+					$.growl.error({ message: "Oops, There was an Error Updating User !" });
+				}
+
+				UIkit.modal("#modal-edit-user").hide();
+				ResetEditUserModal();
+				PermissionsList = [];
+				TypeList = [];
+			})
+			.fail(function()
+			{
+				$.growl.error({ message: "Oops, There was an Error! Please Try Again." });
+				UIkit.modal("#modal-edit-user").hide();
+				ResetEditUserModal();
+				PermissionsList = [];
+				TypeList = [];
+			});
+		}
+	});
+
+	/* Cancel Edit User */
+	$("#modal-edit-user button.uk-modal-close").click(function()
+	{
+		UIkit.modal("#modal-edit-user").hide();
+		ResetEditUserModal();
+		PermissionsList = [];
+		TypeList = [];
+	});
+});
+/* Delete User */
+$(function()
+{
+	var login;
+
+	$("#users #users-list").off("click").on("click", "img.delete", function()
+	{
+		login = $(this).parent().parent().attr("id");
+		$("#modal-delete-user h2.uk-modal-title span").html($("#users-list tr#"+login+" td:first-child").html());
+		UIkit.modal("#modal-delete-user").toggle(); // Show Modal
+	});
+
+	/* Confirm Delete User */
+	$("#modal-delete-user #delete-user-confirm-btn").click(function()
+	{
+		$.ajax
+		({
+			url: "../php/delete_user.php",
+			type: "POST",
+			dataType: "json",
+			data: {login: login},
+		})
+		.done(function(response)
+		{
+			UIkit.modal("#modal-delete-user").hide(); // Hide Modal
+
+			if (response.result)
+			{
+				$("#users-list tr#"+login).remove();
+				$.growl.notice({ message: "User has been Successfully Deleted!" }); // Success Notification
+
+				if ($("#users #users-list table tbody").find("tr").length == 0)
+				{
+					$("#users #users-list table").empty();
+					$("#users #users-list table").append("<thead><tr class='uk-animation-scale-down uk-text-center'><th style='border: 1px solid var(--secondary-color); border-radius: .25rem;'><img src='../images/icons/notfound.png' width='40' height='40'><br><br>No Users Found !</th></tr></thead>");
+				}
+			}
+			else
+			{
+				$.growl.error({ message: "Failed to Delete the User <span style='color: var(--secondary-color)'>"+$("#users-list tr#"+login+" td:first-child").html()+"</span>, Please Try Again !" });
+			}
+		})
+		.fail(function()
+		{
+			UIkit.modal("#modal-delete-user").hide(); // Hide Modal
+			$.growl.error({ message: "Failed to Delete the User <span style='color: var(--secondary-color)'>"+$("#users-list tr#"+login+" td:first-child").html()+"</span>, Please Try Again !" });
+		});
 	});
 });
 /*=========================
@@ -2485,23 +2942,23 @@ $(window).on("load", function()
 
 		if (!new_fname)
 		{
-			$("#setting-fname").css("border", "1px solid #F0506E");
+			$("#setting-fname").css("border-color", "#F0506E");
 			$("#setting-fname-error").show();
 		}
 		else
 		{
-			$("#setting-fname").css("border", "1px solid var(--secondary-color)");
+			$("#setting-fname").css("border-color", "var(--secondary-color)");
 			$("#setting-fname-error").hide();
 		}
 
 		if (!new_lname)
 		{
-			$("#setting-lname").css("border", "1px solid #F0506E");
+			$("#setting-lname").css("border-color", "#F0506E");
 			$("#setting-lname-error").show();
 		}
 		else
 		{
-			$("#setting-lname").css("border", "1px solid var(--secondary-color)");
+			$("#setting-lname").css("border-color", "var(--secondary-color)");
 			$("#setting-lname-error").hide();
 		}
 
@@ -2561,41 +3018,41 @@ $(window).on("load", function()
 			{
 				if (old_password != response.pw)
 				{
-					$("#setting-old-password").css("border", "1px solid #F0506E");
+					$("#setting-old-password").css("border-color", "#F0506E");
 					$("#setting-old-password-error").show();
 				}
 				else
 				{
-					$("#setting-old-password").css("border", "1px solid var(--secondary-color)");
+					$("#setting-old-password").css("border-color", "var(--secondary-color)");
 					$("#setting-old-password-error").hide();
 				}
 
 				if (!new_password)
 				{
-					$("#setting-new-password").css("border", "1px solid #F0506E");
+					$("#setting-new-password").css("border-color", "#F0506E");
 					$("#setting-new-password-error").show();
 				}
 				else
 				{
-					$("#setting-new-password").css("border", "1px solid var(--secondary-color)");
+					$("#setting-new-password").css("border-color", "var(--secondary-color)");
 					$("#setting-new-password-error").hide();
 				}
 
 				if (!confirm_password)
 				{
-					$("#setting-confirm-new-password").css("border", "1px solid #F0506E");
+					$("#setting-confirm-new-password").css("border-color", "#F0506E");
 					$("#setting-confirm-new-password-error").show();
 				}
 				else
 				{
-					$("#setting-confirm-new-password").css("border", "1px solid var(--secondary-color)");
+					$("#setting-confirm-new-password").css("border-color", "var(--secondary-color)");
 					$("#setting-confirm-new-password-error").hide();
 				}
 
 				/* Password Doesn't Match */
 				if (new_password != confirm_password)
 				{
-					$("#setting-confirm-new-password").css("border", "1px solid #F0506E");
+					$("#setting-confirm-new-password").css("border-color", "#F0506E");
 					$("#setting-confirm-new-password-error").show();
 				}
 
@@ -2955,7 +3412,7 @@ function LoadGroupsLightsSection(room)
 			{
 				if (response[i].status == "ON")
 				{
-					$("#lights table#lights-room-devices tbody img#"+response[i].device+".ON").css({"background-color": "#FFCC00", "border": "2px solid "+response[i].color});
+					$("#lights table#lights-room-devices tbody img#"+response[i].device+".ON").css({"background-color": "#FFCC00", "border-color": ""+response[i].color});
 				}
 
 				if (!groups.includes(response[i].name))
@@ -2969,7 +3426,7 @@ function LoadGroupsLightsSection(room)
 						bgcolor = response[i].color;
 					}
 
-					$("#lights #lights-room-groups").append("<button id='"+response[i].id+"' class='uk-button uk-width-small uk-animation-scale-down "+response[i].status+"' style='background-color: "+bgcolor+"; border: 2px solid "+response[i].color+"'><span>"+response[i].name+"</span></button>");
+					$("#lights #lights-room-groups").append("<button id='"+response[i].id+"' class='uk-button uk-width-small uk-animation-scale-down "+response[i].status+"' style='background-color: "+bgcolor+"; border-color: "+response[i].color+"'><span>"+response[i].name+"</span></button>");
 				}
 			}
 
@@ -3117,12 +3574,12 @@ function GroupStatus(group, status, flag)
 
 				if ($(device).attr("class") == "ON")
 				{
-					$(device).css({"background-color": "#FFCC00", "border": "2px solid "+response[i].color});
+					$(device).css({"background-color": "#FFCC00", "border-color": ""+response[i].color});
 				}
 				else
 				{
 					$(device).css("background-color", "var(--device-color)");
-					$(device).css({"background-color": "var(--device-color)", "border": "2px solid var(--text-color)"});
+					$(device).css({"background-color": "var(--device-color)", "border-color": "var(--text-color)"});
 				}
 			}
 		}
@@ -3266,7 +3723,7 @@ function LoadReservedDevicesAddGroupsSection(room)
 function ResetAddGroupModal()
 {
 	$("#add-group-name").val(""); // Clear Group Name
-	$("#add-group-name").css("border", "1px solid var(--secondary-color)"); // Remove Red Border from Input
+	$("#add-group-name").css("border-color", "var(--secondary-color)"); // Remove Red Border from Input
 	$("#add-group-name-error").hide(); // Hide Error
 	$("#add-group-color").val("#FFA200"); // Asign Orange as Group Color
 	$("#modal-add-group #add-group-room table img.SELECTED").css("background-color", "var(--device-color");
@@ -3375,7 +3832,7 @@ function DisplayDevicesEditGroupsSection(room)
 /* Reset Edit Group Modal Function */
 function ResetEditGroupModal()
 {
-	$("#edit-group-name").css("border", "1px solid var(--secondary-color)"); // Remove Red Border from Input
+	$("#edit-group-name").css("border-color", "var(--secondary-color)"); // Remove Red Border from Input
 	$("#edit-group-name-error").hide(); // Hide Error
 	$("#modal-edit-group #edit-group-room table img.SELECTED").css("background-color", "var(--device-color"); // Reset Devices Color
 	$("#modal-edit-group #edit-group-room table img.SELECTED").removeClass("SELECTED"); // Reset All Devices
@@ -3430,8 +3887,8 @@ function ResetAddCardModal()
 	$("#add-card-name").val("");
 	$("#add-card-ip").val("");
 
-	$("#add-card-name").css("border", "1px solid var(--secondary-color)"); // Remove Red Border from Input
-	$("#add-card-ip").css("border", "1px solid var(--secondary-color)"); // Remove Red Border from Input
+	$("#add-card-name").css("border-color", "var(--secondary-color)"); // Remove Red Border from Input
+	$("#add-card-ip").css("border-color", "var(--secondary-color)"); // Remove Red Border from Input
 
 	$("#add-card-name-error").hide();
 	$("#add-card-ip-error").hide();
@@ -3442,8 +3899,8 @@ function ResetEditCardModal()
 	$("#edit-card-name").val(""); // Clear Card Name
 	$("#edit-card-ip").val(""); // Clear Card Name
 
-	$("#edit-card-name").css("border", "1px solid var(--secondary-color)"); // Remove Red Border from Input
-	$("#edit-card-ip").css("border", "1px solid var(--secondary-color)"); // Remove Red Border from Input
+	$("#edit-card-name").css("border-color", "var(--secondary-color)"); // Remove Red Border from Input
+	$("#edit-card-ip").css("border-color", "var(--secondary-color)"); // Remove Red Border from Input
 
 	$("#edit-card-name-error").hide(); // Hide Error
 	$("#edit-card-ip-error").hide(); // Hide Error
@@ -3490,7 +3947,7 @@ function DisplayFloorsListFloorsSection()
 function ResetAddFloorModal()
 {
 	$("#add-floor-name").val(""); // Clear Floor Name
-	$("#add-floor-name").css("border", "1px solid var(--secondary-color)"); // Remove Red Border from Input
+	$("#add-floor-name").css("border-color", "var(--secondary-color)"); // Remove Red Border from Input
 	$("#add-floor-name-error").hide(); // Hide Error
 }
 /* Reset Edit Floor Modal Function */
@@ -3498,7 +3955,7 @@ function ResetEditFloorModal()
 {
 	$("#edit-floor-name").val("");
 	$("#modal-edit-floor table").empty();
-	$("#edit-floor-name").css("border", "1px solid var(--secondary-color)");
+	$("#edit-floor-name").css("border-color", "var(--secondary-color)");
 	$("#edit-floor-name-error").hide(); 
 }
 /*==================================================
@@ -3580,10 +4037,10 @@ function ResetAddRoomModal()
 	$("#add-room-name").val(""); // Clear Room Name
 	$("#add-room-width").val(""); // Clear Room Width
 	$("#add-room-height").val(""); // Clear Room Height
-	$("#add-room-name").css("border", "1px solid var(--secondary-color)"); // Remove Red Border from Input
-	$("#add-room-search-floor").css("border", "1px solid var(--secondary-color)");
-	$("#add-room-width").css("border", "1px solid var(--secondary-color)"); // Remove Red Border from Input
-	$("#add-room-height").css("border", "1px solid var(--secondary-color)"); // Remove Red Border from Input
+	$("#add-room-name").css("border-color", "var(--secondary-color)"); // Remove Red Border from Input
+	$("#add-room-search-floor").css("border-color", "var(--secondary-color)");
+	$("#add-room-width").css("border-color", "var(--secondary-color)"); // Remove Red Border from Input
+	$("#add-room-height").css("border-color", "var(--secondary-color)"); // Remove Red Border from Input
 	$("#add-room-name-error").hide(); // Hide Error
 	$("#add-room-search-floor-error").hide();
 	$("#add-room-width-error").hide(); // Clear Room Width
@@ -3598,9 +4055,9 @@ function ResetAddRoomDeviceModal()
 	$("#add-room-device-type").val($("#add-room-device-type option:first").val());
 	$("#add-room-device-pin").val("");
 
-	$("#add-room-device-type").css("border", "1px solid var(--secondary-color)");
-	$("#add-room-device-card").css("border", "1px solid var(--secondary-color)");
-	$("#add-room-device-pin").css("border", "1px solid var(--secondary-color)");
+	$("#add-room-device-type").css("border-color", "var(--secondary-color)");
+	$("#add-room-device-card").css("border-color", "var(--secondary-color)");
+	$("#add-room-device-pin").css("border-color", "var(--secondary-color)");
 
 	$("#add-room-device-type-error").hide();
 	$("#add-room-device-card-error").hide();
@@ -3613,7 +4070,7 @@ function ResetEditRoomModal()
 	$("#edit-room-search-floor").empty();
 	$("#modal-edit-room #edit-room-room-devices").empty();
 	$("#modal-edit-room #edit-room-room-groups").empty();
-	$("#edit-room-name").css("border", "1px solid var(--secondary-color)");
+	$("#edit-room-name").css("border-color", "var(--secondary-color)");
 	$("#edit-room-name-error").hide(); // Hide Error
 	$("#edit-room-device-card").empty(); // Empty Cards List
 }
@@ -3623,9 +4080,9 @@ function ResetEditRoomDeviceModal()
 	$("#edit-room-device-type").val($("#edit-room-device-type option:first").val());
 	$("#edit-room-device-pin").val("");
 
-	$("#edit-room-device-type").css("border", "1px solid var(--secondary-color)");
-	$("#edit-room-device-card").css("border", "1px solid var(--secondary-color)");
-	$("#edit-room-device-pin").css("border", "1px solid var(--secondary-color)");
+	$("#edit-room-device-type").css("border-color", "var(--secondary-color)");
+	$("#edit-room-device-card").css("border-color", "var(--secondary-color)");
+	$("#edit-room-device-pin").css("border-color", "var(--secondary-color)");
 
 	$("#edit-room-device-type-error").hide();
 	$("#edit-room-device-card-error").hide();
@@ -3656,7 +4113,7 @@ function DisplayUsersListUsersSection()
 
 			for (var i = 0; i < len; i++)
 			{
-				$("#users #users-list table tbody").append("<tr id='"+response[i].username+"' class='uk-animation-scale-down uk-text-center'><td>"+response[i].name+"</td><td><img src='../images/icons/edit.png' width='20' height='20'></td><td><img src='../images/icons/remove.png' width='20' height='20'></td></tr>");
+				$("#users #users-list table tbody").append("<tr id='"+response[i].username+"' class='uk-animation-scale-down uk-text-center'><td>"+response[i].name+"</td><td><img class='edit' src='../images/icons/edit.png' width='20' height='20'></td><td><img class='delete' src='../images/icons/remove.png' width='20' height='20'></td></tr>");
 			}
 		}
 		else
@@ -3670,6 +4127,46 @@ function DisplayUsersListUsersSection()
 		$("#users #users-list table").append("<thead><tr class='uk-animation-scale-down uk-text-center'><th style='border: 1px solid var(--secondary-color); border-radius: .25rem; color: #C0392B;'><img src='../images/icons/error.png' width='40' height='40'><br><br>Failed to Load Users !</th></tr></thead>");
 	}); 
 }
+/* Reset Add User Modal Function */
+function ResetAddUserModal()
+{
+	$("#add-user-login").val("");
+	$("#add-user-password").val("");
+	$("#add-user-fname").val("");
+	$("#add-user-lname").val("");
+
+	$("#add-user-login").css("border-color", "var(--secondary-color)");
+	$("#add-user-password").css("border-color", "var(--secondary-color)");
+	$("#add-user-fname").css("border-color", "var(--secondary-color)");
+	$("#add-user-lname").css("border-color", "var(--secondary-color)");
+
+	$("#add-user-login-error").hide();
+	$("#add-user-password-error").hide();
+	$("#add-user-fname-error").hide();
+	$("#add-user-lname-error").hide();
+
+	$("#modal-add-user #add-user-permissions").empty();
+}
+/* Reset Edit User Modal Function */
+function ResetEditUserModal()
+{
+	$("#edit-user-login").val("");
+	$("#edit-user-password").val("");
+	$("#edit-user-fname").val("");
+	$("#edit-user-lname").val("");
+
+	$("#edit-user-login").css("border-color", "var(--secondary-color)");
+	$("#edit-user-password").css("border-color", "var(--secondary-color)");
+	$("#edit-user-fname").css("border-color", "var(--secondary-color)");
+	$("#edit-user-lname").css("border-color", "var(--secondary-color)");
+
+	$("#edit-user-login-error").hide();
+	$("#edit-user-password-error").hide();
+	$("#edit-user-fname-error").hide();
+	$("#edit-user-lname-error").hide();
+
+	$("#modal-edit-user #edit-user-permissions").empty();
+}
 /*==================================================
 		Settings Section Functions
 ==================================================*/
@@ -3680,11 +4177,11 @@ function ResetSettingsAccountForm()
 	$("#setting-new-password").val("");
 	$("#setting-confirm-new-password").val("");
 
-	$("#setting-fname").css("border", "1px solid var(--secondary-color)");
-	$("#setting-lname").css("border", "1px solid var(--secondary-color)");
-	$("#setting-old-password").css("border", "1px solid var(--secondary-color)");
-	$("#setting-new-password").css("border", "1px solid var(--secondary-color)");
-	$("#setting-confirm-new-password").css("border", "1px solid var(--secondary-color)");
+	$("#setting-fname").css("border-color", "var(--secondary-color)");
+	$("#setting-lname").css("border-color", "var(--secondary-color)");
+	$("#setting-old-password").css("border-color", "var(--secondary-color)");
+	$("#setting-new-password").css("border-color", "var(--secondary-color)");
+	$("#setting-confirm-new-password").css("border-color", "var(--secondary-color)");
 
 	$("#setting-fname-error").hide();
 	$("#setting-lname-error").hide();

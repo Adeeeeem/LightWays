@@ -1041,7 +1041,10 @@
 					<div class="uk-margin">
 						<label class="uk-form-label" for="add-user-login">Login</label>
 						<div class="uk-form-controls">
-							<input id="add-user-login" class="uk-input" type="text" placeholder="Login">
+							<div class="uk-inline uk-width-1-1">
+								<span class="uk-form-icon" uk-icon="icon: credit-card"></span>
+								<input id="add-user-login" class="uk-input" type="text" placeholder="Login">
+							</div>
 						</div>
 						<div class=" uk-animation-toggle">
 							<div class="uk-animation-shake">
@@ -1053,7 +1056,10 @@
 					<div class="uk-margin">
 						<label class="uk-form-label" for="add-user-password">Password</label>
 						<div class="uk-form-controls">
-							<input id="add-user-password" class="uk-input" type="text" placeholder="Password">
+							<div class="uk-inline uk-width-1-1">
+								<span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: lock"></span>
+								<input id="add-user-password" class="uk-input" type="text" placeholder="Password">
+							</div>
 						</div>
 						<div class=" uk-animation-toggle">
 							<div class="uk-animation-shake">
@@ -1065,7 +1071,10 @@
 					<div class="uk-margin">
 						<label class="uk-form-label" for="add-user-fname">First Name</label>
 						<div class="uk-form-controls">
-							<input id="add-user-fname" class="uk-input" type="text" placeholder="First Name">
+							<div class="uk-inline uk-width-1-1">
+								<span class="uk-form-icon" uk-icon="icon: user"></span>
+								<input id="add-user-fname" class="uk-input" type="text" placeholder="First Name">
+							</div>
 						</div>
 						<div class=" uk-animation-toggle">
 							<div class="uk-animation-shake">
@@ -1077,7 +1086,10 @@
 					<div class="uk-margin">
 						<label class="uk-form-label" for="add-user-lname">Last Name</label>
 						<div class="uk-form-controls">
-							<input id="add-user-lname" class="uk-input" type="text" placeholder="Last Name">
+							<div class="uk-inline uk-width-1-1">
+								<span class="uk-form-icon" uk-icon="icon: user"></span>
+								<input id="add-user-lname" class="uk-input" type="text" placeholder="Last Name">
+							</div>
 						</div>
 						<div class=" uk-animation-toggle">
 							<div class="uk-animation-shake">
@@ -1101,6 +1113,112 @@
 					</div>
 				</div>
 			</form>
+		</div>
+	</div>
+	<!-- Edit User Modal -->
+	<div id="modal-edit-user" class="modal" uk-modal="bg-close: false; keyboard: false; escClose: false; modal: false">
+		<div class="uk-modal-dialog uk-margin-auto-vertical">
+			<!-- Title -->
+			<div class="uk-modal-header uk-text-center">
+				<h2 class="uk-modal-title">Edit User</h2>
+			</div>
+			<!-- Form -->
+			<form class="uk-form-stacked">
+				<div class="uk-modal-body">
+					<!-- User Login -->
+					<div class="uk-margin">
+						<label class="uk-form-label" for="edit-user-login">Login</label>
+						<div class="uk-form-controls">
+							<div class="uk-inline uk-width-1-1">
+								<span class="uk-form-icon" uk-icon="icon: credit-card"></span>
+								<input id="edit-user-login" class="uk-input" type="text" placeholder="Login">
+							</div>
+						</div>
+						<div class=" uk-animation-toggle">
+							<div class="uk-animation-shake">
+								<small id="edit-user-login-error" class="error">User Login Can't be Empty !</small>
+							</div>
+						</div>
+					</div>
+					<!-- User Password -->
+					<div class="uk-margin">
+						<label class="uk-form-label" for="edit-user-password">Password</label>
+						<div class="uk-form-controls">
+							<div class="uk-inline uk-width-1-1">
+								<span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: lock"></span>
+								<input id="edit-user-password" class="uk-input" type="text" placeholder="Password">
+							</div>
+						</div>
+						<div class=" uk-animation-toggle">
+							<div class="uk-animation-shake">
+								<small id="edit-user-password-error" class="error">User Password Can't be Empty !</small>
+							</div>
+						</div>
+					</div>
+					<!-- User First Name -->
+					<div class="uk-margin">
+						<label class="uk-form-label" for="edit-user-fname">First Name</label>
+						<div class="uk-form-controls">
+							<div class="uk-inline uk-width-1-1">
+								<span class="uk-form-icon" uk-icon="icon: user"></span>
+								<input id="edit-user-fname" class="uk-input" type="text" placeholder="First Name">
+							</div>
+						</div>
+						<div class=" uk-animation-toggle">
+							<div class="uk-animation-shake">
+								<small id="edit-user-fname-error" class="error">User First Name Can't be Empty !</small>
+							</div>
+						</div>
+					</div>
+					<!-- User Last Name -->
+					<div class="uk-margin">
+						<label class="uk-form-label" for="edit-user-lname">Last Name</label>
+						<div class="uk-form-controls">
+							<div class="uk-inline uk-width-1-1">
+								<span class="uk-form-icon" uk-icon="icon: user"></span>
+								<input id="edit-user-lname" class="uk-input" type="text" placeholder="Last Name">
+							</div>
+						</div>
+						<div class=" uk-animation-toggle">
+							<div class="uk-animation-shake">
+								<small id="edit-user-lname-error" class="error">User Last Name Can't be Empty !</small>
+							</div>
+						</div>
+					</div>
+					<!-- User Permissions -->
+					<div class="uk-margin">
+						<label class="uk-form-label">Permissions</label>
+						<div id="edit-user-permissions" class="uk-form-controls">
+							<!-- Data Will be Loaded From JavaScript -->
+						</div>
+					</div>
+				</div>
+				<!-- Footer Buttons -->
+				<div class="uk-modal-footer uk-text-right">
+					<div class="uk-button-group uk-width-1-1">
+						<button class="uk-button uk-width-1-1 uk-modal-close" type="button">Cancel</button>
+						<button id="edit-user-confirm-btn" class="uk-button uk-width-1-1" type="button">Save</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+	<!-- Delete User Modal -->
+	<div id="modal-delete-user" class="modal" uk-modal="stack: true">
+		<div class="uk-modal-dialog uk-margin-auto-vertical">
+			<!-- Body -->
+			<div class="uk-modal-body uk-text-center">
+				<img src="../images/icons/caution.png" width="50" height="50">
+				<h2 class="uk-modal-title">Are you Sure you want to<br>Delete the User <span></span> ?</h2>
+				<h5>This will Permanently Erase the Account.<br>You can't undo this action</h5>
+			</div>
+			<!-- Footer Buttons -->
+			<div class="uk-modal-footer uk-text-right">
+				<div class="uk-button-group uk-width-1-1">
+					<button class="uk-button uk-width-1-1 uk-modal-close" type="button">Cancel</button>
+					<button id="delete-user-confirm-btn" class="uk-button uk-width-1-1" type="button">Yes, Delete it !</button>
+				</div>
+			</div>
 		</div>
 	</div>
 </body>
