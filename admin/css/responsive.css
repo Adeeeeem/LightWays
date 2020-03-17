@@ -69,6 +69,10 @@
 	=========================*/
 	#settings form{margin-top: 75px!important; width: 60%;}
 	#settings #setting-language{width: 206px;}
+	/*=========================
+			Support
+	=========================*/
+	#support div.rights{margin-left: 200px;}
 }
 /* Small Devices */
 @media (min-width: 768px) and (max-width: 991px)
@@ -143,6 +147,10 @@
 	=========================*/
 	#settings form{margin-top: 60px!important; width: 80%;}
 	#settings #setting-language{width: 206px;}
+	/*=========================
+			Support
+	=========================*/
+	#support div.rights{margin-left: 200px;}
 }
 /* Extra Small Devices */
 @media (max-width: 767px)
@@ -227,6 +235,10 @@
 	/* Save & Cancel Buttons */
 	#settings div.setting-cancel-btn{padding-right: 20px !important;}
 	#settings div.setting-save-btn{padding-left: 20px !important;}
+	/*=========================
+			Support
+	=========================*/
+	#support div.rights{margin-left: 0;}
 }
 /* Extra X-Small Devices */
 @media (max-width: 480px)

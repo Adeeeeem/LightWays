@@ -283,3 +283,11 @@
 #settings button.uk-button-text::before{border-bottom: 2px solid var(--orange-color);}
 #settings div.setting-cancel-btn{padding-right: 50px !important;}
 #settings div.setting-save-btn{padding-left: 50px !important;}
+/*=========================
+		Support
+=========================*/
+#support h4{font-size: 0.9rem; margin-left: 15px; margin-bottom: 5px; color: var(--text-color);}
+#support span.light{color: var(--orange-color);}
+#support span.ways{color: var(--blue-color);}
+#support div.rights{background-color: var(--primary-color); padding: 10px; line-height: 1; margin-left: 250px;}
+#support div.rights h5{margin-bottom: 0; color: var(--text-color); font-size: 0.8rem;}
