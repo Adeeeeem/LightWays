@@ -41,7 +41,7 @@
 #lights form label{color: var(--blue-color); padding-bottom: 0 !important; margin-bottom: 0 !important; padding-left: 6rem;}
 #lights form div.uk-form-controls{text-align: center !important;}
 #lights form select{width: 65%; border: none; background-color: transparent; border: none; padding: 0; margin-top: -5px !important;}
-#lights hr.select-hr{background-position: 60%; max-width: 60%; margin-top: -5px; background-image: radial-gradient(closest-side, var(--secondary-color), hsla(232, 18%, 69%, 0) 150%); height: 1px;}
+#lights hr.select-hr{background-position: 60%; max-width: 60%; margin-top: -5px; background-image: radial-gradient(closest-side, var(--secondary-color), hsla(232, 18%, 69%, 0.2) 150%); height: 2px;}
 #lights #lights-room{margin-top: -45px !important;}
 #lights #lights-room-name{font-size: 1.5rem !important; letter-spacing: 1px; margin-bottom: 0; margin-top: -20px; color: var(--text-color);}
 #lights #lights-room-devices-number{padding: 0 !important; margin: 0 !important; color: var(--orange-color); font-size: 0.8rem;}
@@ -93,7 +93,7 @@
 #modal-add-group div.add-group-search-room div{padding: 0; margin: 0;}
 #modal-add-group div.add-group-search-room label{color: var(--blue-color); padding-left: 0.5rem; margin-bottom: 0 !important; font-size: 10px;}
 #modal-add-group #add-group-search-floor, #modal-add-group #add-group-search-room{background-color: transparent; border: none;}
-#modal-add-group hr.select-hr{background-position: 85%; max-width: 85%; margin-top: -5px; background-image: radial-gradient(closest-side, var(--secondary-color), hsla(232, 18%, 69%, 0) 150%); height: 1px;}
+#modal-add-group hr.select-hr{background-position: 85%; max-width: 85%; margin-top: -5px; background-image: radial-gradient(closest-side, var(--secondary-color), hsla(232, 18%, 69%, 0) 150%); height: 2px;}
 #modal-add-group #add-group-room table{border: 1px solid var(--secondary-color); border-radius: .25rem; padding: 10px; border-collapse: separate;}
 #modal-add-group #add-group-room table td{padding: 0 !important;}
 #modal-add-group #add-group-room table td div{padding: 7px !important;}
@@ -102,7 +102,7 @@
 #modal-edit-group div.edit-group-search-room div{padding: 0; margin: 0;}
 #modal-edit-group div.edit-group-search-room label{color: var(--blue-color); padding-left: 0.5rem; margin-bottom: 0 !important; font-size: 10px;}
 #modal-edit-group #edit-group-search-floor, #modal-edit-group #edit-group-search-room{background-color: transparent; border: none;}
-#modal-edit-group hr.select-hr{background-position: 85%; max-width: 85%; margin-top: -5px; background-image: radial-gradient(closest-side, var(--secondary-color), hsla(232, 18%, 69%, 0) 150%); height: 1px;}
+#modal-edit-group hr.select-hr{background-position: 85%; max-width: 85%; margin-top: -5px; background-image: radial-gradient(closest-side, var(--secondary-color), hsla(232, 18%, 69%, 0) 150%); height: 2px;}
 #modal-edit-group #edit-group-room table{border: 1px solid var(--secondary-color); border-radius: .25rem; padding: 10px; border-collapse: separate;}
 #modal-edit-group #edit-group-room table td{padding: 0 !important;}
 #modal-edit-group #edit-group-room table td div{padding: 7px !important;}
@@ -214,7 +214,7 @@
 #modal-edit-room div.edit-room-search-floor div{padding: 0; margin: 0;}
 #modal-edit-room div.edit-room-search-floor label{color: var(--blue-color); padding-left: 0.5rem; margin-bottom: 0 !important; font-size: 10px;}
 #modal-edit-room #edit-room-search-floor{background-color: transparent; border: none;}
-#modal-edit-room hr.select-hr{background-position: 85%; max-width: 85%; margin-top: -5px; background-image: radial-gradient(closest-side, var(--secondary-color), hsla(232, 18%, 69%, 0) 150%); height: 1px;}
+#modal-edit-room hr.select-hr{background-position: 85%; max-width: 85%; margin-top: -5px; background-image: radial-gradient(closest-side, var(--secondary-color), hsla(232, 18%, 69%, 0) 150%); height: 2px;}
 #modal-edit-room table#edit-room-room-devices{border: 1px solid var(--secondary-color); border-radius: .25rem; padding: 10px; border-collapse: separate; margin-top: 20px;}
 #modal-edit-room table#edit-room-room-devices td{padding: 0 !important;}
 #modal-edit-room table#edit-room-room-devices td div{padding: 2px !important;}
@@ -242,7 +242,7 @@
 #users #add-user-btn{background-color: transparent; text-transform: uppercase; letter-spacing: 1px; font-size: 13px !important;}
 #users #add-user-btn img{margin-top: -4px; margin-right: 4px !important;}
 #users hr{border: 0; margin: 0.25em auto; max-width: 100%; background-position: 50%; box-sizing: border-box; height: 2px; background-image: radial-gradient(closest-side, hsla(232, 18%, 69%, 1.0),  hsla(232, 18%, 69%, 0) 100%); position: relative;}
-#users #users-list{height: calc(110vh - 225px); overflow-y: auto; overflow-x: hidden;}
+#users #users-list{height: calc(110vh - 225px); overflow-y: auto; overflow-x: hidden; line-height: 1;}
 /* Display Users Table */
 #users table{border-radius: .25rem; padding: 10px; border-collapse: separate; margin-top: 20px;}
 #users table th{padding: 12px 8px;}
@@ -263,10 +263,22 @@
 #modal-delete-user button.uk-modal-close{background-color: #C0392B; color: #FFFFFF;}
 #modal-delete-user button#delete-user-confirm-btn{background-color: #2ECC71; color: #FFFFFF;}
 /*=========================
+		History
+=========================*/
+#history input{width: 95%;}
+#history #search-history{background-color: var(--primary-color); color: #FFFFFF; padding: 0; border-radius: 0.25rem; height: 25px; line-height: 1; font-size: 0.7rem;}
+#history *+.uk-grid-margin, #history .uk-grid+.uk-grid, #history .uk-grid>.uk-grid-margin{margin-top: 15px !important;}
+#history hr{border: 0; margin: 0.25em auto; max-width: 100%; background-position: 50%; box-sizing: border-box; height: 2px; background-image: radial-gradient(closest-side, hsla(232, 18%, 69%, 1.0),  hsla(232, 18%, 69%, 0) 100%); position: relative; margin-top: 15px;}
+#history #history-list{height: calc(110vh - 300px); padding-left: 50px; padding-right: 50px; overflow-y: auto; overflow-x: hidden;}
+/* Display History Table */
+#history table{border-radius: .25rem; padding: 10px; border-collapse: separate; margin-top: 20px;}
+#history table th{padding: 12px 8px;}
+#history table td{border-bottom: 1px solid var(--primary-color); font-size: 0.9rem; padding: 10px;}
+/*=========================
 		Settings
 =========================*/
 #settings form{margin-top: 100px!important; width: 60%;}
-#settings hr{background-position: 85%; max-width: 85%; margin-top: -5px; background-image: radial-gradient(closest-side, var(--secondary-color), hsla(232, 18%, 69%, 0) 150%); height: 1px;}
+#settings hr{background-position: 85%; max-width: 85%; margin-top: -5px; background-image: radial-gradient(closest-side, var(--secondary-color), hsla(232, 18%, 69%, 0) 150%); height: 2px;}
 #settings div.change-name-title, #settings div.change-password-title, #settings div.preference-title{font-size: 0.8rem; color: var(--secondary-color);}
 #settings #setting-language{border: 1px solid var(--secondary-color); width: 228px;}
 /* Dark Theme Button */

@@ -191,7 +191,7 @@ $(function()
 					// Change Status to OFF
 					$(device).removeClass("ON");
 					$(device).addClass("OFF");
-					$(device).css({"background-color": "var(--device-color)", "border-color": "var(--text-color)"});
+					$(device).css("background-color", "var(--device-color)");
 					// Change Icon
 					image = image.replace("_ON", "_OFF");
 				}
@@ -500,6 +500,11 @@ $(function()
 						var devices = response.devices;
 						var room = response.room;
 						var bgcolor = "var(--secondary-color)";
+
+						if($("#groups #groups-list").find("article").length == 0)
+						{
+							$("#groups #groups-list").empty();
+						}
 
 						// Add to Groups List in Groups Section
 						$("#groups #groups-list").prepend("<article id='"+id+"' class='uk-comment group-details uk-margin-small-top uk-animation-scale-down'><header class='uk-comment-header uk-grid-medium uk-flex-middle uk-margin-small-left uk-margin-small-right' uk-grid><div class='uk-width-expand'><h4 class='uk-comment-title uk-margin-remove' style='color: "+bgcolor+";'>"+name+"</h4><h6 class='uk-comment-meta uk-margin-remove-top'>"+devices+" <span class='translate' key='Devices'>Devices</span></h6></div><div class='uk-width-auto uk-text-right uk-margin-small-right'><label class='uk-switch'><input type='checkbox' class='control-group-button'><div class='uk-switch-slider'></div></label></div></header></article>");
@@ -2322,35 +2327,6 @@ $(function()
 								$("#modal-add-user li#"+response[i].floor+".floor-permissions ul.floor-permissions-inner").append("<li id='"+response[i].room+"' class='room-permissions'><label><input class='uk-checkbox room-permissions-input' type='checkbox'> "+response[i].name+"</label><ul class='room-permissions-inner'></ul></li>");
 							}
 						}
-
-						// Load Groups
-						/*$.ajax
-						({
-							url: "../php/groups_permissions_list.php",
-							type: "POST",
-							dataType: "json",
-						})
-						.done(function(response)
-						{
-							var len = response.length;
-
-							if (len != 0)
-							{
-								for (var i = 0; i < len; i++)
-								{
-									if (response[i].id != null)
-									{
-										$("#modal-add-user li#"+response[i].room+".room-permissions ul.room-permissions-inner").append("<li id='"+response[i].id+"' class='group-permissions'><label><input class='uk-checkbox group-permissions-input' type='checkbox'> "+response[i].name+"</label></li>");
-									}
-								}
-							}
-						})
-						.fail(function()
-						{
-							$.growl.error({ message: "Failed to Load Data !" });
-							$("#modal-add-user #add-user-permissions").empty();
-							$("#modal-add-user #add-user-permissions").append("<table><tr class='uk-animation-scale-down uk-text-center'><tr class='uk-animation-scale-down uk-text-center'><th style='color: #C0392B;'><img src='../images/icons/error.png' width='40' height='40'><br><br>Failed to Load Data !</th></tr></table>");
-						});*/
 					}
 				})
 				.fail(function()
@@ -2397,36 +2373,6 @@ $(function()
 			$("#modal-add-user li#"+floor+".floor-permissions input:checkbox:lt(1)").prop("checked", false);
 		}
 	});
-
-	/*$("#modal-add-user #add-user-permissions").on("change", "input.group-permissions-input", function()
-	{
-		var self = $(this);
-		var id = self.parent().parent().attr("id");
-		var room = self.parent().parent().parent().parent().attr("id");
-		var floor = self.parent().parent().parent().parent().parent().parent().attr("id");
-
-		if (self.is(":checked"))
-		{
-			$("#modal-add-user li#"+room+".room-permissions input:checkbox:lt(1)").prop("checked", true);
-			$("#modal-add-user li#"+floor+".floor-permissions input:checkbox:lt(1)").prop("checked", true);
-		}
-		else
-		{
-			if ($("#modal-add-user li#"+floor+".floor-permissions ul.floor-permissions-inner input[type=checkbox]:checked").length == 0)
-			{
-				$("#modal-add-user li#"+room+".room-permissions input:checkbox:lt(1)").prop("checked", false);
-				$("#modal-add-user li#"+floor+".floor-permissions input:checkbox:lt(1)").prop("checked", false);
-			}
-			else
-			{
-				if ($("#modal-add-user li#"+room+".room-permissions ul.room-permissions-inner input[type=checkbox]:checked").length == 0)
-				{
-					$("#modal-add-user li#"+room+".room-permissions input:checkbox:lt(1)").prop("checked", false);
-					$("#modal-add-user li#"+floor+".floor-permissions input:checkbox:lt(1)").prop("checked", false);
-				}
-			}
-		}
-	});*/
 
 	var PermissionsList = [];
 	var TypeList = [];
@@ -2874,6 +2820,140 @@ $(function()
 		{
 			UIkit.modal("#modal-delete-user").hide(); // Hide Modal
 			$.growl.error({ message: "Failed to Delete the User <span style='color: var(--secondary-color)'>"+$("#users-list tr#"+login+" td:first-child").html()+"</span>, Please Try Again !" });
+		});
+	});
+});
+/*=========================
+		History
+=========================*/
+/* Load Users into Users List */
+$(window).on("load", function()
+{
+	LoadHistory();
+
+	$("#history-btn, #mobile-history-btn").click(function()
+	{
+		LoadHistory();
+	});
+});
+/* Load History into Website by Searching */
+$(function()
+{
+	$("#search-history").click(function(e)
+	{
+		e.preventDefault();
+
+		var start_date = $("#history-start-date").val();
+		var end_date = $("#history-end-date").val();
+		var start_time = $("#history-start-time").val();
+		var end_time = $("#history-end-time").val();
+
+		$.ajax
+		({
+			url: "../php/search_history.php",
+			type: "POST",
+			dataType: "json",
+			data: {start_date: start_date, end_date: end_date, start_time: start_time, end_time: end_time},
+		})
+		.done(function(response)
+		{
+			// Empty The Hisotry List
+			$("#history #history-list table").empty();
+
+			var len = response.length;
+
+			if (len != 0)
+			{
+				$("#history #history-list table").append("<thead><tr class='uk-animation-scale-down uk-text-center'><th>Login</th><th>Date</th><th>Time</th><th>History</th></thead><tbody></tbody>");
+
+				for (var i = 0; i < len; i++)
+				{
+					var history = "";
+
+					switch (response[i].type)
+					{
+						case "CONNECT":
+								history = "<span style='color: var(--blue-color);'>"+response[i].opt+"</span> Connected";
+							break;
+						case "DISCONNECT":
+								history = "<span style='color: var(--blue-color);'>"+response[i].opt+"</span> Disconnected";
+							break;
+						case "ON":
+								switch (response[i].data)
+								{
+									case "DEVICE":
+										history = "Turned on Device in <span style='color: var(--blue-color);'>"+response[i].opt+"</span> Room";
+									break;
+									case "GROUP":
+										history = "Turned on <span style='color: var(--blue-color);'>"+response[i].opt+"</span> Group";
+									break;
+								}
+							break;
+						case "OFF":
+								switch (response[i].data)
+								{
+									case "DEVICE":
+										history = "Turned off Device in <span style='color: var(--blue-color);'>"+response[i].opt+"</span> Room";
+									break;
+									case "GROUP":
+										history = "Turned off <span style='color: var(--blue-color);'>"+response[i].opt+"</span> Group";
+									break;
+								}
+							break;
+						case "ADD":
+								switch (response[i].data)
+								{
+									case "USER":
+										history = "Added New User <span style='color: var(--blue-color);'>"+response[i].opt+"</span>";
+									break;
+									case "CARD":
+										history = "Added New Card <span style='color: var(--blue-color);'>"+response[i].opt+"</span>";
+									break;
+									case "FLOOR":
+										history = "Added New Floor <span style='color: var(--blue-color);'>"+response[i].opt+"</span>";
+									break;
+									case "ROOM":
+										history = "Added New Room <span style='color: var(--blue-color);'>"+response[i].opt+"</span>";
+									break;
+									case "GROUP":
+										history = "Added New Group <span style='color: var(--blue-color);'>"+response[i].opt+"</span>";
+									break;
+								}
+							break;
+						case "DELETE":
+								switch (response[i].data)
+								{
+									case "USER":
+										history = "Deleted User <span style='color: var(--blue-color);'>"+response[i].opt+"</span>";
+									break;
+									case "CARD":
+										history = "Deleted Card <span style='color: var(--blue-color);'>"+response[i].opt+"</span>";
+									break;
+									case "FLOOR":
+										history = "Deleted Floor <span style='color: var(--blue-color);'>"+response[i].opt+"</span>";
+									break;
+									case "ROOM":
+										history = "Deleted Room <span style='color: var(--blue-color);'>"+response[i].opt+"</span>";
+									break;
+									case "GROUP":
+										history = "Deleted Group <span style='color: var(--blue-color);'>"+response[i].opt+"</span>";
+									break;
+								}
+							break;
+					}
+
+					$("#history #history-list table tbody").append("<tr class='uk-animation-scale-down uk-text-center'><td>"+response[i].user+"</td><td>"+ConverteDateFormat(response[i].date)+"</td><td>"+response[i].time+"</td><td>"+history+"</td></tr>");
+				}	
+			}
+			else
+			{
+				$("#history #history-list table").append("<thead><tr class='uk-animation-scale-down uk-text-center'><th style='border: 1px solid var(--secondary-color); border-radius: .25rem;'><img src='../images/icons/notfound.png' width='40' height='40'><br><br>No History Found !</th></tr></thead>");
+			}
+		})
+		.fail(function()
+		{
+			$("#history #history-list table").empty();
+			$("#history #history-list table").append("<thead><tr class='uk-animation-scale-down uk-text-center'><th style='border: 1px solid var(--secondary-color); border-radius: .25rem; color: #C0392B;'><img src='../images/icons/error.png' width='40' height='40'><br><br>Failed to Load Hisotry !</th></tr></thead>");
 		});
 	});
 });
@@ -3401,6 +3481,8 @@ function LoadGroupsLightsSection(room)
 	{
 		var len = response.length;
 
+		$("#lights table#lights-room-devices tbody img").css("border-color", "var(--text-color)");
+
 		if (len != 0)
 		{
 			$("#lights #lights-room-groups").empty(); // Empty Groups
@@ -3410,10 +3492,8 @@ function LoadGroupsLightsSection(room)
 
 			for (var i = 0; i < len; i++)
 			{
-				if (response[i].status == "ON")
-				{
-					$("#lights table#lights-room-devices tbody img#"+response[i].device+".ON").css({"background-color": "#FFCC00", "border-color": ""+response[i].color});
-				}
+				
+				$("#lights table#lights-room-devices tbody img#"+response[i].device).css("border-color", response[i].color);
 
 				if (!groups.includes(response[i].name))
 				{
@@ -3543,58 +3623,57 @@ function GroupStatus(group, status, flag)
 		var opposite = "ON";
 	}
 
-	// Turn on or off the Lights
-	$.ajax
-	({
-		url: "../php/group_status.php",
-		type: "POST",
-		dataType: "json",
-		data: {group: group, status: status}
-	})
-	.done(function(response)
+	if (flag)
 	{
-		var len = response.length;
-
-		if (len != 0)
+		// Turn on or off the Lights
+		$.ajax
+		({
+			url: "../php/group_status.php",
+			type: "POST",
+			dataType: "json",
+			data: {group: group, status: status}
+		})
+		.done(function(response)
 		{
-			for (var i = 0; i < len; i++)
+			var len = response.length;
+
+			if (len != 0)
 			{
-				var device = $("#lights table#lights-room-devices img#"+response[i].id);
+				for (var i = 0; i < len; i++)
+				{
+					var device = $("#lights table#lights-room-devices img#"+response[i].id);
 
-				if ($(device).attr("class") == opposite)
-				{
-					// Change Status to status
-					$(device).removeClass(opposite);
-					$(device).addClass(status);
-					// Change Icon
-					image = $(device).attr("src");
-					image = image.replace("_"+opposite, "_"+status);
-					$(device).attr("src", image);
-				}
+					if ($(device).attr("class") == opposite)
+					{
+						// Change Status to status
+						$(device).removeClass(opposite);
+						$(device).addClass(status);
+						// Change Icon
+						image = $(device).attr("src");
+						image = image.replace("_"+opposite, "_"+status);
+						$(device).attr("src", image);
+					}
 
-				if ($(device).attr("class") == "ON")
-				{
-					$(device).css({"background-color": "#FFCC00", "border-color": ""+response[i].color});
-				}
-				else
-				{
-					$(device).css("background-color", "var(--device-color)");
-					$(device).css({"background-color": "var(--device-color)", "border-color": "var(--text-color)"});
+					if ($(device).attr("class") == "ON")
+					{
+						$(device).css("background-color", "#FFCC00");
+					}
+					else
+					{
+						$(device).css("background-color", "var(--device-color)");
+					}
 				}
 			}
-		}
-		else
-		{
-			if (flag)
+			else
 			{
 				$.growl({ title: "This Group Has no Devices.", message: "Make Sure You Add Devices!" });
 			}
-		}
-	})
-	.fail(function()
-	{
-			$.growl.error({ message: "Failed to Change Group Status !" });
-	});
+		})
+		.fail(function()
+		{
+				$.growl.error({ message: "Failed to Change Group Status !" });
+		});
+	}
 }
 /* Load Rooms Related to a Floor Function Add Group Modal */
 function LoadRoomsAddGroupsSection(floor)
@@ -4166,6 +4245,126 @@ function ResetEditUserModal()
 	$("#edit-user-lname-error").hide();
 
 	$("#modal-edit-user #edit-user-permissions").empty();
+}
+/*==================================================
+		Hisotry Section Functions
+==================================================*/
+/* Load Hisotry */
+function LoadHistory()
+{
+	$.ajax
+	({
+		url: "../php/history.php",
+		type: "POST",
+		dataType: "json",
+	})
+	.done(function(response)
+	{
+		// Empty The Hisotry List
+		$("#history #history-list table").empty();
+
+		var len = response.length;
+
+		if (len != 0)
+		{
+			$("#history #history-list table").append("<thead><tr class='uk-animation-scale-down uk-text-center'><th>Login</th><th>Date</th><th>Time</th><th>History</th></thead><tbody></tbody>");
+
+			for (var i = 0; i < len; i++)
+			{
+				var history = "";
+
+				switch (response[i].type)
+				{
+					case "CONNECT":
+							history = "<span style='color: var(--blue-color);'>"+response[i].opt+"</span> Connected";
+						break;
+					case "DISCONNECT":
+							history = "<span style='color: var(--blue-color);'>"+response[i].opt+"</span> Disconnected";
+						break;
+					case "ON":
+							switch (response[i].data)
+							{
+								case "DEVICE":
+									history = "Turned on Device in <span style='color: var(--blue-color);'>"+response[i].opt+"</span> Room";
+								break;
+								case "GROUP":
+									history = "Turned on <span style='color: var(--blue-color);'>"+response[i].opt+"</span> Group";
+								break;
+							}
+						break;
+					case "OFF":
+							switch (response[i].data)
+							{
+								case "DEVICE":
+									history = "Turned off Device in <span style='color: var(--blue-color);'>"+response[i].opt+"</span> Room";
+								break;
+								case "GROUP":
+									history = "Turned off <span style='color: var(--blue-color);'>"+response[i].opt+"</span> Group";
+								break;
+							}
+						break;
+					case "ADD":
+							switch (response[i].data)
+							{
+								case "USER":
+									history = "Added New User <span style='color: var(--blue-color);'>"+response[i].opt+"</span>";
+								break;
+								case "CARD":
+									history = "Added New Card <span style='color: var(--blue-color);'>"+response[i].opt+"</span>";
+								break;
+								case "FLOOR":
+									history = "Added New Floor <span style='color: var(--blue-color);'>"+response[i].opt+"</span>";
+								break;
+								case "ROOM":
+									history = "Added New Room <span style='color: var(--blue-color);'>"+response[i].opt+"</span>";
+								break;
+								case "GROUP":
+									history = "Added New Group <span style='color: var(--blue-color);'>"+response[i].opt+"</span>";
+								break;
+							}
+						break;
+					case "DELETE":
+							switch (response[i].data)
+							{
+								case "USER":
+									history = "Deleted User <span style='color: var(--blue-color);'>"+response[i].opt+"</span>";
+								break;
+								case "CARD":
+									history = "Deleted Card <span style='color: var(--blue-color);'>"+response[i].opt+"</span>";
+								break;
+								case "FLOOR":
+									history = "Deleted Floor <span style='color: var(--blue-color);'>"+response[i].opt+"</span>";
+								break;
+								case "ROOM":
+									history = "Deleted Room <span style='color: var(--blue-color);'>"+response[i].opt+"</span>";
+								break;
+								case "GROUP":
+									history = "Deleted Group <span style='color: var(--blue-color);'>"+response[i].opt+"</span>";
+								break;
+							}
+						break;
+				}
+
+				$("#history #history-list table tbody").append("<tr class='uk-animation-scale-down uk-text-center'><td>"+response[i].user+"</td><td>"+ConverteDateFormat(response[i].date)+"</td><td>"+response[i].time+"</td><td>"+history+"</td></tr>");
+			}
+		}
+		else
+		{
+			$("#history #history-list table").append("<thead><tr class='uk-animation-scale-down uk-text-center'><th style='border: 1px solid var(--secondary-color); border-radius: .25rem;'><img src='../images/icons/notfound.png' width='40' height='40'><br><br>No History Found !</th></tr></thead>");
+		}
+	})
+	.fail(function()
+	{
+		$("#history #history-list table").empty();
+		$("#history #history-list table").append("<thead><tr class='uk-animation-scale-down uk-text-center'><th style='border: 1px solid var(--secondary-color); border-radius: .25rem; color: #C0392B;'><img src='../images/icons/error.png' width='40' height='40'><br><br>Failed to Load Hisotry !</th></tr></thead>");
+	});
+}
+/* Convert Date Format From YYYY-MM-DD to DD/MM/YYYY */
+function ConverteDateFormat(date)
+{
+	var d = date.split(/\D/g);
+
+	return [d[2],d[1],d[0] ].join("/");
 }
 /*==================================================
 		Settings Section Functions

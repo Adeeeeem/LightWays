@@ -244,7 +244,53 @@
 		</div>
 		<!-- History Section -->
 		<div id="history" class="uk-margin-medium-top uk-animation-fade">
-			cc
+			<form uk-grid>
+				<!-- Search History by Date -->
+				<div class="uk-width-1-2@s">
+					<div class="uk-grid">
+						<div class="uk-width-1-2">
+							<div class="uk-margin">
+								<div class="uk-text-left"><label class="uk-form-label" for="history-start-date">Start Date</label></div>
+								<input id="history-start-date" class="uk-input" type="date">
+							</div>
+						</div>
+						<div class="uk-width-1-2">
+							<div class="uk-margin">
+								<div class="uk-text-left"><label class="uk-form-label" for="history-end-date">End Date</label></div>
+								<input id="history-end-date" class="uk-input" type="date">
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- Search History by Time -->
+				<div class="uk-width-1-2@s">
+					<div class="uk-grid">
+						<div class="uk-width-1-2">
+							<div class="uk-margin">
+								<div class="uk-text-left"><label class="uk-form-label" for="history-start-time">Start Date</label></div>
+								<input id="history-start-time" class="uk-input" type="time">
+							</div>
+						</div>
+						<div class="uk-width-1-2">
+							<div class="uk-margin">
+								<div class="uk-text-left"><label class="uk-form-label" for="history-end-time">End Date</label></div>
+								<input id="history-end-time" class="uk-input" type="time">
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- Search Button -->
+				<div class="uk-width-1-1">
+					<button id="search-history" class="uk-button uk-width-1-3">Search</button>
+				</div>
+			</form>
+			<hr>
+			<!-- History List -->
+			<div id="history-list" class="uk-text-center">
+				<table class="uk-table uk-table-hover">
+					<!-- Data Will be Loaded from JavaScript -->
+				</table>
+			</div>
 		</div>
 		<!-- Settings Section -->
 		<div id="settings" class="uk-margin-medium-top uk-animation-fade">

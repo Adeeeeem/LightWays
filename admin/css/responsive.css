@@ -143,6 +143,14 @@
 	#users table tr td{font-size: 0.7rem; padding: 12px 0;}
 	#users table img{width: 17px;}
 	/*=========================
+			History
+	=========================*/
+	#history #history-list{padding: 20px;}
+	/* Display History Table */
+	#history table{padding: 10px;}
+	#history table th{padding: 10px;}
+	#history table td{padding: 8px; font-size: 0.8rem;}
+	/*=========================
 			Settings
 	=========================*/
 	#settings form{margin-top: 60px!important; width: 80%;}
@@ -228,6 +236,15 @@
 	#users table tr td{font-size: 0.75rem; padding: 12px 0;}
 	#users table img{width: 15px;}
 	/*=========================
+			History
+	=========================*/
+	#history #history-list{padding: 10px;}
+	#history #search-history{width: 50%;}
+	/* Display History Table */
+	#history table{padding: 0;}
+	#history table th{padding: 5px;}
+	#history table td{padding: 5px; font-size: 0.8rem;}
+	/*=========================
 			Settings
 	=========================*/
 	#settings form{margin-top: 20px!important; width: 75%;}
@@ -310,6 +327,17 @@
 	/* Delete Group Modal */
 	#modal-delete-user h2.uk-modal-title{font-size: 1.2rem;}
 	#modal-delete-user button{font-size: 0.7rem; line-height: 1; padding: 0;}
+	/*=========================
+			History
+	=========================*/
+	#history input{width: 95%;}
+	#history #search-history{width: 100%;}
+	#history #history-list{padding: 0;}
+	/* Display History Table */
+	#history table{padding: 0;}
+	#history table th{padding: 5px;}
+	#history table td{padding: 2px; font-size: 0.7rem;}
+
 	/*=========================
 			Settings
 	=========================*/

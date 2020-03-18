@@ -21,7 +21,7 @@
 			/* Preparing Statement */
 			$statement = $DB_CONNECTION->prepare($request);
 			/* Binding Parameter */
-			$statement->bindParam(':password', $password, PDO::PARAM_STR, 50);
+			$statement->bindParam(':password', $password, PDO::PARAM_STR, 30);
 			$statement->bindParam(':login', $_SESSION["6C3Zq5Bpwm"], PDO::PARAM_STR, 30);
 			/* Execute Query */
 			$statement->execute();
