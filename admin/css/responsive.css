@@ -230,11 +230,13 @@
 	=========================*/
 	#users #add-user-btn{font-size: 10px !important;}
 	#users #add-user-btn img{margin-top: -3px;}
+	#users-list{padding: 0;}
 	/* Display users Table */
 	#users table{padding: 5px; margin-top: 15px;}
-	#users table tr th{font-size: 0.8rem; padding: 12px 8px;}
-	#users table tr td{font-size: 0.75rem; padding: 12px 0;}
-	#users table img{width: 15px;}
+	#users table tr th{font-size: 0.8rem; padding: 8px 6px;}
+	#users table tr td{font-size: 0.75rem; padding: 8px 0;}
+	#users table img.delete{width: 14px;}
+	#users table img.edit{width: 12px;}
 	/*=========================
 			History
 	=========================*/
@@ -330,7 +332,8 @@
 	/*=========================
 			History
 	=========================*/
-	#history input{width: 95%;}
+	#history form{margin-top: -25px;}
+	#history input{width: 95%; height: 30px !important;}
 	#history #search-history{width: 100%;}
 	#history #history-list{padding: 0;}
 	/* Display History Table */

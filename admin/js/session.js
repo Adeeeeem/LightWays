@@ -39,7 +39,7 @@ $(function ()
 		})
 		.always(function()
 		{
-			localStorage.setItem("LastSectionOpen", "#lights-btn"); // Reset Saved Tabs
+			localStorage.setItem("LightWays_ADMIN_SECTION", "#lights-btn"); // Reset Saved Tabs
 			window.location.href="../"; // Exit to Login Page
 		});
 	});

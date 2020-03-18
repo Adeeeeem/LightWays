@@ -2510,7 +2510,7 @@ $(function()
 {
 	var old_login;
 
-	$("#users #users-list").off("click").on("click", "img.edit", function()
+	$("#users #users-list table").off("click").on("click", "img.edit", function()
 	{
 		old_login = $(this).parent().parent().attr("id");
 		
@@ -4188,11 +4188,11 @@ function DisplayUsersListUsersSection()
 
 		if (len != 0)
 		{
-			$("#users #users-list table").append("<thead><tr class='uk-animation-scale-down uk-text-center'><th>Name</th><th>Edit</th><th>Delete</th></thead><tbody></tbody>");
+			$("#users #users-list table").append("<thead><tr class='uk-animation-scale-down uk-text-center'><th>Login</th><th>Name</th><th>Edit</th><th>Delete</th></thead><tbody></tbody>");
 
 			for (var i = 0; i < len; i++)
 			{
-				$("#users #users-list table tbody").append("<tr id='"+response[i].username+"' class='uk-animation-scale-down uk-text-center'><td>"+response[i].name+"</td><td><img class='edit' src='../images/icons/edit.png' width='20' height='20'></td><td><img class='delete' src='../images/icons/remove.png' width='20' height='20'></td></tr>");
+				$("#users #users-list table tbody").append("<tr id='"+response[i].username+"' class='uk-animation-scale-down uk-text-center'><td>"+response[i].username+"</td><td>"+response[i].name+"</td><td><img class='edit' src='../images/icons/edit.png' width='20' height='20'></td><td><img class='delete' src='../images/icons/remove.png' width='20' height='20'></td></tr>");
 			}
 		}
 		else

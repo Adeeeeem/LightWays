@@ -25,11 +25,10 @@
 			$end_time = $end_time.":00"; // Add Seconds
 
 			/* Preparing Request */
-			$request = "SELECT HISTORY_USER AS user, HISTORY_TYPE AS type, HISTORY_DATA_ID AS id, HISTORY_DATA AS data, HISTORY_DATE AS date, HISTORY_TIME AS time, HISTORY_OPTION AS opt FROM HISTORY WHERE HISTORY_BOSS = :user AND HISTORY_DATE BETWEEN :start_date AND :end_date AND HISTORY_TIME BETWEEN :start_time AND :end_time ORDER BY HISTORY_DATE DESC, HISTORY_TIME DESC;";
+			$request = "SELECT HISTORY_USER AS user, HISTORY_TYPE AS type, HISTORY_DATA_ID AS id, HISTORY_DATA AS data, HISTORY_DATE AS date, HISTORY_TIME AS time, HISTORY_OPTION AS opt FROM HISTORY WHERE HISTORY_DATE BETWEEN :start_date AND :end_date AND HISTORY_TIME BETWEEN :start_time AND :end_time ORDER BY HISTORY_DATE DESC, HISTORY_TIME DESC;";
 			/* Preparing Statement */
 			$statement = $DB_CONNECTION->prepare($request);
 			/* Binding Parameter */
-			$statement->bindParam(':user', $_SESSION["6C3Zq5Bpwm"], PDO::PARAM_STR, 30);
 			$statement->bindParam(':start_date', $start_date, PDO::PARAM_STR, 10);
 			$statement->bindParam(':end_date', $end_date, PDO::PARAM_STR, 10);
 			$statement->bindParam(':start_time', $start_time, PDO::PARAM_STR, 5);
@@ -38,11 +37,10 @@
 		else // History Between two Dates
 		{
 			/* Preparing Request */
-			$request = "SELECT HISTORY_USER AS user, HISTORY_TYPE AS type, HISTORY_DATA_ID AS id, HISTORY_DATA AS data, HISTORY_DATE AS date, HISTORY_TIME AS time, HISTORY_OPTION AS opt FROM HISTORY WHERE HISTORY_BOSS = :user AND HISTORY_DATE BETWEEN :start_date AND :end_date ORDER BY HISTORY_DATE DESC, HISTORY_TIME DESC;";
+			$request = "SELECT HISTORY_USER AS user, HISTORY_TYPE AS type, HISTORY_DATA_ID AS id, HISTORY_DATA AS data, HISTORY_DATE AS date, HISTORY_TIME AS time, HISTORY_OPTION AS opt FROM HISTORY WHERE HISTORY_DATE BETWEEN :start_date AND :end_date ORDER BY HISTORY_DATE DESC, HISTORY_TIME DESC;";
 			/* Preparing Statement */
 			$statement = $DB_CONNECTION->prepare($request);
 			/* Binding Parameter */
-			$statement->bindParam(':user', $_SESSION["6C3Zq5Bpwm"], PDO::PARAM_STR, 30);
 			$statement->bindParam(':start_date', $start_date, PDO::PARAM_STR, 10);
 			$statement->bindParam(':end_date', $end_date, PDO::PARAM_STR, 10);
 		}
@@ -55,22 +53,19 @@
 			$end_time = $end_time.":00"; // Add Seconds
 
 			/* Preparing Request */
-			$request = "SELECT HISTORY_USER AS user, HISTORY_TYPE AS type, HISTORY_DATA_ID AS id, HISTORY_DATA AS data, HISTORY_DATE AS date, HISTORY_TIME AS time, HISTORY_OPTION AS opt FROM HISTORY WHERE HISTORY_BOSS = :user AND HISTORY_DATE = CURRENT_DATE AND HISTORY_TIME BETWEEN :start_time AND :end_time ORDER BY HISTORY_DATE DESC, HISTORY_TIME DESC;";
+			$request = "SELECT HISTORY_USER AS user, HISTORY_TYPE AS type, HISTORY_DATA_ID AS id, HISTORY_DATA AS data, HISTORY_DATE AS date, HISTORY_TIME AS time, HISTORY_OPTION AS opt FROM HISTORY WHERE HISTORY_DATE = CURRENT_DATE AND HISTORY_TIME BETWEEN :start_time AND :end_time ORDER BY HISTORY_DATE DESC, HISTORY_TIME DESC;";
 			/* Preparing Statement */
 			$statement = $DB_CONNECTION->prepare($request);
 			/* Binding Parameter */
-			$statement->bindParam(':user', $_SESSION["6C3Zq5Bpwm"], PDO::PARAM_STR, 30);
 			$statement->bindParam(':start_time', $start_time, PDO::PARAM_STR, 5);
 			$statement->bindParam(':end_time', $end_time, PDO::PARAM_STR, 5);
 		}
 		else
 		{
 			/* Preparing Request */
-			$request = "SELECT HISTORY_USER AS user, HISTORY_TYPE AS type, HISTORY_DATA_ID AS id, HISTORY_DATA AS data, HISTORY_DATE AS date, HISTORY_TIME AS time, HISTORY_OPTION AS opt FROM HISTORY WHERE HISTORY_BOSS = :user ORDER BY HISTORY_DATE DESC, HISTORY_TIME DESC LIMIT 25;";
+			$request = "SELECT HISTORY_USER AS user, HISTORY_TYPE AS type, HISTORY_DATA_ID AS id, HISTORY_DATA AS data, HISTORY_DATE AS date, HISTORY_TIME AS time, HISTORY_OPTION AS opt FROM HISTORY ORDER BY HISTORY_DATE DESC, HISTORY_TIME DESC LIMIT 25;";
 			/* Preparing Statement */
 			$statement = $DB_CONNECTION->prepare($request);
-			/* Binding Parameter */
-			$statement->bindParam(':user', $_SESSION["6C3Zq5Bpwm"], PDO::PARAM_STR, 30);
 			/* Execute Query */
 			$statement->execute();
 			/* Fetch Result */

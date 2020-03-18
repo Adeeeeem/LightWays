@@ -11,7 +11,7 @@
 		{
 			$response["result"] = "User"; // Normal User
 		}
-		else
+		else if ($_SESSION["Va7FqW6A3e"] == "ADMIN")
 		{
 			$response["result"] = "Admin"; // Admin
 		}

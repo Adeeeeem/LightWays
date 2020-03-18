@@ -18,10 +18,6 @@ $(window).on("load", function()
 			case "Admin": //  Admin
 				window.location.href="admin/";
 			break;
-
-			case "Super": //  Super
-				window.location.href="super/";
-			break;
 		}
 	});
 });
@@ -102,10 +98,6 @@ $(function()
 					case "Admin": // Admin
 						window.location.href="admin/";
 						localStorage.setItem("LightWays_ADMIN_SECTION", "#lights-btn"); // Reset Saved Tabs
-					break;
-
-					case "Super": // Super
-						window.location.href="super/";
 					break;
 				}
 		})

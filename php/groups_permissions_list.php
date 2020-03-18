@@ -4,11 +4,9 @@
 	header("Content-Type: application/json");
 
 	/* Preparing Request */
-	$request = "SELECT ROOMS.ROOM_ID AS room, GROUP_ID AS id, GROUP_NAME AS name FROM ROOMS NATURAL JOIN FLOORS LEFT JOIN GROUPS ON ROOMS.ROOM_ID = GROUPS.ROOM_ID WHERE USER_LOGIN = :user;";
+	$request = "SELECT ROOMS.ROOM_ID AS room, GROUP_ID AS id, GROUP_NAME AS name FROM ROOMS LEFT JOIN GROUPS ON ROOMS.ROOM_ID = GROUPS.ROOM_ID;";
 	/* Preparing Statement */
 	$statement = $DB_CONNECTION->prepare($request);
-	/* Binding Parameter */
-	$statement->bindParam(':user', $_SESSION["6C3Zq5Bpwm"], PDO::PARAM_STR, 30);
 	/* Execute Query */
 	$statement->execute();
 	/* Fetch Result */

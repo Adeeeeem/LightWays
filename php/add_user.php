@@ -27,7 +27,7 @@
 		{
 			/* Insert New User */
 			/* Preparing Request */
-			$request = "INSERT INTO USERS (USER_LOGIN, USER_PASSWORD, USER_FNAME, USER_LNAME, USER_TYPE, USER_BOSS) VALUES (:login, :password, :fname, :lname, 'USER', :user);";
+			$request = "INSERT INTO USERS (USER_LOGIN, USER_PASSWORD, USER_FNAME, USER_LNAME, USER_TYPE) VALUES (:login, :password, :fname, :lname, 'USER');";
 			/* Preparing Statement */
 			$statement = $DB_CONNECTION->prepare($request);
 			/* Binding Parameter */
@@ -35,7 +35,6 @@
 			$statement->bindParam(':password', $password,PDO::PARAM_STR, 30);
 			$statement->bindParam(':fname', $fname, PDO::PARAM_STR, 30);
 			$statement->bindParam(':lname', $lname, PDO::PARAM_STR, 30);
-			$statement->bindParam(':user', $_SESSION["6C3Zq5Bpwm"], PDO::PARAM_STR, 30);
 			/* Execute Query */
 			$statement->execute();
 
@@ -61,18 +60,20 @@
 				/* Return Added User */
 				$response = array("user" => $login, "name" => $name);
 
-				/* Add to History */
-				/* Preparing Request */
-				$request = "INSERT INTO HISTORY (HISTORY_USER, HISTORY_TYPE, HISTORY_DATA_ID, HISTORY_DATA, HISTORY_DATE, HISTORY_TIME, HISTORY_OPTION, HISTORY_BOSS) VALUES (:user, 'ADD', :employee, 'USER', CURRENT_DATE, CURRENT_TIME, :name, :boss);";
-				/* Preparing Statement */
-				$statement = $DB_CONNECTION->prepare($request);
-				/* Binding Parameter */
-				$statement->bindParam(':user', $_SESSION["6C3Zq5Bpwm"], PDO::PARAM_STR, 30);
-				$statement->bindParam(':employee', $login, PDO::PARAM_STR, 30);
-				$statement->bindParam(':name', $name, PDO::PARAM_STR, 100);
-				$statement->bindParam(':boss', $_SESSION["6C3Zq5Bpwm"], PDO::PARAM_STR, 30);
-				/* Execute Query */
-				$statement->execute();
+				if ($_SESSION["6C3Zq5Bpwm"] == "admin")
+				{
+					/* Add to History */
+					/* Preparing Request */
+					$request = "INSERT INTO HISTORY (HISTORY_USER, HISTORY_TYPE, HISTORY_DATA_ID, HISTORY_DATA, HISTORY_DATE, HISTORY_TIME, HISTORY_OPTION) VALUES (:user, 'ADD', :employee, 'USER', CURRENT_DATE, CURRENT_TIME, :name);";
+					/* Preparing Statement */
+					$statement = $DB_CONNECTION->prepare($request);
+					/* Binding Parameter */
+					$statement->bindParam(':user', $_SESSION["6C3Zq5Bpwm"], PDO::PARAM_STR, 30);
+					$statement->bindParam(':employee', $login, PDO::PARAM_STR, 30);
+					$statement->bindParam(':name', $name, PDO::PARAM_STR, 100);
+					/* Execute Query */
+					$statement->execute();
+				}
 			}
 		}
 	}

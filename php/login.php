@@ -29,12 +29,12 @@
 			if ($statement->rowCount()) // User Exists
 			{
 				/* Preparing Request */
-				$request = "SELECT USER_LOGIN, USER_TYPE, CONCAT(USER_FNAME, ' ', USER_LNAME) AS name, USER_BOSS AS boss FROM USERS WHERE BINARY USER_LOGIN = :username AND BINARY USER_PASSWORD = :password LIMIT 1;"; // Check For Password
+				$request = "SELECT USER_LOGIN, USER_TYPE, CONCAT(USER_FNAME, ' ', USER_LNAME) AS name FROM USERS WHERE BINARY USER_LOGIN = :username AND BINARY USER_PASSWORD = :password LIMIT 1;"; // Check For Password
 				/* Preparing Statement */
 				$statement = $DB_CONNECTION->prepare($request);
 				/* Binding Parameter */
 				$statement->bindParam(":username", $username, PDO::PARAM_STR, 30);
-				$statement->bindParam(":password", $password, PDO::PARAM_STR, 50);
+				$statement->bindParam(":password", $password, PDO::PARAM_STR, 30);
 				/* Execute Query */
 				$statement->execute();
 
@@ -56,27 +56,23 @@
 						$response["result"] = "Admin"; // Admin
 						$_SESSION["Va7FqW6A3e"] = "ADMIN"; // Affect Admin to Type Session
 					}
-					else
-					{
-						$response["result"] = "Super"; // Super
-						$_SESSION["Va7FqW6A3e"] = "SUPER"; // Affect Super to Type Session
-					}
 
 					$name = $row["name"];
-					$boss = $row["boss"];
 
-					/* Add to History */
-					/* Preparing Request */
-					$request = "INSERT INTO HISTORY (HISTORY_USER, HISTORY_TYPE, HISTORY_DATA_ID, HISTORY_DATA, HISTORY_DATE, HISTORY_TIME, HISTORY_OPTION, HISTORY_BOSS) VALUES (:login, 'CONNECT', :user, 'USER', CURRENT_DATE, CURRENT_TIME, :name, :boss);";
-					/* Preparing Statement */
-					$statement = $DB_CONNECTION->prepare($request);
-					/* Binding Parameter */
-					$statement->bindParam(':login', $_SESSION["6C3Zq5Bpwm"], PDO::PARAM_STR, 30);
-					$statement->bindParam(':user', $_SESSION["6C3Zq5Bpwm"], PDO::PARAM_STR, 30);
-					$statement->bindParam(':name', $name, PDO::PARAM_STR, 100);
-					$statement->bindParam(':boss', $boss);
-					/* Execute Query */
-					$statement->execute();
+					if ($_SESSION["6C3Zq5Bpwm"] == "admin")
+					{
+						/* Add to History */
+						/* Preparing Request */
+						$request = "INSERT INTO HISTORY (HISTORY_USER, HISTORY_TYPE, HISTORY_DATA_ID, HISTORY_DATA, HISTORY_DATE, HISTORY_TIME, HISTORY_OPTION) VALUES (:login, 'CONNECT', :user, 'USER', CURRENT_DATE, CURRENT_TIME, :name);";
+						/* Preparing Statement */
+						$statement = $DB_CONNECTION->prepare($request);
+						/* Binding Parameter */
+						$statement->bindParam(':login', $_SESSION["6C3Zq5Bpwm"], PDO::PARAM_STR, 30);
+						$statement->bindParam(':user', $_SESSION["6C3Zq5Bpwm"], PDO::PARAM_STR, 30);
+						$statement->bindParam(':name', $name, PDO::PARAM_STR, 100);
+						/* Execute Query */
+						$statement->execute();
+					}
 				}
 				else
 				{

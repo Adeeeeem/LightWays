@@ -4,7 +4,7 @@
 	header("Content-Type: application/json");
 
 	/* Get User Name for Hisotry */
-	$request = "SELECT CONCAT(USER_FNAME, ' ', USER_LNAME) AS name, USER_BOSS AS boss FROM USERS WHERE USER_LOGIN = :user LIMIT 1;";
+	$request = "SELECT CONCAT(USER_FNAME, ' ', USER_LNAME) AS name FROM USERS WHERE USER_LOGIN = :user LIMIT 1;";
 	/* Preparing Statement */
 	$statement = $DB_CONNECTION->prepare($request);
 	/* Binding Parameter */
@@ -15,20 +15,21 @@
 	$result = $statement->fetch();
 
 	$name = $result["name"];
-	$boss = $result["boss"];
 
-	/* Add to History */
-	/* Preparing Request */
-	$request = "INSERT INTO HISTORY (HISTORY_USER, HISTORY_TYPE, HISTORY_DATA_ID, HISTORY_DATA, HISTORY_DATE, HISTORY_TIME, HISTORY_OPTION, HISTORY_BOSS) VALUES (:login, 'DISCONNECT', :user, 'USER', CURRENT_DATE, CURRENT_TIME, :name, :boss);";
-	/* Preparing Statement */
-	$statement = $DB_CONNECTION->prepare($request);
-	/* Binding Parameter */
-	$statement->bindParam(':login', $_SESSION["6C3Zq5Bpwm"], PDO::PARAM_STR, 30);
-	$statement->bindParam(':user', $_SESSION["6C3Zq5Bpwm"], PDO::PARAM_STR, 30);
-	$statement->bindParam(':name', $name, PDO::PARAM_STR, 100);
-	$statement->bindParam(':boss', $boss, PDO::PARAM_STR, 30);
-	/* Execute Query */
-	$statement->execute();
+	if ($_SESSION["6C3Zq5Bpwm"] == "admin")
+	{
+		/* Add to History */
+		/* Preparing Request */
+		$request = "INSERT INTO HISTORY (HISTORY_USER, HISTORY_TYPE, HISTORY_DATA_ID, HISTORY_DATA, HISTORY_DATE, HISTORY_TIME, HISTORY_OPTION) VALUES (:login, 'DISCONNECT', :user, 'USER', CURRENT_DATE, CURRENT_TIME, :name);";
+		/* Preparing Statement */
+		$statement = $DB_CONNECTION->prepare($request);
+		/* Binding Parameter */
+		$statement->bindParam(':login', $_SESSION["6C3Zq5Bpwm"], PDO::PARAM_STR, 30);
+		$statement->bindParam(':user', $_SESSION["6C3Zq5Bpwm"], PDO::PARAM_STR, 30);
+		$statement->bindParam(':name', $name, PDO::PARAM_STR, 100);
+		/* Execute Query */
+		$statement->execute();
+	}
 
 	/* Empty Sessions */
 	$_SESSION["6C3Zq5Bpwm"] == "";
