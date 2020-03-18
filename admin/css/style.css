@@ -279,7 +279,7 @@
 		Settings
 =========================*/
 #settings form{margin-top: 100px!important; width: 60%;}
-#settings hr{background-position: 85%; max-width: 85%; margin-top: -5px; background-image: radial-gradient(closest-side, var(--secondary-color), hsla(232, 18%, 69%, 0) 150%); height: 2px;}
+#settings hr{background-position: 100%; max-width: 100%; margin-top: -5px; background-image: radial-gradient(closest-side, var(--secondary-color), hsla(232, 18%, 69%, 0) 150%); height: 2px;}
 #settings div.change-name-title, #settings div.change-password-title, #settings div.preference-title{font-size: 0.8rem; color: var(--secondary-color);}
 #settings #setting-language{border: 1px solid var(--secondary-color); width: 228px;}
 /* Dark Theme Button */

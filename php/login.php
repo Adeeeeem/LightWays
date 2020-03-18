@@ -59,7 +59,7 @@
 
 					$name = $row["name"];
 
-					if ($_SESSION["6C3Zq5Bpwm"] == "admin")
+					if ($_SESSION["6C3Zq5Bpwm"] != "lightways")
 					{
 						/* Add to History */
 						/* Preparing Request */

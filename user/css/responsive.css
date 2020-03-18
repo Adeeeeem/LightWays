@@ -1,0 +1,167 @@
+/*==================================================
+				Media Queries
+==================================================*/
+/* Large Devices */
+@media (min-width: 1200px) and (max-width: 1299px)
+{
+
+}
+/* Medium Devices */
+@media (min-width: 992px) and (max-width: 1199px)
+{
+	/*==================================================
+					HTML & Body
+	==================================================*/
+	input, select{height: 37px !important; font-size: 14px !important;}
+	/*==================================================
+					Menu
+	==================================================*/
+	/* Left Menu */
+	#menu{width: 200px;}
+	#menu-logo img{width: 150px; height: 60px;}
+	#menu button{font-size: 10px;}
+	#menu button img{width: 17px; height: 17px; margin-right: 20px; margin-top: -3px;}
+	#groups-btn img{width: 24px !important; height: 24px !important; margin-left: -3px; margin-right: 17px !important;}
+	#logout-btn img{margin-right: 17px !important;}
+	/*==================================================
+					Sections
+	==================================================*/
+	#sections{margin-left: 200px;}
+	/*=========================
+			Lights
+	=========================*/
+	#lights form label{padding-left: 2.1rem; font-size: 11px;}
+	#lights form select{width: 80%;}
+	/* Groups Display Table */
+	#lights #lights-room-groups button{width: 125px !important; height: 30px; font-size: .5rem !important; line-height: 1;}
+	/*=========================
+			Settings
+	=========================*/
+	#settings form{margin-top: 75px!important; width: 60%;}
+	#settings #setting-language{width: 206px;}
+	/*=========================
+			Support
+	=========================*/
+	#support div.rights{margin-left: 200px;}
+}
+/* Small Devices */
+@media (min-width: 768px) and (max-width: 991px)
+{
+	/*==================================================
+					HTML & Body
+	==================================================*/
+	input, select{height: 35px !important; font-size: 13px !important;}
+	/*==================================================
+					Menu
+	==================================================*/
+	/* Left Menu */
+	#menu{width: 200px;}
+	#menu-logo img{width: 150px; height: 60px;}
+	#menu button{font-size: 10px;}
+	#menu button img{width: 17px; height: 17px; margin-right: 20px; margin-top: -2px;}
+	#groups-btn img{width: 24px !important; height: 24px !important; margin-left: -3px; margin-right: 15px !important;}
+	#logout-btn img{margin-right: 17px !important;}
+	#menu div.uk-accordion-content{padding-left: 20px;}
+	/*==================================================
+					Sections
+	==================================================*/
+	#sections{margin-left: 200px;}
+	/*=========================
+			Lights
+	=========================*/
+	#lights form label{padding-left: 1.9rem; font-size: 9px;}
+	#lights form select{width: 80%;}
+	#lights hr.select-hr{background-position: 70%; max-width: 70%;}
+	#lights #lights-room{margin-top: -30px !important;}
+	#lights #lights-room #lights-room-name{margin-top: 20px !important; font-size: 1.3rem !important;}
+	#lights #lights-room #lights-room-devices-number{font-size: 0.8rem;}
+	/* Devices Display Table */
+	#lights table#lights-room-devices td div{padding: 5px !important;}
+	/* Groups Display Table */
+	#lights #lights-room-groups button{width: 100px !important; height: 30px; font-size: .5rem !important; line-height: 1;}
+	/*=========================
+			Settings
+	=========================*/
+	#settings form{margin-top: 60px!important; width: 80%;}
+	#settings #setting-language{width: 206px;}
+	/*=========================
+			Support
+	=========================*/
+	#support div.rights{margin-left: 200px;}
+}
+/* Extra Small Devices */
+@media (max-width: 767px)
+{
+	/*==================================================
+					HTML & Body
+	==================================================*/
+	input, select{height: 35px !important; font-size: 14px !important;}
+	/*==================================================
+					Menu
+	==================================================*/
+	/* Left Menu */
+	#menu{display: none;}
+	/*==================================================
+					Sections
+	==================================================*/
+	#sections{margin-left: 0;}
+	nav{margin-top: 5px !important;}
+	#mobile-menu-open-btn{display: block;}
+	/*=========================
+			Lights
+	=========================*/
+	#lights {margin-top: 15px !important;}
+	#lights form {margin-top: 15px !important;}
+	#lights form label{padding-left: 0.7rem; font-size: 9px;}
+	#lights form select{width: 90%;}
+	#lights hr.select-hr{background-position: 75%; max-width: 75%;}
+	#lights #lights-room{margin-top: -25px !important;}
+	#lights #lights-room #lights-room-name{margin-top: 20px !important; font-size: 1.2rem !important;}
+	#lights #lights-room #lights-room-devices-number{font-size: 0.7rem;}
+	/* Devices Display Table */
+	#lights table#lights-room-devices td div{padding: 5px !important;}
+	/* Groups Display Table */
+	#lights #lights-room-groups button{width: 100px !important; height: 25px; font-size: .45rem !important; line-height: 1;}
+	/*=========================
+			Settings
+	=========================*/
+	#settings form{margin-top: 20px!important; width: 75%;}
+	#settings #setting-language{width: 206px;}
+	/* Save & Cancel Buttons */
+	#settings div.setting-cancel-btn{padding-right: 20px !important;}
+	#settings div.setting-save-btn{padding-left: 20px !important;}
+	/*=========================
+			Support
+	=========================*/
+	#support div.rights{margin-left: 0;}
+}
+/* Extra X-Small Devices */
+@media (max-width: 480px)
+{
+	/*==================================================
+					Sections
+	==================================================*/
+	/*=========================
+			Lights
+	=========================*/
+	#lights form label{padding-left: 0.2rem;}
+	#lights form select{font-size: 10px;}
+	#lights #lights-room{margin-top: -20px !important;}
+	#lights #lights-room #lights-room-name{margin-top: 15px !important; font-size: 1rem !important;}
+	#lights #lights-room #lights-room-devices-number{font-size: 0.5rem;}
+	/* Devices Display Table */
+	#lights table#lights-room-devices td div{padding: 2px !important;}
+	#lights table#lights-room-devices td div img{padding: 2px !important;}
+	/* Groups Display Table */
+	#lights #lights-room-groups button{width: 75px !important; height: 20px; font-size: .4rem !important; line-height: 1;}
+	/*=========================
+			Groups
+	=========================*/
+	/* Group */
+	#groups article.group-details h4{font-size: 15px;}
+	#groups article.group-details h6{font-size: 11px;}
+	/*=========================
+			Settings
+	=========================*/
+	#settings form{width: 100%;}
+}

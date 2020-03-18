@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<!-- Title -->
+	<title>LightWays</title>
+	<!-- The Author of this page -->
+	<meta name="author" content="Mohamed Adem Ben Moussa">
+	<meta name="author" content="Mohamed Mehdi Charni">
+	<!-- Specify the character encoding of your content -->
+	<meta charset="UTF-8">
+	<!-- Tell Internet Explorer to use the latest Rendering Engine -->
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<!-- Setting the viewport to make your website look good on all devices -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+	<!-- Icon -->
+	<link rel="shortcut icon" type="image/png" href="../images/icon.png">
+	<!-- UIkit CSS 3.3.2 -->
+	<link rel="stylesheet" type="text/css" href="../css/uikit/uikit.min.css">
+	<!-- Main CSS -->
+	<link rel="stylesheet" type="text/css" href="../css/main.css">
+	<!-- Style CSS -->
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<!-- Responsive CSS -->
+	<link rel="stylesheet" type="text/css" href="css/responsive.css">
+	<!-- jQuery JavaScript 3.4.1 -->
+	<script type="text/javascript" src="../js/jquery/jquery-3.4.1.min.js"></script>
+	<!-- Preloader JavaScript -->
+	<script type="text/javascript" src="../js/preloader.js"></script>
+	<!-- Session JavaScript -->
+	<script type="text/javascript" src="js/session.js"></script>
+</head>
+<body>
+
+	<!-- Preloader -->
+	<div id="preloader">
+		<div id="status">
+			&nbsp;
+		</div>
+	</div>
+
+	<!-- Sections Menu -->
+	<div id="menu">
+		<div id="menu-logo" class="uk-width-1-1 uk-text-center"><img class="uk-margin-small-top" src="../images/logo.png"></div>
+		<div class="uk-margin-medium-top uk-margin-large-bottom">
+			<button id="lights-btn" class="uk-button uk-width-1-1 uk-text-left active"><img src="../images/icons/bulb.png">Lights</button>
+			<button id="groups-btn" class="uk-button uk-width-1-1 uk-text-left"><img src="../images/icons/groups.png">Groups</button>
+			<button id="settings-btn" class="uk-button uk-width-1-1 uk-text-left"><img src="../images/icons/settings.png">Settings</button>
+			<button id="support-btn" class="uk-button uk-width-1-1 uk-text-left"><img src="../images/icons/support.png">Support</button>
+			<button id="logout-btn" class="uk-button uk-width-1-1 uk-text-left logout"><img src="../images/icons/logout.png">Logout</button>
+		</div>
+	</div>
+
+	<!-- Sections Mobile Menu -->
+	<div id="mobile-menu">
+		<!-- Mobile Menu Close Button -->
+		<span id="mobile-menu-close-btn" class="uk-align-right">&times;</span>
+		<!-- Mobile Menu Logo -->
+		<div id="mobile-menu-logo" class="uk-width-1-1 uk-text-center uk-align-center"><img src="../images/logo.png"></div>
+		<div class="uk-margin-small-top uk-margin-large-bottom">
+			<button id="mobile-lights-btn" class="uk-button uk-width-1-1 uk-text-left active"><img src="../images/icons/bulb.png">Lights</button>
+			<button id="mobile-groups-btn" class="uk-button uk-width-1-1 uk-text-left"><img src="../images/icons/groups.png">Groups</button>
+			<button id="mobile-settings-btn" class="uk-button uk-width-1-1 uk-text-left"><img src="../images/icons/settings.png">Settings</button>
+			<button id="mobile-support-btn" class="uk-button uk-width-1-1 uk-text-left"><img src="../images/icons/support.png">Support</button>
+			<button id="mobile-logout-btn" class="uk-button uk-width-1-1 uk-text-left"><img src="../images/icons/logout.png">Logout</button>
+		</div>
+	</div>
+
+	<!-- Sections -->
+	<div id="sections" class="uk-text-center uk-padding-small">
+		<!-- Section Title and Mobile Menu Button -->
+		<nav class="uk-navbar-container uk-navbar-transparent" uk-navbar>
+			<div class="uk-navbar-left">
+				<ul class="uk-navbar-nav">
+					<li><span id="mobile-menu-open-btn" type="button">&#9776;</span></li>
+				</ul>
+			</div>
+
+			<div class="uk-navbar-center">
+				<ul class="uk-navbar-nav">
+					<li>
+						<!-- Section Title -->
+						<div id="section-title">
+							<span class="uk-text-middle">Lights</span>
+						</div>
+						<hr class="title-hr">
+					</li>
+				</ul>
+			</div>
+		</nav>
+		<!-- Lights Section -->
+		<div id="lights" class="uk-margin-medium-top uk-animation-fade">
+			<!-- Floors & Rooms Navigation -->
+			<form class="uk-margin-small-top" uk-grid>
+				<!-- Floors Navigation -->
+				<div class="uk-width-1-2">
+					<div class="uk-margin uk-text-left">
+						<label class="uk-form-label" for="lights-floors-navigation">Floors</label>
+						<div class="uk-form-controls">
+							<select id="lights-floors-navigation" class="uk-input uk-select">
+								<!-- Data Will be Loaded from JavaScript -->
+							</select>
+							<hr class="uk-align-center select-hr">
+						</div>
+					</div>
+				</div>
+				<!-- Rooms Navigation -->
+				<div class="uk-width-1-2">	
+					<div class="uk-margin uk-text-left">
+						<label class="uk-form-label" for="lights-rooms-navigation">Rooms</label>
+						<div class="uk-form-controls">
+							<select id="lights-rooms-navigation" class="uk-input uk-select">
+								<!-- Data Will be Loaded from JavaScript -->
+							</select>
+							<hr class="uk-align-center select-hr">
+						</div>
+					</div>
+				</div>
+			</form>
+			<!-- Room Will be Displayed Here -->
+			<div id="lights-room" class="uk-margin-small-top uk-margin-small-bottom uk-text-center">
+				<!-- Room Name -->
+				<h3 id="lights-room-name" class="uk-margin-medium-top"></h3>
+				<small id="lights-room-devices-number"></small>
+				<!-- Room Devices & Groups -->
+				<div id="fullscreen">
+					<div id="fullscreen-btn-on" class="uk-width-auto uk-align-right"><span uk-icon="icon: expand; ratio: 1.2"></span></div>
+					<div id="fullscreen-btn-off" class="uk-width-auto uk-align-right"><span uk-icon="icon: shrink; ratio: 1.2"></span></div>
+					<!-- Room Devices -->
+					<center id="center">
+						<table id="lights-room-devices" class="uk-margin-small-top">
+							<tbody>
+								<!-- Devices Will be Displayed here from JavaScript -->
+							</tbody>
+						</table>
+						<!-- Room Groups -->
+						<div id="lights-room-groups" class="uk-width-1-1 uk-text-center uk-margin-small-top" uk-grid>
+							<!-- Groups Will be Displayed here from JavaScript -->
+						</div>
+					</center>
+				</div>
+			</div>
+		</div>
+		<!-- Groups Section -->
+		<div id="groups" class="uk-margin-medium-top uk-animation-fade">
+			<hr>
+			<!-- Groups List -->
+			<div id="groups-list" class="uk-container uk-text-left">
+				<!-- Data Will be Loaded from JavaScript -->
+			</div>
+		</div>
+		<!-- Settings Section -->
+		<div id="settings" class="uk-margin-medium-top uk-animation-fade">
+			<center>
+				<form class="uk-form-horizontal uk-margin-large">
+					<hr>
+					<div class="uk-margin uk-text-center change-name-title">Change Name</div>
+					<!-- First Name -->
+					<div class="uk-margin">
+						<label class="uk-form-label" for="setting-fname">First Name</label>
+						<div class="uk-form-controls">
+							<div class="uk-inline">
+								<span class="uk-form-icon" uk-icon="icon: user"></span>
+								<input id="setting-fname" class="uk-input" type="text">
+							</div>
+							<div class=" uk-animation-toggle">
+								<div class="uk-animation-shake">
+									<small id="setting-fname-error" class="error">First Name Can't be Empty !</small>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- Last Name -->
+					<div class="uk-margin">
+						<label class="uk-form-label" for="setting-lname">Last Name</label>
+						<div class="uk-form-controls">
+							<div class="uk-inline">
+								<span class="uk-form-icon" uk-icon="icon: user"></span>
+								<input id="setting-lname" class="uk-input" type="text">
+							</div>
+							<div class=" uk-animation-toggle">
+								<div class="uk-animation-shake">
+									<small id="setting-lname-error" class="error">Last Name Can't be Empty !</small>
+								</div>
+							</div>
+						</div>
+					</div>
+					<hr>
+					<div class="uk-margin uk-text-center change-password-title">Change Password</div>
+					<!-- Old Password -->
+					<div class="uk-margin">
+						<label class="uk-form-label" for="setting-old-password">Old Password</label>
+						<div class="uk-form-controls">
+							<div class="uk-inline">
+								<span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: lock"></span>
+								<input id="setting-old-password" class="uk-input" type="password">
+							</div>
+							<div class=" uk-animation-toggle">
+								<div class="uk-animation-shake">
+									<small id="setting-old-password-error" class="error">Wrong Password !</small>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- New Password -->
+					<div class="uk-margin">
+						<label class="uk-form-label" for="setting-new-password">New Password</label>
+						<div class="uk-form-controls">
+							<div class="uk-inline">
+								<span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: lock"></span>
+								<input id="setting-new-password" class="uk-input" type="password">
+							</div>
+							<div class=" uk-animation-toggle">
+								<div class="uk-animation-shake">
+									<small id="setting-new-password-error" class="error">Set a New Password !</small>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- Confirm New Password -->
+					<div class="uk-margin">
+						<label class="uk-form-label" for="setting-confirm-new-password">Confirm New Password</label>
+						<div class="uk-form-controls">
+							<div class="uk-inline">
+								<span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: lock"></span>
+								<input id="setting-confirm-new-password" class="uk-input" type="password">
+							</div>
+							<div class=" uk-animation-toggle">
+								<div class="uk-animation-shake">
+									<small id="setting-confirm-new-password-error" class="error">Password Doesn't Match !</small>
+								</div>
+							</div>
+						</div>
+					</div>
+					<hr>
+					<div class="uk-margin uk-text-center preference-title">Preference</div>
+					<div class="uk-margin uk-text-center" uk-grid>
+						<div class="uk-width-2-3">
+							<label class="uk-form-label" for="setting-confirm-new-password">Dark Theme</label>
+						</div>
+						<div class="uk-width-1-3 uk-text-left">
+							<label class="uk-switch">
+								<input id="setting-theme" type="checkbox" class="control-group-button">
+								<div class="uk-switch-slider"></div>
+							</label>
+						</div>
+					</div>
+					<div class="uk-margin">
+						<label class="uk-form-label" for="setting-language">Language</label>
+						<div class="uk-form-controls">
+							<div class="uk-inline">
+								<span class="uk-form-icon" uk-icon="icon: world"></span>
+								<select id="setting-language" class="uk-input uk-select">
+									<option value="english">English</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<hr>
+					<div class="uk-margin" uk-grid>
+						<div class="uk-width-1-2 uk-text-right setting-cancel-btn"><button id="setting-cancel-btn" class="uk-button uk-button-text">Cancel</button></div>
+						<div class="uk-width-1-2 uk-text-left setting-save-btn"><button id="setting-save-btn" class="uk-button uk-button-text">Save</button></div>
+					</div>
+				</form>
+			</center>
+		</div>
+		<!-- Support Section -->
+		<div id="support" class="uk-margin-medium-top uk-animation-fade">
+			<h4 class="uk-text-left">About <span class="light">Light</span><span class="ways">Ways</span> :</h4>
+			<div class="rights uk-position-bottom">
+				<h5><span class="light">Light</span><span class="ways">Ways</span><br>Ⓒ 2020 LightWays. All Rights Reserved</h5>
+			</div>
+		</div>
+	</div>
+
+	<!-- UIkit JavaScript 3.3.2 -->
+	<script type="text/javascript" src="../js/uikit/uikit.min.js"></script>
+	<script type="text/javascript" src="../js/uikit/uikit-icons.min.js"></script>
+	<!-- Growl JavaScript 1.3.5 -->
+	<script type="text/javascript" src="../js/growl/growl.min.js"></script>
+	<!-- Growl CSS 1.3.5 -->
+	<link rel="stylesheet" type="text/css" href="../css/growl/growl.min.css">
+	<!-- Style JavaScript -->
+	<script type="text/javascript" src="js/script.js"></script>
+</body>
+</html>

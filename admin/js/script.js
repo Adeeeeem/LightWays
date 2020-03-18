@@ -2443,10 +2443,6 @@ $(function()
 				{
 					TypeList.push("ROOM");
 				}
-				else if ($(this).hasClass("group-permissions-input"))
-				{
-					TypeList.push("GROUP");
-				}
 			});
 
 			var PermissionsListJson = JSON.stringify(PermissionsList)
@@ -2470,10 +2466,10 @@ $(function()
 					if ($("#users #users-list table").find("tbody").length == 0)
 					{
 						$("#users #users-list table").empty();
-						$("#users #users-list table").append("<thead><tr class='uk-animation-scale-down uk-text-center'><th>Name</th><th>Edit</th><th>Delete</th></thead><tbody></tbody>");
+						$("#users #users-list table").append("<thead><tr class='uk-animation-scale-down uk-text-center'><th>Login</th><th>Name</th><th>Edit</th><th>Delete</th></thead><tbody></tbody>");
 					}
 
-					$("#users #users-list table tbody").append("<tr id='"+response.user+"' class='uk-animation-scale-down uk-text-center'><td>"+response.name+"</td><td><img class='edit' src='../images/icons/edit.png' width='20' height='20'></td><td><img class='delete' src='../images/icons/remove.png' width='20' height='20'></td></tr>");
+					$("#users #users-list table tbody").append("<tr id='"+response.user+"' class='uk-animation-scale-down uk-text-center'><td>"+response.user+"</td><td>"+response.name+"</td><td><img class='edit' src='../images/icons/edit.png' width='20' height='20'></td><td><img class='delete' src='../images/icons/remove.png' width='20' height='20'></td></tr>");
 				}
 				else
 				{
