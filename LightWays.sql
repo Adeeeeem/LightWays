@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 17, 2020 at 12:15 AM
+-- Generation Time: Mar 19, 2020 at 02:28 PM
 -- Server version: 10.4.8-MariaDB
 -- PHP Version: 7.3.11
 
@@ -31,8 +31,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `CARDS` (
   `CARD_ID` int(10) NOT NULL,
   `CARD_NAME` varchar(30) NOT NULL,
-  `CARD_IP` varchar(30) NOT NULL,
-  `USER_LOGIN` varchar(30) NOT NULL
+  `CARD_IP` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -61,8 +60,7 @@ CREATE TABLE `DEVICES` (
 
 CREATE TABLE `FLOORS` (
   `FLOOR_ID` int(10) NOT NULL,
-  `FLOOR_NAME` varchar(30) NOT NULL,
-  `USER_LOGIN` varchar(30) NOT NULL
+  `FLOOR_NAME` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -92,8 +90,7 @@ CREATE TABLE `HISTORY` (
   `HISTORY_DATA` enum('USER','CARD','FLOOR','ROOM','GROUP','DEVICE') NOT NULL,
   `HISTORY_DATE` date NOT NULL,
   `HISTORY_TIME` time NOT NULL,
-  `HISTORY_OPTION` varchar(100) DEFAULT NULL,
-  `HISTORY_BOSS` varchar(30) NOT NULL
+  `HISTORY_OPTION` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -130,19 +127,19 @@ CREATE TABLE `ROOMS` (
 
 CREATE TABLE `USERS` (
   `USER_LOGIN` varchar(30) NOT NULL,
-  `USER_PASSWORD` varchar(50) NOT NULL,
+  `USER_PASSWORD` varchar(30) NOT NULL,
   `USER_FNAME` varchar(30) NOT NULL,
   `USER_LNAME` varchar(30) NOT NULL,
-  `USER_TYPE` enum('SUPER','ADMIN','USER') NOT NULL,
-  `USER_BOSS` varchar(30) NOT NULL
+  `USER_TYPE` enum('ADMIN','USER') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `USERS`
 --
 
-INSERT INTO `USERS` (`USER_LOGIN`, `USER_PASSWORD`, `USER_FNAME`, `USER_LNAME`, `USER_TYPE`, `USER_BOSS`) VALUES
-('super', 'super', 'LightWays', 'Administrator', 'SUPER', 'super');
+INSERT INTO `USERS` (`USER_LOGIN`, `USER_PASSWORD`, `USER_FNAME`, `USER_LNAME`, `USER_TYPE`) VALUES
+('admin', 'admin', 'ADMIN_FIRST_NAME', 'ADMIN_LAST_NAME', 'ADMIN'),
+('lightways', 'lightways', 'LightWays', 'Administrator', 'ADMIN'),
 
 --
 -- Indexes for dumped tables
@@ -152,8 +149,7 @@ INSERT INTO `USERS` (`USER_LOGIN`, `USER_PASSWORD`, `USER_FNAME`, `USER_LNAME`, 
 -- Indexes for table `CARDS`
 --
 ALTER TABLE `CARDS`
-  ADD PRIMARY KEY (`CARD_ID`),
-  ADD KEY `fk_user_card` (`USER_LOGIN`);
+  ADD PRIMARY KEY (`CARD_ID`);
 
 --
 -- Indexes for table `DEVICES`
@@ -168,8 +164,7 @@ ALTER TABLE `DEVICES`
 -- Indexes for table `FLOORS`
 --
 ALTER TABLE `FLOORS`
-  ADD PRIMARY KEY (`FLOOR_ID`),
-  ADD KEY `fk_user_floor` (`USER_LOGIN`);
+  ADD PRIMARY KEY (`FLOOR_ID`);
 
 --
 -- Indexes for table `GROUPS`
@@ -196,8 +191,7 @@ ALTER TABLE `ROOMS`
 -- Indexes for table `USERS`
 --
 ALTER TABLE `USERS`
-  ADD PRIMARY KEY (`USER_LOGIN`),
-  ADD KEY `fk_user_user` (`USER_BOSS`);
+  ADD PRIMARY KEY (`USER_LOGIN`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -238,24 +232,12 @@ ALTER TABLE `ROOMS`
 --
 
 --
--- Constraints for table `CARDS`
---
-ALTER TABLE `CARDS`
-  ADD CONSTRAINT `fk_user_card` FOREIGN KEY (`USER_LOGIN`) REFERENCES `USERS` (`USER_LOGIN`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
 -- Constraints for table `DEVICES`
 --
 ALTER TABLE `DEVICES`
   ADD CONSTRAINT `fk_card_device` FOREIGN KEY (`CARD_ID`) REFERENCES `CARDS` (`CARD_ID`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_group_device` FOREIGN KEY (`GROUP_ID`) REFERENCES `GROUPS` (`GROUP_ID`) ON DELETE SET NULL ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_room_device` FOREIGN KEY (`ROOM_ID`) REFERENCES `ROOMS` (`ROOM_ID`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `FLOORS`
---
-ALTER TABLE `FLOORS`
-  ADD CONSTRAINT `fk_user_floor` FOREIGN KEY (`USER_LOGIN`) REFERENCES `USERS` (`USER_LOGIN`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `GROUPS`
@@ -274,12 +256,6 @@ ALTER TABLE `PERMISSIONS`
 --
 ALTER TABLE `ROOMS`
   ADD CONSTRAINT `fk_floor_room` FOREIGN KEY (`FLOOR_ID`) REFERENCES `FLOORS` (`FLOOR_ID`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `USERS`
---
-ALTER TABLE `USERS`
-  ADD CONSTRAINT `fk_user_user` FOREIGN KEY (`USER_BOSS`) REFERENCES `USERS` (`USER_LOGIN`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

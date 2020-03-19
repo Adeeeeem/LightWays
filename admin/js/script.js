@@ -4281,10 +4281,16 @@ function LoadHistory()
 							switch (response[i].data)
 							{
 								case "DEVICE":
-									history = "Turned on Device in <span style='color: var(--blue-color);'>"+response[i].opt+"</span> Room";
+									var pin = response[i].opt.substring(0, response[i].opt.indexOf(":"));
+									var name = response[i].opt.substring(response[i].opt.indexOf(":")+1, response[i].opt.length);
+
+									history = "Turned on Device Pin N° <span style='color: var(--blue-color);'>"+pin+"</span> in <span style='color: var(--blue-color);'>"+name+"</span> Room";
 								break;
 								case "GROUP":
-									history = "Turned on <span style='color: var(--blue-color);'>"+response[i].opt+"</span> Group";
+									var name = response[i].opt.substring(0, response[i].opt.indexOf(":"));
+									var room = response[i].opt.substring(response[i].opt.indexOf(":")+1, response[i].opt.length);
+
+									history = "Turned on <span style='color: var(--blue-color);'>"+name+"</span> Group in <span style='color: var(--blue-color);'>"+room+"</span> Room";
 								break;
 							}
 						break;
@@ -4292,10 +4298,16 @@ function LoadHistory()
 							switch (response[i].data)
 							{
 								case "DEVICE":
-									history = "Turned off Device in <span style='color: var(--blue-color);'>"+response[i].opt+"</span> Room";
+									var pin = response[i].opt.substring(0, response[i].opt.indexOf(":"));
+									var name = response[i].opt.substring(response[i].opt.indexOf(":")+1, response[i].opt.length);
+
+									history = "Turned off Device Pin N° <span style='color: var(--blue-color);'>"+pin+"</span> in <span style='color: var(--blue-color);'>"+name+"</span> Room";
 								break;
 								case "GROUP":
-									history = "Turned off <span style='color: var(--blue-color);'>"+response[i].opt+"</span> Group";
+									var name = response[i].opt.substring(0, response[i].opt.indexOf(":"));
+									var room = response[i].opt.substring(response[i].opt.indexOf(":")+1, response[i].opt.length);
+
+									history = "Turned off <span style='color: var(--blue-color);'>"+name+"</span> Group in <span style='color: var(--blue-color);'>"+room+"</span> Room";
 								break;
 							}
 						break;
