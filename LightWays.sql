@@ -139,7 +139,7 @@ CREATE TABLE `USERS` (
 
 INSERT INTO `USERS` (`USER_LOGIN`, `USER_PASSWORD`, `USER_FNAME`, `USER_LNAME`, `USER_TYPE`) VALUES
 ('admin', 'admin', 'ADMIN_FIRST_NAME', 'ADMIN_LAST_NAME', 'ADMIN'),
-('lightways', 'lightways', 'LightWays', 'Administrator', 'ADMIN'),
+('lightways', 'lightways', 'LightWays', 'Administrator', 'ADMIN');
 
 --
 -- Indexes for dumped tables
