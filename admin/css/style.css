@@ -266,7 +266,7 @@
 		History
 =========================*/
 #history input{width: 95%;}
-#history #search-history{background-color: var(--primary-color); color: #FFFFFF; padding: 0; border-radius: 0.25rem; height: 25px; line-height: 1; font-size: 0.7rem;}
+#history #search-history{background-color: var(--primary-color); color: #FFFFFF; padding: 0; border-radius: 0.25rem; height: 25px; line-height: 1; font-size: 0.7rem; margin-top: 15px;}
 #history #search-history:focus, #history #search-history:hover{background-color: var(--secondary-color);}
 #history *+.uk-grid-margin, #history .uk-grid+.uk-grid, #history .uk-grid>.uk-grid-margin{margin-top: 15px !important;}
 #history hr{border: 0; margin: 0.25em auto; max-width: 100%; background-position: 50%; box-sizing: border-box; height: 2px; background-image: radial-gradient(closest-side, hsla(232, 18%, 69%, 1.0),  hsla(232, 18%, 69%, 0) 100%); position: relative; margin-top: 15px;}

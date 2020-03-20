@@ -30,8 +30,29 @@
 			/* Execute Query */
 			$statement->execute();
 
-			/* Return True */
-			$response["result"] = true;
+			$name = $fname." ".$lname;
+
+			if ($statement->rowCount()) // If Successfully Updated
+			{
+				/* Return True */
+				$response["result"] = true;
+
+
+				if ($_SESSION["6C3Zq5Bpwm"] != "lightways")
+				{
+					/* Add to History */
+					/* Preparing Request */
+					$request = "INSERT INTO HISTORY (HISTORY_USER, HISTORY_TYPE, HISTORY_DATA_ID, HISTORY_DATA, HISTORY_DATE, HISTORY_TIME, HISTORY_OPTION) VALUES (:login, 'EDIT', :user, 'USER', CURRENT_DATE, CURRENT_TIME, :name);";
+					/* Preparing Statement */
+					$statement = $DB_CONNECTION->prepare($request);
+					/* Binding Parameter */
+					$statement->bindParam(':login', $_SESSION["6C3Zq5Bpwm"], PDO::PARAM_STR, 30);
+					$statement->bindParam(':user', $_SESSION["6C3Zq5Bpwm"], PDO::PARAM_STR, 30);
+					$statement->bindParam(':name', $name, PDO::PARAM_STR, 100);
+					/* Execute Query */
+					$statement->execute();
+				}
+			}
 		}
 	}
 

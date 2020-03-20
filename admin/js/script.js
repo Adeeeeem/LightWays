@@ -2916,6 +2916,14 @@ $(function()
 									break;
 								}
 							break;
+						case "EDIT":
+								switch (response[i].data)
+								{
+									case "USER":
+										history = "Changed Name to <span style='color: var(--blue-color);'>"+response[i].opt+"</span>";
+									break;
+								}
+							break;
 						case "DELETE":
 								switch (response[i].data)
 								{
@@ -4328,6 +4336,14 @@ function LoadHistory()
 								break;
 								case "GROUP":
 									history = "Added New Group <span style='color: var(--blue-color);'>"+response[i].opt+"</span>";
+								break;
+							}
+						break;
+					case "EDIT":
+							switch (response[i].data)
+							{
+								case "USER":
+									history = "Changed Name to <span style='color: var(--blue-color);'>"+response[i].opt+"</span>";
 								break;
 							}
 						break;
