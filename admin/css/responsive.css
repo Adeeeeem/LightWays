@@ -65,6 +65,10 @@
 	#users table tr td{font-size: 0.8rem; padding: 12px 0;}
 	#users table img{width: 18px;}
 	/*=========================
+			History
+	=========================*/
+	#history #search-history{height: 37px;}
+	/*=========================
 			Settings
 	=========================*/
 	#settings form{margin-top: 75px!important; width: 60%;}
@@ -145,6 +149,7 @@
 	/*=========================
 			History
 	=========================*/
+	#history #search-history{height: 35px;}
 	#history #history-list{padding: 20px;}
 	/* Display History Table */
 	#history table{padding: 10px;}
@@ -241,7 +246,7 @@
 			History
 	=========================*/
 	#history #history-list{padding: 10px;}
-	#history #search-history{width: 50%;}
+	#history #search-history{width: 50%; height: 35px;}
 	/* Display History Table */
 	#history table{padding: 0;}
 	#history table th{padding: 5px;}

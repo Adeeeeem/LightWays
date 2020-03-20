@@ -10,38 +10,34 @@
 
 	header("Content-Type: application/json");
 
-	/* Get Card Received ID */
-	$card = $_POST["card"];
-	/* Get Card Received NAME */
-	$name = $_POST["name"];
-	/* Get Card Received IP */
-	$ip = $_POST["ip"];
+	/* Get Group Received ID */
+	$group = $_POST["group"];
 	/* Avoid any XSS or SQL Injection */
-	$card = Security($card);
-	$name = Security($name);
-	$ip = Security($ip);
+	$group = Security($group);
 
 	/* Return False for Error */
 	$response = array("result" => false);
 
-	if ( isset($card) && !empty($card) && isset($name) && !empty($name) && isset($ip) && !empty($ip) )
+	if ( isset($group) && !empty($group) )
 	{
-		if ( (is_numeric($card)) && (is_string($name)) && (is_string($ip)) )
+		if (is_numeric($group))
 		{
-			/* Update Card */
+			/* Check for Permission */
 			/* Preparing Request */
-			$request = "UPDATE CARDS SET CARD_NAME = :name, CARD_IP = :ip WHERE CARD_ID = :card;";
+			$request = "SELECT USER_LOGIN FROM PERMISSIONS WHERE USER_LOGIN = :login AND PERMISSION_ID = (SELECT ROOM_ID FROM GROUPS WHERE GROUP_ID = :group) AND PERMISSION_TYPE = 'ROOM' LIMIT 1;";
 			/* Preparing Statement */
 			$statement = $DB_CONNECTION->prepare($request);
 			/* Binding Parameter */
-			$statement->bindParam(':card', $card, PDO::PARAM_INT);
-			$statement->bindParam(':name', $name, PDO::PARAM_STR, 30);
-			$statement->bindParam(':ip', $ip, PDO::PARAM_STR, 30);
+			$statement->bindParam(':login', $_SESSION["6C3Zq5Bpwm"], PDO::PARAM_STR, 30);
+			$statement->bindParam(':group', $group, PDO::PARAM_INT);
 			/* Execute Query */
 			$statement->execute();
 
-			/* Return True */
-			$response["result"] = true;
+			if ($statement->rowCount() == 1)
+			{
+				/* Return True */
+				$response["result"] = true;
+			}
 		}
 	}
 

@@ -3,6 +3,14 @@
 *					it was written by Mohamed Adem Ben Moussa.
 *				If not, then it was written by Mohamed Mehdi Charni.
 ====================================================================================================*/
+/* Refresh Website every 12 Hour for new Data */
+$(document).ready(function()
+{
+	setInterval(function()
+	{
+		window.location.reload(true);
+	}, 43200000);
+});
 /* Prevent users from submitting a form by hitting Enter */
 $(function()
 {
@@ -110,43 +118,65 @@ $(function()
 		var id = device.attr("id");
 		var status = device.attr("class");
 		var image = device.attr("src");
-		
+		var room = $("#lights-rooms-navigation").val();
+
 		$.ajax
 		({
-			url: "../php/device_status.php",
+			url: "../php/check_permission.php",
 			type: "POST",
 			dataType: "json",
-			data: {device: id, status: status}
+			data: {room: room},
 		})
 		.done(function(response)
 		{
 			if (response.result)
 			{
-				if (status == "ON")
+				$.ajax
+				({
+					url: "../php/device_status.php",
+					type: "POST",
+					dataType: "json",
+					data: {device: id, status: status}
+				})
+				.done(function(response)
 				{
-					// Change Status to OFF
-					$(device).removeClass("ON");
-					$(device).addClass("OFF");
-					$(device).css("background-color", "var(--device-color)");
-					// Change Icon
-					image = image.replace("_ON", "_OFF");
-				}
-				else
-				{
-					// Change Status to ON
-					$(device).removeClass("OFF");
-					$(device).addClass("ON");
-					// Change Icon
-					image = image.replace("_OFF", "_ON");
-					$(device).css("background-color", "#FFCC00")
-				}
+					if (response.result)
+					{
+						if (status == "ON")
+						{
+							// Change Status to OFF
+							$(device).removeClass("ON");
+							$(device).addClass("OFF");
+							$(device).css("background-color", "var(--device-color)");
+							// Change Icon
+							image = image.replace("_ON", "_OFF");
+						}
+						else
+						{
+							// Change Status to ON
+							$(device).removeClass("OFF");
+							$(device).addClass("ON");
+							// Change Icon
+							image = image.replace("_OFF", "_ON");
+							$(device).css("background-color", "#FFCC00")
+						}
 
-				$(device).attr("src", image);
+						$(device).attr("src", image);
+					}
+				})
+				.fail(function()
+				{
+					$.growl.error({ message: "An Error Occurred, Please Try Again !" });
+				});
+			}
+			else
+			{
+				$.growl.error({ message: "Oops, Seems like you don't have Permissions for this Room !" });
 			}
 		})
 		.fail(function()
 		{
-			$.growl.error({ message: "An Error Occurred, Please Try Again !" });
+			$.growl.error({ message: "Failed to Check your Permissions for this Room !" });
 		});
 	});
 });
@@ -168,38 +198,61 @@ $(function()
 {
 	$("#groups-list").on("click", "article.group-details .control-group-button", function()
 	{
-		var parent = $(this).parent().parent().parent().parent();
+		var btn = $(this);
+		var parent = btn.parent().parent().parent().parent();
 		var group = parent.attr("id");
 		var status;
 
-		if($(this).is(":checked"))
+		$.ajax
+		({
+			url: "../php/check_group_permission.php",
+			type: "POST",
+			dataType: "json",
+			data: {group: group},
+		})
+		.done(function(response)
 		{
-			status = "ON";
-			// Turn ON Group Devices
-			GroupStatus(group, status, true);
-			// Change Text Color to Orange
-			$(parent).find("h4").css("color", "var(--text-color)");
-			// Add Box Shadow
-			$(parent).addClass("uk-box-shadow-medium");
-			// Change in Lights Section
-			$("#lights #lights-room-groups button#"+group).removeClass("OFF");
-			$("#lights #lights-room-groups button#"+group).addClass("ON");
-			$("#lights #lights-room-groups button#"+group).css("background-color", $("#lights #lights-room-groups button#"+group).css("border-color"));
-		}
-		else if($(this).is(":not(:checked)"))
+			if (response.result)
+			{
+				if(btn.is(":checked"))
+				{
+					status = "ON";
+					// Turn ON Group Devices
+					GroupStatus(group, status, true);
+					// Change Text Color to Orange
+					$(parent).find("h4").css("color", "var(--text-color)");
+					// Add Box Shadow
+					$(parent).addClass("uk-box-shadow-medium");
+					// Change in Lights Section
+					$("#lights #lights-room-groups button#"+group).removeClass("OFF");
+					$("#lights #lights-room-groups button#"+group).addClass("ON");
+					$("#lights #lights-room-groups button#"+group).css("background-color", $("#lights #lights-room-groups button#"+group).css("border-color"));
+				}
+				else if(btn.is(":not(:checked)"))
+				{
+					status = "OFF";
+					// Turn OFF Group Devices
+					GroupStatus(group, status, true);
+					// Change Text Color to Blue
+					$(parent).find("h4").css("color", "var(--secondary-color)");
+					// Remove Box Shadow
+					$(parent).removeClass("uk-box-shadow-medium");
+					// Change in Lights Section
+					$("#lights #lights-room-groups button#"+group).removeClass("ON");
+					$("#lights #lights-room-groups button#"+group).addClass("OFF");
+					$("#lights #lights-room-groups button#"+group).css("background-color", "var(--primary-color)");
+				}
+			}
+			else
+			{
+				btn.prop("checked", !btn.prop("checked"));
+				$.growl.error({ message: "Oops, Seems like you don't have Permissions for this Group !" });
+			}
+		})
+		.fail(function()
 		{
-			status = "OFF";
-			// Turn OFF Group Devices
-			GroupStatus(group, status, true);
-			// Change Text Color to Blue
-			$(parent).find("h4").css("color", "var(--secondary-color)");
-			// Remove Box Shadow
-			$(parent).removeClass("uk-box-shadow-medium");
-			// Change in Lights Section
-			$("#lights #lights-room-groups button#"+group).removeClass("ON");
-			$("#lights #lights-room-groups button#"+group).addClass("OFF");
-			$("#lights #lights-room-groups button#"+group).css("background-color", "var(--primary-color)");
-		}
+			$.growl.error({ message: "Failed to Check your Permissions for this Group !" });
+		});
 	});
 });
 /*=========================
@@ -761,33 +814,55 @@ function LoadGroupsLightsSection(room)
 		var group = $(this);
 		var id = group.attr("id");
 		var status;
+		var room = $("#lights-rooms-navigation").val();
 
-		if (group.hasClass("ON"))
+		$.ajax
+		({
+			url: "../php/check_permission.php",
+			type: "POST",
+			dataType: "json",
+			data: {room: room},
+		})
+		.done(function(response)
 		{
-			status = "OFF";
-		}
-		else
-		{
-			status = "ON";
-		}
+			if (response.result)
+			{
+				if (group.hasClass("ON"))
+				{
+					status = "OFF";
+				}
+				else
+				{
+					status = "ON";
+				}
 
-		// Turn on or off the Light
-		GroupStatus(id, status, false);
+				// Turn on or off the Light
+				GroupStatus(id, status, false);
 
-		if (status == "ON")
+				if (status == "ON")
+				{
+					group.removeClass("ON");
+					group.addClass("OFF");
+					group.css("background-color", "var(--primary-color)");
+					$("#groups #groups-list article#"+id+" .control-group-button").click();
+				}
+				else
+				{
+					group.removeClass("OFF");
+					group.addClass("ON");
+					group.css("background-color", group.css("border-color"));
+					$("#groups #groups-list article#"+id+" .control-group-button").click();
+				}
+			}
+			else
+			{
+				$.growl.error({ message: "Oops, Seems like you don't have Permissions for this Room !" });
+			}
+		})
+		.fail(function()
 		{
-			group.removeClass("ON");
-			group.addClass("OFF");
-			group.css("background-color", "var(--primary-color)");
-			$("#groups #groups-list article#"+id+" .control-group-button").click();
-		}
-		else
-		{
-			group.removeClass("OFF");
-			group.addClass("ON");
-			group.css("background-color", group.css("border-color"));
-			$("#groups #groups-list article#"+id+" .control-group-button").click();
-		}
+			$.growl.error({ message: "Failed to Check your Permissions for this Room !" });
+		});
 	});
 }
 /*==================================================

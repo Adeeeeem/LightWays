@@ -10,26 +10,34 @@
 
 	header("Content-Type: application/json");
 
-	/* Get Card Received ID */
-	$card = $_POST["card"];
+	/* Get Room Received ID */
+	$room = $_POST["room"];
 	/* Avoid any XSS or SQL Injection */
-	$card = Security($card);
+	$room = Security($room);
 
-	if ( isset($card) && !empty($card) )
+	/* Return False for Error */
+	$response = array("result" => false);
+
+	if ( isset($room) && !empty($room) )
 	{
-		if (is_numeric($card))
+		if (is_numeric($room))
 		{
-			/* Select Card Details and its Related Rooms, Devices, Groups */
+			/* Check for Permission */
 			/* Preparing Request */
-			$request = "SELECT CARD_NAME AS name, CARD_IP AS ip, COUNT(DEVICE_ID) AS devices FROM CARDS LEFT JOIN DEVICES ON CARDS.CARD_ID = DEVICES.CARD_ID WHERE CARDS.CARD_ID = :card LIMIT 1;";
+			$request = "SELECT USER_LOGIN FROM PERMISSIONS WHERE USER_LOGIN = :login AND PERMISSION_ID = :room AND PERMISSION_TYPE = 'ROOM' LIMIT 1;";
 			/* Preparing Statement */
 			$statement = $DB_CONNECTION->prepare($request);
 			/* Binding Parameter */
-			$statement->bindParam(":card", $card, PDO::PARAM_INT);
+			$statement->bindParam(':login', $_SESSION["6C3Zq5Bpwm"], PDO::PARAM_STR, 30);
+			$statement->bindParam(':room', $room, PDO::PARAM_INT);
 			/* Execute Query */
 			$statement->execute();
-			/* Fetch Result */
-			$response = $statement->fetch();
+
+			if ($statement->rowCount() == 1)
+			{
+				/* Return True */
+				$response["result"] = true;
+			}
 		}
 	}
 
