@@ -1,5 +1,5 @@
-ErrorDocument 400 /LightWays/400.html
-ErrorDocument 401 /LightWays/401.html
-ErrorDocument 403 /LightWays/403.html
+ErrorDocument 400 /LightWays/404.html
+ErrorDocument 401 /LightWays/404.html
+ErrorDocument 403 /LightWays/404.html
 ErrorDocument 404 /LightWays/404.html
-ErrorDocument 500 /LightWays/500.html
+ErrorDocument 500 /LightWays/404.html
