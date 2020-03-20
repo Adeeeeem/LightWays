@@ -74,9 +74,9 @@ small.error{display: none;}
 			404 Not Found Page
 ==================================================*/
 #notfound{height: 75vh; background: var(--body-color);}
-#notfound div.notfound{max-width: 767px; width: 100%; line-height: 1; padding: 100px 50px; text-align: center;}
+#notfound div.notfound{max-width: 767px; width: 100%; line-height: 1; padding: 50px 50px; text-align: center;}
 #notfound div.notfound-inner{position: relative; height: 180px;}
 #notfound div.notfound-inner h1{position: absolute; left: 50%; top: 50%; -webkit-transform: translate(-50%, -50%); -ms-transform: translate(-50%, -50%); transform: translate(-50%, -50%); font-size: 8rem; font-weight: 700; margin: 0px; color: var(--orange-color); text-transform: uppercase;}
 #notfound div.notfound-inner h1>span{color: var(--blue-color);}
 #notfound div.notfound h2{font-size: 0.85rem; text-transform: uppercase; color: var(--text-color); margin-top: 0px; font-weight: 600;}
-#notfound div.notfound button{margin-bottom: 25px; margin-top: 25px; color: var(--device-color); border-radius: .25rem; background-color: var(--blue-color); width: 200px; height: 35px; line-height: 1;}
+#notfound div.notfound button{margin-bottom: 10px; margin-top: 10px; color: var(--device-color); border-radius: .25rem; background-color: var(--blue-color); width: 200px; height: 35px; line-height: 1;}
