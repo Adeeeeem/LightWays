@@ -7,7 +7,7 @@
 	}
 
 	include_once("config.php");
-	require_once("toggleLight.php");
+	//require_once("toggleLight.php");
 
 	header("Content-Type: application/json");
 
@@ -38,11 +38,11 @@
 				$pin = $row["pin"];
 				$ip = $row["ip"];
 
-				$check = toggleL($pin, $status, $ip);
+				//$check = toggleL($pin, $status, $ip);
 			}
 
-			if ($check == "true")
-			{
+			//if ($check == "true")
+			//{
 				/* Change Devices Status */
 				/* Preparing Request */
 				$request = "UPDATE DEVICES SET DEVICE_STATUS = :status WHERE GROUP_ID = :group;";
@@ -107,7 +107,7 @@
 					/* Execute Query */
 					$statement->execute();
 				}
-			}
+			//}
 		}
 	}
 

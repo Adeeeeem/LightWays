@@ -1,14 +1,5 @@
-RewriteEngine on
-RewriteBase /
-
-# Defines 404 error pages content:
+ErrorDocument 400 /LightWays/400.html
+ErrorDocument 401 /LightWays/401.html
+ErrorDocument 403 /LightWays/403.html
 ErrorDocument 404 /LightWays/404.html
-
-# for all invalid links (non existing files):
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule .* - [L,R=404]
-
-# for some valid links (existing files to be un-accessible):
-RewriteCond %{THE_REQUEST} ^.*some_file.php.*$ [NC]
-RewriteRule .* - [L,R=404]
+ErrorDocument 500 /LightWays/500.html
