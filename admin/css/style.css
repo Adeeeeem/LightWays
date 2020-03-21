@@ -99,6 +99,7 @@
 #modal-add-group #add-group-room table td div{padding: 7px !important;}
 #modal-add-group #add-group-room table td div img{padding: 5px !important; border: 2px solid var(--text-color); border-radius: 50%; cursor: pointer;}
 /* Edit Group Modal */
+#modal-edit-group div.uk-modal-body{padding-bottom: 10px;}
 #modal-edit-group div.edit-group-search-room div{padding: 0; margin: 0;}
 #modal-edit-group div.edit-group-search-room label{color: var(--blue-color); padding-left: 0.5rem; margin-bottom: 0 !important; font-size: 10px;}
 #modal-edit-group #edit-group-search-floor, #modal-edit-group #edit-group-search-room{background-color: transparent; border: none;}
@@ -135,6 +136,7 @@
 #cards #cards-list table{border: 1px solid var(--secondary-color); border-radius: .25rem; padding: 10px; width: 100%;}
 #cards #cards-list table th{padding: 0 !important; text-align: left; vertical-align: bottom; font-size: .75rem; font-weight: 400; color: #999; text-transform: uppercase;}
 /* Edit Card Modal */
+#modal-edit-card div.uk-modal-body{padding-bottom: 10px;}
 #modal-edit-card #delete-card-btn{color: #C0392B; font-size: 0.7rem !important;}
 #modal-edit-card #delete-card-btn img{margin-top: -2px;}
 /* Delete Floor Modal */
@@ -161,6 +163,7 @@
 #floors #floors-list table{border: 1px solid var(--secondary-color); border-radius: .25rem; padding: 10px; width: 100%;}
 #floors #floors-list table th{padding: 0 !important; text-align: left; vertical-align: bottom; font-size: .75rem; font-weight: 400; color: #999; text-transform: uppercase;}
 /* Edit Floor Modal */
+#modal-edit-floor div.uk-modal-body{padding-bottom: 10px;}
 #modal-edit-floor #delete-floor-btn{color: #C0392B; font-size: 0.7rem !important;}
 #modal-edit-floor #delete-floor-btn img{margin-top: -2px;}
 /* Floor Details Table */
@@ -211,6 +214,7 @@
 #modal-add-room-device #delete-room-device-btn{color: #C0392B; font-size: 0.7rem !important;}
 #modal-add-room-device #delete-room-device-btn img{margin-top: -2px;}
 /* Edit Room Modal */
+#modal-edit-room div.uk-modal-body{padding-bottom: 10px;}
 #modal-edit-room div.edit-room-search-floor div{padding: 0; margin: 0;}
 #modal-edit-room div.edit-room-search-floor label{color: var(--blue-color); padding-left: 0.5rem; margin-bottom: 0 !important; font-size: 10px;}
 #modal-edit-room #edit-room-search-floor{background-color: transparent; border: none;}

@@ -43,7 +43,6 @@ div.uk-modal-dialog.big-width{width: 95%;}
 div.uk-modal-dialog, div.uk-modal-body{background-color:  var(--body-color); border-radius: 0.5rem;}
 div.uk-modal-dialog .uk-modal-title{font-size: 1.7rem; color: var(--text-color);}
 div.uk-modal-header{background-color: var(--primary-color); padding-top: 10px; padding-bottom: 10px;}
-div.uk-modal-body{padding-bottom: 10px;}
 div.uk-modal-footer{background-color: var(--primary-color); height: 45px !important; padding: 0;}
 button.uk-modal-close-default{background-color: transparent; font-size: 70px; color: var(--orange-color); font-weight: 400; cursor: pointer; margin-top: -10px;}
 button.uk-modal-close-default:hover, button.uk-modal-close-default:focus{color: var(--blue-color);}
@@ -75,7 +74,8 @@ small.error{display: none;}
 ==================================================*/
 #notfound{height: 75vh; background: var(--body-color);}
 #notfound div.notfound{max-width: 767px; width: 100%; line-height: 1; padding: 50px 50px; text-align: center;}
-#notfound div.notfound-inner{position: relative; height: 180px;}
+#notfound div.notfound img{margin-left: -75px;}
+#notfound div.notfound-inner{position: relative; height: 180px; margin-top: -50px;}
 #notfound div.notfound-inner h1{position: absolute; left: 50%; top: 50%; -webkit-transform: translate(-50%, -50%); -ms-transform: translate(-50%, -50%); transform: translate(-50%, -50%); font-size: 8rem; font-weight: 700; margin: 0px; color: var(--orange-color); text-transform: uppercase;}
 #notfound div.notfound-inner h1>span{color: var(--blue-color);}
 #notfound div.notfound h2{font-size: 0.85rem; text-transform: uppercase; color: var(--text-color); margin-top: 0px; font-weight: 600;}
