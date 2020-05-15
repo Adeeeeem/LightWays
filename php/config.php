@@ -38,7 +38,7 @@
 	{
 		$value = trim($value);
 		$value = stripslashes($value);
-		$value = htmlspecialchars($value, ENT_HTML401 | ENT_HTML5, "UTF-8");
+		$value = htmlspecialchars($value, ENT_HTML401 | ENT_QUOTES | ENT_HTML5, "UTF-8");
 		$value = strip_tags($value);
 
 		return $value;

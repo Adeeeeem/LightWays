@@ -43,6 +43,13 @@ $(function()
 		DisplaySection("#groups", "Groups", "#groups-btn, #mobile-groups-btn");
 	});
 
+	// When Clicking on Scenes Button in Menu
+	$("#scenes-btn, #mobile-scenes-btn").click(function()
+	
+		{// Display Scenes Section
+		DisplaySection("#scenes", "Scenes", "#scenes-btn, #mobile-scenes-btn");
+	});
+
 	// When Clicking on Statistics Button in Menu
 	$("#statistics-btn, #mobile-statistics-btn").click(function()
 	{
@@ -119,6 +126,7 @@ $(function()
 		
 	$("#lights-btn, #mobile-lights-btn").click(function(){localStorage.setItem("LightWays_ADMIN_SECTION", "#lights-btn");});
 	$("#groups-btn, #mobile-groups-btn").click(function(){localStorage.setItem("LightWays_ADMIN_SECTION", "#groups-btn");});
+	$("#scenes-btn, #mobile-scenes-btn").click(function(){localStorage.setItem("LightWays_ADMIN_SECTION", "#scenes-btn");});
 	$("#statistics-btn, #mobile-statistics-btn").click(function(){localStorage.setItem("LightWays_ADMIN_SECTION", "#statistics-btn");});
 	$("#cards-btn, #mobile-cards-btn").click(function(){localStorage.setItem("LightWays_ADMIN_SECTION", "#cards-btn")});
 	$("#floors-btn, #mobile-floors-btn").click(function(){localStorage.setItem("LightWays_ADMIN_SECTION", "#floors-btn")});
@@ -948,6 +956,10 @@ $(function()
 		});
 	});
 });
+/*=========================
+		Scenes
+=========================*/
+//
 /*=========================
 		Statistics
 =========================*/
@@ -3221,6 +3233,7 @@ function HideAllSections()
 {
 	$("#lights").hide();
 	$("#groups").hide();
+	$("#scenes").hide();
 	$("#statistics").hide();
 	$("#cards").hide();
 	$("#floors").hide();
@@ -3233,6 +3246,7 @@ function HideAllSections()
 	// Remove Active Class From the Selected Section
 	$("#lights-btn, #mobile-lights-btn").removeClass("active");
 	$("#groups-btn, #mobile-groups-btn").removeClass("active");
+	$("#scenes-btn, #mobile-scenes-btn").removeClass("active");
 	$("#statistics-btn, #mobile-statistics-btn").removeClass("active");
 	$("#configuration-btn, #mobile-configuration-btn").removeClass("active");
 	$("#cards-btn, #mobile-cards-btn").removeClass("active");

@@ -44,6 +44,7 @@
 		<div class="uk-margin-medium-top uk-margin-large-bottom">
 			<button id="lights-btn" class="uk-button uk-width-1-1 uk-text-left active"><img src="../images/icons/bulb.png">Lights</button>
 			<button id="groups-btn" class="uk-button uk-width-1-1 uk-text-left"><img src="../images/icons/groups.png">Groups</button>
+			<button id="scenes-btn" class="uk-button uk-width-1-1 uk-text-left"><img src="../images/icons/scenes.png">Scenes</button>
 			<button id="statistics-btn" class="uk-button uk-width-1-1 uk-text-left"><img src="../images/icons/statistics.png">Statistics</button>
 			<ul class="uk-margin-remove" uk-accordion>
 				<li>
@@ -72,6 +73,7 @@
 		<div class="uk-margin-small-top uk-margin-large-bottom">
 			<button id="mobile-lights-btn" class="uk-button uk-width-1-1 uk-text-left active"><img src="../images/icons/bulb.png">Lights</button>
 			<button id="mobile-groups-btn" class="uk-button uk-width-1-1 uk-text-left"><img src="../images/icons/groups.png">Groups</button>
+			<button id="mobile-scenes-btn" class="uk-button uk-width-1-1 uk-text-left"><img src="../images/icons/scenes.png">Scenes</button>
 			<button id="mobile-statistics-btn" class="uk-button uk-width-1-1 uk-text-left"><img src="../images/icons/statistics.png">Statistics</button>
 			<ul class="uk-margin-remove" uk-accordion>
 				<li>
@@ -180,9 +182,13 @@
 				<!-- Data Will be Loaded from JavaScript -->
 			</div>
 		</div>
+		<!-- Scenes Section -->
+		<div id="scenes" class="uk-margin-medium-top uk-animation-fade">
+			Scenes
+		</div>
 		<!-- Statistics Section -->
 		<div id="statistics" class="uk-margin-medium-top uk-animation-fade">
-			stats
+			Statistics
 		</div>
 		<!-- Manage Cards Section -->
 		<div id="cards" class="uk-margin-medium-top uk-animation-fade">
@@ -267,13 +273,13 @@
 					<div class="uk-grid">
 						<div class="uk-width-1-2">
 							<div class="uk-margin">
-								<div class="uk-text-left"><label class="uk-form-label" for="history-start-time">Start Date</label></div>
+								<div class="uk-text-left"><label class="uk-form-label" for="history-start-time">Start Hour</label></div>
 								<input id="history-start-time" class="uk-input" type="time">
 							</div>
 						</div>
 						<div class="uk-width-1-2">
 							<div class="uk-margin">
-								<div class="uk-text-left"><label class="uk-form-label" for="history-end-time">End Date</label></div>
+								<div class="uk-text-left"><label class="uk-form-label" for="history-end-time">End Hour</label></div>
 								<input id="history-end-time" class="uk-input" type="time">
 							</div>
 						</div>
@@ -1265,7 +1271,7 @@
 			<div class="uk-modal-footer uk-text-right">
 				<div class="uk-button-group uk-width-1-1">
 					<button class="uk-button uk-width-1-1 uk-modal-close" type="button">Cancel</button>
-					<button id="delete-user-confirm-btn" class="uk-button uk-width-1-1" type="button">Yes, Delete it !</button>
+					<button id="delete-user-confirm-btn" class="uk-button uk-width-1-1" type="button">Yes, Delete !</button>
 				</div>
 			</div>
 		</div>

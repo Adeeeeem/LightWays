@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 19, 2020 at 02:28 PM
+-- Generation Time: Apr 26, 2020 at 05:17 PM
 -- Server version: 10.4.8-MariaDB
 -- PHP Version: 7.3.11
 
@@ -21,6 +21,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `LightWays`
 --
+CREATE DATABASE IF NOT EXISTS `LightWays` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `LightWays`;
 
 -- --------------------------------------------------------
 
@@ -44,6 +46,7 @@ CREATE TABLE `DEVICES` (
   `DEVICE_ID` int(10) NOT NULL,
   `DEVICE_PIN` int(2) NOT NULL,
   `DEVICE_TYPE` varchar(20) NOT NULL,
+  `DEVICE_POWER` int(10) NOT NULL,
   `DEVICE_LINE` int(2) NOT NULL,
   `DEVICE_COLUMN` int(2) NOT NULL,
   `DEVICE_STATUS` enum('ON','OFF') NOT NULL,
@@ -122,6 +125,32 @@ CREATE TABLE `ROOMS` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `SCENENING`
+--
+
+CREATE TABLE `SCENENING` (
+  `SCENE_ID` int(10) NOT NULL,
+  `DEVICE_ID` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `SCENES`
+--
+
+CREATE TABLE `SCENES` (
+  `SCENE_ID` int(10) NOT NULL,
+  `SCENE_NAME` varchar(30) NOT NULL,
+  `SCENE_START` time NOT NULL,
+  `SCENE_END` time NOT NULL,
+  `SCENE_DAYS` varchar(7) NOT NULL,
+  `SCENE_STATUS` enum('ON','OFF') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `USERS`
 --
 
@@ -188,6 +217,19 @@ ALTER TABLE `ROOMS`
   ADD KEY `fk_floor_room` (`FLOOR_ID`);
 
 --
+-- Indexes for table `SCENENING`
+--
+ALTER TABLE `SCENENING`
+  ADD PRIMARY KEY (`SCENE_ID`,`DEVICE_ID`),
+  ADD KEY `fk_device_scenening` (`DEVICE_ID`);
+
+--
+-- Indexes for table `SCENES`
+--
+ALTER TABLE `SCENES`
+  ADD PRIMARY KEY (`SCENE_ID`);
+
+--
 -- Indexes for table `USERS`
 --
 ALTER TABLE `USERS`
@@ -228,6 +270,12 @@ ALTER TABLE `ROOMS`
   MODIFY `ROOM_ID` int(10) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `SCENES`
+--
+ALTER TABLE `SCENES`
+  MODIFY `SCENE_ID` int(10) NOT NULL AUTO_INCREMENT;
+
+--
 -- Constraints for dumped tables
 --
 
@@ -256,6 +304,13 @@ ALTER TABLE `PERMISSIONS`
 --
 ALTER TABLE `ROOMS`
   ADD CONSTRAINT `fk_floor_room` FOREIGN KEY (`FLOOR_ID`) REFERENCES `FLOORS` (`FLOOR_ID`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `SCENENING`
+--
+ALTER TABLE `SCENENING`
+  ADD CONSTRAINT `fk_device_scenening` FOREIGN KEY (`DEVICE_ID`) REFERENCES `DEVICES` (`DEVICE_ID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_scene_scenening` FOREIGN KEY (`SCENE_ID`) REFERENCES `SCENES` (`SCENE_ID`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
