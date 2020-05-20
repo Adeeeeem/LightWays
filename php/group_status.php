@@ -40,7 +40,7 @@
 				$pin = $row["pin"];
 				$ip = $row["ip"];
 
-				//$check = toggleL($pin, $status, $ip);
+				$check = toggleL($pin, $status, $ip);
 			}
 
 			if ($check == "true")
