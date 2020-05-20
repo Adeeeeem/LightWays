@@ -499,6 +499,71 @@ $(function()
 		}
 	});
 });
+/*=========================
+		Support
+=========================*/
+/* Send Message */
+$(function()
+{
+	$("#contact-submit-btn").click(function()
+	{
+		var email = $("#contact-email").val();
+		var message = $("#contact-message").val();
+
+		if (!email)
+		{
+			$("#contact-email").css("border-color", "#F0506E");
+			$("#contact-email-error").show();
+		}
+		else
+		{
+			$("#contact-email").css("border-color", "var(--secondary-color)");
+			$("#contact-email-error").hide();
+		}
+
+		if (!message)
+		{
+			$("#contact-message").css("border-color", "#F0506E");
+			$("#contact-message-error").show();
+		}
+		else
+		{
+			$("#contact-message").css("border-color", "var(--secondary-color)");
+			$("#contact-message-error").hide();
+		}
+
+		// Send Message
+		if (email && message)
+		{
+			$.ajax
+			({
+				url: "../php/send_message.php",
+				type: "POST",
+				dataType: "json",
+				data: {email: email, message: message},
+			})
+			.done(function(response)
+			{
+				ResetContactForm();
+
+				if (response.result)
+				{
+					$.growl.notice({ message: "Your Message has been Successfully Sent!" });
+				}
+				else
+				{
+					$.growl.error({ message: "Oops, There was an Error Sending Your Message !" });
+				}
+			})
+			.fail(function()
+			{
+				$.growl.error({ message: "Oops, There was an Error Sending Your Message !" });
+				ResetContactForm();
+			});
+				
+		}
+	});
+});
 /*==================================================
 				Functions
 ==================================================*/
@@ -681,7 +746,7 @@ function LoadDevicesLightsSection(room)
 
 			for (var i = 0; i < len; i++)
 			{
-				var tooltip = "Type <span>"+response[i].type+"</span><br>Pin <span>"+response[i].pin+"</span><br>Card <span>"+response[i].card+"</span><br>Card IP <span>"+response[i].ip+"</span>";
+				var tooltip = "Type <span>"+response[i].type+"</span><br>Watts <span>"+response[i].power+"</span><br>Card <span>"+response[i].card+"</span><br>Card IP <span>"+response[i].ip+"</span><br>Card Pin <span>"+response[i].pin+"</span>";
 				$("#lights table#lights-room-devices tbody td#"+response[i].lin+"-"+response[i].col).attr("class", "device");
 				$("#lights table#lights-room-devices tbody td#"+response[i].lin+"-"+response[i].col+" div").html("<img id='"+response[i].id+"' class='"+response[i].status+"' src='../images/devices/"+response[i].type+"_"+response[i].status+".png' width='50' height='50' uk-tooltip='"+tooltip+"'>");
 			}
@@ -1003,4 +1068,19 @@ function ResetSettingsAccountForm()
 	$("#setting-old-password-error").hide();
 	$("#setting-new-password-error").hide();
 	$("#setting-confirm-new-password-error").hide();
+}
+/*==================================================
+		Support Section Functions
+==================================================*/
+/* Reset Contact Form Account */
+function ResetContactForm()
+{
+	$("#contact-email").val("");
+	$("#contact-message").val("");
+
+	$("#contact-email").css("border-color", "var(--secondary-color)");
+	$("#contact-message").css("border-color", "var(--secondary-color)");
+
+	$("#contact-email-error").hide();
+	$("#contact-message-error").hide();
 }

@@ -236,7 +236,10 @@ $(function()
 /* Load Groups into Groups List */
 $(window).on("load", function()
 {
-	DisplayGroupsListGroupsSection();
+	if (localStorage.getItem("LightWays_ADMIN_SECTION") == "#groups-btn")
+	{
+		DisplayGroupsListGroupsSection();
+	}
 
 	$("#groups-btn, #mobile-groups-btn").click(function()
 	{
@@ -963,14 +966,54 @@ $(function()
 /*=========================
 		Statistics
 =========================*/
-//
+$(window).on("load", function()
+{
+	$("#statistics #stats-menu p#month").removeClass("active");
+	$("#statistics #stats-menu p#year").removeClass("active");
+	$("#statistics #stats-menu p#week").addClass("active");
+
+	if (localStorage.getItem("LightWays_ADMIN_SECTION") == "#statistics-btn")
+	{
+		LoadWeeklyStats();
+	}
+
+	$("#statistics-btn, #mobile-statistics-btn, #statistics #stats-menu p#week").click(function()
+	{
+		$("#statistics #stats-menu p#month").removeClass("active");
+		$("#statistics #stats-menu p#year").removeClass("active");
+		$("#statistics #stats-menu p#week").addClass("active");
+
+		LoadWeeklyStats();
+	});
+
+	$("#statistics #stats-menu p#month").click(function()
+	{
+		$("#statistics #stats-menu p#week").removeClass("active");
+		$("#statistics #stats-menu p#year").removeClass("active");
+		$("#statistics #stats-menu p#month").addClass("active");
+
+		LoadMonthlyStats();
+	});
+
+	$("#statistics #stats-menu p#year").click(function()
+	{
+		$("#statistics #stats-menu p#week").removeClass("active");
+		$("#statistics #stats-menu p#month").removeClass("active");
+		$("#statistics #stats-menu p#year").addClass("active");
+
+		LoadYearlyStats();
+	});
+});
 /*=========================
 		Cards
 =========================*/
 /* Load Cards into Cards List */
 $(window).on("load", function()
 {
-	LoadCardsSection();
+	if (localStorage.getItem("LightWays_ADMIN_SECTION") == "#cards-btn")
+	{
+		LoadCardsSection();
+	}
 
 	$("#cards-btn, #mobile-cards-btn").click(function()
 	{
@@ -1213,7 +1256,10 @@ $(function()
 /* Load Floors into Floors List */
 $(window).on("load", function()
 {
-	DisplayFloorsListFloorsSection();
+	if (localStorage.getItem("LightWays_ADMIN_SECTION") == "#floors-btn")
+	{
+		DisplayFloorsListFloorsSection();
+	}
 
 	$("#floors-btn, #mobile-floors-btn").click(function()
 	{
@@ -1455,7 +1501,10 @@ $(function()
 /* Load Rooms into Rooms List */
 $(window).on("load", function()
 {
-	DisplayRoomsListRoomsSection();
+	if (localStorage.getItem("LightWays_ADMIN_SECTION") == "#rooms-btn")
+	{
+		DisplayRoomsListRoomsSection();
+	}
 
 	$("#rooms-btn, #mobile-rooms-btn").click(function()
 	{
@@ -1470,6 +1519,7 @@ $(function()
 	var device; // Room's Device
 	var coords; // Room's Device Coords
 	var SelectedDeviceType = [];
+	var SelectedDevicePower = [];
 	var SelectedDevicePin = [];
 	var SelectedDeviceCoords = [];
 	var SelectedDeviceCard = [];
@@ -1546,6 +1596,7 @@ $(function()
 			DisplayDevicesAddRoomRoomsSection(width, height);
 
 			SelectedDeviceType = [];
+			SelectedDevicePower = [];
 			SelectedDevicePin = [];
 			SelectedDeviceCoords = [];
 			SelectedDeviceCard = [];
@@ -1594,6 +1645,7 @@ $(function()
 				if (SelectedDeviceCoords[i] == coords)
 				{
 					$("#add-room-device-type").val(SelectedDeviceType[i]);
+					$("#add-room-device-power").val(SelectedDevicePower[i]);
 					$("#add-room-device-card").val(SelectedDeviceCard[i]).prop("selected", true); // Set Card Device Selected
 					$("#add-room-device-pin").val(SelectedDevicePin[i]);
 				}
@@ -1619,6 +1671,7 @@ $(function()
 			{
 				SelectedDeviceCoords.splice(i, 1); // Delete when Found
 				SelectedDeviceType.splice(i, 1);
+				SelectedDevicePower.splice(i, 1);
 				SelectedDeviceCard.splice(i, 1);
 				SelectedDevicePin.splice(i, 1);
 			}
@@ -1632,6 +1685,7 @@ $(function()
 	$("#add-room-device-confirm-btn").click(function()
 	{
 		var type = $("#add-room-device-type").val();
+		var power = $("#add-room-device-power").val();
 		var card = $("#add-room-device-card").val();
 		var pin = $("#add-room-device-pin").val();
 
@@ -1644,6 +1698,17 @@ $(function()
 		{
 			$("#add-room-device-type").css("border-color", "var(--secondary-color)");
 			$("#add-room-device-type-error").hide()
+		}
+
+		if (!power)
+		{
+			$("#add-room-device-power").css("border-color", "#F0506E");
+			$("#add-room-device-power-error").show();
+		}
+		else
+		{
+			$("#add-room-device-power").css("border-color", "var(--secondary-color)");
+			$("#add-room-device-power-error").hide();
 		}
 
 		if (card == null)
@@ -1668,23 +1733,25 @@ $(function()
 			$("#add-room-device-pin-error").hide();
 		}
 
-		if ( (type != "NONE") && (pin) && (card != null) )
+		if ( (type != "NONE") && (power) && (pin) && (card != null) )
 		{
 			if (!SelectedDeviceCoords.includes(coords))
 			{
 				SelectedDeviceCoords.push(coords);
 				SelectedDeviceType.push(type);
+				SelectedDevicePower.push(power);
 				SelectedDeviceCard.push(card);
 				SelectedDevicePin.push(pin);
 				$("#modal-add-room #add-room-room table td#"+coords+" img").addClass("SELECTED");
 			}
 			else
 			{
-				for (var i = 0; i < SelectedDeviceCoords.length; i++) // Loop Array Search for the Item to Delete
+				for (var i = 0; i < SelectedDeviceCoords.length; i++) // Loop Array Search for the Item to Update
 				{
 					if (SelectedDeviceCoords[i] == coords)
 					{
 						SelectedDeviceType[i] = type;
+						SelectedDevicePower[i] = power;
 						SelectedDeviceCard[i] = card;
 						SelectedDevicePin[i] = pin;
 					}
@@ -1706,6 +1773,7 @@ $(function()
 		height = "";
 		SelectedDevicePin = [];
 		SelectedDeviceType = [];
+		SelectedDevicePower = [];
 		SelectedDeviceCard = [];
 		SelectedDeviceCoords = [];
 	});
@@ -1766,6 +1834,7 @@ $(function()
 		{
 			var SelectedDeviceCoordsJson = JSON.stringify(SelectedDeviceCoords); // Get Selected Devices Coords
 			var SelectedDeviceTypeJson = JSON.stringify(SelectedDeviceType); // Get Selected Devices Type
+			var SelectedDevicePowerJson = JSON.stringify(SelectedDevicePower); // Get Selected Devcices Power
 			var SelectedDeviceCardJson = JSON.stringify(SelectedDeviceCard); // Get Selected Devices Card
 			var SelectedDevicePinJson = JSON.stringify(SelectedDevicePin); // Get Selected Devices Pin
 
@@ -1774,7 +1843,7 @@ $(function()
 				url: "../php/add_room.php",
 				type: "POST",
 				dataType: "json",
-				data: {name: room_name, width: room_width, height: room_height, floor: room_floor, devices_coords: SelectedDeviceCoordsJson, devices_type: SelectedDeviceTypeJson, devices_card: SelectedDeviceCardJson, devices_pin: SelectedDevicePinJson},
+				data: {name: room_name, width: room_width, height: room_height, floor: room_floor, devices_coords: SelectedDeviceCoordsJson, devices_type: SelectedDeviceTypeJson, devices_power: SelectedDevicePowerJson, devices_card: SelectedDeviceCardJson, devices_pin: SelectedDevicePinJson},
 			})
 			.done(function(response)
 			{
@@ -1785,7 +1854,7 @@ $(function()
 
 				if (len != 0)
 				{
-					$.growl.notice({ message: "Room has been Successfully Added !" }); // Success Notification	
+					$.growl.notice({ message: "Room has been Successfully Added!" }); // Success Notification	
 
 					if($("#rooms-list div#"+room_floor+".uk-section").find("table.uk-margin-small-top").length > 0)
 					{
@@ -1815,6 +1884,7 @@ $(function()
 				height = "";
 				SelectedDevicePin = [];
 				SelectedDeviceType = [];
+				SelectedDevicePower = [];
 				SelectedDeviceCard = [];
 				SelectedDeviceCoords = [];
 			})
@@ -1827,6 +1897,7 @@ $(function()
 				height = "";
 				SelectedDevicePin = [];
 				SelectedDeviceType = [];
+				SelectedDevicePower = [];
 				SelectedDeviceCard = [];
 				SelectedDeviceCoords = [];
 			});
@@ -1841,6 +1912,7 @@ $(function()
 	var width; // Room WIDTH
 	var height; // Room HEIGHT
 	var SelectedDeviceType = [];
+	var SelectedDevicePower = [];
 	var SelectedDeviceCard = [];
 	var SelectedDevicePin = [];
 	var SelectedDeviceCoords = [];
@@ -1950,6 +2022,7 @@ $(function()
 						$("#modal-edit-room table#edit-room-room-devices td#"+response[i].lin+"-"+response[i].col).html("<div class='device'><img id='"+response[i].device+"' src='../images/devices/"+response[i].type+"_ON.png' style='background-color: "+bgcolor+";' width='50' height='50'></div>");
 
 						SelectedDeviceType.push(response[i].type);
+						SelectedDevicePower.push(response[i].power);
 						SelectedDeviceCard.push(response[i].card);
 						SelectedDevicePin.push(response[i].pin);
 						SelectedDeviceCoords.push(response[i].lin+"-"+response[i].col);
@@ -2021,6 +2094,7 @@ $(function()
 		device = "";
 		id = "";
 		SelectedDeviceType = [];
+		SelectedDevicePower = [];
 		SelectedDeviceCard = [];
 		SelectedDevicePin = [];
 		SelectedDeviceCoords = [];
@@ -2042,6 +2116,7 @@ $(function()
 			if (SelectedDeviceId[i] == id)
 			{
 				$("#edit-room-device-type").val(SelectedDeviceType[i]);
+				$("#edit-room-device-power").val(SelectedDevicePower[i]);
 				$("#edit-room-device-card").val(SelectedDeviceCard[i]);
 				$("#edit-room-device-pin").val(SelectedDevicePin[i]);
 			}
@@ -2058,6 +2133,7 @@ $(function()
 	$("#edit-room-device-confirm-btn").click(function()
 	{
 		var type = $("#edit-room-device-type").val();
+		var power = $("#edit-room-device-power").val();
 		var card = $("#edit-room-device-card").val();
 		var pin = $("#edit-room-device-pin").val();
 
@@ -2070,6 +2146,17 @@ $(function()
 		{
 			$("#edit-room-device-type").css("border-color", "var(--secondary-color)");
 			$("#edit-room-device-type-error").hide()
+		}
+
+		if (!power)
+		{
+			$("#edit-room-device-power").css("border-color", "#F0506E");
+			$("#edit-room-device-power-error").show();
+		}
+		else
+		{
+			$("#edit-room-device-power").css("border-color", "var(--secondary-color)");
+			$("#edit-room-device-power-error").hide();	
 		}
 
 		if (card == null)
@@ -2094,13 +2181,14 @@ $(function()
 			$("#edit-room-device-pin-error").hide();	
 		}
 
-		if ( (type != "NONE") && (pin) && (card != null) )
+		if ( (type != "NONE") && (power) && (pin) && (card != null) )
 		{
 			for (var i = 0; i < SelectedDeviceId.length; i++) // Loop Array Search for the Item to Delete
 			{
 				if (SelectedDeviceId[i] == id)
 				{
 					SelectedDeviceType[i] = type;
+					SelectedDevicePower[i] = power;
 					SelectedDeviceCard[i] = card;
 					SelectedDevicePin[i] = pin;
 				}
@@ -2134,6 +2222,7 @@ $(function()
 		{
 			var SelectedDeviceIdJson = JSON.stringify(SelectedDeviceId); // Get Selected Devices Id
 			var SelectedDeviceTypeJson = JSON.stringify(SelectedDeviceType); // Get Selected Devices Type
+			var SelectedDevicePowerJson = JSON.stringify(SelectedDevicePower); // Get Selected Devices Power
 			var SelectedDeviceCardJson = JSON.stringify(SelectedDeviceCard); // Get Selected Devices Card
 			var SelectedDevicePinJson = JSON.stringify(SelectedDevicePin); // Get Selected Devices Pin
 
@@ -2142,7 +2231,7 @@ $(function()
 				url: "../php/update_room.php",
 				type: "POST",
 				dataType: "json",
-				data: {room: room, name: room_name, floor: new_room_floor, devices_id: SelectedDeviceIdJson, devices_type: SelectedDeviceTypeJson, devices_card: SelectedDeviceCardJson, devices_pin: SelectedDevicePinJson},
+				data: {room: room, name: room_name, floor: new_room_floor, devices_id: SelectedDeviceIdJson, devices_type: SelectedDeviceTypeJson, devices_power: SelectedDevicePowerJson, devices_card: SelectedDeviceCardJson, devices_pin: SelectedDevicePinJson},
 			})
 			.done(function(response)
 			{
@@ -2190,6 +2279,7 @@ $(function()
 				device = "";
 				id = "";
 				SelectedDeviceType = [];
+				SelectedDevicePower = [];
 				SelectedDeviceCard = [];
 				SelectedDevicePin = [];
 				SelectedDeviceCoords = [];
@@ -2210,6 +2300,7 @@ $(function()
 				device = "";
 				id = "";
 				SelectedDeviceType = [];
+				SelectedDevicePower = [];
 				SelectedDeviceCard = [];
 				SelectedDevicePin = [];
 				SelectedDeviceCoords = [];
@@ -2269,6 +2360,7 @@ $(function()
 				id = "";
 				SelectedDeviceType = [];
 				SelectedDevicePin = [];
+				SelectedDevicePower = [];
 				SelectedDeviceCoords = [];
 				SelectedDeviceColor = [];
 				SelectedDeviceId = [];
@@ -2293,7 +2385,10 @@ $(function()
 /* Load Users into Users List */
 $(window).on("load", function()
 {
-	DisplayUsersListUsersSection();
+	if (localStorage.getItem("LightWays_ADMIN_SECTION") == "#users-btn")
+	{
+		DisplayUsersListUsersSection();
+	}
 
 	$("#users-btn, #mobile-users-btn").click(function()
 	{
@@ -2845,7 +2940,10 @@ $(function()
 /* Load Users into Users List */
 $(window).on("load", function()
 {
-	LoadHistory();
+	if (localStorage.getItem("LightWays_ADMIN_SECTION") == "#history-btn")
+	{
+		LoadHistory();
+	}
 
 	$("#history-btn, #mobile-history-btn").click(function()
 	{
@@ -3225,6 +3323,71 @@ $(function()
 		}
 	});
 });
+/*=========================
+		Support
+=========================*/
+/* Send Message */
+$(function()
+{
+	$("#contact-submit-btn").click(function()
+	{
+		var email = $("#contact-email").val();
+		var message = $("#contact-message").val();
+
+		if (!email)
+		{
+			$("#contact-email").css("border-color", "#F0506E");
+			$("#contact-email-error").show();
+		}
+		else
+		{
+			$("#contact-email").css("border-color", "var(--secondary-color)");
+			$("#contact-email-error").hide();
+		}
+
+		if (!message)
+		{
+			$("#contact-message").css("border-color", "#F0506E");
+			$("#contact-message-error").show();
+		}
+		else
+		{
+			$("#contact-message").css("border-color", "var(--secondary-color)");
+			$("#contact-message-error").hide();
+		}
+
+		// Send Message
+		if (email && message)
+		{
+			$.ajax
+			({
+				url: "../php/send_message.php",
+				type: "POST",
+				dataType: "json",
+				data: {email: email, message: message},
+			})
+			.done(function(response)
+			{
+				ResetContactForm();
+
+				if (response.result)
+				{
+					$.growl.notice({ message: "Your Message has been Successfully Sent!" });
+				}
+				else
+				{
+					$.growl.error({ message: "Oops, There was an Error Sending Your Message !" });
+				}
+			})
+			.fail(function()
+			{
+				$.growl.error({ message: "Oops, There was an Error Sending Your Message !" });
+				ResetContactForm();
+			});
+				
+		}
+	});
+});
 /*==================================================
 				Functions
 ==================================================*/
@@ -3268,6 +3431,30 @@ function DisplaySection(Section, Title, Button)
 	$(Section).show();
 	// Make Button Active
 	$(Button).addClass("active");
+}
+/* String to Date */
+function formatDate(date)
+{
+	var d = new Date(date), month = '' + (d.getMonth() + 1), day = '' + d.getDate(), year = d.getFullYear();
+
+	if (month.length < 2) month = '0' + month;
+
+	if (day.length < 2) day = '0' + day;
+
+	return [year, month, day].join('-');
+}
+/* Calculate Difference Between Two Times In Hours */
+function CalculateDifferenceinHours(time1, time2)
+{
+	var startDate = new Date("January 1, 1970 " + time1);
+	var endDate = new Date("January 1, 1970 " + time2);
+
+	if (startDate > endDate)
+	{
+		endDate = new Date("January 2, 1970 " + time2);
+	}
+
+	return Math.abs(endDate - startDate) / 36e5;
 }
 /*==================================================
 		Lights Section Functions
@@ -3422,7 +3609,7 @@ function LoadDevicesLightsSection(room)
 
 			for (var i = 0; i < len; i++)
 			{
-				var tooltip = "Type <span>"+response[i].type+"</span><br>Pin <span>"+response[i].pin+"</span><br>Card <span>"+response[i].card+"</span><br>Card IP <span>"+response[i].ip+"</span>";
+				var tooltip = "Type <span>"+response[i].type+"</span><br>Watts <span>"+response[i].power+"</span><br>Card <span>"+response[i].card+"</span><br>Card IP <span>"+response[i].ip+"</span><br>Card Pin <span>"+response[i].pin+"</span>";
 				$("#lights table#lights-room-devices tbody td#"+response[i].lin+"-"+response[i].col).attr("class", "device");
 				$("#lights table#lights-room-devices tbody td#"+response[i].lin+"-"+response[i].col+" div").html("<img id='"+response[i].id+"' class='"+response[i].status+"' src='../images/devices/"+response[i].type+"_"+response[i].status+".png' width='50' height='50' uk-tooltip='"+tooltip+"'>");
 			}
@@ -3947,7 +4134,275 @@ function ResetEditGroupModal()
 /*==================================================
 		Statistics Section Functions
 ==================================================*/
-//
+/* Calculate Weekly Consumption Stats */
+function LoadWeeklyStats()
+{
+	var chart = document.getElementById("chart").getContext("2d"),
+	gradient = chart.createLinearGradient(0, 0, 0, 450);
+
+	gradient.addColorStop(0, "rgba(6, 133, 213, 0.5)");
+	gradient.addColorStop(0.5, "rgba(6, 133, 213, 0.25)");
+	gradient.addColorStop(1, "rgba(6, 133, 213, 0)");
+
+	Chart.defaults.global.defaultFontFamily = "Lato";
+
+	var data  =
+	{
+		labels: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+		datasets:
+		[{
+			label: "kWh",
+			data: [0, 0, 0, 0, 0, 0, 0],
+			backgroundColor: gradient,
+			borderColor: "rgba(6, 133, 213, 0.75)",
+			labelText: "Creative Thinking",
+			pointBackgroundColor: "rgba(6, 133, 213, 1)",
+			pointHoverRadius: 4,
+			pointRadius: 4,
+		}],
+	};
+
+	var options =
+	{
+		title: {display: true, text: "Weekly Electricity Usage kWh", fontSize: 14, padding: 20},
+		legend: {display: false},
+		responsive: true,
+		maintainAspectRatio: true,
+		animation: {easing: "easeInOutQuad", duration: 520},
+		elements: {line: {tension: 0.4}},
+		layout: {padding: { left: 20, right: 10, bottom: 0, top: 0}},
+		scales: {yAxes: [{ticks: {beginAtZero: true}}]},
+		tooltips: {backgroundColor: "rgba(0, 0, 0, 0.7)", titleAlign: "center", bodyAlign: "center", caretPadding: 10, displayColors: false, xPadding: 40, yPadding: 10, animationEnabled: true, callbacks:
+		{
+			title: function(tooltipItems, data)
+			{
+				var day;
+
+				switch (tooltipItems[0].xLabel)
+				{
+					case "Sun":
+							day = "Sunday";
+						break;
+					case "Mon":
+							day = "Monday";
+						break;
+					case "Tue":
+							day = "Tuesday";
+						break;
+					case "Wed":
+							day = "Wednesday";
+						break;
+					case "Thu":
+							day = "Thursday";
+						break;
+					case "Fri":
+							day = "Friday";
+						break;
+					case "Sat":
+							day = "Saturday";
+						break;
+				}
+
+				return day;
+			},
+			label: function(tooltipItem, data)
+			{
+				return data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index] + "  kWh";
+			}
+		}}
+	};
+
+	$.ajax
+	({
+		url: "../php/week_stats.php",
+		type: "POST",
+		dataType: "json",
+	})
+	.done(function(response)
+	{
+		var len = response.length;
+
+		if (len != 0)
+		{
+			var now = new Date();
+			var today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+			var lastSunday = new Date(today.setDate(today.getDate()-today.getDay()));
+
+			var sun = formatDate(lastSunday);
+			var mon = formatDate(lastSunday.setDate(lastSunday.getDate() + 1));
+			var tue = formatDate(lastSunday.setDate(lastSunday.getDate() + 1));
+			var wed = formatDate(lastSunday.setDate(lastSunday.getDate() + 1));
+			var thu = formatDate(lastSunday.setDate(lastSunday.getDate() + 1));
+			var fri = formatDate(lastSunday.setDate(lastSunday.getDate() + 1));
+			var sat = formatDate(lastSunday.setDate(lastSunday.getDate() + 1));
+
+			var SundayHistoryArray = [];
+			var MondayHistoryArray = [];
+			var TuesdayHistoryArray = [];
+			var WednesdayHistoryArray = [];
+			var ThursdayHistoryArray = [];
+			var FridayHistoryArray = [];
+			var SaturdayHistoryArray = [];
+
+			for (var i = 0; i < len; i++)
+			{
+				switch (response[i].date)
+				{
+					case sun:
+							SundayHistoryArray.push(response[i]);
+						break;
+					case mon:
+							MondayHistoryArray.push(response[i]);
+						break;
+					case tue:
+							TuesdayHistoryArray.push(response[i]);
+						break;
+					case wed:
+							WednesdayHistoryArray.push(response[i]);
+						break;
+					case thu:
+							ThursdayHistoryArray.push(response[i]);
+						break;
+					case fri:
+							FridayHistoryArray.push(response[i]);
+						break;
+					case sat:
+							SaturdayHistoryArray.push(response[i]);
+						break;
+				}
+			}
+
+			var SundayConsumption = CalculateWattsConsumption(SundayHistoryArray);
+			var MondayConsumption = CalculateWattsConsumption(MondayHistoryArray);
+			var TuesdayConsumption = CalculateWattsConsumption(TuesdayHistoryArray);
+			var WednesdayConsumption = CalculateWattsConsumption(WednesdayHistoryArray);
+			var ThursdayConsumption = CalculateWattsConsumption(ThursdayHistoryArray);
+			var FridayConsumption = CalculateWattsConsumption(FridayHistoryArray);
+			var SaturdayConsumption = CalculateWattsConsumption(SaturdayHistoryArray);
+
+			data  =
+			{
+				labels: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+				datasets:
+				[{
+					label: "kWh",
+					data: [SundayConsumption, MondayConsumption, TuesdayConsumption, WednesdayConsumption, ThursdayConsumption, FridayConsumption, SaturdayConsumption],
+					backgroundColor: gradient,
+					borderColor: "rgba(6, 133, 213, 0.75)",
+					labelText: "Creative Thinking",
+					pointBackgroundColor: "rgba(6, 133, 213, 1)",
+					pointHoverRadius: 4,
+					pointRadius: 4,
+				}],
+			};
+		}
+
+		var chartInstance = new Chart(chart, {type: "line", data: data, options: options});
+	})
+	.fail(function()
+	{
+		$.growl.error({ message: "Failed to Load Statistics !" });
+
+		var chartInstance = new Chart(chart, {type: "line", data: data, options: options});
+	});
+}
+/* Calculate Monthly Consumption Stats */
+function LoadMonthlyStats()
+{
+	//
+}
+/* Calculate Yearly Consumption Stats */
+function LoadYearlyStats()
+{
+	//
+}
+/* Calculate Watts Consumption */
+function CalculateWattsConsumption(ArrayData)
+{
+	var len = ArrayData.length;
+	var time;
+	var consumption = 0;
+	var Data = [];
+	Array.prototype.push.apply(Data, ArrayData); // Copy Array to use later for devices not turned off
+
+	for (var i = 0; i < len; i++)
+	{
+		if (ArrayData[i].type == "ON")
+		{
+			var j = i + 1;
+			var id = ArrayData[i].id;
+			var done = false;
+			var off_time;
+
+			while ( (j < len) && !done ) // Search for the off to calculate the time difference
+			{
+				if ( (ArrayData[j].type == "OFF") && (ArrayData[j].id == id) ) // If Off time found leave the loop
+				{
+					off_time = ArrayData[j].time;
+					done = true;
+					break;
+				}
+
+				j++;
+			}
+
+			if (done)
+			{
+				time = CalculateDifferenceinHours(ArrayData[i].time, ArrayData[j].time);
+			}
+			else // If off time not found
+			{
+				var today = new Date(); // Get current day
+				var current_time = today.toTimeString().slice(0,8); // Get current Time
+				today = formatDate(today);
+
+				if (today == ArrayData[i].date) // If the day is today
+				{
+					time = CalculateDifferenceinHours(ArrayData[i].time, current_time); // Calculate fromm time on till current time
+				}
+				else
+				{
+					time = CalculateDifferenceinHours(ArrayData[i].time, "00:00:00"); // Calculate fromm time on till mid-night
+				}
+			}
+
+			for (var k = Data.length - 1; k >= 0; k--) // Delete the on and off time from Data array
+			{
+				if ( (Data[k].id == ArrayData[i].id) && (Data[k].data == ArrayData[i].data) && ( (Data[k].time == ArrayData[i].time) || (Data[k].time == off_time) ) )
+				{
+					Data.splice(k, 1); // Delete when Found
+				}
+			}
+
+			// Calculate Consumption kWh for current Day
+			// E(kWh/day) = P(W) × t(h/day) / 1000(W/kW)
+			consumption += (getDeviceWattsPower(ArrayData[i].id) * time) / 1000; // kWh
+		}
+	}
+
+	// For the Devices that left on yesterday and turned off today, start counting from mid-night to the off time
+	for (var i = 0; i < Data.length; i++)
+	{
+		time = CalculateDifferenceinHours("00:00:00", Data[i].time);
+		// Calculate Consumption kWh for current Day
+		// E(kWh/day) = P(W) × t(h/day) / 1000(W/kW)
+		consumption += (getDeviceWattsPower(ArrayData[i].id) * time) / 1000; // kWh
+	}
+
+	return Math.round(consumption);
+}
+/* Get Device's Electric Power (Watts) */
+function getDeviceWattsPower(id)
+{
+	return $.ajax
+	({
+		async: false,
+		url: "../php/device_power.php",
+		type: "POST",
+		dataType: "text",
+		data: {id: id},
+	}).responseText;
+}
 /*==================================================
 		Cards Section Functions
 ==================================================*/
@@ -4158,13 +4613,16 @@ function ResetAddRoomModal()
 function ResetAddRoomDeviceModal()
 {
 	$("#add-room-device-type").val($("#add-room-device-type option:first").val());
+	$("#add-room-device-power").val("");
 	$("#add-room-device-pin").val("");
 
 	$("#add-room-device-type").css("border-color", "var(--secondary-color)");
+	$("#add-room-device-power").css("border-color", "var(--secondary-color)");
 	$("#add-room-device-card").css("border-color", "var(--secondary-color)");
 	$("#add-room-device-pin").css("border-color", "var(--secondary-color)");
 
 	$("#add-room-device-type-error").hide();
+	$("#add-room-device-power-error").hide();
 	$("#add-room-device-card-error").hide();
 	$("#add-room-device-pin-error").hide(); 
 }
@@ -4183,13 +4641,16 @@ function ResetEditRoomModal()
 function ResetEditRoomDeviceModal()
 {
 	$("#edit-room-device-type").val($("#edit-room-device-type option:first").val());
+	$("#edit-room-device-power").val("");
 	$("#edit-room-device-pin").val("");
 
 	$("#edit-room-device-type").css("border-color", "var(--secondary-color)");
+	$("#edit-room-device-power").css("border-color", "var(--secondary-color)");
 	$("#edit-room-device-card").css("border-color", "var(--secondary-color)");
 	$("#edit-room-device-pin").css("border-color", "var(--secondary-color)");
 
 	$("#edit-room-device-type-error").hide();
+	$("#edit-room-device-power-error").hide();
 	$("#edit-room-device-card-error").hide();
 	$("#edit-room-device-pin-error").hide(); 
 }
@@ -4433,4 +4894,19 @@ function ResetSettingsAccountForm()
 	$("#setting-old-password-error").hide();
 	$("#setting-new-password-error").hide();
 	$("#setting-confirm-new-password-error").hide();
+}
+/*==================================================
+		Support Section Functions
+==================================================*/
+/* Reset Contact Form Account */
+function ResetContactForm()
+{
+	$("#contact-email").val("");
+	$("#contact-message").val("");
+
+	$("#contact-email").css("border-color", "var(--secondary-color)");
+	$("#contact-message").css("border-color", "var(--secondary-color)");
+
+	$("#contact-email-error").hide();
+	$("#contact-message-error").hide();
 }

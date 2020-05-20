@@ -6,6 +6,8 @@
 	<!-- The Author of this page -->
 	<meta name="author" content="Mohamed Adem Ben Moussa">
 	<meta name="author" content="Mohamed Mehdi Charni">
+	<!-- Refresh Website every 24 Hour -->
+	<meta http-equiv="refresh" content="86400">
 	<!-- Specify the character encoding of your content -->
 	<meta charset="UTF-8">
 	<!-- Tell Internet Explorer to use the latest Rendering Engine -->
@@ -28,6 +30,8 @@
 	<script type="text/javascript" src="../js/preloader.js"></script>
 	<!-- Session JavaScript -->
 	<script type="text/javascript" src="js/session.js"></script>
+	<!-- Charts JavaScript -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
 </head>
 <body>
 
@@ -188,7 +192,22 @@
 		</div>
 		<!-- Statistics Section -->
 		<div id="statistics" class="uk-margin-medium-top uk-animation-fade">
-			Statistics
+			<center>
+				<div id="stats-menu" class="uk-text-center">
+					<div uk-grid>
+						<div class="uk-width-1-3"><p id="week" class="active">Week</p></div>
+						<div class="uk-width-1-3"><p id="month">Month</p></div>
+						<div class="uk-width-1-3"><p id="year">Year</p></div>
+					</div>
+				</div>
+				<div id="line-chart" class="uk-margin-medium-top" uk-grid>
+					<div class="uk-width-1-2@m">
+						<div class="line-chart">
+							<canvas id="chart"></canvas>
+						</div>
+					</div>
+				</div>
+			</center>
 		</div>
 		<!-- Manage Cards Section -->
 		<div id="cards" class="uk-margin-medium-top uk-animation-fade">
@@ -415,10 +434,128 @@
 		</div>
 		<!-- Support Section -->
 		<div id="support" class="uk-margin-medium-top uk-animation-fade">
-			<h4 class="uk-text-left">About <span class="light">Light</span><span class="ways">Ways</span> :</h4>
+			<h4 class="uk-text-left support-titles">About <span class="light">Light</span><span class="ways">Ways</span> :</h4>
+			<p class="uk-text-left uk-text-small">MISSING MISSING MISSING MISSING MISSING MISSING MISSING MISSING MISSING MISSING MISSING MISSING MISSING MISSING MISSING MISSING MISSING MISSING MISSING MISSING MISSING MISSING MISSING MISSING MISSING MISSING MISSING MISSING MISSING MISSING MISSING MISSING MISSING MISSING MISSING MISSING MISSING MISSING MISSING MISSING MISSING MISSING MISSING MISSING MISSING MISSING MISSING MISSING MISSING</p>
+			<!-- Contact -->
+			<h4 class="uk-text-left support-titles">Contact Us :</h4>
+			<div class="uk-margin-small-top">
+				<div class="uk-child-width-expand@s uk-text-center" uk-grid>
+					<div class="contact-outer">
+						<div id="contact-left" class="uk-card uk-card-body">
+							<div class="uk-text-center">
+								<div>
+									<div id="details" class="uk-text-left">
+										<p class="uk-text-small"><img src="../images/icons/email.png" width="25" height="25"> &nbsp; Hamdi.Zaghouani@gmail.com</p>
+										<p class="uk-text-small"><img src="../images/icons/phone.png" width="25" height="25"> &nbsp; +216 31 404 190</p>
+										<p class="uk-text-small"><img src="../images/icons/location.png" width="25" height="25"> &nbsp; 8, 8020 Rue de Nil, Soliman</p>
+									</div>
+									<div id="social" class="uk-text-left">
+										<a href="#" target="_blank" class="uk-icon-link uk-margin-small-right"><img src="../images/icons/facebook.png" width="35" height="35"></a>
+										<a href="https://www.linkedin.com/company/telecom-for-future/" target="_blank" class="uk-icon-link uk-margin-small-right"><img src="../images/icons/linkedin.png" width="35" height="35"></a>
+									</div>
+								</div>
+								<div>
+									<section id="map" class="uk-margin-small-top">
+										<iframe src="https://maps.google.com/maps?width=100%&amp;height=600&amp;hl=en&amp;q=8%2C%208020%20Rue%20du%20Nil%2C%20Soliman+(TELECOM%20FOR%20FUTURE)&amp;ie=UTF8&amp;t=&amp;z=17&amp;iwloc=B&amp;output=embed" frameborder="0" style="border:0" allowfullscreen></iframe>
+									</section>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="contact-outer">
+						<div id="contact-right" class="uk-card uk-card-body">
+							<h4 class="uk-text-left uk-margin-remove-bottom uk-margin-remove-top">Send a Message</h4>
+							<p class="uk-text-left uk-text-small uk-margin-small-top">If you are curious to hear more about what we can offer, do no hesitate to get in touch.</p>
+							<form class="uk-form-stacked">
+								<!-- Email -->
+								<div class="uk-margin">
+									<label class="uk-form-label uk-text-left" for="contact-email">E-mail</label>
+									<div class="uk-form-controls">
+										<input id="contact-email" class="uk-input" type="email" placeholder="Your E-mail Address">
+									</div>
+									<div class=" uk-animation-toggle">
+										<div class="uk-animation-shake">
+											<small id="contact-email-error" class="error">Please Enter Your Email !</small>
+										</div>
+									</div>
+								</div>
+								<!-- Message -->
+								<div class="uk-margin">
+									<label class="uk-form-label uk-text-left" for="contact-message">Message</label>
+									<div class="uk-form-controls">
+										<textarea id="contact-message" class="uk-textarea" rows="5" placeholder="Your Message"></textarea>
+									</div>
+									<div class=" uk-animation-toggle">
+										<div class="uk-animation-shake">
+											<small id="contact-message-error" class="error">Please Enter Your Message !</small>
+										</div>
+									</div>
+								</div>
+								<button id="contact-submit-btn" class="uk-button uk-width-1-1" type="button">Submit</button>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- Projects -->
+			<h4 class="uk-text-left support-titles">Our Projects :</h4>
+			<div class="uk-margin-small-top slider">
+				<div class="slide-track">
+					<div class="slide">
+						<img src="../images/ways/lightways.png" height="100" width="100" alt="" />
+					</div>
+					<div class="slide">
+						<img src="../images/ways/packways.png" height="100" width="100" alt="" />
+					</div>
+					<div class="slide">
+						<img src="../images/ways/trackways.png" height="100" width="100" alt="" />
+					</div>
+					<div class="slide">
+						<img src="../images/ways/storeways.png" height="100" width="100" alt="" />
+					</div>
+					<div class="slide">
+						<img src="../images/ways/lightways.png" height="100" width="100" alt="" />
+					</div>
+					<div class="slide">
+						<img src="../images/ways/packways.png" height="100" width="100" alt="" />
+					</div>
+					<div class="slide">
+						<img src="../images/ways/trackways.png" height="100" width="100" alt="" />
+					</div>
+					<div class="slide">
+						<img src="../images/ways/storeways.png" height="100" width="100" alt="" />
+					</div>
+					<div class="slide">
+						<img src="../images/ways/lightways.png" height="100" width="100" alt="" />
+					</div>
+					<div class="slide">
+						<img src="../images/ways/packways.png" height="100" width="100" alt="" />
+					</div>
+					<div class="slide">
+						<img src="../images/ways/trackways.png" height="100" width="100" alt="" />
+					</div>
+					<div class="slide">
+						<img src="../images/ways/storeways.png" height="100" width="100" alt="" />
+					</div>
+					<div class="slide">
+						<img src="../images/ways/lightways.png" height="100" width="100" alt="" />
+					</div>
+					<div class="slide">
+						<img src="../images/ways/packways.png" height="100" width="100" alt="" />
+					</div>
+					<div class="slide">
+						<img src="../images/ways/trackways.png" height="100" width="100" alt="" />
+					</div>
+					<div class="slide">
+						<img src="../images/ways/storeways.png" height="100" width="100" alt="" />
+					</div>
+				</div>
+			</div>
+			<!-- Copyrights -->
 			<div class="rights uk-position-bottom">
 				<h5><span class="light">Light</span><span class="ways">Ways</span><br>Ⓒ 2020 LightWays. All Rights Reserved</h5>
 			</div>
+			&nbsp;<br>&nbsp;<br>&nbsp;
 		</div>
 	</div>
 
@@ -906,7 +1043,19 @@
 					</div>
 					<div class=" uk-animation-toggle">
 						<div class="uk-animation-shake">
-							<small id="add-room-device-type-error" class="error">Please Choose a Card !</small>
+							<small id="add-room-device-type-error" class="error">Please Choose a Device Type !</small>
+						</div>
+					</div>
+				</div>
+				<!-- Device Power -->
+				<div class="uk-margin">
+					<label class="uk-form-label" for="add-room-device-power">Watts</label>
+					<div class="uk-form-controls">
+						<input id="add-room-device-power" class="uk-input" type="number" min="0" step="1" placeholder="Device Power in Watts">
+					</div>
+					<div class=" uk-animation-toggle">
+						<div class="uk-animation-shake">
+							<small id="add-room-device-power-error" class="error">Please Type a Device Electric Power !</small>
 						</div>
 					</div>
 				</div>
@@ -928,7 +1077,7 @@
 				<div class="uk-margin">
 					<label class="uk-form-label" for="add-room-device-pin">Pin</label>
 					<div class="uk-form-controls">
-						<input id="add-room-device-pin" class="uk-input" type="number" step="1" placeholder="Pin Number (Port)">
+						<input id="add-room-device-pin" class="uk-input" type="number" min="0" step="1" placeholder="Card Pin Number (Port)">
 					</div>
 					<div class=" uk-animation-toggle">
 						<div class="uk-animation-shake">
@@ -1028,6 +1177,18 @@
 						</div>
 					</div>
 				</div>
+				<!-- Device Power -->
+				<div class="uk-margin">
+					<label class="uk-form-label" for="edit-room-device-power">Watts</label>
+					<div class="uk-form-controls">
+						<input id="edit-room-device-power" class="uk-input" type="number" step="1" placeholder="Device Power in Watts">
+					</div>
+					<div class=" uk-animation-toggle">
+						<div class="uk-animation-shake">
+							<small id="edit-room-device-power-error" class="error">Please Type a Device Electric Power !</small>
+						</div>
+					</div>
+				</div>
 				<!-- Device Card -->
 				<div class="uk-margin">
 					<label class="uk-form-label" for="edit-room-device-card">Card</label>
@@ -1046,7 +1207,7 @@
 				<div class="uk-margin">
 					<label class="uk-form-label" for="edit-room-device-pin">Pin</label>
 					<div class="uk-form-controls">
-						<input id="edit-room-device-pin" class="uk-input" type="number" step="1" placeholder="Pin Number (Port)">
+						<input id="edit-room-device-pin" class="uk-input" type="number" min="0" step="1" placeholder="Card Pin Number (Port)">
 					</div>
 					<div class=" uk-animation-toggle">
 						<div class="uk-animation-shake">

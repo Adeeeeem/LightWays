@@ -7,6 +7,7 @@
 	}
 
 	include_once("config.php");
+	require_once("toggleLight.php");
 
 	header("Content-Type: application/json");
 
@@ -16,13 +17,32 @@
 	$card = Security($card);
 
 	/* Return False for Error */
-	$response = array("result" => true);
+	$response = array("result" => false);
 
 	if ( isset($card) && !empty($card) )
 	{
 		if (is_numeric($card))
 		{
 			/* Turn OFF All Card's Lights */
+			/* Preparing Request */
+			$request = "SELECT DEVICE_ID AS id, DEVICE_PIN AS pin, ROOM_NAME AS name, CARD_IP AS ip FROM DEVICES NATURAL JOIN ROOMS NATURAL JOIN CARDS WHERE CARD_ID = :card;";
+			/* Preparing Statement */
+			$statement = $DB_CONNECTION->prepare($request);
+			/* Binding Parameter */
+			$statement->bindParam(':card', $card, PDO::PARAM_INT);
+			/* Execute Query */
+			$statement->execute();
+			/* Fetch Result */
+			$result = $statement->fetchAll();
+
+			foreach($result as $row)
+			{
+				$pin = $row["pin"];
+				$ip = $row["ip"];
+
+				toggleL($pin, 'OFF', $ip);
+			}
+
 			/* Preparing Request */
 			$request = "UPDATE DEVICES SET DEVICE_STATUS = 'OFF' WHERE CARD_ID = :card;";
 			/* Preparing Statement */
@@ -31,6 +51,33 @@
 			$statement->bindParam(':card', $card, PDO::PARAM_INT);
 			/* Execute Query */
 			$statement->execute();
+
+			/* If Devices Status Updated */
+			if ($statement->rowCount())
+			{
+				if ($_SESSION["6C3Zq5Bpwm"] != "lightways")
+				{
+					/* Add to History */
+					foreach($result as $row)
+					{
+						$pin = $row["pin"];
+						$name = $row["name"];
+						$option = $pin.":".$name;
+						$id = $row["id"];
+
+						/* Preparing Request */
+						$request = "INSERT INTO HISTORY (HISTORY_USER, HISTORY_TYPE, HISTORY_DATA_ID, HISTORY_DATA, HISTORY_DATE, HISTORY_TIME, HISTORY_OPTION) VALUES (:user, 'OFF', :id, 'DEVICE', CURRENT_DATE, CURRENT_TIME, :option);";
+						/* Preparing Statement */
+						$statement = $DB_CONNECTION->prepare($request);
+						/* Binding Parameter */
+						$statement->bindParam(':user', $_SESSION["6C3Zq5Bpwm"], PDO::PARAM_STR, 30);
+						$statement->bindParam(':id', $id, PDO::PARAM_STR, 30);
+						$statement->bindParam(':option', $option, PDO::PARAM_STR, 100);
+						/* Execute Query */
+						$statement->execute();
+					}
+				}
+			}
 
 			/* Get Card Name for Hisotry */
 			$request = "SELECT CARD_NAME AS name FROM CARDS WHERE CARD_ID = :card LIMIT 1;";
@@ -44,8 +91,8 @@
 			$result = $statement->fetch();
 
 			$name = $result["name"];
-			
-			/* Delete Floor */
+				
+			/* Delete Card */
 			/* Preparing Request */
 			$request = "DELETE FROM CARDS WHERE CARD_ID = :card;";
 			/* Preparing Statement */
@@ -55,7 +102,7 @@
 			/* Execute Query */
 			$statement->execute();
 
-			/* If Floor Deleted */
+			/* If Card Deleted */
 			if ($statement->rowCount())
 			{
 				/* Return True */

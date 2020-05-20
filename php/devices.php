@@ -20,7 +20,7 @@
 		if (is_numeric($room))
 		{
 			/* Preparing Request */
-			$request = "SELECT DEVICE_ID AS id, DEVICE_PIN AS pin, DEVICE_TYPE AS type, DEVICE_LINE AS lin, DEVICE_COLUMN AS col, DEVICE_STATUS AS status, ROOM_NAME AS name, ROOM_WIDTH AS width, ROOM_HEIGHT AS height, CARD_NAME AS card, CARD_IP AS ip FROM DEVICES NATURAL JOIN ROOMS NATURAL JOIN CARDS WHERE ROOM_ID = :room;";
+			$request = "SELECT DEVICE_ID AS id, DEVICE_PIN AS pin, DEVICE_TYPE AS type, DEVICE_POWER AS power, DEVICE_LINE AS lin, DEVICE_COLUMN AS col, DEVICE_STATUS AS status, ROOM_NAME AS name, ROOM_WIDTH AS width, ROOM_HEIGHT AS height, CARD_NAME AS card, CARD_IP AS ip FROM DEVICES NATURAL JOIN ROOMS NATURAL JOIN CARDS WHERE ROOM_ID = :room;";
 			/* Preparing Statement */
 			$statement = $DB_CONNECTION->prepare($request);
 			/* Binding Parameter */

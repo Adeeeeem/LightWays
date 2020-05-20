@@ -30,7 +30,7 @@
 *{margin: 0; padding: 0;}
 html, body{height: 100%; width: 100%; font-family: "Raleway", sans serif !important; color: var(--text-color) !important; font-weight: bold; overflow-x: hidden; background-color: var(--body-color);}
 label{font-weight: bold;}
-input, select{height: 40px !important; padding: auto 0; border-radius: 0.5rem !important;}
+input, select{height: 40px !important; padding: auto 0; border-radius: 0.25rem !important;}
 table th, table td{text-align: center !important; vertical-align: middle !important;}
 /*==================================================
 			Custom UIkit Preferences

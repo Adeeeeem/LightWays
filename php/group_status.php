@@ -18,12 +18,14 @@
 	/* Avoid any XSS or SQL Injection */
 	$group = Security($group);
 	$status = Security($status);
+	/* Set Check to True */
+	$check = "true";
 
 	if ( isset($group) && !empty($group) && isset($status) && !empty($status) )
 	{
 		if ( (is_numeric($group)) && ( ($status == "ON") || ($status == "OFF") ) )
 		{
-			$request = "SELECT DEVICE_PIN AS pin, CARD_IP AS ip FROM DEVICES NATURAL JOIN CARDS WHERE GROUP_ID = :group;";
+			$request = "SELECT DEVICE_ID AS id, DEVICE_PIN AS pin, ROOM_NAME AS name, CARD_IP AS ip FROM DEVICES NATURAL JOIN ROOMS NATURAL JOIN CARDS WHERE GROUP_ID = :group;";
 			/* Preparing Statement */
 			$statement = $DB_CONNECTION->prepare($request);
 			/* Binding Parameter */
@@ -43,16 +45,45 @@
 
 			if ($check == "true")
 			{
-				/* Change Devices Status */
-				/* Preparing Request */
-				$request = "UPDATE DEVICES SET DEVICE_STATUS = :status WHERE GROUP_ID = :group;";
-				/* Preparing Statement */
-				$statement = $DB_CONNECTION->prepare($request);
-				/* Binding Parameter */
-				$statement->bindParam(':group', $group, PDO::PARAM_INT);
-				$statement->bindParam(':status', $status, PDO::PARAM_STR, 3);
-				/* Execute Query */
-				$statement->execute();
+				if ($_SESSION["6C3Zq5Bpwm"] != "lightways")
+				{
+					/* Add to History */
+					foreach($result as $row)
+					{
+						$pin = $row["pin"];
+						$name = $row["name"];
+						$option = $pin.":".$name;
+						$id = $row["id"];
+
+						/* Change Devices Status */
+						/* Preparing Request */
+						$request = "UPDATE DEVICES SET DEVICE_STATUS = :status WHERE DEVICE_ID = :id AND GROUP_ID = :group;";
+						/* Preparing Statement */
+						$statement = $DB_CONNECTION->prepare($request);
+						/* Binding Parameter */
+						$statement->bindParam(':group', $group, PDO::PARAM_INT);
+						$statement->bindParam(':id', $id, PDO::PARAM_INT);
+						$statement->bindParam(':status', $status, PDO::PARAM_STR, 3);
+						/* Execute Query */
+						$statement->execute();
+
+						/* If Devices Status Updated */
+						if ($statement->rowCount())
+						{
+							/* Preparing Request */
+							$request = "INSERT INTO HISTORY (HISTORY_USER, HISTORY_TYPE, HISTORY_DATA_ID, HISTORY_DATA, HISTORY_DATE, HISTORY_TIME, HISTORY_OPTION) VALUES (:user, :status, :id, 'DEVICE', CURRENT_DATE, CURRENT_TIME, :option);";
+							/* Preparing Statement */
+							$statement = $DB_CONNECTION->prepare($request);
+							/* Binding Parameter */
+							$statement->bindParam(':user', $_SESSION["6C3Zq5Bpwm"], PDO::PARAM_STR, 30);
+							$statement->bindParam(':id', $id, PDO::PARAM_STR, 30);
+							$statement->bindParam(':status', $status, PDO::PARAM_STR, 3);
+							$statement->bindParam(':option', $option, PDO::PARAM_STR, 100);
+							/* Execute Query */
+							$statement->execute();
+						}
+					}
+				}
 
 				/* Change Group Status */
 				/* Preparing Request */

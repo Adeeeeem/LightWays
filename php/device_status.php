@@ -32,7 +32,7 @@
 		if ( (is_numeric($device)) && (is_string($status)) )
 		{
 			/* Get User Name for Hisotry */
-			$request = "SELECT DEVICE_PIN AS pin, ROOM_NAME AS name, CARD_IP AS ip FROM DEVICES NATURAL JOIN ROOMS NATURAL JOIN CARDS WHERE DEVICE_ID = :device LIMIT 1;";
+			$request = "SELECT DEVICE_ID AS id, DEVICE_PIN AS pin, ROOM_NAME AS name, CARD_IP AS ip FROM DEVICES NATURAL JOIN ROOMS NATURAL JOIN CARDS WHERE DEVICE_ID = :device LIMIT 1;";
 			/* Preparing Statement */
 			$statement = $DB_CONNECTION->prepare($request);
 			/* Binding Parameter */
@@ -45,8 +45,8 @@
 			$pin = $result["pin"];
 			$name = $result["name"];
 			$option = $pin.":".$name;
-
 			$ip = $result["ip"];
+
 			$check = toggleL($pin, $status, $ip);
 
 			if ($check == "true")

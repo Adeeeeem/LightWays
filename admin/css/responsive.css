@@ -40,6 +40,11 @@
 	#groups #add-group-btn{font-size: 11px !important;}
 	#groups #add-group-btn img{margin-top: -2px;}
 	/*=========================
+			Statistics
+	=========================*/
+	#statistics #stats-menu{margin-top: 45px !important; max-width: 45%;}
+	#statistics #stats-menu p{font-size: 12px;}
+	/*=========================
 			Cards
 	=========================*/
 	#cards #add-card-btn{font-size: 11px !important;}
@@ -77,6 +82,8 @@
 			Support
 	=========================*/
 	#support div.rights{margin-left: 200px;}
+	/* Map */
+	#support #map iframe{height: 211px; width: 100%;}
 }
 /* Small Devices */
 @media (min-width: 768px) and (max-width: 991px)
@@ -118,6 +125,11 @@
 	=========================*/
 	#groups #add-group-btn{font-size: 10px !important;}
 	#groups #add-group-btn img{margin-top: -3px;}
+	/*=========================
+			Statistics
+	=========================*/
+	#statistics #stats-menu{margin-top: 50px !important; max-width: 50%;}
+	#statistics #stats-menu p{font-size: 12px;}
 	/*=========================
 			Cards
 	=========================*/
@@ -164,6 +176,9 @@
 			Support
 	=========================*/
 	#support div.rights{margin-left: 200px;}
+	#support #social img{width: 25px; height: 25px;}
+	/* Map */
+	#support #map iframe{height: 240px; width: 100%;}
 }
 /* Extra Small Devices */
 @media (max-width: 767px)
@@ -207,6 +222,11 @@
 	#modal-add-group #add-group-room table td div{padding: 5px !important;}
 	/* Edit Group Modal */
 	#modal-edit-group #edit-group-room table td div{padding: 5px !important;}
+	/*=========================
+			Statistics
+	=========================*/
+	#statistics #stats-menu{margin-top: -10px !important; max-width: 50%;}
+	#statistics #stats-menu p{font-size: 13px;}
 	/*=========================
 			Cards
 	=========================*/
@@ -263,6 +283,8 @@
 			Support
 	=========================*/
 	#support div.rights{margin-left: 0;}
+	/* Contact */
+	#support .contact-outer{padding: 0 !important;}
 }
 /* Extra X-Small Devices */
 @media (max-width: 480px)
@@ -300,6 +322,11 @@
 	/* Delete Group Modal */
 	#modal-delete-group h2.uk-modal-title{font-size: 1.2rem;}
 	#modal-delete-group button{font-size: 0.7rem; line-height: 1; padding: 0;}
+	/*=========================
+			Statistics
+	=========================*/
+	#statistics #stats-menu{margin-top: -10px !important; max-width: 75%;}
+	#statistics #stats-menu p{font-size: 11px;}
 	/*=========================
 			Cards
 	=========================*/
