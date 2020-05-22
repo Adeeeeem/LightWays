@@ -44,6 +44,9 @@
 	=========================*/
 	#statistics #stats-menu{margin-top: 45px !important; max-width: 45%;}
 	#statistics #stats-menu p{font-size: 12px;}
+	/* Details */
+	#statistics h3.stats-titles, #statistics h3.stats-titles-price{font-size: 0.7rem;}
+	#statistics #stats-details p, #statistics #stats-details-price p{font-size: 0.55rem;}
 	/*=========================
 			Cards
 	=========================*/
@@ -130,6 +133,12 @@
 	=========================*/
 	#statistics #stats-menu{margin-top: 50px !important; max-width: 50%;}
 	#statistics #stats-menu p{font-size: 12px;}
+	/* Chart */
+	#statistics #chart-title{font-size: 12px;}
+	/* Details */
+	#statistics h3.stats-titles, #statistics h3.stats-titles-price{font-size: 0.7rem;}
+	#statistics #stats-details p, #statistics #stats-details-price p{font-size: 0.55rem;}
+	#statistics .stats-details{margin-top: 0 !important;}
 	/*=========================
 			Cards
 	=========================*/
@@ -227,6 +236,10 @@
 	=========================*/
 	#statistics #stats-menu{margin-top: -10px !important; max-width: 50%;}
 	#statistics #stats-menu p{font-size: 13px;}
+	/* Chart */
+	#statistics #chart-title{font-size: 12px;}
+	/* Details */
+	#statistics .stats-details{margin-top: 0 !important;}
 	/*=========================
 			Cards
 	=========================*/
@@ -327,6 +340,9 @@
 	=========================*/
 	#statistics #stats-menu{margin-top: -10px !important; max-width: 75%;}
 	#statistics #stats-menu p{font-size: 11px;}
+	/* Details */
+	#statistics h3.stats-titles, #statistics h3.stats-titles-price{font-size: 0.6rem;}
+	#statistics #stats-details p, #statistics #stats-details-price p{font-size: 0.45rem;}
 	/*=========================
 			Cards
 	=========================*/

@@ -56,6 +56,7 @@ input.uk-checkbox:checked:focus, input.uk-checkbox:checked{background-color: var
 .uk-table-hover tbody tr:hover,.uk-table-hover>tr:hover{background-color: var(--primary-color);}
 div.uk-tooltip-inner span{color: var(--orange-color);}
 .uk-list ul{padding-left: 50px;}
+.uk-hr, hr{border-top: none;}
 /*==================================================
 				Preloader
 ==================================================*/

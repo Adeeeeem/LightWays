@@ -32,7 +32,7 @@
 			$end_time = $end_time.":00"; // Add Seconds
 
 			/* Preparing Request */
-			$request = "SELECT HISTORY_USER AS user, HISTORY_TYPE AS type, HISTORY_DATA_ID AS id, HISTORY_DATA AS data, HISTORY_DATE AS date, HISTORY_TIME AS time, HISTORY_OPTION AS opt FROM HISTORY WHERE HISTORY_DATE BETWEEN :start_date AND :end_date AND HISTORY_TIME BETWEEN :start_time AND :end_time ORDER BY HISTORY_DATE DESC, HISTORY_TIME DESC;";
+			$request = "SELECT HISTORY_USER AS user, HISTORY_TYPE AS type, HISTORY_DATA_ID AS id, HISTORY_DATA AS data, HISTORY_DATE AS date, HISTORY_TIME AS time, HISTORY_OPTION AS opt FROM HISTORY WHERE HISTORY_USER != 'SYSTEM' AND HISTORY_DATE BETWEEN :start_date AND :end_date AND HISTORY_TIME BETWEEN :start_time AND :end_time ORDER BY HISTORY_DATE DESC, HISTORY_TIME DESC;";
 			/* Preparing Statement */
 			$statement = $DB_CONNECTION->prepare($request);
 			/* Binding Parameter */
@@ -44,7 +44,7 @@
 		else // History Between two Dates
 		{
 			/* Preparing Request */
-			$request = "SELECT HISTORY_USER AS user, HISTORY_TYPE AS type, HISTORY_DATA_ID AS id, HISTORY_DATA AS data, HISTORY_DATE AS date, HISTORY_TIME AS time, HISTORY_OPTION AS opt FROM HISTORY WHERE HISTORY_DATE BETWEEN :start_date AND :end_date ORDER BY HISTORY_DATE DESC, HISTORY_TIME DESC;";
+			$request = "SELECT HISTORY_USER AS user, HISTORY_TYPE AS type, HISTORY_DATA_ID AS id, HISTORY_DATA AS data, HISTORY_DATE AS date, HISTORY_TIME AS time, HISTORY_OPTION AS opt FROM HISTORY WHERE HISTORY_USER != 'SYSTEM' AND HISTORY_DATE BETWEEN :start_date AND :end_date ORDER BY HISTORY_DATE DESC, HISTORY_TIME DESC;";
 			/* Preparing Statement */
 			$statement = $DB_CONNECTION->prepare($request);
 			/* Binding Parameter */
@@ -60,7 +60,7 @@
 			$end_time = $end_time.":00"; // Add Seconds
 
 			/* Preparing Request */
-			$request = "SELECT HISTORY_USER AS user, HISTORY_TYPE AS type, HISTORY_DATA_ID AS id, HISTORY_DATA AS data, HISTORY_DATE AS date, HISTORY_TIME AS time, HISTORY_OPTION AS opt FROM HISTORY WHERE HISTORY_DATE = CURRENT_DATE AND HISTORY_TIME BETWEEN :start_time AND :end_time ORDER BY HISTORY_DATE DESC, HISTORY_TIME DESC;";
+			$request = "SELECT HISTORY_USER AS user, HISTORY_TYPE AS type, HISTORY_DATA_ID AS id, HISTORY_DATA AS data, HISTORY_DATE AS date, HISTORY_TIME AS time, HISTORY_OPTION AS opt FROM HISTORY WHERE HISTORY_USER != 'SYSTEM' AND HISTORY_DATE = CURRENT_DATE AND HISTORY_TIME BETWEEN :start_time AND :end_time ORDER BY HISTORY_DATE DESC, HISTORY_TIME DESC;";
 			/* Preparing Statement */
 			$statement = $DB_CONNECTION->prepare($request);
 			/* Binding Parameter */
@@ -70,7 +70,7 @@
 		else
 		{
 			/* Preparing Request */
-			$request = "SELECT HISTORY_USER AS user, HISTORY_TYPE AS type, HISTORY_DATA_ID AS id, HISTORY_DATA AS data, HISTORY_DATE AS date, HISTORY_TIME AS time, HISTORY_OPTION AS opt FROM HISTORY ORDER BY HISTORY_DATE DESC, HISTORY_TIME DESC LIMIT 25;";
+			$request = "SELECT HISTORY_USER AS user, HISTORY_TYPE AS type, HISTORY_DATA_ID AS id, HISTORY_DATA AS data, HISTORY_DATE AS date, HISTORY_TIME AS time, HISTORY_OPTION AS opt FROM HISTORY WHERE HISTORY_USER != 'SYSTEM' ORDER BY HISTORY_DATE DESC, HISTORY_TIME DESC LIMIT 25;";
 			/* Preparing Statement */
 			$statement = $DB_CONNECTION->prepare($request);
 			/* Execute Query */
