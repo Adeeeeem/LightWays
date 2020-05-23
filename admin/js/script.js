@@ -959,7 +959,19 @@ $(function()
 /*=========================
 		Scenes
 =========================*/
-//
+/* Load Scenes into Scenes List */
+$(window).on("load", function()
+{
+	if (localStorage.getItem("LightWays_ADMIN_SECTION") == "#scenes-btn")
+	{
+		DisplayScenesList();
+	}
+
+	$("#scenes-btn, #mobile-scenes-btn").click(function()
+	{
+		DisplayScenesList();
+	});
+});
 /*=========================
 		Statistics
 =========================*/
@@ -4120,6 +4132,78 @@ function ResetEditGroupModal()
 	$("#edit-group-search-room").empty(); // Clear Rooms List
 }
 /*==================================================
+		Scenes Section Functions
+==================================================*/
+/* Display Scenes List in Scenes Section */
+function DisplayScenesList()
+{
+	$.ajax
+	({
+		url: "../php/scenes.php",
+		type: "POST",
+		dataType: "json",
+	})
+	.done(function(response)
+	{
+		// Empty The Scenes List
+		$("#scenes #scenes-list").empty();
+
+		var len = response.length;
+
+		if (len != 0)
+		{
+			for (var i = 0; i < len; i++)
+			{
+				var id = response[i].id; // Get Scenes ID
+				var name = response[i].name; // Get Scenes Name
+				var time = response[i].start.slice(0,5) + " - " + response[i].stop.slice(0,5);// Get Scene Working Time
+				var days = response[i].days; // Get Scenes Working Days
+				var status = response[i].status; // Get Scenes Status
+				var devices = response[i].devices; // Get Scenes Devices Number
+				var checked = "checked";
+				var shadow = "uk-box-shadow-medium";
+				var bgcolor = "var(--text-color)";
+				var days_routine = "";
+
+				if (status == "OFF")
+				{
+					shadow = "";
+					bgcolor = "var(--secondary-color)";
+					checked = "";
+				}
+
+				// Which days the scenes working on
+				if (days == "0")
+				{
+					days_routine = "S M T W T F S";
+				}
+				else
+				{
+					if (days.includes("1")) { days_routine += "<span class='working'>S</span> "; } else { days_routine += "S "; }
+					if (days.includes("2")) { days_routine += "<span class='working'>M</span> "; } else { days_routine += "M "; }
+					if (days.includes("3")) { days_routine += "<span class='working'>T</span> "; } else { days_routine += "T "; }
+					if (days.includes("4")) { days_routine += "<span class='working'>W</span> "; } else { days_routine += "W "; }
+					if (days.includes("5")) { days_routine += "<span class='working'>T</span> "; } else { days_routine += "T "; }
+					if (days.includes("6")) { days_routine += "<span class='working'>F</span> "; } else { days_routine += "F "; }
+					if (days.includes("7")) { days_routine += "<span class='working'>S</span>"; } else { days_routine += "S"; }
+				}
+
+				// Display Scenes
+				$("#scenes #scenes-list").append("<article id='"+id+"' class='uk-comment scene-details uk-margin-small-top uk-animation-scale-down "+shadow+"'><header class='uk-comment-header uk-grid-medium uk-flex-middle uk-margin-small-left uk-margin-small-right' uk-grid><div class='uk-width-expand'><h4 class='uk-comment-title uk-margin-remove' style='color: "+bgcolor+";'>"+name+"</h4><div uk-grid><div class='uk-width-1-3'><h6 class='uk-comment-meta uk-margin-remove-top'>"+time+"</h6></div><div class='uk-width-1-3'><h6 class='uk-comment-meta uk-margin-remove-top uk-text-center'><div class='devices'>"+devices+" Devices</div></h6></div><div class='uk-width-1-3'><h6 class='uk-comment-meta uk-margin-remove-top uk-text-right'><div class='days'>"+days_routine+"</div></h6></div></div></div><div class='uk-width-auto uk-text-right uk-margin-small-right'><label class='uk-switch'><input type='checkbox' class='control-group-button' "+checked+"><div class='uk-switch-slider'></div></label></div></header></article>");
+			}
+		}
+		else
+		{
+			$("#scenes #scenes-list").append("<table class='uk-margin-small-top'><tr class='uk-animation-scale-down uk-text-center'><th><img class='notfound' src='../images/icons/notfound.png' width='40' height='40'><br><br>No Scenes Found !<br><small>Make Sure You Add Scenes...</small></th></tr></table>");
+		}
+	})
+	.fail(function()
+	{
+		$("#scenes #scenes-list").empty();
+		$("#scenes #scenes-list").append("<table class='uk-margin-small-top'><tr class='uk-animation-scale-down uk-text-center'><th style='color: #C0392B;'><img class='error' src='../images/icons/error.png' width='40' height='40'><br><br>Failed to Load Scenes !</th></tr></table>");
+	});
+}
+/*==================================================
 		Statistics Section Functions
 ==================================================*/
 /* Calculate Weekly Consumption Stats */
@@ -4949,7 +5033,7 @@ function LoadCardsSection()
 			for (var i = 0; i < len; i++)
 			{
 				// Display Card
-				$("#cards #cards-list").append("<article id='"+response[i].id+"' class='uk-comment card-details uk-margin-small-top uk-animation-scale-down uk-box-shadow-medium'><header class='uk-comment-header uk-grid-medium uk-flex-middle uk-margin-small-left uk-margin-small-right uk-grid uk-grid-stack' uk-grid><div class='uk-width-1-1'><h4 class='uk-comment-title uk-margin-remove'>"+response[i].name+"</h4><h6 class='uk-comment-meta uk-margin-remove-top devices'>"+response[i].devices+" Devices</h6></div></header></article>");
+				$("#cards #cards-list").append("<article id='"+response[i].id+"' class='uk-comment card-details uk-margin-small-top uk-animation-scale-down uk-box-shadow-medium'><header class='uk-comment-header uk-grid-medium uk-flex-middle uk-margin-small-left uk-margin-small-right uk-grid uk-grid-stack' uk-grid><div class='uk-width-1-1'><h4 class='uk-comment-title uk-margin-remove'>"+response[i].name+"</h4><div uk-grid><div class='uk-width-1-2'><h6 class='uk-comment-meta uk-margin-remove-top'>"+response[i].ip+"</h6></div><div class='uk-width-1-2'><h6 class='uk-comment-meta uk-margin-remove-top devices'>"+response[i].devices+" Devices</h6></div></div></div></header></article>");
 			}
 		}
 		else

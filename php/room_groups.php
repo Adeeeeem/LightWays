@@ -20,7 +20,7 @@
 		if (is_numeric($room))
 		{
 			/* Preparing Request */
-			$request = "SELECT GROUPS.GROUP_ID AS id, GROUP_NAME AS name, GROUP_COLOR AS color, GROUP_STATUS AS status, DEVICE_ID AS device FROM GROUPS LEFT JOIN DEVICES ON GROUPS.GROUP_ID = DEVICES.GROUP_ID WHERE GROUPS.ROOM_ID = :room;";
+			$request = "SELECT GROUPS.GROUP_ID AS id, GROUP_NAME AS name, GROUP_COLOR AS color, GROUP_STATUS AS status, DEVICE_ID AS device FROM GROUPS LEFT JOIN DEVICES USING(GROUP_ID) WHERE GROUPS.ROOM_ID = :room;";
 			/* Preparing Statement */
 			$statement = $DB_CONNECTION->prepare($request);
 			/* Binding Parameter */

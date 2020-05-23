@@ -21,7 +21,7 @@
 		{
 			/* Select Group Details and its Related Devices */
 			/* Preparing Request */
-			$request = "SELECT GROUP_NAME AS name, GROUP_COLOR AS color, GROUPS.ROOM_ID AS room, ROOMS.FLOOR_ID AS floor, DEVICE_ID AS devices FROM GROUPS NATURAL JOIN ROOMS LEFT JOIN DEVICES ON GROUPS.GROUP_ID = DEVICES.GROUP_ID WHERE GROUPS.GROUP_ID = :group;";
+			$request = "SELECT GROUP_NAME AS name, GROUP_COLOR AS color, GROUPS.ROOM_ID AS room, ROOMS.FLOOR_ID AS floor, DEVICE_ID AS devices FROM GROUPS NATURAL JOIN ROOMS LEFT JOIN DEVICES USING(GROUP_ID) WHERE GROUPS.GROUP_ID = :group;";
 			/* Preparing Statement */
 			$statement = $DB_CONNECTION->prepare($request);
 			/* Binding Parameter */

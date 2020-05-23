@@ -40,6 +40,11 @@
 	#groups #add-group-btn{font-size: 11px !important;}
 	#groups #add-group-btn img{margin-top: -2px;}
 	/*=========================
+			Scenes
+	=========================*/
+	#scenes #add-scene-btn{font-size: 11px !important;}
+	#scenes #add-scene-btn img{margin-top: -2px;}
+	/*=========================
 			Statistics
 	=========================*/
 	#statistics #stats-menu{margin-top: 45px !important; max-width: 45%;}
@@ -128,6 +133,11 @@
 	=========================*/
 	#groups #add-group-btn{font-size: 10px !important;}
 	#groups #add-group-btn img{margin-top: -3px;}
+	/*=========================
+			Scenes
+	=========================*/
+	#scenes #add-scene-btn{font-size: 10px !important;}
+	#scenes #add-scene-btn img{margin-top: -3px;}
 	/*=========================
 			Statistics
 	=========================*/
@@ -232,6 +242,15 @@
 	/* Edit Group Modal */
 	#modal-edit-group #edit-group-room table td div{padding: 5px !important;}
 	/*=========================
+			Scenes
+	=========================*/
+	#scenes #add-scene-btn{font-size: 10px !important;}
+	#scenes #add-scene-btn img{margin-top: -3px;}
+	/* Add Group Modal */
+	#modal-add-scene #add-scene-room table td div{padding: 5px !important;}
+	/* Edit Group Modal */
+	#modal-edit-scene #edit-scene-room table td div{padding: 5px !important;}
+	/*=========================
 			Statistics
 	=========================*/
 	#statistics #stats-menu{margin-top: -10px !important; max-width: 50%;}
@@ -335,6 +354,24 @@
 	/* Delete Group Modal */
 	#modal-delete-group h2.uk-modal-title{font-size: 1.2rem;}
 	#modal-delete-group button{font-size: 0.7rem; line-height: 1; padding: 0;}
+	/*=========================
+			Scenes
+	=========================*/
+	#scenes .add-scene{margin-top: 0;}
+	#scenes #add-scene-btn{padding-left: 10px; padding-right: 10px;}
+	/* Scene */
+	#scenes article.scene-details h4{font-size: 15px;}
+	#scenes article.scene-details h6{font-size: 11px;}
+	#scenes article.scene-details .days{margin-top: -10px; font-size: 12px;}
+	/* Add Scene Modal */
+	#modal-add-scene #add-scene-room table td div{padding: 2px !important;}
+	#modal-add-scene #add-scene-room table td div img{padding: 2px !important;}
+	/* Edit Scene Modal */
+	#modal-edit-scene #edit-scene-room table td div{padding: 2px !important;}
+	#modal-edit-scene #edit-scene-room table td div img{padding: 2px !important;}
+	/* Delete Scene Modal */
+	#modal-delete-scene h2.uk-modal-title{font-size: 1.2rem;}
+	#modal-delete-scene button{font-size: 0.7rem; line-height: 1; padding: 0;}
 	/*=========================
 			Statistics
 	=========================*/

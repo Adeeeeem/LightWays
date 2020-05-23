@@ -21,7 +21,7 @@
 		{
 			/* Select Room Details and its Related Devices, Groups */
 			/* Preparing Request */
-			$request = "SELECT FLOOR_ID AS floor, ROOMS.ROOM_ID AS room, ROOM_NAME AS name, ROOM_WIDTH AS width, ROOM_HEIGHT AS height, DEVICE_ID AS device, DEVICE_PIN as pin, DEVICE_TYPE AS type, DEVICE_POWER AS power, CARD_ID AS card, DEVICE_LINE AS lin, DEVICE_COLUMN AS col, (SELECT GROUP_COLOR FROM GROUPS NATURAL JOIN DEVICES WHERE DEVICE_ID = device) AS color FROM ROOMS LEFT JOIN DEVICES ON DEVICES.ROOM_ID = ROOMS.ROOM_ID WHERE ROOMS.ROOM_ID = :room;";
+			$request = "SELECT FLOOR_ID AS floor, ROOMS.ROOM_ID AS room, ROOM_NAME AS name, ROOM_WIDTH AS width, ROOM_HEIGHT AS height, DEVICE_ID AS device, DEVICE_PIN as pin, DEVICE_TYPE AS type, DEVICE_POWER AS power, CARD_ID AS card, DEVICE_LINE AS lin, DEVICE_COLUMN AS col, (SELECT GROUP_COLOR FROM GROUPS NATURAL JOIN DEVICES WHERE DEVICE_ID = device) AS color FROM ROOMS LEFT JOIN DEVICES USING(ROOM_ID) WHERE ROOMS.ROOM_ID = :room;";
 			/* Preparing Statement */
 			$statement = $DB_CONNECTION->prepare($request);
 			/* Binding Parameter */

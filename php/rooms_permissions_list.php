@@ -11,7 +11,7 @@
 	header("Content-Type: application/json");
 
 	/* Preparing Request */
-	$request = "SELECT FLOORS.FLOOR_ID as floor, ROOM_ID AS room, ROOM_NAME AS name FROM FLOORS LEFT JOIN ROOMS ON FLOORS.FLOOR_ID = ROOMS.FLOOR_ID";
+	$request = "SELECT FLOORS.FLOOR_ID as floor, ROOM_ID AS room, ROOM_NAME AS name FROM FLOORS LEFT JOIN ROOMS USING(FLOOR_ID);";
 	/* Preparing Statement */
 	$statement = $DB_CONNECTION->prepare($request);
 	/* Execute Query */

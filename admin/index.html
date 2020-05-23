@@ -188,7 +188,17 @@
 		</div>
 		<!-- Scenes Section -->
 		<div id="scenes" class="uk-margin-medium-top uk-animation-fade">
-			Scenes
+			<!-- Add New Scene Button -->
+			<div class="uk-width-1-1 uk-text-left add-scene">
+				<button id="add-scene-btn" class="uk-button" uk-toggle="target: #modal-add-scene">
+					<img class="uk-margin-small-right" src="../images/icons/plus.png" width="20" height="20">Add New Scene
+				</button>
+			</div>
+			<hr>
+			<!-- Scenes List -->
+			<div id="scenes-list" class="uk-container uk-text-left">
+				<!-- Data Will be Loaded from JavaScript -->
+			</div>
 		</div>
 		<!-- Statistics Section -->
 		<div id="statistics" class="uk-margin-medium-top uk-animation-fade">
@@ -793,6 +803,175 @@
 			</div>
 		</div>
 	</div>
+	
+	<!-- Add New Scene Modal -->
+	<div id="modal-add-scene" class="modal" uk-modal="bg-close: false; keyboard: false; escClose: false; modal: false">
+		<div class="uk-modal-dialog uk-margin-auto-vertical big-width">
+			<!-- Title -->
+			<div class="uk-modal-header uk-text-center">
+				<h2 class="uk-modal-title">Add Scene</h2>
+			</div>
+			<!-- Form -->
+			<form class="uk-form-stacked">
+				<div class="uk-modal-body">
+					<div class="uk-margin">
+						<label class="uk-form-label" for="add-scene-name">Scene Name</label>
+						<div class="uk-form-controls">
+							<input id="add-scene-name" class="uk-input" type="text" placeholder="Scene Name">
+						</div>
+						<div class=" uk-animation-toggle">
+							<div class="uk-animation-shake">
+								<small id="add-scene-name-error" class="error">Please Enter a Scene Name !</small>
+							</div>
+						</div>
+					</div>
+					<div class="uk-margin">
+						<label class="uk-form-label" for="add-scene-color">Scene Color</label>
+						<div class="uk-form-controls">
+							<input id="add-scene-color" class="uk-input" type="color" value="#FFA200">
+						</div>
+					</div>
+					<div class="uk-margin">
+						<label class="uk-form-label uk-text-center uk-margin-small-bottom">Add Devices to Scene</label>
+						<div class="uk-form-controls">
+							<!-- Floors & Rooms Search -->
+							<div class="add-scene-search-room" uk-grid>
+								<div class="uk-width-1-2">
+									<div class="uk-margin">
+										<label class="uk-form-label" for="add-scene-search-floor">Floor</label>
+										<div class="uk-form-controls">
+											<select id="add-scene-search-floor" class="uk-input uk-select">
+												<!-- Data Will be Loaded from JavaScript -->
+											</select>
+											<hr class="uk-align-center select-hr">
+										</div>
+									</div>
+								</div>
+								<div class="uk-width-1-2">
+									<div class="uk-margin">
+										<label class="uk-form-label" for="add-scene-search-room">Room</label>
+										<div class="uk-form-controls">
+											<select id="add-scene-search-room" class="uk-input uk-select">
+												<!-- Data Will be Loaded from JavaScript -->
+											</select>
+											<hr class="uk-align-center select-hr">
+										</div>
+									</div>
+								</div>
+							</div>
+							<div id="add-scene-room" class="uk-text-center">
+								<table class="uk-table">
+									<!-- Devices Will be Displayed from JavaScript -->
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- Footer Buttons -->
+				<div class="uk-modal-footer uk-text-right">
+					<div class="uk-button-group uk-width-1-1">
+						<button class="uk-button uk-width-1-1 uk-modal-close" type="button">Cancel</button>
+						<button id="add-scene-confirm-btn" class="uk-button uk-width-1-1" type="button">Save</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+	<!-- Edit Scene Modal -->
+	<div id="modal-edit-scene" class="modal" uk-modal="bg-close: false; keyboard: false; escClose: false; modal: false">
+		<div class="uk-modal-dialog uk-margin-auto-vertical big-width">
+			<!-- Title -->
+			<div class="uk-modal-header uk-text-center">
+				<h2 class="uk-modal-title">Edit Scene</h2>
+			</div>
+			<form class="uk-form-stacked">
+				<!-- Body -->
+				<div class="uk-modal-body">
+					<div class="uk-margin">
+						<!-- Change Scene Name -->
+						<label class="uk-form-label" for="edit-scene-name">Change Scene Name</label>
+						<div class="uk-form-controls">
+							<input id="edit-scene-name" class="uk-input" type="text">
+						</div>
+						<div class=" uk-animation-toggle">
+							<div class="uk-animation-shake">
+								<small id="edit-scene-name-error" class="error">Scene Name Can't be Empty !</small>
+							</div>
+						</div>
+					</div>
+					<!-- Change Scene Color -->
+					<div class="uk-margin">
+						<label class="uk-form-label" for="edit-scene-color">Change Scene Color</label>
+						<div class="uk-form-controls">
+							<input id="edit-scene-color" class="uk-input" type="color">
+						</div>
+					</div>
+					<div class="uk-margin">
+						<label class="uk-form-label uk-text-center uk-margin-small-bottom">Manage Scene Devices</label>
+						<div class="uk-form-controls">
+							<!-- Floors & Rooms Search -->
+							<div class="edit-scene-search-room" uk-grid>
+								<div class="uk-width-1-2">
+									<div class="uk-margin">
+										<label class="uk-form-label" for="edit-scene-search-floor">Floor</label>
+										<div class="uk-form-controls">
+											<select id="edit-scene-search-floor" class="uk-input uk-select">
+												<!-- Data Will be Loaded from JavaScript -->
+											</select>
+											<hr class="uk-align-center select-hr">
+										</div>
+									</div>
+								</div>
+								<div class="uk-width-1-2">
+									<div class="uk-margin">
+										<label class="uk-form-label" for="edit-scene-search-room">Room</label>
+										<div class="uk-form-controls">
+											<select id="edit-scene-search-room" class="uk-input uk-select">
+												<!-- Data Will be Loaded from JavaScript -->
+											</select>
+											<hr class="uk-align-center select-hr">
+										</div>
+									</div>
+								</div>
+							</div>
+							<div id="edit-scene-room" class="uk-text-center">
+								<table class="uk-table uk-table-divider">
+									<!-- Devices Will be Displayed from JavaScript -->
+								</table>
+							</div>
+						</div>
+					</div>
+					<!-- Delete Scene Button -->
+					<button id="delete-scene-btn" class="uk-button uk-button-link" uk-toggle="target: #modal-delete-scene"><img src="../images/icons/delete.png" class="uk-margin-small-right" width="10" height="10">Delete Scene ?</button>
+				</div>
+				<!-- Footer Buttons -->
+				<div class="uk-modal-footer uk-text-right">
+					<div class="uk-button-group uk-width-1-1">
+						<button class="uk-button uk-width-1-1 uk-modal-close" type="button">Cancel</button>
+						<button id="edit-scene-confirm-btn" class="uk-button uk-width-1-1" type="button">Save</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+	<!-- Delete Scene Modal -->
+	<div id="modal-delete-scene" class="modal" uk-modal="stack: true">
+		<div class="uk-modal-dialog uk-margin-auto-vertical">
+			<!-- Body -->
+			<div class="uk-modal-body uk-text-center">
+				<img src="../images/icons/caution.png" width="50" height="50">
+				<h2 class="uk-modal-title">Are you Sure you want to<br>Delete <span></span> Scene ?</h2>
+			</div>
+			<!-- Footer Buttons -->
+			<div class="uk-modal-footer uk-text-right">
+				<div class="uk-button-group uk-width-1-1">
+					<button class="uk-button uk-width-1-1 uk-modal-close" type="button">Cancel</button>
+					<button id="delete-scene-confirm-btn" class="uk-button uk-width-1-1" type="button">Yes, Delete it !</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
 	<!-- Add New Card Modal -->
 	<div id="modal-add-card" class="modal" uk-modal="bg-close: false; keyboard: false; escClose: false; modal: false">
 		<div class="uk-modal-dialog uk-margin-auto-vertical">

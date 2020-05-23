@@ -21,7 +21,7 @@
 		{
 			/* Select Card Details and its Related Rooms, Devices, Groups */
 			/* Preparing Request */
-			$request = "SELECT CARD_NAME AS name, CARD_IP AS ip, COUNT(DEVICE_ID) AS devices FROM CARDS LEFT JOIN DEVICES ON CARDS.CARD_ID = DEVICES.CARD_ID WHERE CARDS.CARD_ID = :card LIMIT 1;";
+			$request = "SELECT CARD_NAME AS name, CARD_IP AS ip, COUNT(DEVICE_ID) AS devices FROM CARDS LEFT JOIN DEVICES USING(CARD_ID) WHERE CARDS.CARD_ID = :card LIMIT 1;";
 			/* Preparing Statement */
 			$statement = $DB_CONNECTION->prepare($request);
 			/* Binding Parameter */

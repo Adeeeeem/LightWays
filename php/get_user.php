@@ -21,7 +21,7 @@
 		{
 			/* Select User Details and its Related Permissions */
 			/* Preparing Request */
-			$request = "SELECT USERS.USER_LOGIN AS login, USER_PASSWORD AS password, USER_FNAME AS fname, USER_LNAME as lname, PERMISSION_ID AS permission, PERMISSION_TYPE AS type FROM USERS LEFT JOIN PERMISSIONS ON USERS.USER_LOGIN = PERMISSIONS.USER_LOGIN WHERE USERS.USER_LOGIN = :login;";
+			$request = "SELECT USERS.USER_LOGIN AS login, USER_PASSWORD AS password, USER_FNAME AS fname, USER_LNAME as lname, PERMISSION_ID AS permission, PERMISSION_TYPE AS type FROM USERS LEFT JOIN PERMISSIONS USING(USER_LOGIN) WHERE USERS.USER_LOGIN = :login;";
 			/* Preparing Statement */
 			$statement = $DB_CONNECTION->prepare($request);
 			/* Binding Parameter */

@@ -11,7 +11,7 @@
 	header("Content-Type: application/json");
 
 	/* Preparing Request */
-	$request = "SELECT CARDS.CARD_ID AS id, CARD_NAME AS name, CARD_IP AS ip, COUNT(DEVICE_ID) AS devices FROM CARDS LEFT JOIN DEVICES USING(CARD_ID) GROUP BY CARDS.CARD_ID;";
+	$request = "SELECT SCENES.SCENE_ID AS id, SCENE_NAME AS name, SCENE_START AS start, SCENE_END AS stop, SCENE_DAYS AS days, SCENE_STATUS AS status, COUNT(SCENENING.DEVICE_ID) AS devices FROM SCENES LEFT JOIN SCENENING USING(SCENE_ID) GROUP BY SCENES.SCENE_ID, SCENE_NAME, SCENE_STATUS ORDER BY SCENES.SCENE_ID DESC;";
 	/* Preparing Statement */
 	$statement = $DB_CONNECTION->prepare($request);
 	/* Execute Query */
