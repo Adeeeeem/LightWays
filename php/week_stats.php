@@ -10,11 +10,18 @@
 
 	header("Content-Type: application/json");
 
-	$sunday = date("Y-m-d", strtotime("last sunday"));
-	$saturday = date("Y-m-d", strtotime("saturday this week"));
+	$today = date("D");
+	$first = date("Y-m-d", strtotime("last sunday"));
+	$last = date("Y-m-d", strtotime("saturday this week"));
+
+	if ($today == "Sun")
+	{
+		$first = date("Y-m-d", strtotime("this sunday"));
+		$last = date("Y-m-d", strtotime("saturday next week"));
+	}
 
 	/* Preparing Request */
-	$request = "SELECT HISTORY_TYPE AS type, HISTORY_DATA_ID AS id, HISTORY_DATE AS date, HISTORY_TIME AS time FROM HISTORY WHERE HISTORY_TYPE IN ('ON', 'OFF', 'RESET') AND HISTORY_DATA = 'DEVICE' AND HISTORY_DATE BETWEEN '$sunday' AND '$saturday';";
+	$request = "SELECT HISTORY_TYPE AS type, HISTORY_DATA_ID AS id, HISTORY_DATE AS date, HISTORY_TIME AS time FROM HISTORY WHERE HISTORY_TYPE IN ('ON', 'OFF', 'RESET') AND HISTORY_DATA = 'DEVICE' AND HISTORY_DATE BETWEEN '$first' AND '$last';";
 	/* Preparing Statement */
 	$statement = $DB_CONNECTION->prepare($request);
 	/* Execute Query */

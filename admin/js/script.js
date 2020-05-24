@@ -4448,6 +4448,10 @@ function LoadWeeklyStats()
 
 			$("#statistics #stats-table tbody").append("<tr><td>Sunday</td><td>"+SundayConsumption+"</td><td>"+CalculateConsumptionPrice(SundayConsumption)+"</td></tr><tr><td>Monday</td><td>"+MondayConsumption+"</td><td>"+CalculateConsumptionPrice(MondayConsumption)+"</td></tr><tr><td>Tuesday</td><td>"+TuesdayConsumption+"</td><td>"+CalculateConsumptionPrice(TuesdayConsumption)+"</td></tr><tr><td>Wednesday</td><td>"+WednesdayConsumption+"</td><td>"+CalculateConsumptionPrice(WednesdayConsumption)+"</td></tr><tr><td>Thursday</td><td>"+ThursdayConsumption+"</td><td>"+CalculateConsumptionPrice(ThursdayConsumption)+"</td></tr><tr><td>Friday</td><td>"+FridayConsumption+"</td><td>"+CalculateConsumptionPrice(FridayConsumption)+"</td></tr><tr><td>Saturday</td><td>"+SaturdayConsumption+"</td><td>"+CalculateConsumptionPrice(SaturdayConsumption)+"</td></tr>");
 		}
+		else
+		{
+			$("#statistics #stats-table tbody").append("<tr><td>Sunday</td><td>0</td><td>0</td></tr><tr><td>Monday</td><td>0</td><td>0</td></tr><tr><td>Tuesday</td><td>0</td><td>0</td></tr><tr><td>Wednesday</td><td>0</td><td>0</td></tr><tr><td>Thursday</td><td>0</td><td>0</td></tr><tr><td>Friday</td><td>0</td><td>0</td></tr><tr><td>Saturday</td><td>0</td><td>0</td></tr>");
+		}
 
 		chartInstance = new Chart(chart, {type: "line", data: data, options: options});
 		chartInstance_bar = new Chart(chart_bar, {type: "bar", data: data_bar, options: options});
@@ -4458,6 +4462,8 @@ function LoadWeeklyStats()
 
 		chartInstance = new Chart(chart, {type: "line", data: data, options: options});
 		chartInstance_bar = new Chart(chart_bar, {type: "bar", data: data_bar, options: options});
+
+		$("#statistics #stats-table tbody").append("<tr><td>Sunday</td><td>0</td><td>0</td></tr><tr><td>Monday</td><td>0</td><td>0</td></tr><tr><td>Tuesday</td><td>0</td><td>0</td></tr><tr><td>Wednesday</td><td>0</td><td>0</td></tr><tr><td>Thursday</td><td>0</td><td>0</td></tr><tr><td>Friday</td><td>0</td><td>0</td></tr><tr><td>Saturday</td><td>0</td><td>0</td></tr>");
 	});
 }
 /* Calculate Monthly Consumption Stats */
@@ -4601,6 +4607,10 @@ function LoadMonthlyStats()
 
 			$("#statistics #stats-table tbody").append("<tr><td>Week 1</td><td>"+FirstWeekConsumption+"</td><td>"+CalculateConsumptionPrice(FirstWeekConsumption)+"</td></tr><tr><td>Week 2</td><td>"+SecondWeekConsumption+"</td><td>"+CalculateConsumptionPrice(SecondWeekConsumption)+"</td></tr><tr><td>Week 3</td><td>"+ThirdWeekConsumption+"</td><td>"+CalculateConsumptionPrice(ThirdWeekConsumption)+"</td></tr><tr><td>Week 4</td><td>"+FourthWeekConsumption+"</td><td>"+CalculateConsumptionPrice(FourthWeekConsumption)+"</td></tr>");
 		}
+		else
+		{
+			$("#statistics #stats-table tbody").append("<tr><td>Week 1</td><td>0</td><td>0</td></tr><tr><td>Week 2</td><td>0</td><td>0</td></tr><tr><td>Week 3</td><td>0</td><td>0</td></tr><tr><td>Week 4</td><td>0</td><td>0</td></tr>");
+		}
 
 		chartInstance = new Chart(chart, {type: "line", data: data, options: options});
 		chartInstance_bar = new Chart(chart_bar, {type: "bar", data: data_bar, options: options});
@@ -4611,6 +4621,8 @@ function LoadMonthlyStats()
 
 		chartInstance = new Chart(chart, {type: "line", data: data, options: options});
 		chartInstance_bar = new Chart(chart_bar, {type: "bar", data: data_bar, options: options});
+
+		$("#statistics #stats-table tbody").append("<tr><td>Week 1</td><td>0</td><td>0</td></tr><tr><td>Week 2</td><td>0</td><td>0</td></tr><tr><td>Week 3</td><td>0</td><td>0</td></tr><tr><td>Week 4</td><td>0</td><td>0</td></tr>");
 	});
 }
 /* Calculate Yearly Consumption Stats */
@@ -4841,6 +4853,10 @@ function LoadYearlyStats()
 
 			$("#statistics #stats-table tbody").append("<tr><td>January</td><td>"+Jan_WeekConsumption+"</td><td>"+CalculateConsumptionPrice(Jan_WeekConsumption)+"</td></tr><tr><td>February</td><td>"+Feb_WeekConsumption+"</td><td>"+CalculateConsumptionPrice(Feb_WeekConsumption)+"</td></tr><tr><td>March</td><td>"+Mar_WeekConsumption+"</td><td>"+CalculateConsumptionPrice(Mar_WeekConsumption)+"</td></tr><tr><td>April</td><td>"+Apr_WeekConsumption+"</td><td>"+CalculateConsumptionPrice(Apr_WeekConsumption)+"</td></tr><tr><td>May</td><td>"+May_WeekConsumption+"</td><td>"+CalculateConsumptionPrice(May_WeekConsumption)+"</td></tr><tr><td>June</td><td>"+Jun_WeekConsumption+"</td><td>"+CalculateConsumptionPrice(Jun_WeekConsumption)+"</td></tr><tr><td>July</td><td>"+Jul_WeekConsumption+"</td><td>"+CalculateConsumptionPrice(Jul_WeekConsumption)+"</td></tr><tr><td>August</td><td>"+Aug_WeekConsumption+"</td><td>"+CalculateConsumptionPrice(Aug_WeekConsumption)+"</td></tr><tr><td>September</td><td>"+Sep_WeekConsumption+"</td><td>"+CalculateConsumptionPrice(Sep_WeekConsumption)+"</td></tr><tr><td>October</td><td>"+Oct_WeekConsumption+"</td><td>"+CalculateConsumptionPrice(Oct_WeekConsumption)+"</td></tr><tr><td>November</td><td>"+Nov_WeekConsumption+"</td><td>"+CalculateConsumptionPrice(Nov_WeekConsumption)+"</td></tr><tr><td>December</td><td>"+Dec_WeekConsumption+"</td><td>"+CalculateConsumptionPrice(Dec_WeekConsumption)+"</td></tr>");
 		}
+		else
+		{
+			$("#statistics #stats-table tbody").append("<tr><td>January</td><td>0</td><td>0</td></tr><tr><td>February</td><td>0</td><td>0</td></tr><tr><td>March</td><td>0</td><td>0</td></tr><tr><td>April</td><td>0</td><td>0</td></tr><tr><td>May</td><td>0</td><td>0</td></tr><tr><td>June</td><td>0</td><td>0</td></tr><tr><td>July</td><td>0</td><td>0</td></tr><tr><td>August</td><td>0</td><td>0</td></tr><tr><td>September</td><td>0</td><td>0</td></tr><tr><td>October</td><td>0</td><td>0</td></tr><tr><td>November</td><td>0</td><td>0</td></tr><tr><td>December</td><td>0</td><td>0</td></tr>");
+		}
 
 		chartInstance = new Chart(chart, {type: "line", data: data, options: options});
 		chartInstance_bar = new Chart(chart_bar, {type: "bar", data: data_bar, options: options});
@@ -4851,6 +4867,8 @@ function LoadYearlyStats()
 
 		chartInstance = new Chart(chart, {type: "line", data: data, options: options});
 		chartInstance_bar = new Chart(chart_bar, {type: "bar", data: data_bar, options: options});
+
+		$("#statistics #stats-table tbody").append("<tr><td>January</td><td>0</td><td>0</td></tr><tr><td>February</td><td>0</td><td>0</td></tr><tr><td>March</td><td>0</td><td>0</td></tr><tr><td>April</td><td>0</td><td>0</td></tr><tr><td>May</td><td>0</td><td>0</td></tr><tr><td>June</td><td>0</td><td>0</td></tr><tr><td>July</td><td>0</td><td>0</td></tr><tr><td>August</td><td>0</td><td>0</td></tr><tr><td>September</td><td>0</td><td>0</td></tr><tr><td>October</td><td>0</td><td>0</td></tr><tr><td>November</td><td>0</td><td>0</td></tr><tr><td>December</td><td>0</td><td>0</td></tr>");
 	});
 }
 /* Calculate Watts Consumption in a Day */
