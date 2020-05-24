@@ -7,7 +7,7 @@
 	}
 
 	include_once("config.php");
-	//require_once("toggleLight.php");
+	require_once("toggleLight.php");
 
 	header("Content-Type: application/json");
 
@@ -40,7 +40,7 @@
 				$pin = $row["pin"];
 				$ip = $row["ip"];
 
-				//toggleL($pin, 'OFF', $ip);
+				toggleL($pin, 'OFF', $ip);
 			}
 
 			/* Preparing Request */
