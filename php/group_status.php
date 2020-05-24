@@ -25,7 +25,7 @@
 	{
 		if ( (is_numeric($group)) && ( ($status == "ON") || ($status == "OFF") ) )
 		{
-			$request = "SELECT DEVICE_ID AS id, DEVICE_PIN AS pin, ROOM_NAME AS name, CARD_IP AS ip FROM DEVICES NATURAL JOIN ROOMS NATURAL JOIN CARDS WHERE GROUP_ID = :group;";
+			$request = "SELECT DEVICE_ID AS id, DEVICE_PIN AS pin, GROUP_NAME AS name, CARD_IP AS ip FROM DEVICES NATURAL JOIN GROUPS NATURAL JOIN CARDS WHERE GROUP_ID = :group;";
 			/* Preparing Statement */
 			$statement = $DB_CONNECTION->prepare($request);
 			/* Binding Parameter */
@@ -52,7 +52,7 @@
 					{
 						$pin = $row["pin"];
 						$name = $row["name"];
-						$option = $pin.":".$name;
+						$option = "G".$pin.":".$name;
 						$id = $row["id"];
 
 						/* Change Devices Status */

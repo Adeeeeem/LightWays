@@ -44,7 +44,7 @@
 
 			$pin = $result["pin"];
 			$name = $result["name"];
-			$option = $pin.":".$name;
+			$option = "R".$pin.":".$name;
 			$ip = $result["ip"];
 
 			$check = toggleL($pin, $status, $ip);

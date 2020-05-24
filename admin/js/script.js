@@ -3052,10 +3052,14 @@ $(function()
 								switch (response[i].data)
 								{
 									case "DEVICE":
-										var pin = response[i].opt.substring(0, response[i].opt.indexOf(":"));
-										var name = response[i].opt.substring(response[i].opt.indexOf(":")+1, response[i].opt.length);
+										var type = response[i].opt.slice(0, 1);
+									var option = response[i].opt.slice(1, response[i].opt.length);
+									var place = "";
+									if (type == "R") {place = "Room"} else if (type == "G") {place = "Group"}
+									var pin = option.substring(0, option.indexOf(":"));
+									var name = option.substring(option.indexOf(":")+1, option.length);
 
-										history = "Turned on Device Pin N° <span style='color: var(--blue-color);'>"+pin+"</span> in <span style='color: var(--blue-color);'>"+name+"</span> Room";
+									history = "Turned on Device Pin N° <span style='color: var(--blue-color);'>"+pin+"</span> in <span style='color: var(--blue-color);'>"+name+"</span> "+place;
 									break;
 									case "GROUP":
 										var name = response[i].opt.substring(0, response[i].opt.indexOf(":"));
@@ -3069,10 +3073,14 @@ $(function()
 								switch (response[i].data)
 								{
 									case "DEVICE":
-										var pin = response[i].opt.substring(0, response[i].opt.indexOf(":"));
-										var name = response[i].opt.substring(response[i].opt.indexOf(":")+1, response[i].opt.length);
+										var type = response[i].opt.slice(0, 1);
+										var option = response[i].opt.slice(1, response[i].opt.length);
+										var place = "";
+										if (type == "R") {place = "Room"} else if (type == "G") {place = "Group"}
+										var pin = option.substring(0, option.indexOf(":"));
+										var name = option.substring(option.indexOf(":")+1, option.length);
 
-										history = "Turned off Device Pin N° <span style='color: var(--blue-color);'>"+pin+"</span> in <span style='color: var(--blue-color);'>"+name+"</span> Room";
+										history = "Turned off Device Pin N° <span style='color: var(--blue-color);'>"+pin+"</span> in <span style='color: var(--blue-color);'>"+name+"</span> "+place;
 									break;
 									case "GROUP":
 										var name = response[i].opt.substring(0, response[i].opt.indexOf(":"));
@@ -5378,10 +5386,14 @@ function LoadHistory()
 							switch (response[i].data)
 							{
 								case "DEVICE":
-									var pin = response[i].opt.substring(0, response[i].opt.indexOf(":"));
-									var name = response[i].opt.substring(response[i].opt.indexOf(":")+1, response[i].opt.length);
+									var type = response[i].opt.slice(0, 1);
+									var option = response[i].opt.slice(1, response[i].opt.length);
+									var place = "";
+									if (type == "R") {place = "Room"} else if (type == "G") {place = "Group"}
+									var pin = option.substring(0, option.indexOf(":"));
+									var name = option.substring(option.indexOf(":")+1, option.length);
 
-									history = "Turned on Device Pin N° <span style='color: var(--blue-color);'>"+pin+"</span> in <span style='color: var(--blue-color);'>"+name+"</span> Room";
+									history = "Turned on Device Pin N° <span style='color: var(--blue-color);'>"+pin+"</span> in <span style='color: var(--blue-color);'>"+name+"</span> "+place;
 								break;
 								case "GROUP":
 									var name = response[i].opt.substring(0, response[i].opt.indexOf(":"));
@@ -5395,10 +5407,14 @@ function LoadHistory()
 							switch (response[i].data)
 							{
 								case "DEVICE":
-									var pin = response[i].opt.substring(0, response[i].opt.indexOf(":"));
-									var name = response[i].opt.substring(response[i].opt.indexOf(":")+1, response[i].opt.length);
+									var type = response[i].opt.slice(0, 1);
+									var option = response[i].opt.slice(1, response[i].opt.length);
+									var place = "";
+									if (type == "R") {place = "Room"} else if (type == "G") {place = "Group"}
+									var pin = option.substring(0, option.indexOf(":"));
+									var name = option.substring(option.indexOf(":")+1, option.length);
 
-									history = "Turned off Device Pin N° <span style='color: var(--blue-color);'>"+pin+"</span> in <span style='color: var(--blue-color);'>"+name+"</span> Room";
+									history = "Turned off Device Pin N° <span style='color: var(--blue-color);'>"+pin+"</span> in <span style='color: var(--blue-color);'>"+name+"</span> "+place;
 								break;
 								case "GROUP":
 									var name = response[i].opt.substring(0, response[i].opt.indexOf(":"));
