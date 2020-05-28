@@ -62,7 +62,7 @@
 /* Groups Display Table */
 #lights #lights-room-groups{border: 1px solid var(--secondary-color); border-radius: .25rem; padding: 10px !important; display: flex; flex-wrap: wrap; justify-content: center;}
 #lights *+.uk-grid-margin, #lights .uk-grid+.uk-grid, #lights .uk-grid>.uk-grid-margin{margin-top: 10px;}
-#lights #lights-room-groups button{border: 1px solid var(--primary-color); border-radius: 0.25rem; display: inline-block; cursor: pointer; margin-left: 10px; margin-right: 10px; height: 35px; padding: 0px; color: var(--text-color); line-height: 1; font-size: 0.7rem;}
+#lights #lights-room-groups button{border: 2px solid var(--primary-color); border-radius: 0.25rem; display: inline-block; cursor: pointer; margin-left: 10px; margin-right: 10px; height: 35px; padding: 0px; color: var(--text-color); line-height: 1; font-size: 0.7rem;}
 #lights #lights-room-groups th{padding: 0 !important; text-align: left; vertical-align: bottom; font-size: .75rem; font-weight: 400; color: #999999; text-transform: uppercase;}
 /*=========================
 		Groups
@@ -142,6 +142,17 @@
 #scenes input:checked + .uk-switch-slider{background-color: var(--blue-color) !important;}
 #scenes input:checked + .uk-switch-slider:before {transform: translateX(26px);}
 #scenes .uk-switch-slider{background-color: var(--secondary-color);}
+/* Add Scene Modal */
+#modal-add-scene div.add-scene-search-room div, #modal-add-scene div.add-scene-date-time div{padding: 0; margin: 0;}
+#modal-add-scene div.add-scene-search-room label, #modal-add-scene div.add-scene-date-time label.add-scene-time{color: var(--blue-color); padding-left: 0.5rem; margin-bottom: 0 !important; font-size: 10px;}
+#modal-add-scene #add-scene-search-floor, #modal-add-scene #add-scene-search-room, #modal-add-scene #add-scene-time-start, #modal-add-scene #add-scene-time-end{background-color: transparent; border: none;}
+#modal-add-scene hr.select-hr{background-position: 85%; max-width: 85%; margin-top: -5px; background-image: radial-gradient(closest-side, var(--secondary-color), hsla(232, 18%, 69%, 0) 150%); height: 2px;}
+#modal-add-scene div.add-scene-days-work span{margin-left: 10px; margin-right: 10px; padding: 5px; width: 25px; height: 25px; font-size: 1rem; border-radius: 50%; border: 1px solid var(--text-color); background-color: var(--primary-color); display: inline-block; cursor: pointer;}
+#modal-add-scene div.add-scene-days-work span.selected{background-color: #5CB85C;}
+#modal-add-scene #add-scene-room table{border: 1px solid var(--secondary-color); border-radius: .25rem; padding: 10px; border-collapse: separate;}
+#modal-add-scene #add-scene-room table td{padding: 0 !important;}
+#modal-add-scene #add-scene-room table td div{padding: 7px !important;}
+#modal-add-scene #add-scene-room table td div img{padding: 5px !important; border: 2px solid var(--text-color); border-radius: 50%; cursor: pointer;}
 /* Edit Scene Modal */
 #modal-edit-scenes div.uk-modal-body{padding-bottom: 10px;}
 #modal-edit-scenes div.edit-scenes-search-room div{padding: 0; margin: 0;}
@@ -370,8 +381,8 @@
 #support p{font-weight: 400;}
 #support span.light{color: var(--orange-color);}
 #support span.ways{color: var(--blue-color);}
-#support div.rights{background-color: var(--primary-color); padding: 10px; line-height: 1; margin-left: 250px;}
-#support div.rights h5{margin-bottom: 0; color: var(--text-color); font-size: 0.8rem;}
+#support footer.footer{background-color: var(--primary-color); padding: 10px; line-height: 1; margin-left: 250px;}
+#support footer.footer h5{margin-bottom: 0; color: var(--text-color); font-size: 0.8rem;}
 /* Contact */
 #support .contact-outer{padding-left: 15px !important; padding-right: 15px !important;}
 #support #contact-left, #support #contact-right{padding: 0px;}

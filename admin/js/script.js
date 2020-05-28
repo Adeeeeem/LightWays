@@ -972,6 +972,72 @@ $(window).on("load", function()
 		DisplayScenesList();
 	});
 });
+/* Enable and Disable Scene */
+
+/* Load Data to Add Scene Modal */
+$(function()
+{
+	$("#scenes #add-scene-btn").click(function()
+	{
+		$.ajax
+		({
+			url: "../php/floors.php",
+			type: "POST",
+			dataType: "json",
+		})
+		.done(function(response)
+		{
+			var len = response.length;
+			$("#modal-add-scene #add-scene-room table").empty();
+
+			if (len != 0)
+			{
+				for (var i = 0; i < len; i++)
+				{
+					$("#modal-add-scene #add-scene-search-floor").append("<option value='"+response[i].id+"'>"+response[i].name+"</option>");
+				}
+
+				// Get Selected Option Value
+				var floor = $("#add-scene-search-floor").val();
+				// Empty The Rooms List
+				$("#add-scene-search-room").empty();
+				// Load Rooms corresponding to the selected Floor
+				LoadRoomsAddSceneSection(floor);
+			}
+			else
+			{
+				$("#modal-add-scene #add-scene-room table").append("<tr class='uk-animation-scale-down uk-text-center'><th><img class='notfound' src='../images/icons/notfound.png' width='40' height='40'><br><br>No Floors Found !<br><small>Make Sure You Add Floors...</small></th></tr>");
+			}
+		})
+		.fail(function()
+		{
+			$("#modal-add-scene #add-scene-room table").empty();
+			$("#modal-add-scene #add-scene-room table").append("<tr class='uk-animation-scale-down uk-text-center'><th style='color: #C0392B;'><img class='error' src='../images/icons/error.png' width='40' height='40'><br><br>Failed to Load Floors !</th></tr>");
+		});
+	});
+
+	$("#add-scene-search-floor").change(function()
+	{
+		// Get Selected Option Value
+		var floor = $("#add-scene-search-floor").val();
+		// Empty The Rooms List
+		$("#add-scene-search-room").empty();
+		// Load Rooms corresponding to the selected Floor
+		LoadRoomsAddSceneSection(floor);
+	});
+
+	$("#modal-add-scene div.add-scene-days-work span").click(function()
+	{
+		if ($(this).hasClass("selected"))
+		{
+			$(this).removeClass("selected");
+		}
+		else
+		{
+			$(this).addClass("selected");
+		}
+	});
+});
 /*=========================
 		Statistics
 =========================*/
@@ -3866,7 +3932,7 @@ function GroupStatus(group, status, flag)
 
 					if ($(device).attr("class") == opposite)
 					{
-						// Change Status to status
+						// Change Status to Opposite
 						$(device).removeClass(opposite);
 						$(device).addClass(status);
 						// Change Icon
@@ -3934,7 +4000,7 @@ function LoadRoomsAddGroupsSection(floor)
 	.fail(function()
 	{
 		$("#modal-add-group #add-group-room table").empty();
-		$("#modal-add-group #add-group-room table").append("<tr class='uk-animation-scale-down uk-text-center'><th style='color: #C0392B;'><img class='error' src='../images/icons/error.png' width='40' height='40'><br><br>Failed to Load Rooms !</th></tr>")
+		$("#modal-add-group #add-group-room table").append("<tr class='uk-animation-scale-down uk-text-center'><th style='color: #C0392B;'><img class='error' src='../images/icons/error.png' width='40' height='40'><br><br>Failed to Load Rooms !</th></tr>");
 	});
 
 	$("#add-group-search-room").change(function()
@@ -3996,7 +4062,7 @@ function DisplayDevicesAddGroupsSection(room)
 		$("#modal-add-group #add-group-room table").append("<tr class='uk-animation-scale-down uk-text-center'><th style='color: #C0392B;'><img class='error' src='../images/icons/error.png' width='45' height='45'><br><br>Failed to Load Devices !</th></tr>");
 	});
 }
-// Load Divces Already in Groups to the selected Room
+/* Load Divces Already in Groups to the selected Room */
 function LoadReservedDevicesAddGroupsSection(room)
 {
 	$.ajax
@@ -4210,6 +4276,76 @@ function DisplayScenesList()
 		$("#scenes #scenes-list").empty();
 		$("#scenes #scenes-list").append("<table class='uk-margin-small-top'><tr class='uk-animation-scale-down uk-text-center'><th style='color: #C0392B;'><img class='error' src='../images/icons/error.png' width='40' height='40'><br><br>Failed to Load Scenes !</th></tr></table>");
 	});
+}
+/* Change Scene Status Function */
+function SceneStatus(scene, status)
+{
+	//
+}
+
+/* Load Rooms Related to a Floor Function Add Scene Modal */
+function LoadRoomsAddSceneSection(floor)
+{
+	$.ajax
+	({
+		url: "../php/rooms.php",
+		type: "POST",
+		dataType: "json",
+		data: {floor: floor}
+	})
+	.done(function(response)
+	{
+		/* Load Rooms Related to a Floor Function Add Scene Modal */
+		var len = response.length;
+		$("#modal-add-scene #add-scene-room table").empty();
+
+		if (len != 0)
+		{
+			for (var i = 0; i < len; i++)
+			{
+				$("#add-scene-search-room").append("<option value='"+response[i].id+"'>"+response[i].name+"</option>");
+			}
+
+			// Get Selected Option Value
+			var room = $("#add-scene-search-room").val();
+			// Display The Selected Room's Devices in Scene Add Section
+			DisplayDevicesAddSceneSection(room);
+			// Load Room Groups of the selected Room
+			setTimeout("LoadReservedDevicesAddSceneSection("+room+")", 100);
+		}
+		else
+		{
+			$("#modal-add-scene #add-scene-room table").empty();
+			$("#modal-add-scene #add-scene-room table").append("<tr class='uk-animation-scale-down uk-text-center'><th><img class='notfound' src='../images/icons/notfound.png' width='40' height='40'><br><br>No Rooms Found in This Floor !<br><small>Make Sure You Add Rooms...</small></th></tr>");
+		}
+	})
+	.fail(function()
+	{
+		$("#modal-add-scene #add-scene-room table").empty();
+		$("#modal-add-scene #add-scene-room table").append("<tr class='uk-animation-scale-down uk-text-center'><th style='color: #C0392B;'><img class='error' src='../images/icons/error.png' width='40' height='40'><br><br>Failed to Load Rooms !</th></tr>");
+	});
+
+	$("#add-scene-search-room").change(function()
+	{
+		// Get Selected Option Value
+		var room = $("#add-scene-search-room").val();
+		// Empty The Devices Display Room
+		$("#modal-add-scene #add-scene-room table").empty();
+		// Display The Selected Room's Devices
+		DisplayDevicesAddSceneSection(room);
+		// Load Room Groups of the selected Room
+		setTimeout("LoadReservedDevicesAddSceneSection("+room+")", 100);
+	});
+}
+/* Load Devices Related to a Room Function Add Scene Modal */
+function DisplayDevicesAddSceneSection(room)
+{
+	//
+}
+/* Load Room Groups of the selected Room */
+function LoadReservedDevicesAddSceneSection(room)
+{
+	//
 }
 /*==================================================
 		Statistics Section Functions
@@ -4446,11 +4582,11 @@ function LoadWeeklyStats()
 			$("#statistics #today-price").html(today_price);
 			$("#statistics #week-price").html(week_price);
 
-			$("#statistics #stats-table tbody").append("<tr><td>Sunday</td><td>"+SundayConsumption+"</td><td>"+CalculateConsumptionPrice(SundayConsumption)+"</td></tr><tr><td>Monday</td><td>"+MondayConsumption+"</td><td>"+CalculateConsumptionPrice(MondayConsumption)+"</td></tr><tr><td>Tuesday</td><td>"+TuesdayConsumption+"</td><td>"+CalculateConsumptionPrice(TuesdayConsumption)+"</td></tr><tr><td>Wednesday</td><td>"+WednesdayConsumption+"</td><td>"+CalculateConsumptionPrice(WednesdayConsumption)+"</td></tr><tr><td>Thursday</td><td>"+ThursdayConsumption+"</td><td>"+CalculateConsumptionPrice(ThursdayConsumption)+"</td></tr><tr><td>Friday</td><td>"+FridayConsumption+"</td><td>"+CalculateConsumptionPrice(FridayConsumption)+"</td></tr><tr><td>Saturday</td><td>"+SaturdayConsumption+"</td><td>"+CalculateConsumptionPrice(SaturdayConsumption)+"</td></tr>");
+			$("#statistics #stats-table tbody").append("<tr><td>Sunday</td><td>"+SundayConsumption+" kWh</td><td>"+CalculateConsumptionPrice(SundayConsumption)+" DT</td></tr><tr><td>Monday</td><td>"+MondayConsumption+" kWh</td><td>"+CalculateConsumptionPrice(MondayConsumption)+" DT</td></tr><tr><td>Tuesday</td><td>"+TuesdayConsumption+" kWh</td><td>"+CalculateConsumptionPrice(TuesdayConsumption)+" DT</td></tr><tr><td>Wednesday</td><td>"+WednesdayConsumption+" kWh</td><td>"+CalculateConsumptionPrice(WednesdayConsumption)+" DT</td></tr><tr><td>Thursday</td><td>"+ThursdayConsumption+" kWh</td><td>"+CalculateConsumptionPrice(ThursdayConsumption)+" DT</td></tr><tr><td>Friday</td><td>"+FridayConsumption+" kWh</td><td>"+CalculateConsumptionPrice(FridayConsumption)+" DT</td></tr><tr><td>Saturday</td><td>"+SaturdayConsumption+" kWh</td><td>"+CalculateConsumptionPrice(SaturdayConsumption)+" DT</td></tr>");
 		}
 		else
 		{
-			$("#statistics #stats-table tbody").append("<tr><td>Sunday</td><td>0</td><td>0</td></tr><tr><td>Monday</td><td>0</td><td>0</td></tr><tr><td>Tuesday</td><td>0</td><td>0</td></tr><tr><td>Wednesday</td><td>0</td><td>0</td></tr><tr><td>Thursday</td><td>0</td><td>0</td></tr><tr><td>Friday</td><td>0</td><td>0</td></tr><tr><td>Saturday</td><td>0</td><td>0</td></tr>");
+			$("#statistics #stats-table tbody").append("<tr><td>Sunday</td><td>0 kWh</td><td>0 DT</td></tr><tr><td>Monday</td><td>0 kWh</td><td>0 DT</td></tr><tr><td>Tuesday</td><td>0 kWh</td><td>0 DT</td></tr><tr><td>Wednesday</td><td>0 kWh</td><td>0 DT</td></tr><tr><td>Thursday</td><td>0 kWh</td><td>0 DT</td></tr><tr><td>Friday</td><td>0 kWh</td><td>0 DT</td></tr><tr><td>Saturday</td><td>0 kWh</td><td>0 DT</td></tr>");
 		}
 
 		chartInstance = new Chart(chart, {type: "line", data: data, options: options});
@@ -4458,12 +4594,12 @@ function LoadWeeklyStats()
 	})
 	.fail(function()
 	{
-		$.growl.error({ message: "Failed to Load Statistics !" });
+		$.growl.error({ message: "Failed to Load Week Statistics !" });
 
 		chartInstance = new Chart(chart, {type: "line", data: data, options: options});
 		chartInstance_bar = new Chart(chart_bar, {type: "bar", data: data_bar, options: options});
 
-		$("#statistics #stats-table tbody").append("<tr><td>Sunday</td><td>0</td><td>0</td></tr><tr><td>Monday</td><td>0</td><td>0</td></tr><tr><td>Tuesday</td><td>0</td><td>0</td></tr><tr><td>Wednesday</td><td>0</td><td>0</td></tr><tr><td>Thursday</td><td>0</td><td>0</td></tr><tr><td>Friday</td><td>0</td><td>0</td></tr><tr><td>Saturday</td><td>0</td><td>0</td></tr>");
+		$("#statistics #stats-table tbody").append("<tr><td>Sunday</td><td>0 kWh</td><td>0 DT</td></tr><tr><td>Monday</td><td>0 kWh</td><td>0 DT</td></tr><tr><td>Tuesday</td><td>0 kWh</td><td>0 DT</td></tr><tr><td>Wednesday</td><td>0 kWh</td><td>0 DT</td></tr><tr><td>Thursday</td><td>0 kWh</td><td>0 DT</td></tr><tr><td>Friday</td><td>0 kWh</td><td>0 DT</td></tr><tr><td>Saturday</td><td>0 kWh</td><td>0 DT</td></tr>");
 	});
 }
 /* Calculate Monthly Consumption Stats */
@@ -4605,11 +4741,11 @@ function LoadMonthlyStats()
 			$("#statistics #week-usage").html(month_cons);
 			$("#statistics #week-price").html(month_price);
 
-			$("#statistics #stats-table tbody").append("<tr><td>Week 1</td><td>"+FirstWeekConsumption+"</td><td>"+CalculateConsumptionPrice(FirstWeekConsumption)+"</td></tr><tr><td>Week 2</td><td>"+SecondWeekConsumption+"</td><td>"+CalculateConsumptionPrice(SecondWeekConsumption)+"</td></tr><tr><td>Week 3</td><td>"+ThirdWeekConsumption+"</td><td>"+CalculateConsumptionPrice(ThirdWeekConsumption)+"</td></tr><tr><td>Week 4</td><td>"+FourthWeekConsumption+"</td><td>"+CalculateConsumptionPrice(FourthWeekConsumption)+"</td></tr>");
+			$("#statistics #stats-table tbody").append("<tr><td>Week 1</td><td>"+FirstWeekConsumption+" kWh</td><td>"+CalculateConsumptionPrice(FirstWeekConsumption)+" DT</td></tr><tr><td>Week 2</td><td>"+SecondWeekConsumption+" kWh</td><td>"+CalculateConsumptionPrice(SecondWeekConsumption)+" DT</td></tr><tr><td>Week 3</td><td>"+ThirdWeekConsumption+" kWh</td><td>"+CalculateConsumptionPrice(ThirdWeekConsumption)+" DT</td></tr><tr><td>Week 4</td><td>"+FourthWeekConsumption+" kWh</td><td>"+CalculateConsumptionPrice(FourthWeekConsumption)+" DT</td></tr>");
 		}
 		else
 		{
-			$("#statistics #stats-table tbody").append("<tr><td>Week 1</td><td>0</td><td>0</td></tr><tr><td>Week 2</td><td>0</td><td>0</td></tr><tr><td>Week 3</td><td>0</td><td>0</td></tr><tr><td>Week 4</td><td>0</td><td>0</td></tr>");
+			$("#statistics #stats-table tbody").append("<tr><td>Week 1</td><td>0 kWh</td><td>0 DT</td></tr><tr><td>Week 2</td><td>0 kWh</td><td>0 DT</td></tr><tr><td>Week 3</td><td>0 kWh</td><td>0 DT</td></tr><tr><td>Week 4</td><td>0 kWh</td><td>0 DT</td></tr>");
 		}
 
 		chartInstance = new Chart(chart, {type: "line", data: data, options: options});
@@ -4617,12 +4753,12 @@ function LoadMonthlyStats()
 	})
 	.fail(function()
 	{
-		$.growl.error({ message: "Failed to Load Statistics !" });
+		$.growl.error({ message: "Failed to Load Month Statistics !" });
 
 		chartInstance = new Chart(chart, {type: "line", data: data, options: options});
 		chartInstance_bar = new Chart(chart_bar, {type: "bar", data: data_bar, options: options});
 
-		$("#statistics #stats-table tbody").append("<tr><td>Week 1</td><td>0</td><td>0</td></tr><tr><td>Week 2</td><td>0</td><td>0</td></tr><tr><td>Week 3</td><td>0</td><td>0</td></tr><tr><td>Week 4</td><td>0</td><td>0</td></tr>");
+		$("#statistics #stats-table tbody").append("<tr><td>Week 1</td><td>0 kWh</td><td>0 DT</td></tr><tr><td>Week 2</td><td>0 kWh</td><td>0 DT</td></tr><tr><td>Week 3</td><td>0 kWh</td><td>0 DT</td></tr><tr><td>Week 4</td><td>0 kWh</td><td>0 DT</td></tr>");
 	});
 }
 /* Calculate Yearly Consumption Stats */
@@ -4851,11 +4987,11 @@ function LoadYearlyStats()
 			$("#statistics #week-usage").html(year_cons);
 			$("#statistics #week-price").html(year_price);
 
-			$("#statistics #stats-table tbody").append("<tr><td>January</td><td>"+Jan_WeekConsumption+"</td><td>"+CalculateConsumptionPrice(Jan_WeekConsumption)+"</td></tr><tr><td>February</td><td>"+Feb_WeekConsumption+"</td><td>"+CalculateConsumptionPrice(Feb_WeekConsumption)+"</td></tr><tr><td>March</td><td>"+Mar_WeekConsumption+"</td><td>"+CalculateConsumptionPrice(Mar_WeekConsumption)+"</td></tr><tr><td>April</td><td>"+Apr_WeekConsumption+"</td><td>"+CalculateConsumptionPrice(Apr_WeekConsumption)+"</td></tr><tr><td>May</td><td>"+May_WeekConsumption+"</td><td>"+CalculateConsumptionPrice(May_WeekConsumption)+"</td></tr><tr><td>June</td><td>"+Jun_WeekConsumption+"</td><td>"+CalculateConsumptionPrice(Jun_WeekConsumption)+"</td></tr><tr><td>July</td><td>"+Jul_WeekConsumption+"</td><td>"+CalculateConsumptionPrice(Jul_WeekConsumption)+"</td></tr><tr><td>August</td><td>"+Aug_WeekConsumption+"</td><td>"+CalculateConsumptionPrice(Aug_WeekConsumption)+"</td></tr><tr><td>September</td><td>"+Sep_WeekConsumption+"</td><td>"+CalculateConsumptionPrice(Sep_WeekConsumption)+"</td></tr><tr><td>October</td><td>"+Oct_WeekConsumption+"</td><td>"+CalculateConsumptionPrice(Oct_WeekConsumption)+"</td></tr><tr><td>November</td><td>"+Nov_WeekConsumption+"</td><td>"+CalculateConsumptionPrice(Nov_WeekConsumption)+"</td></tr><tr><td>December</td><td>"+Dec_WeekConsumption+"</td><td>"+CalculateConsumptionPrice(Dec_WeekConsumption)+"</td></tr>");
+			$("#statistics #stats-table tbody").append("<tr><td>January</td><td>"+Jan_WeekConsumption+" kWh</td><td>"+CalculateConsumptionPrice(Jan_WeekConsumption)+" DT</td></tr><tr><td>February</td><td>"+Feb_WeekConsumption+" kWh</td><td>"+CalculateConsumptionPrice(Feb_WeekConsumption)+" DT</td></tr><tr><td>March</td><td>"+Mar_WeekConsumption+" kWh</td><td>"+CalculateConsumptionPrice(Mar_WeekConsumption)+" DT</td></tr><tr><td>April</td><td>"+Apr_WeekConsumption+" kWh</td><td>"+CalculateConsumptionPrice(Apr_WeekConsumption)+" DT</td></tr><tr><td>May</td><td>"+May_WeekConsumption+" kWh</td><td>"+CalculateConsumptionPrice(May_WeekConsumption)+" DT</td></tr><tr><td>June</td><td>"+Jun_WeekConsumption+" kWh</td><td>"+CalculateConsumptionPrice(Jun_WeekConsumption)+" DT</td></tr><tr><td>July</td><td>"+Jul_WeekConsumption+" kWh</td><td>"+CalculateConsumptionPrice(Jul_WeekConsumption)+" DT</td></tr><tr><td>August</td><td>"+Aug_WeekConsumption+" kWh</td><td>"+CalculateConsumptionPrice(Aug_WeekConsumption)+" DT</td></tr><tr><td>September</td><td>"+Sep_WeekConsumption+" kWh</td><td>"+CalculateConsumptionPrice(Sep_WeekConsumption)+" DT</td></tr><tr><td>October</td><td>"+Oct_WeekConsumption+" kWh</td><td>"+CalculateConsumptionPrice(Oct_WeekConsumption)+" DT</td></tr><tr><td>November</td><td>"+Nov_WeekConsumption+" kWh</td><td>"+CalculateConsumptionPrice(Nov_WeekConsumption)+" DT</td></tr><tr><td>December</td><td>"+Dec_WeekConsumption+" kWh</td><td>"+CalculateConsumptionPrice(Dec_WeekConsumption)+" DT</td></tr>");
 		}
 		else
 		{
-			$("#statistics #stats-table tbody").append("<tr><td>January</td><td>0</td><td>0</td></tr><tr><td>February</td><td>0</td><td>0</td></tr><tr><td>March</td><td>0</td><td>0</td></tr><tr><td>April</td><td>0</td><td>0</td></tr><tr><td>May</td><td>0</td><td>0</td></tr><tr><td>June</td><td>0</td><td>0</td></tr><tr><td>July</td><td>0</td><td>0</td></tr><tr><td>August</td><td>0</td><td>0</td></tr><tr><td>September</td><td>0</td><td>0</td></tr><tr><td>October</td><td>0</td><td>0</td></tr><tr><td>November</td><td>0</td><td>0</td></tr><tr><td>December</td><td>0</td><td>0</td></tr>");
+			$("#statistics #stats-table tbody").append("<tr><td>January</td><td>0 kWh</td><td>0 DT</td></tr><tr><td>February</td><td>0 kWh</td><td>0 DT</td></tr><tr><td>March</td><td>0 kWh</td><td>0 DT</td></tr><tr><td>April</td><td>0 kWh</td><td>0 DT</td></tr><tr><td>May</td><td>0 kWh</td><td>0 DT</td></tr><tr><td>June</td><td>0 kWh</td><td>0 DT</td></tr><tr><td>July</td><td>0 kWh</td><td>0 DT</td></tr><tr><td>August</td><td>0 kWh</td><td>0 DT</td></tr><tr><td>September</td><td>0 kWh</td><td>0 DT</td></tr><tr><td>October</td><td>0 kWh</td><td>0 DT</td></tr><tr><td>November</td><td>0 kWh</td><td>0 DT</td></tr><tr><td>December</td><td>0 kWh</td><td>0 DT</td></tr>");
 		}
 
 		chartInstance = new Chart(chart, {type: "line", data: data, options: options});
@@ -4863,12 +4999,12 @@ function LoadYearlyStats()
 	})
 	.fail(function()
 	{
-		$.growl.error({ message: "Failed to Load Statistics !" });
+		$.growl.error({ message: "Failed to Load Year Statistics !" });
 
 		chartInstance = new Chart(chart, {type: "line", data: data, options: options});
 		chartInstance_bar = new Chart(chart_bar, {type: "bar", data: data_bar, options: options});
 
-		$("#statistics #stats-table tbody").append("<tr><td>January</td><td>0</td><td>0</td></tr><tr><td>February</td><td>0</td><td>0</td></tr><tr><td>March</td><td>0</td><td>0</td></tr><tr><td>April</td><td>0</td><td>0</td></tr><tr><td>May</td><td>0</td><td>0</td></tr><tr><td>June</td><td>0</td><td>0</td></tr><tr><td>July</td><td>0</td><td>0</td></tr><tr><td>August</td><td>0</td><td>0</td></tr><tr><td>September</td><td>0</td><td>0</td></tr><tr><td>October</td><td>0</td><td>0</td></tr><tr><td>November</td><td>0</td><td>0</td></tr><tr><td>December</td><td>0</td><td>0</td></tr>");
+		$("#statistics #stats-table tbody").append("<tr><td>January</td><td>0 kWh</td><td>0 DT</td></tr><tr><td>February</td><td>0 kWh</td><td>0 DT</td></tr><tr><td>March</td><td>0 kWh</td><td>0 DT</td></tr><tr><td>April</td><td>0 kWh</td><td>0 DT</td></tr><tr><td>May</td><td>0 kWh</td><td>0 DT</td></tr><tr><td>June</td><td>0 kWh</td><td>0 DT</td></tr><tr><td>July</td><td>0 kWh</td><td>0 DT</td></tr><tr><td>August</td><td>0 kWh</td><td>0 DT</td></tr><tr><td>September</td><td>0 kWh</td><td>0 DT</td></tr><tr><td>October</td><td>0 kWh</td><td>0 DT</td></tr><tr><td>November</td><td>0 kWh</td><td>0 DT</td></tr><tr><td>December</td><td>0 kWh</td><td>0 DT</td></tr>");
 	});
 }
 /* Calculate Watts Consumption in a Day */
@@ -4876,8 +5012,7 @@ function CalculateWattsConsumptionDay(ArrayHistoryDay)
 {
 	var len = ArrayHistoryDay.length;
 	var time = 0;
-	var off_time;
-
+	var id;
 	var today = new Date(); // Get current day
 	var current_time = today.toTimeString().slice(0,8); // Get current Time
 	today = formatDate(today);
@@ -4887,84 +5022,70 @@ function CalculateWattsConsumptionDay(ArrayHistoryDay)
 	{
 		for (var i = 0; i < len; i++)
 		{
-			switch (ArrayHistoryDay[i].type)
+			if (ArrayHistoryDay[i] != null)
 			{
-				case "ON":
-						var done = false;
-						// Search for the off time to calculate the time difference
-						for (var j = i; j < len; j++)
-						{
-							if ( (ArrayHistoryDay[j].id == ArrayHistoryDay[i].id) && (ArrayHistoryDay[j].type == "OFF") ) // If off time found leave the loop
+				id = ArrayHistoryDay[i].id;
+
+				switch (ArrayHistoryDay[i].type)
+				{
+					case "ON":
+							var done = false;
+							// Search for the off time to calculate the time difference
+							for (var j = i + 1; j < len; j++)
 							{
-								off_time = ArrayHistoryDay[j].time; // Get off Time
-								done = true;
-								// Mark off if found time Done
-								ArrayHistoryDay[j].type = "DELETED";
-								// Leave the loop
-								break; // In case the device was opened again or closed so it doesn't delete that as well
-							}
-						}
-						// If Off Time Found
-						if (done)
-						{
-							time = CalculateDifferenceinHours(ArrayHistoryDay[i].time, off_time);
-							// Mark on time Done
-							ArrayHistoryDay[i].type = "DELETED";
-						}
-						else // Off time not found
-						{
-							if (today == ArrayHistoryDay[i].date) // If the day is today
-							{
-								time = CalculateDifferenceinHours(ArrayHistoryDay[i].time, current_time); // Calculate from time on till current time
-								// Mark on time Done
-								ArrayHistoryDay[i].type = "DELETED";
-							}
-							else // If it is in the past then calculate from on time till mid night
-							{
-								time = CalculateDifferenceinHours(ArrayHistoryDay[i].time, "00:00:00"); // Calculate from on time till mid-night
-								// Mark as done for the on and reset time
-								for (var j = i; j < len; j++)
+								if ( (ArrayHistoryDay[j].id == ArrayHistoryDay[i].id) && (ArrayHistoryDay[j].type == "OFF") ) // If off time found leave the loop
 								{
-									if ( (ArrayHistoryDay[j].id == ArrayHistoryDay[i].id) && (ArrayHistoryDay[j].type == "RESET") )
+									time = CalculateDifferenceinHours(ArrayHistoryDay[i].time, ArrayHistoryDay[j].time);
+									done = true;
+									// Delete off if found time
+									ArrayHistoryDay.splice(j, 1);
+									len--;
+									// Leave the loop
+									break; // In case the device was opened again or closed so it doesn't delete that as well
+								}
+							}
+							// Off time not found
+							if (!done)
+							{
+								if (today == ArrayHistoryDay[i].date) // If the day is today
+								{
+									time = CalculateDifferenceinHours(ArrayHistoryDay[i].time, current_time); // Calculate from time on till current time
+								}
+								else // If it is in the past then calculate from on time till mid night
+								{
+									time = CalculateDifferenceinHours(ArrayHistoryDay[i].time, "00:00:00"); // Calculate from on time till mid-night
+									// Delete the reset time
+									for (var j = i + 1; j < len; j++)
 									{
-										// Mark reset time Done
-										ArrayHistoryDay[j].type = "DELETED";
+										if ( (ArrayHistoryDay[j].id == ArrayHistoryDay[i].id) && (ArrayHistoryDay[j].type == "RESET") )
+										{
+											// Delete reset time
+											ArrayHistoryDay.splice(j, 1);
+											len--;
+											// Leave the loop
+											break;
+										}
 									}
 								}
-								// Mark on time Done
-								ArrayHistoryDay[i].type = "DELETED";
 							}
-						}
-					break;
-				case "OFF": // For the Devices that left on yesterday or before and turned off today or reseted by the system, start counting from mid-night to the off time
-						time = CalculateDifferenceinHours("00:00:00", ArrayHistoryDay[i].time); // Start counting from mid night till the off time
-						// Mark off time Done
-						ArrayHistoryDay[i].type = "DELETED";
-					break;
-				case "RESET": // Reseted by the System to better calculation
-						var exists = false;
-						for (var j = 0; j < len; j++)
-						{
-							if  ( (ArrayHistoryDay[j].id == ArrayHistoryDay[i].id) && (ArrayHistoryDay[j].type != "RESET") )
-							{
-								exists = true;
-								break;
-							}
-						}
-						if (!exists)
-						{
+						break;
+					case "OFF": // For the Devices that left on yesterday or before and turned off today or reseted by the system, start counting from mid-night to the off time
+							time = CalculateDifferenceinHours("00:00:00", ArrayHistoryDay[i].time); // Start counting from mid night till the off time
+						break;
+					case "RESET": // Reseted by the System to better calculation
 							time = 24;
-						}
-						// Mark reset time Done
-						ArrayHistoryDay[i].type = "DELETED";
-					break;
-				default:
-						// DO NOTHING I JUST JUST IN CASE
-					break;
+						break;
+					default:
+							// DO NOTHING I JUST JUST IN CASE
+						break;
+				}
+				// Calculate Consumption kWh for current Day
+				// E(kWh/day) = P(W) × T(h/day) / 1000(W/kW)
+				consumption += (getDeviceWattsPower(id) * time) / 1000; // kWh
+				ArrayHistoryDay.splice(i, 1);
+				i--;
+				len--;
 			}
-			// Calculate Consumption kWh for current Day
-			// E(kWh/day) = P(W) × T(h/day) / 1000(W/kW)
-			consumption += (getDeviceWattsPower(ArrayHistoryDay[i].id) * time) / 1000; // kWh
 		}
 	}
 
@@ -4975,23 +5096,59 @@ function CalculateWattsConsumptionWeek(ArrayHistoryWeek)
 {
 	var len = ArrayHistoryWeek.length;
 	var consumption = 0;
+	var ArrayHistoryDay = [];
 
 	if (len != 0)
 	{
-		//
+		var date_iterator = ArrayHistoryWeek[0].date;
+
+		for (var i = 0; i < len; i++)
+		{
+			if (ArrayHistoryWeek[i].date == date_iterator)
+			{
+				ArrayHistoryDay.push(ArrayHistoryWeek[i]);
+
+				if (i == len - 1) {consumption += CalculateWattsConsumptionDay(ArrayHistoryDay); ArrayHistoryDay = [];}
+			}
+			else
+			{
+				date_iterator = ArrayHistoryWeek[i].date;
+				consumption += CalculateWattsConsumptionDay(ArrayHistoryDay);
+				ArrayHistoryDay = [];
+				ArrayHistoryDay.push(ArrayHistoryWeek[i]);
+			}
+		}
 	}
 
 	return Math.round(consumption);
 }
-/* Calculate Watss Consumption in a Year */
-function CalculateWattsConsumptionYear(ArrayHistoryYear)
+/* Calculate Watss Consumption in a Month */
+function CalculateWattsConsumptionYear(ArrayHistoryMonth)
 {
-	var len = ArrayHistoryYear.length;
+	var len = ArrayHistoryMonth.length;
 	var consumption = 0;
+	var ArrayHistoryDay = [];
 
 	if (len != 0)
 	{
-		//
+		var date_iterator = ArrayHistoryMonth[0].date;
+
+		for (var i = 0; i < len; i++)
+		{
+			if (ArrayHistoryMonth[i].date == date_iterator)
+			{
+				ArrayHistoryDay.push(ArrayHistoryMonth[i]);
+
+				if (i == len - 1) {consumption += CalculateWattsConsumptionDay(ArrayHistoryDay); ArrayHistoryDay = [];}
+			}
+			else
+			{
+				date_iterator = ArrayHistoryMonth[i].date;
+				consumption += CalculateWattsConsumptionDay(ArrayHistoryDay);
+				ArrayHistoryDay = [];
+				ArrayHistoryDay.push(ArrayHistoryMonth[i]);
+			}
+		}
 	}
 
 	return Math.round(consumption);

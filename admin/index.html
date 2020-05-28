@@ -263,8 +263,8 @@
 						<table class="uk-table uk-table-hover">
 							<thead>
 								<th id="dwm" width="35%">Day</th>
-								<th width="32.35%">Consumption (kWh)</th>
-								<th width="32.35%">Cost (DT)</th>
+								<th width="32.35%">Consumption</th>
+								<th width="32.35%">Cost</th>
 							</thead>
 							<tbody>
 								<!-- Data Will be Loaded from JavaScript -->
@@ -618,9 +618,9 @@
 				</div>
 			</div>
 			<!-- Copyrights -->
-			<div class="rights uk-position-bottom">
+			<footer class="footer uk-position-bottom">
 				<h5><span class="light">Light</span><span class="ways">Ways</span><br>Ⓒ 2020 LightWays. All Rights Reserved</h5>
-			</div>
+			</footer>
 			&nbsp;<br>&nbsp;<br>&nbsp;
 		</div>
 	</div>
@@ -825,10 +825,47 @@
 							</div>
 						</div>
 					</div>
+					<!-- Time and Days -->
 					<div class="uk-margin">
-						<label class="uk-form-label" for="add-scene-color">Scene Color</label>
 						<div class="uk-form-controls">
-							<input id="add-scene-color" class="uk-input" type="color" value="#FFA200">
+							<div class="add-scene-date-time" uk-grid>
+								<!-- Scene Time -->
+								<div class="uk-width-1-2@s" uk-grid>
+									<!-- Scene Time Start -->
+									<div class="uk-width-1-2">
+										<label class="uk-form-label add-scene-time" for="add-scene-time-start">Time Start</label>
+										<div class="uk-form-controls">
+											<input id="add-scene-time-start" class="uk-input" type="time" pattern="[0-9]{2}:[0-9]{2}" placeholder="Scene Name">
+											<hr class="uk-align-center select-hr">
+										</div>
+										<div class=" uk-animation-toggle">
+											<div class="uk-animation-shake">
+												<small id="add-scene-time-start-error" class="error">Please Enter a Scene Start Time !</small>
+											</div>
+										</div>
+									</div>
+									<!-- Scene Time End -->
+									<div class="uk-width-1-2">
+										<label class="uk-form-label add-scene-time" for="add-scene-time-end">Time End</label>
+										<div class="uk-form-controls">
+											<input id="add-scene-time-end" class="uk-input" type="time" pattern="[0-9]{2}:[0-9]{2}" placeholder="Scene Name">
+											<hr class="uk-align-center select-hr">
+										</div>
+										<div class=" uk-animation-toggle">
+											<div class="uk-animation-shake">
+												<small id="add-scene-time-end-error" class="error">Please Enter a Scene End Time !</small>
+											</div>
+										</div>
+									</div>
+								</div>
+								<!-- Scene Days -->
+								<div class="uk-width-1-2@s add-scene-days-work">
+									<label class="uk-form-label uk-text-center" for="add-scene-days-work">Scene Days</label>
+									<div class="uk-form-controls uk-text-center">
+										 <span>S</span> <span>M</span> <span>T</span> <span>W</span> <span>T</span> <span>F</span> <span>S</span> 
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
 					<div class="uk-margin">
@@ -864,6 +901,9 @@
 									<!-- Devices Will be Displayed from JavaScript -->
 								</table>
 							</div>
+							<div id="add-scene-group" class="uk-text-center">
+								<!-- Groups Will be Displayed from JavaScript -->
+							</div>
 						</div>
 					</div>
 				</div>
@@ -897,13 +937,6 @@
 							<div class="uk-animation-shake">
 								<small id="edit-scene-name-error" class="error">Scene Name Can't be Empty !</small>
 							</div>
-						</div>
-					</div>
-					<!-- Change Scene Color -->
-					<div class="uk-margin">
-						<label class="uk-form-label" for="edit-scene-color">Change Scene Color</label>
-						<div class="uk-form-controls">
-							<input id="edit-scene-color" class="uk-input" type="color">
 						</div>
 					</div>
 					<div class="uk-margin">
