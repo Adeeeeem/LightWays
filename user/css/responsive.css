@@ -42,7 +42,7 @@
 	/*=========================
 			Support
 	=========================*/
-	#support div.rights{margin-left: 200px;}
+	#support footer.footer{margin-left: 200px;}
 	/* Map */
 	#support #map iframe{height: 211px; width: 100%;}
 }
@@ -89,7 +89,7 @@
 	/*=========================
 			Support
 	=========================*/
-	#support div.rights{margin-left: 200px;}
+	#support footer.footer{margin-left: 200px;}
 	#support #social img{width: 25px; height: 25px;}
 	/* Map */
 	#support #map iframe{height: 240px; width: 100%;}
@@ -138,7 +138,7 @@
 	/*=========================
 			Support
 	=========================*/
-	#support div.rights{margin-left: 0;}
+	#support footer.footer{margin-left: 0;}
 	/* Contact */
 	#support .contact-outer{padding: 0 !important;}
 }

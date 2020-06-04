@@ -46,6 +46,8 @@
 	#scenes #add-scene-btn img{margin-top: -2px;}
 	/* Add Scene Modal */
 	#modal-add-scene div.add-scene-days-work span{margin-left: 7px; margin-right: 7px;}
+	/* Groups Display Table */
+	#modal-add-scene #add-scene-group button{width: 125px !important; height: 30px; font-size: .5rem !important; line-height: 1;}
 	/*=========================
 			Statistics
 	=========================*/
@@ -91,7 +93,7 @@
 	/*=========================
 			Support
 	=========================*/
-	#support div.rights{margin-left: 200px;}
+	#support footer.footer{margin-left: 200px;}
 	/* Map */
 	#support #map iframe{height: 211px; width: 100%;}
 }
@@ -142,6 +144,8 @@
 	#scenes #add-scene-btn img{margin-top: -3px;}
 	/* Add Scene Modal */
 	#modal-add-scene div.add-scene-days-work span{margin-left: 3px; margin-right: 3px; padding: 3px; width: 23px; height: 23px;}
+	/* Groups Display Table */
+	#modal-add-scene #add-scene-group button{width: 100px !important; height: 30px; font-size: .5rem !important; line-height: 1;}
 	/*=========================
 			Statistics
 	=========================*/
@@ -198,7 +202,7 @@
 	/*=========================
 			Support
 	=========================*/
-	#support div.rights{margin-left: 200px;}
+	#support footer.footer{margin-left: 200px;}
 	#support #social img{width: 25px; height: 25px;}
 	/* Map */
 	#support #map iframe{height: 240px; width: 100%;}
@@ -253,6 +257,8 @@
 	/* Add Scene Modal */
 	#modal-add-scene div.add-scene-days-work span{margin-left: 5px; margin-right: 5px; padding: 5px; width: 25px; height: 25px;}
 	#modal-add-scene #add-scene-room table td div{padding: 5px !important;}
+	/* Groups Display Table */
+	#modal-add-scene #add-scene-group button{width: 100px !important; height: 25px; font-size: .45rem !important; line-height: 1;}
 	/* Edit Scene Modal */
 	#modal-edit-scene #edit-scene-room table td div{padding: 5px !important;}
 	/*=========================
@@ -319,7 +325,7 @@
 	/*=========================
 			Support
 	=========================*/
-	#support div.rights{margin-left: 0;}
+	#support footer.footer{margin-left: 0;}
 	/* Contact */
 	#support .contact-outer{padding: 0 !important;}
 }
@@ -372,6 +378,8 @@
 	#modal-add-scene div.add-scene-days-work span{margin-left: 0; margin-right: 0; padding: 2px; width: 20px; height: 20px; font-size: 0.8rem;}
 	#modal-add-scene #add-scene-room table td div{padding: 2px !important;}
 	#modal-add-scene #add-scene-room table td div img{padding: 2px !important;}
+	/* Groups Display Table */
+	#modal-add-scene #add-scene-group button{width: 75px !important; height: 20px; font-size: .4rem !important; line-height: 1;}
 	/* Edit Scene Modal */
 	#modal-edit-scene #edit-scene-room table td div{padding: 2px !important;}
 	#modal-edit-scene #edit-scene-room table td div img{padding: 2px !important;}

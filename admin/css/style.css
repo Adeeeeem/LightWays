@@ -148,11 +148,16 @@
 #modal-add-scene #add-scene-search-floor, #modal-add-scene #add-scene-search-room, #modal-add-scene #add-scene-time-start, #modal-add-scene #add-scene-time-end{background-color: transparent; border: none;}
 #modal-add-scene hr.select-hr{background-position: 85%; max-width: 85%; margin-top: -5px; background-image: radial-gradient(closest-side, var(--secondary-color), hsla(232, 18%, 69%, 0) 150%); height: 2px;}
 #modal-add-scene div.add-scene-days-work span{margin-left: 10px; margin-right: 10px; padding: 5px; width: 25px; height: 25px; font-size: 1rem; border-radius: 50%; border: 1px solid var(--text-color); background-color: var(--primary-color); display: inline-block; cursor: pointer;}
-#modal-add-scene div.add-scene-days-work span.selected{background-color: #5CB85C;}
+#modal-add-scene div.add-scene-days-work span.SELECTED{background-color: #5CB85C;}
 #modal-add-scene #add-scene-room table{border: 1px solid var(--secondary-color); border-radius: .25rem; padding: 10px; border-collapse: separate;}
 #modal-add-scene #add-scene-room table td{padding: 0 !important;}
 #modal-add-scene #add-scene-room table td div{padding: 7px !important;}
 #modal-add-scene #add-scene-room table td div img{padding: 5px !important; border: 2px solid var(--text-color); border-radius: 50%; cursor: pointer;}
+/* Groups Display Table */
+#modal-add-scene #add-scene-group{border: 1px solid var(--secondary-color); border-radius: .25rem; padding: 10px !important; display: flex; flex-wrap: wrap; justify-content: center;}
+#modal-add-scene *+.uk-grid-margin, #modal-add-scene .uk-grid+.uk-grid, #modal-add-scene .uk-grid>.uk-grid-margin{margin-top: 10px;}
+#modal-add-scene #add-scene-group button{border: 2px solid var(--primary-color); border-radius: 0.25rem; display: inline-block; cursor: pointer; margin-left: 10px; margin-right: 10px; height: 35px; padding: 0px; color: var(--text-color); line-height: 1; font-size: 0.7rem;}
+#modal-add-scene #add-scene-group th{padding: 0 !important; text-align: left; vertical-align: bottom; font-size: .75rem; font-weight: 400; color: #999999; text-transform: uppercase;}
 /* Edit Scene Modal */
 #modal-edit-scenes div.uk-modal-body{padding-bottom: 10px;}
 #modal-edit-scenes div.edit-scenes-search-room div{padding: 0; margin: 0;}

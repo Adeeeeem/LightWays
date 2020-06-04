@@ -110,8 +110,8 @@
 #support p{font-weight: 400;}
 #support span.light{color: var(--orange-color);}
 #support span.ways{color: var(--blue-color);}
-#support div.rights{background-color: var(--primary-color); padding: 10px; line-height: 1; margin-left: 250px;}
-#support div.rights h5{margin-bottom: 0; color: var(--text-color); font-size: 0.8rem;}
+#support footer.footer{background-color: var(--primary-color); padding: 10px; line-height: 1; margin-left: 250px;}
+#support footer.footer h5{margin-bottom: 0; color: var(--text-color); font-size: 0.8rem;}
 /* Contact */
 #support .contact-outer{padding-left: 15px !important; padding-right: 15px !important;}
 #support #contact-left, #support #contact-right{padding: 0px;}

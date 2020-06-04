@@ -649,7 +649,7 @@
 					<div class="uk-margin">
 						<label class="uk-form-label" for="add-group-name">Group Name</label>
 						<div class="uk-form-controls">
-							<input id="add-group-name" class="uk-input" type="text" placeholder="Group Name">
+							<input id="add-group-name" class="uk-input" type="text" placeholder="Group Name" pattern="[A-z0-9À-ž\s]{30}">
 						</div>
 						<div class=" uk-animation-toggle">
 							<div class="uk-animation-shake">
@@ -803,7 +803,6 @@
 			</div>
 		</div>
 	</div>
-	
 	<!-- Add New Scene Modal -->
 	<div id="modal-add-scene" class="modal" uk-modal="bg-close: false; keyboard: false; escClose: false; modal: false">
 		<div class="uk-modal-dialog uk-margin-auto-vertical big-width">
@@ -817,7 +816,7 @@
 					<div class="uk-margin">
 						<label class="uk-form-label" for="add-scene-name">Scene Name</label>
 						<div class="uk-form-controls">
-							<input id="add-scene-name" class="uk-input" type="text" placeholder="Scene Name">
+							<input id="add-scene-name" class="uk-input" type="text" placeholder="Scene Name" pattern="([A-z0-9À-ž\s]){30}">
 						</div>
 						<div class=" uk-animation-toggle">
 							<div class="uk-animation-shake">
@@ -862,7 +861,12 @@
 								<div class="uk-width-1-2@s add-scene-days-work">
 									<label class="uk-form-label uk-text-center" for="add-scene-days-work">Scene Days</label>
 									<div class="uk-form-controls uk-text-center">
-										 <span>S</span> <span>M</span> <span>T</span> <span>W</span> <span>T</span> <span>F</span> <span>S</span> 
+										 <span id="1">S</span> <span id="2">M</span> <span id="3">T</span> <span id="4">W</span> <span id="5">T</span> <span id="6">F</span> <span id="7">S</span> 
+									</div>
+									<div class=" uk-animation-toggle">
+										<div class="uk-animation-shake">
+											<center><small id="add-scene-days-work-error" class="error">Please Select Scene Days !</small></center>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -917,6 +921,7 @@
 			</form>
 		</div>
 	</div>
+
 	<!-- Edit Scene Modal -->
 	<div id="modal-edit-scene" class="modal" uk-modal="bg-close: false; keyboard: false; escClose: false; modal: false">
 		<div class="uk-modal-dialog uk-margin-auto-vertical big-width">
