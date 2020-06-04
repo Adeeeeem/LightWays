@@ -28,7 +28,7 @@ def getdays(d):
 def main():
         ############# SQL ##################
 	mycursor = mydb.cursor()
-	mycursor.execute("SELECT SCENE_START, SCENE_END, SCENE_DAYS, DEVICE_ID, SCENE_ID, CARD_IP, DEVICE_PIN FROM SCENENING natural join SCENES natural join CARDS natural join DEVICES where SCENE_STATUS = 'ON' AND SCENE_DAYS NOT LIKE '%0%'")
+	mycursor.execute("SELECT SCENE_START, SCENE_END, SCENE_DAYS, DEVICE_ID, SCENE_NAME, CARD_IP, DEVICE_PIN FROM SCENENING natural join SCENES natural join CARDS natural join DEVICES where SCENE_STATUS = 'ON' AND SCENE_DAYS NOT LIKE '%0%'")
 	count = mycursor.rowcount
 	if (count == 0):
 		return False
@@ -57,10 +57,11 @@ def main():
 		ip=str(x[5])
 		pin=str(x[6])
 		device_id = str(x[3])
+		scene_name = str(x[4])
         
 		          #### PREPARING CRON LINES ####
-		os.system("echo %s %s \* \* %s sudo python3 /var/www/html/CronFiles/filterCron.py %s %s %s %s >> /var/www/html/cron"%(minute,hour,days, ip, pin, "ON", device_id))
-		os.system("echo %s %s \* \* %s sudo python3 /var/www/html/CronFiles/filterCron.py %s %s %s %s >> /var/www/html/cron"%(minute1,hour1,days,ip,pin, "OFF", device_id))
+		os.system("echo %s %s \* \* %s sudo python3 /var/www/html/LightWays/python/filterCron.py %s %s %s %s %s >> /var/www/html/cron"%(minute,hour,days, ip, pin, "ON", device_id, scene_name))
+		os.system("echo %s %s \* \* %s sudo python3 /var/www/html/LightWays/python/filterCron.py %s %s %s %s %s >> /var/www/html/cron"%(minute1,hour1,days,ip,pin, "OFF", device_id, scene_name))
         
                     #### UDATING CRON FILE ####    
 	os.system("sudo crontab -u www-data /var/www/html/cron")

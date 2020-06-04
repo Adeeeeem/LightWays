@@ -7,7 +7,7 @@
 	}
 
 	include_once("config.php");
-	require("system_scene.php");
+	require("update_system.php");
 
 	header("Content-Type: application/json");
 
@@ -89,7 +89,7 @@
 					$statement->execute();
 				}
 
-				System_Scene();
+				updateSystem();
 			}
 		}
 	}
