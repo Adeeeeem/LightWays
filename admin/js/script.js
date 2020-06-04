@@ -3398,6 +3398,11 @@ $(function()
 
 										history = "Turned on <span style='color: var(--blue-color);'>"+name+"</span> Group in <span style='color: var(--blue-color);'>"+room+"</span> Room";
 									break;
+									case "SCENE":
+										var name = response[i].opt;
+
+										history = "Activated <span style='color: var(--blue-color);'>"+name+"</span> Scene'>";
+									break;
 								}
 							break;
 						case "OFF":
@@ -3419,6 +3424,11 @@ $(function()
 
 										history = "Turned off <span style='color: var(--blue-color);'>"+name+"</span> Group in <span style='color: var(--blue-color);'>"+room+"</span> Room";
 									break;
+									case "SCENE":
+										var name = response[i].opt;
+
+										history = "Desactivated <span style='color: var(--blue-color);'>"+name+"</span> Scene'>";
+									break;
 								}
 							break;
 						case "ADD":
@@ -3438,6 +3448,9 @@ $(function()
 									break;
 									case "GROUP":
 										history = "Added New Group <span style='color: var(--blue-color);'>"+response[i].opt+"</span>";
+									break;
+									case "SCENE":
+										history = "Added New Scene <span style='color: var(--blue-color);'>"+response[i].opt+"</span>";
 									break;
 								}
 							break;
@@ -3466,6 +3479,9 @@ $(function()
 									break;
 									case "GROUP":
 										history = "Deleted Group <span style='color: var(--blue-color);'>"+response[i].opt+"</span>";
+									break;
+									case "SCENE":
+										history = "Deleted Scene <span style='color: var(--blue-color);'>"+response[i].opt+"</span>";
 									break;
 								}
 							break;
@@ -5960,6 +5976,11 @@ function LoadHistory()
 
 									history = "Turned on <span style='color: var(--blue-color);'>"+name+"</span> Group in <span style='color: var(--blue-color);'>"+room+"</span> Room";
 								break;
+								case "SCENE":
+									var name = response[i].opt;
+
+									history = "Activated <span style='color: var(--blue-color);'>"+name+"</span> Scene'>";
+								break;
 							}
 						break;
 					case "OFF":
@@ -5981,6 +6002,11 @@ function LoadHistory()
 
 									history = "Turned off <span style='color: var(--blue-color);'>"+name+"</span> Group in <span style='color: var(--blue-color);'>"+room+"</span> Room";
 								break;
+								case "SCENE":
+									var name = response[i].opt;
+
+									history = "Desactivated <span style='color: var(--blue-color);'>"+name+"</span> Scene'>";
+								break;
 							}
 						break;
 					case "ADD":
@@ -6000,6 +6026,9 @@ function LoadHistory()
 								break;
 								case "GROUP":
 									history = "Added New Group <span style='color: var(--blue-color);'>"+response[i].opt+"</span>";
+								break;
+								case "SCENE":
+									history = "Added New Scene <span style='color: var(--blue-color);'>"+response[i].opt+"</span>";
 								break;
 							}
 						break;
@@ -6028,6 +6057,9 @@ function LoadHistory()
 								break;
 								case "GROUP":
 									history = "Deleted Group <span style='color: var(--blue-color);'>"+response[i].opt+"</span>";
+								break;
+								case "SCENE":
+									history = "Deleted Scene <span style='color: var(--blue-color);'>"+response[i].opt+"</span>";
 								break;
 							}
 						break;
