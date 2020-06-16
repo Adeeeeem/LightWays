@@ -14,7 +14,7 @@
 	$last = date("Y-m-d", strtotime("last day of december this year"));
 
 	/* Preparing Request */
-	$request = "SELECT HISTORY_TYPE AS type, HISTORY_DATA_ID AS id, HISTORY_DATE AS date, HISTORY_TIME AS time FROM HISTORY WHERE HISTORY_TYPE IN ('ON', 'OFF', 'RESET') AND HISTORY_DATA = 'DEVICE' AND HISTORY_DATE BETWEEN '$first' AND '$last';";
+	$request = "SELECT HISTORY_TYPE AS type, HISTORY_DATA_ID AS id, DEVICE_POWER AS pow, HISTORY_DATE AS date, HISTORY_TIME AS time FROM HISTORY, DEVICES WHERE HISTORY_TYPE IN ('ON', 'OFF', 'RESET') AND HISTORY_DATA = 'DEVICE' AND HISTORY_DATE BETWEEN '$first' AND '$last' AND DEVICE_ID = HISTORY_DATA_ID;";
 	/* Preparing Statement */
 	$statement = $DB_CONNECTION->prepare($request);
 	/* Execute Query */

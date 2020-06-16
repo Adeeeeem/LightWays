@@ -6139,7 +6139,7 @@ function CalculateWattsConsumptionDay(ArrayHistoryDay)
 				}
 				// Calculate Consumption kWh for current Day
 				// E(kWh/day) = P(W) × T(h/day) / 1000(W/kW)
-				consumption += (getDeviceWattsPower(id) * time) / 1000; // kWh
+				consumption += (ArrayHistoryDay[i].pow * time) / 1000; // kWh
 				ArrayHistoryDay.splice(i, 1);
 				i--;
 				len--;
@@ -6210,18 +6210,6 @@ function CalculateWattsConsumptionYear(ArrayHistoryMonth)
 	}
 
 	return Math.round(consumption);
-}
-/* Get Device's Electric Power (Watts) */
-function getDeviceWattsPower(id)
-{
-	return $.ajax
-	({
-		async: false,
-		url: "../php/device_power.php",
-		type: "POST",
-		dataType: "text",
-		data: {id: id},
-	}).responseText;
 }
 /* Calculate Consumption Price */
 function CalculateConsumptionPrice(kwh)
