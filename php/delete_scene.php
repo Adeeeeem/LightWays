@@ -46,12 +46,12 @@
 			/* Execute Query */
 			$statement->execute();
 
-			$check = updateSystem();
-
-			if ($check == "true")
+			/* If Scene Deleted */
+			if ($statement->rowCount())
 			{
-				/* If Scene Deleted */
-				if ($statement->rowCount())
+				$check = updateSystem();
+				
+				if ($check == "true")
 				{
 					/* Return True */
 					$response["result"] = true;

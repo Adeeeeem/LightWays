@@ -1735,8 +1735,6 @@ $(function()
 			if (response.result)
 			{
 				$("#scenes #scenes-list article#"+scene+".scene-details").remove();
-				UIkit.modal("#modal-edit-scene").hide(); // Hide Edit Modal
-				UIkit.modal("#modal-delete-scene").hide(); // Hide Modal
 				$.growl.notice({ message: "Scene has been Successfully Deleted!" }); // Success Notification
 				ResetEditSceneModal(); // Reset Modal
 				SelectedDevices = []; // Clear Selected Devices Array
@@ -1751,10 +1749,14 @@ $(function()
 			{
 				$.growl.error({ message: "Failed to Delete <span style='color: var(--blue-color);'>"+$("#edit-scene-name").val()+"</span> Scene, Please Try Again !" });
 			}
+
+			UIkit.modal("#modal-edit-scene").hide(); // Hide Edit Modal
+			UIkit.modal("#modal-delete-scene").hide(); // Hide Modal
 		})
 		.fail(function()
 		{
 			UIkit.modal("#modal-delete-scene").hide(); // Hide Modal
+			UIkit.modal("#modal-edit-scene").hide(); // Hide Edit Modal
 			$.growl.error({ message: "Failed to Delete <span style='color: var(--blue-color);'>"+$("#edit-scene-name").val()+"</span> Scene, Please Try Again !" });
 		});
 	});

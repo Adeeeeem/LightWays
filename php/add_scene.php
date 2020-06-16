@@ -27,6 +27,8 @@
 	$time_end = Security($time_end);
 	$working_days = Security($working_days);
 
+	$response = array();
+
 	if ( isset($scene) && !empty($scene) && isset($time_start) && !empty($time_start) && isset($time_end) && !empty($time_end) && isset($working_days) && !empty($working_days) )
 	{
 		if ( (is_string($scene)) && (is_string($time_start)) && (is_string($time_end)) && (is_string($working_days)) )
