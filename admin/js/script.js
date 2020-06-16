@@ -559,7 +559,7 @@ $(function()
 	/* Loading Group Details and Assign its Devices to Selected Devices Array */
 	$("#groups #groups-list").on("click", "article.group-details div:not(.uk-width-auto.uk-text-right.uk-margin-small-right, .uk-switch-slider)", function()
 	{
-		group = $(this).parent().parent().attr("id"); // Assign Group ID
+		group = $(this).closest("article").attr("id"); // Assign Group ID
 		UIkit.modal("#modal-edit-group").toggle(); // Show Modal
 
 		// Get Group Details
@@ -792,6 +792,16 @@ $(function()
 		$("#edit-group-search-room").empty();
 		// Load Rooms corresponding to the selected Floor
 		LoadRoomsEditGroupsSection(floor);
+
+		setTimeout(function()
+		{
+			for (var i = 0; i < SelectedDevices.length; i++)
+			{
+				var device = $("#modal-edit-group #edit-group-room table img#"+SelectedDevices[i]);
+				device.addClass("SELECTED");
+				device.css("background-color", $("#edit-group-color").val());
+			}
+		}, 400);
 	});
 
 	/* When Changing the Room from Select in Edit Group Section, Return Devices corresponding to the selected Room */
@@ -801,17 +811,7 @@ $(function()
 		var room = $("#edit-group-search-room").val();
 		// Load Devices corresponding to the selected Room
 		DisplayDevicesEditGroupsSection(room);
-	});
 
-	/* When Changing Color, Change Selected Devices Background */
-	$("#edit-group-color").change(function()
-	{
-		$("#modal-edit-group #edit-group-room table img.SELECTED").css("background-color", $("#edit-group-color").val());
-	});
-
-	/* When Loading Between Rooms Re-Select The Already Selected Devices */
-	$("#modal-edit-group #edit-group-search-floor, #modal-edit-group #edit-group-search-room").bind("DOMNodeInserted DOMSubtreeModified DOMNodeRemoved", function()
-	{
 		setTimeout(function()
 		{
 			for (var i = 0; i < SelectedDevices.length; i++)
@@ -820,7 +820,13 @@ $(function()
 				device.addClass("SELECTED");
 				device.css("background-color", $("#edit-group-color").val());
 			}
-		}, 200);
+		}, 400);
+	});
+
+	/* When Changing Color, Change Selected Devices Background */
+	$("#edit-group-color").change(function()
+	{
+		$("#modal-edit-group #edit-group-room table img.SELECTED").css("background-color", $("#edit-group-color").val());
 	});
 
 	/* When Cancelling or Closing, Reset Form */
@@ -975,7 +981,48 @@ $(window).on("load", function()
 /* Enable and Disable Scene */
 $(function()
 {
-	//
+	$("#scenes-list").on("click", "article.scene-details .control-group-button", function()
+	{
+		var parent = $(this).parent().parent().parent().parent();
+		var scene = parent.attr("id");
+		var status;
+
+		if($(this).is(":checked"))
+		{
+			status = "ON";
+			// Change Text Color to Orange
+			$(parent).find("h4").css("color", "var(--text-color)");
+			// Add Box Shadow
+			$(parent).addClass("uk-box-shadow-medium");
+		}
+		else if($(this).is(":not(:checked)"))
+		{
+			status = "OFF";
+			// Change Text Color to Blue
+			$(parent).find("h4").css("color", "var(--secondary-color)");
+			// Remove Box Shadow
+			$(parent).removeClass("uk-box-shadow-medium");
+		}
+
+		$.ajax
+		({
+			url: "../php/scene_status.php",
+			type: "POST",
+			dataType: "json",
+			data: {scene: scene, status: status}
+		})
+		.done(function(response)
+		{
+			if (!response.result)
+			{
+				$.growl.error({ message: "Failed to Change Scene Status !" });
+			}
+		})
+		.fail(function()
+		{
+			$.growl.error({ message: "Failed to Change Scene Status !" });
+		});
+	});
 });
 /* Load Data to Add Scene Modal */
 $(function()
@@ -1034,26 +1081,6 @@ $(function()
 {
 	var SelectedDevices = [];
 	var SelectedGroups = [];
-
-	// Make Start Time smaller than End Time if needed
-	$("#add-scene-time-start, #add-scene-time-end").change(function()
-	{
-		var start = $("#add-scene-time-start").val();
-		var end = $("#add-scene-time-end").val();
-
-		if ( (start != "") && (end != "") )
-		{
-			if (start.toString() > end.toString())
-			{
-				var x = start;
-				start = end;
-				end = x;
-
-				$("#add-scene-time-start").val(start);
-				$("#add-scene-time-end").val(end);
-			}
-		}
-	});
 
 	// Select Days
 	$("#modal-add-scene div.add-scene-days-work span").click(function()
@@ -1238,6 +1265,13 @@ $(function()
 
 		if (scene && time_start && time_end && working_days != "")
 		{
+			if (time_start.toString() > time_end.toString())
+			{
+				var x = time_start;
+				time_start = time_end;
+				time_end = x;
+			}
+
 			var SelectedDevicesJson = JSON.stringify(SelectedDevices); // Get Selected Devices
 
 			$.ajax
@@ -1248,7 +1282,7 @@ $(function()
 				data: {scene: scene, time_start: time_start, time_end: time_end, working_days: working_days, devices: SelectedDevicesJson}
 			})
 			.done(function(response)
-			{console.log(response)
+			{
 				var len = response.length;
 
 				UIkit.modal("#modal-add-scene").hide(); // Hide Modal
@@ -1263,7 +1297,7 @@ $(function()
 					// Add Group Dynamically
 					var id = response.id;
 					var name = response.name;
-					var time = response[i].time_start.slice(0,5) + " - " + response[i].time_end.slice(0,5);// Get Scene Working Time
+					var time = response.time_start.slice(0,5) + " - " + response.time_end.slice(0,5);// Get Scene Working Time
 					var days = response.days;
 					var devices = response.devices;
 					var shadow = "uk-box-shadow-medium";
@@ -1285,7 +1319,7 @@ $(function()
 					}
 
 					// Add to Scenes List in Scenes Section
-					$("#scenes #scenes-list").prepend("<article id='"+id+"' class='uk-comment scene-details uk-margin-small-top uk-animation-scale-down "+shadow+"'><header class='uk-comment-header uk-grid-medium uk-flex-middle uk-margin-small-left uk-margin-small-right' uk-grid><div class='uk-width-expand'><h4 class='uk-comment-title uk-margin-remove' style='color: "+bgcolor+";'>"+name+"</h4><div uk-grid><div class='uk-width-1-3'><h6 class='uk-comment-meta uk-margin-remove-top'>"+time+"</h6></div><div class='uk-width-1-3'><h6 class='uk-comment-meta uk-margin-remove-top uk-text-center'><div class='devices'>"+devices+" Devices</div></h6></div><div class='uk-width-1-3'><h6 class='uk-comment-meta uk-margin-remove-top uk-text-right'><div class='days'>"+days_routine+"</div></h6></div></div></div><div class='uk-width-auto uk-text-right uk-margin-small-right'><label class='uk-switch'><input type='checkbox' class='control-group-button' checked><div class='uk-switch-slider'></div></label></div></header></article>");
+					$("#scenes #scenes-list").prepend("<article id='"+id+"' class='uk-comment scene-details uk-margin-small-top uk-animation-scale-down "+shadow+"'><header class='uk-comment-header uk-grid-medium uk-flex-middle uk-margin-small-left uk-margin-small-right' uk-grid><div class='uk-width-expand'><h4 class='uk-comment-title uk-margin-remove' style='color: "+bgcolor+";'>"+name+"</h4><div uk-grid><div class='uk-width-1-3'><h6 class='uk-comment-meta uk-margin-remove-top'>"+time+"</h6></div><div class='uk-width-1-3'><h6 class='uk-comment-meta uk-margin-remove-top uk-text-center'><div class='devices'>"+devices+" Devices</div></h6></div><div class='uk-width-1-3'><h6 class='uk-comment-meta uk-margin-remove-top uk-text-right'><div class='days'>"+days_routine+"</div></h6></div></div></div><div class='uk-width-auto uk-text-right uk-margin-small-right'><label class='uk-switch'><input type='checkbox' class='control-group-button' checked><div class='uk-switch-slider'></div></label></div></header></article>");console.log("ok")
 				}
 				else
 				{
@@ -1301,6 +1335,428 @@ $(function()
 				$.growl.error({ message: "Oops, There was an Error! Please Try Again." });
 			});
 		}
+	});
+});
+/* Load Data to Edit Scene Modal and Get Scene Details */
+$(function()
+{
+	var SelectedDevices = [];
+	var SelectedGroups = [];
+	var scene;
+
+	/* Loading Scene Details and Assign its Devices to Selected Devices Array */
+	$("#scenes #scenes-list").on("click", "article.scene-details div:not(.uk-width-auto.uk-text-right.uk-margin-small-right, .uk-switch-slider)", function(e)
+	{
+		e.stopPropagation();
+
+		scene = $(this).closest("article").attr("id"); // Assign Scene ID
+		UIkit.modal("#modal-edit-scene").toggle(); // Show Modal
+
+		// Get Scene Details
+		$.ajax
+		({
+			url: "../php/scene_details.php",
+			type: "POST",
+			dataType: "json",
+			data: {scene: scene},
+		})
+		.done(function(response)
+		{
+			var len = response.length;
+
+			if (len != 0)
+			{
+				var name = response[0].name; // Get Scene Name
+				var start_time = response[0].start_time.slice(0, -3); // Get Scene Start Time
+				var end_time = response[0].end_time.slice(0, -3); // Get Scene End Time
+				var days = response[0].days; // Get Scene Working Days
+				var device = response[0].devices // Get First Device
+
+				$("#edit-scene-name").val(name);
+				$("#edit-scene-time-start").val(start_time);
+				$("#edit-scene-time-end").val(end_time);
+
+				for(var i = 0; i < days.length; i++)
+					$("#modal-edit-scene div.edit-scene-days-work span#"+days.charAt(i)).addClass("SELECTED");
+
+				// Get Scene's Devices
+				if (device != null)
+				{
+					for (var i = 0; i < len; i++)
+					{
+						SelectedDevices.push(""+response[i].devices+"");
+					}
+				}
+				else
+				{
+					$.growl({ title: "This Scene Has no Devices.", message: "Make Sure You Add Devices!" });
+				}
+
+				// Load Floors
+				$.ajax
+				({
+					url: "../php/floors.php",
+					type: "POST",
+					dataType: "json"
+				})
+				.done(function(response)
+				{
+					var len = response.length;
+
+					if (len != 0)
+					{
+						for (var i = 0; i < len; i++)
+							$("#edit-scene-search-floor").append("<option value='"+response[i].id+"'>"+response[i].name+"</option>");
+
+						// Load Rooms
+						LoadRoomsEditSceneSection($("#edit-scene-search-floor").val());
+
+						// Color Scene's Devices
+						setTimeout(function()
+						{
+							for (var i = 0; i < SelectedDevices.length; i++)
+							{
+								$("#modal-edit-scene #edit-scene-room table img#"+SelectedDevices[i]).addClass("SELECTED");
+								$("#modal-edit-scene #edit-scene-room table img#"+SelectedDevices[i]).css("background-color", "#5CB85C");
+							}
+						}, 400);
+					}
+					else
+					{
+						$("#modal-edit-scene #edit-scene-room table").append("<tr class='uk-animation-scale-down uk-text-center'><th><img class='notfound' src='../images/icons/notfound.png' width='40' height='40'><br><br>No Floors Found !<br><small>Make Sure You Add Floors...</small></th></tr>");
+					}
+				})
+				.fail(function()
+				{
+					$("#modal-edit-scene #edit-scene-room table").empty();
+					$("#modal-edit-scene #edit-scene-room table").append("<tr class='uk-animation-scale-down uk-text-center'><th style='color: #C0392B;'><img class='error' src='../images/icons/error.png' width='40' height='40'><br><br>Failed to Load Floors !</th></tr>");
+				});
+			}
+			else
+			{
+				$.growl.error({ message: "Failed to Get Selected Scene Details !" });
+				ResetEditSceneModal(); // Reset Modal
+				SelectedDevices = []; // Clear Selected Devices Array
+				SelectedGroups = [];
+			}
+		})
+		.fail(function()
+		{
+			$.growl.error({ message: "Failed to Get Selected Scene Details !" });
+			ResetEditSceneModal(); // Reset Modal
+			SelectedDevices = []; // Clear Selected Devices Array
+			SelectedGroups = [];
+		});
+	});
+
+	/* Mark the Selected Devices */
+	$("#modal-edit-scene").off("click").on("click", "#edit-scene-room table img", function()
+	{
+		var device = $(this);
+		var id = device.attr("id");
+
+		if (device.hasClass("SELECTED")) // If It's Already Selected
+		{
+			device.removeClass("SELECTED");
+			device.css("background-color", "var(--device-color)");
+
+			for (var i = 0; i < SelectedDevices.length; i++) // Loop Array Search for the Item to Delete
+			{
+				if (SelectedDevices[i] == id)
+				{
+					SelectedDevices.splice(i, 1); // Delete when Found
+				}
+			}
+		}
+		else
+		{
+			device.addClass("SELECTED");
+			device.css("background-color", "#5CB85C");
+			// Add to Array
+			SelectedDevices.unshift(id);
+		}
+	});
+
+	/* When Changing the Floor from Select in Edit Group Section, Return Rooms corresponding to the selected Floor */
+	$("#edit-scene-search-floor").change(function()
+	{
+		// Get Selected Option Value
+		var floor = $("#edit-scene-search-floor").val();
+		// Empty The Rooms List
+		$("#edit-scene-search-room").empty();
+		// Load Rooms corresponding to the selected Floor
+		LoadRoomsEditSceneSection(floor);
+
+		// Color Scene's Devices
+		setTimeout(function()
+		{
+			for (var i = 0; i < SelectedDevices.length; i++)
+			{
+				$("#modal-edit-scene #edit-scene-room table img#"+SelectedDevices[i]).addClass("SELECTED");
+				$("#modal-edit-scene #edit-scene-room table img#"+SelectedDevices[i]).css("background-color", "#5CB85C");
+			}
+		}, 400);
+	});
+
+	/* When Changing the Room from Select in Edit Group Section, Return Devices corresponding to the selected Room */
+	$("#edit-scene-search-room").change(function()
+	{
+		// Get Selected Option Value
+		var room = $("#edit-scene-search-room").val();
+		// Load Devices corresponding to the selected Room
+		DisplayDevicesEditSceneSection(room);
+
+		// Color Scene's Devices
+		setTimeout(function()
+		{
+			for (var i = 0; i < SelectedDevices.length; i++)
+			{
+				$("#modal-edit-scene #edit-scene-room table img#"+SelectedDevices[i]).addClass("SELECTED");
+				$("#modal-edit-scene #edit-scene-room table img#"+SelectedDevices[i]).css("background-color", "#5CB85C");
+			}
+		}, 400);
+	});
+
+	/* When Cancelling or Closing, Reset Form */
+	$("#modal-edit-scene button.uk-modal-close").click(function()
+	{
+		ResetEditSceneModal(); // Reset Modal
+		SelectedDevices = []; // Clear Selected Devices Array
+		SelectedGroups = [];
+	});
+
+	// Select Days
+	$("#modal-edit-scene div.edit-scene-days-work span").click(function()
+	{
+		if ($(this).hasClass("SELECTED"))
+		{
+			$(this).removeClass("SELECTED");
+		}
+		else
+		{
+			$(this).addClass("SELECTED");
+		}
+	});
+
+	// Select Group
+	$("#modal-edit-scene #edit-scene-group").off("click").on("click", "button", function(e)
+	{
+		e.preventDefault();
+		var group = $(this).attr("id");
+
+		if ($(this).hasClass("SELECTED"))
+		{
+			$(this).removeClass("SELECTED");
+			$(this).css("background-color", "var(--primary-color)");
+
+			// Add Group to Array
+			for (var i = SelectedGroups.length - 1; i >= 0; i--)
+			{
+				if ( SelectedGroups[i] == group )
+				{
+					SelectedGroups.splice(i, 1);
+					break;
+				}
+			}
+
+			$("#modal-edit-scene #edit-scene-room img.G"+group).each(function (index, element)
+			{
+				if ($(element).hasClass("SELECTED"))
+				{
+					$(element).css("background-color", "var(--device-color)");
+					$(element).removeClass("SELECTED");
+
+					for (var i = SelectedDevices.length - 1; i >= 0; i--)
+					{
+						if ( SelectedDevices[i] == $(element).attr("id") )
+						{
+							SelectedDevices.splice(i, 1);
+							break;
+						}
+					}
+				}
+			});
+		}
+		else
+		{
+			$(this).addClass("SELECTED");
+			$(this).css("background-color", $(this).css("border-color"));
+
+			SelectedGroups.push(group); // Delete Group From Array
+
+			$("#modal-edit-scene #edit-scene-room img.G"+group).each(function (index, element)
+			{
+				if (!$(element).hasClass("SELECTED"))
+				{
+					SelectedDevices.push($(element).attr("id"));
+					$(element).addClass("SELECTED");
+					$(element).css("background-color", "#5CB85C");
+				}
+			});
+		}
+	});
+
+	/* When Confirming */
+	$("#edit-scene-confirm-btn").click(function()
+	{
+		var scene_name = $("#edit-scene-name").val(); // Get Scene Name
+		var time_start = $("#edit-scene-time-start").val(); // Get Scene Time Start
+		var time_end = $("#edit-scene-time-end").val(); // Get Scene Time End
+		var working_days = "";
+
+		$("#modal-edit-scene div.edit-scene-days-work span.SELECTED").each(function()
+		{
+			working_days += $(this).attr("id");
+		});
+
+		if (!scene_name)
+		{
+			$("#edit-scene-name").css("border-color", "#F0506E");
+			$("#edit-scene-name-error").show();
+		}
+		else
+		{
+			$("#edit-scene-name").css("border-color", "var(--secondary-color)");
+			$("#edit-scene-name-error").hide();
+		}
+
+		if (!time_start)
+		{
+			$("#edit-scene-time-start").css("border-color", "#F0506E");
+			$("#edit-scene-time-start-error").show();
+		}
+		else
+		{
+			$("#edit-scene-time-start").css("border-color", "var(--secondary-color)");
+			$("#edit-scene-time-start-error").hide();
+		}
+
+		if (!time_end)
+		{
+			$("#edit-scene-time-end").css("border-color", "#F0506E");
+			$("#edit-scene-time-end-error").show();
+		}
+		else
+		{
+			$("#edit-scene-time-end").css("border-color", "var(--secondary-color)");
+			$("#edit-scene-time-end-error").hide();
+		}
+
+		if (working_days == "")
+		{
+			$("#edit-scene-days-work-error").show(); // Show Error
+		}
+		else
+		{
+			$("#edit-scene-days-work-error").hide();
+		}
+
+		if (scene_name && time_start && time_end && working_days != "")
+		{
+			if (time_start.toString() > time_end.toString())
+			{
+				var x = time_start;
+				time_start = time_end;
+				time_end = x;
+			}
+
+			var SelectedDevicesJson = JSON.stringify(SelectedDevices); // Get Selected Devices
+
+			$.ajax
+			({
+				url: "../php/update_scene.php",
+				type: "POST",
+				dataType: "json",
+				data: {scene: scene, name: scene_name, time_start: time_start, time_end: time_end, working_days: working_days, devices: SelectedDevicesJson}
+			})
+			.done(function(response)
+			{
+				if (response.result)
+				{
+					$.growl.notice({ message: "Scene has been Successfully Updated !" }); // Success Notification
+					$("#scenes article#"+scene+".scene-details h4.uk-comment-title").html(scene_name);
+					$("#scenes article#"+scene+".scene-details div.uk-width-1-3.uk-first-column h6.uk-comment-meta").html(time_start+" - "+time_end);
+					$("#scenes article#"+scene+".scene-details h6.uk-comment-meta div.devices").html(SelectedDevices.length+" Devices");
+
+					var days_routine = "";
+
+					if (working_days.includes("1")) { days_routine += "<span class='working'>S</span> "; } else { days_routine += "S "; }
+					if (working_days.includes("2")) { days_routine += "<span class='working'>M</span> "; } else { days_routine += "M "; }
+					if (working_days.includes("3")) { days_routine += "<span class='working'>T</span> "; } else { days_routine += "T "; }
+					if (working_days.includes("4")) { days_routine += "<span class='working'>W</span> "; } else { days_routine += "W "; }
+					if (working_days.includes("5")) { days_routine += "<span class='working'>T</span> "; } else { days_routine += "T "; }
+					if (working_days.includes("6")) { days_routine += "<span class='working'>F</span> "; } else { days_routine += "F "; }
+					if (working_days.includes("7")) { days_routine += "<span class='working'>S</span>"; } else { days_routine += "S"; }
+
+					$("#scenes article#"+scene+".scene-details div.days").html(days_routine);
+				}
+				else
+				{
+					$.growl.error({ message: "Oops, There was an Error! Please Try Again." });
+				}
+
+				UIkit.modal("#modal-edit-scene").hide(); // Hide Modal
+				ResetEditSceneModal(); // Reset Modal
+				SelectedDevices = []; // Clear Selected Devices Array
+				SelectedGroups = []; // Clear Selected Groups Array
+			})
+			.fail(function()
+			{
+				UIkit.modal("#modal-edit-scene").hide(); // Hide Modal
+				ResetEditSceneModal(); // Reset Modal
+				SelectedDevices = []; // Clear Selected Devices Array
+				SelectedGroups = []; // Clear Selected Groups Array
+				$.growl.error({ message: "Oops, There was an Error! Please Try Again." });
+			});
+		}
+	});
+
+	/* Delete Scene */
+	$("#delete-scene-btn").click(function(e)
+	{
+		e.preventDefault();
+
+		$("#modal-delete-scene h2.uk-modal-title span").html($("#edit-scene-name").val());
+		$("#modal-delete-scene h2.uk-modal-title span").css("color", "var(--blue-color)");
+	});
+
+	/* Confirm Delete Scene */
+	$("#delete-scene-confirm-btn").click(function()
+	{
+		$.ajax
+		({
+			url: "../php/delete_scene.php",
+			type: "POST",
+			dataType: "json",
+			data: {scene: scene},
+		})
+		.done(function(response)
+		{
+			if (response.result)
+			{
+				$("#scenes #scenes-list article#"+scene+".scene-details").remove();
+				UIkit.modal("#modal-edit-scene").hide(); // Hide Edit Modal
+				UIkit.modal("#modal-delete-scene").hide(); // Hide Modal
+				$.growl.notice({ message: "Scene has been Successfully Deleted!" }); // Success Notification
+				ResetEditSceneModal(); // Reset Modal
+				SelectedDevices = []; // Clear Selected Devices Array
+				SelectedGroups = [];
+
+				if ($("#scenes #scenes-list").find("article").length == 0)
+				{
+					$("#scenes #scenes-list").append("<table class='uk-margin-small-top'><tr class='uk-animation-scale-down uk-text-center'><th><img class='notfound' src='../images/icons/notfound.png' width='40' height='40'><br><br>No Scenes Found !<br><small>Make Sure You Add Scenes...</small></th></tr></table>");
+				}
+			}
+			else
+			{
+				$.growl.error({ message: "Failed to Delete <span style='color: var(--blue-color);'>"+$("#edit-scene-name").val()+"</span> Scene, Please Try Again !" });
+			}
+		})
+		.fail(function()
+		{
+			UIkit.modal("#modal-delete-scene").hide(); // Hide Modal
+			$.growl.error({ message: "Failed to Delete <span style='color: var(--blue-color);'>"+$("#edit-scene-name").val()+"</span> Scene, Please Try Again !" });
+		});
 	});
 });
 /*=========================
@@ -3386,7 +3842,7 @@ $(function()
 										var type = response[i].opt.slice(0, 1);
 									var option = response[i].opt.slice(1, response[i].opt.length);
 									var place = "";
-									if (type == "R") {place = "Room"} else if (type == "G") {place = "Group"}
+									if (type == "R") {place = "Room"} else if (type == "G") {place = "Group"} else if (type == "S") {place = "Scene"}
 									var pin = option.substring(0, option.indexOf(":"));
 									var name = option.substring(option.indexOf(":")+1, option.length);
 
@@ -3412,7 +3868,7 @@ $(function()
 										var type = response[i].opt.slice(0, 1);
 										var option = response[i].opt.slice(1, response[i].opt.length);
 										var place = "";
-										if (type == "R") {place = "Room"} else if (type == "G") {place = "Group"}
+										if (type == "R") {place = "Room"} else if (type == "G") {place = "Group"} else if (type == "S") {place = "Scene"}
 										var pin = option.substring(0, option.indexOf(":"));
 										var name = option.substring(option.indexOf(":")+1, option.length);
 
@@ -4558,12 +5014,6 @@ function DisplayScenesList()
 		$("#scenes #scenes-list").append("<table class='uk-margin-small-top'><tr class='uk-animation-scale-down uk-text-center'><th style='color: #C0392B;'><img class='error' src='../images/icons/error.png' width='40' height='40'><br><br>Failed to Load Scenes !</th></tr></table>");
 	});
 }
-/* Change Scene Status Function */
-function SceneStatus(scene, status)
-{
-	//
-}
-
 /* Load Rooms Related to a Floor Function Add Scene Modal */
 function LoadRoomsAddSceneSection(floor)
 {
@@ -4686,6 +5136,7 @@ function LoadGroupsAddSceneSection(room)
 			$("#modal-add-scene #add-scene-group").empty(); // Empty Groups
 
 			var groups = [];
+			var groupsid = [];
 			var bgcolor;
 
 			for (var i = 0; i < len; i++)
@@ -4693,9 +5144,10 @@ function LoadGroupsAddSceneSection(room)
 				$("#modal-add-scene #add-scene-room img#"+response[i].device).css("border-color", response[i].color);
 				$("#modal-add-scene #add-scene-room img#"+response[i].device).addClass("G"+response[i].id);
 
-				if (!groups.includes(response[i].name))
+				if (!groupsid.includes(response[i].id))
 				{
 					groups.push(response[i].name);
+					groupsid.push(response[i].id);
 					bgcolor = "var(--primary-color)";
 
 					$("#modal-add-scene #add-scene-group").append("<button id='"+response[i].id+"' class='uk-button uk-width-small uk-animation-scale-down' style='background-color: "+bgcolor+"; border-color: "+response[i].color+"'><span>"+response[i].name+"</span></button>");
@@ -4703,6 +5155,7 @@ function LoadGroupsAddSceneSection(room)
 			}
 
 			groups = [];
+			groupsid = [];
 		}
 		else
 		{
@@ -4731,10 +5184,7 @@ function ResetAddSceneModal()
 	$("#add-scene-time-end").css("border-color", "var(--secondary-color)"); // Remove Red Border from Input
 	$("#add-scene-time-end-error").hide(); // Hide Error
 
-	$("#modal-add-scene div.add-scene-days-work span.SELECTED").each(function()
-	{
-		$(this).removeClass("SELECTED");
-	});
+	$("#modal-add-scene div.add-scene-days-work span.SELECTED").removeClass("SELECTED");
 
 	$("#add-scene-days-work-error").hide(); // Hide Error
 
@@ -4746,6 +5196,214 @@ function ResetAddSceneModal()
 
 	$("#add-scene-search-floor").empty(); // Clear Floors List
 	$("#add-scene-search-room").empty(); // Clear Rooms List
+}
+/* Load Rooms Related to a Floor Function Edit Scene Modal */
+function LoadRoomsEditSceneSection(floor)
+{
+	$.ajax
+	({
+		url: "../php/rooms.php",
+		type: "POST",
+		dataType: "json",
+		data: {floor: floor}
+	})
+	.done(function(response)
+	{
+		var len = response.length;
+
+		if (len != 0)
+		{
+			for (var i = 0; i < len; i++)
+			{
+				$("#edit-scene-search-room").append("<option value='"+response[i].id+"'>"+response[i].name+"</option>");
+			}
+
+			// Get Selected Option Value
+			var room = $("#edit-scene-search-room").val();
+			// Empty The Devices Display Room
+			$("#modal-edit-scene #edit-scene-room table").empty();
+			// Display The Selected Room's Devices in Scene Edit Section
+			DisplayDevicesEditSceneSection(room);
+			// Load Room Groups of the selected Room
+			setTimeout("LoadGroupsEditSceneSection("+room+")", 200);
+		}
+		else
+		{
+			$("#modal-edit-scene #edit-scene-room table").empty();
+			$("#modal-edit-scene #edit-scene-room table").append("<tr class='uk-animation-scale-down uk-text-center'><th><img class='notfound' src='../images/icons/notfound.png' width='40' height='40'><br><br>No Rooms Found in This Floor !<br><small>Make Sure You Add Rooms...</small></th></tr>");
+		}
+
+	})
+	.fail(function()
+	{
+		$("#modal-edit-scene #edit-scene-room table").empty();
+		$("#modal-edit-scene #edit-scene-room table").append("<tr class='uk-animation-scale-down uk-text-center'><th style='color: #C0392B;'><img class='error' src='../images/icons/error.png' width='40' height='40'><br><br>Failed to Load Rooms !</th></tr>");
+	});
+
+	/* When Changing Rooms Select */
+	$("#edit-scene-search-room").change(function()
+	{
+		// Get Selected Option Value
+		var room = $("#edit-scene-search-room").val();
+		// Empty The Rooms List
+		$("#modal-edit-scene #edit-scene-room table").empty();
+		// Load Rooms corresponding to the selected Floor
+		DisplayDevicesEditSceneSection(room);
+		// Load Room Groups of the selected Room
+		setTimeout("LoadGroupsEditSceneSection("+room+")", 200);
+	});
+}
+/* Load Devices Related to a Room Function Add Scene Modal */
+function DisplayDevicesEditSceneSection(room)
+{
+	$.ajax
+	({
+		url: "../php/devices.php",
+		type: "POST",
+		dataType: "json",
+		data: {room: room}
+	})
+	.done(function(response)
+	{
+		var len = response.length;
+		$("#modal-edit-scene #edit-scene-room table").empty();
+
+		if (len != 0)
+		{
+			var width = response[0].width; // Get Room Width
+			var height = response[0].height; // Get Room Height
+
+			for (var line = 1; line <= height; line++)
+			{
+				$("#modal-edit-scene #edit-scene-room table").append("<tr id='"+line+"' class='uk-animation-scale-down uk-text-center'></tr>");
+
+				for (var column = 1; column <= width; column++)
+				{
+					$("#modal-edit-scene #edit-scene-room table tr#"+line).append("<td id='"+line+"-"+column+"'></td>");
+				}
+			}
+
+			for (var i = 0; i < len; i++)
+			{
+				$("#modal-edit-scene #edit-scene-room table td#"+response[i].lin+"-"+response[i].col).html("<div class='device'><img id='"+response[i].id+"' src='../images/devices/"+response[i].type+"_ON.png' style='background-color: var(--device-color);' width='50' height='50'></div>");
+			}
+		}
+		else
+		{
+			$("#modal-edit-scene #edit-scene-room table").append("<tr class='uk-animation-scale-down uk-text-center'><th class='uk-text-center'><img class='notfound' src='../images/icons/notfound.png' width='45' height='45'><br><br>No Devices Found in This Room !</th></tr>");
+		}
+	})
+	.fail(function()
+	{
+		$("#modal-edit-scene #edit-scene-room table").empty();
+		$("#modal-edit-scene #edit-scene-room table").append("<tr class='uk-animation-scale-down uk-text-center'><th style='color: #C0392B;'><img class='error' src='../images/icons/error.png' width='45' height='45'><br><br>Failed to Load Devices !</th></tr>");
+	});
+}
+/* Load Room Groups of the selected Room */
+function LoadGroupsEditSceneSection(room)
+{
+	$.ajax
+	({
+		url: "../php/room_groups.php",
+		type: "POST",
+		dataType: "json",
+		data: {room: room}
+	})
+	.done(function(response)
+	{
+		var len = response.length;
+
+		$("#modal-edit-scene #edit-scene-room img").css("border-color", "var(--text-color)");
+
+		if (len != 0)
+		{
+			$("#modal-edit-scene #edit-scene-group").empty(); // Empty Groups
+
+			var groups = [];
+			var groupsid = [];
+			var bgcolor;
+
+			for (var i = 0; i < len; i++)
+			{
+				$("#modal-edit-scene #edit-scene-room img#"+response[i].device).css("border-color", response[i].color);
+				$("#modal-edit-scene #edit-scene-room img#"+response[i].device).addClass("G"+response[i].id);
+
+				if (!groupsid.includes(response[i].id))
+				{
+					groupsid.push(response[i].id);
+					groups.push(response[i].name);
+					bgcolor = "var(--primary-color)";
+
+					$("#modal-edit-scene #edit-scene-group").append("<button id='"+response[i].id+"' class='uk-button uk-width-small uk-animation-scale-down' style='background-color: "+bgcolor+"; border-color: "+response[i].color+"'><span>"+response[i].name+"</span></button>");
+				}
+			}
+
+			setTimeout(function()
+			{
+
+				for(var i = 0; i < groupsid.length; i++)
+				{
+					var breakOut = true;
+					$("#modal-edit-scene #edit-scene-room table img.G"+groupsid[i]).each(function(index, value)
+					{
+						if (!$(this).hasClass("SELECTED"))
+						{
+							breakOut = false;
+							return false;
+						}
+					});
+
+					if (breakOut)
+					{
+						$("#modal-edit-scene #edit-scene-group button#"+groupsid[i]).addClass("SELECTED");
+						$("#modal-edit-scene #edit-scene-group button#"+groupsid[i]).css("background-color", $("#modal-edit-scene #edit-scene-group button#"+groupsid[i]).css("border-color"));
+					}
+				}
+
+				groups = [];
+				groupsid = [];
+
+			}, 400);
+		}
+		else
+		{
+			$("#modal-edit-scene #edit-scene-group").empty();
+			$("#modal-edit-scene #edit-scene-group").append("<table><tr class='uk-animation-scale-down uk-text-center'><th><img class='notfound' src='../images/icons/notfound.png' width='40' height='40'><br><br>No Groups Found in This Room !<br><small>Make Sure You Add Groups...</small></th></tr></table>");
+		}
+	})
+	.fail(function()
+	{
+		$("#modal-edit-scene #edit-scene-group").empty();
+		$("#modal-edit-scene #edit-scene-group").append("<table><tr class='uk-animation-scale-down uk-text-center'><th style='color: #C0392B;'><img class='error' src='../images/icons/error.png' width='40' height='40'><br><br>Failed to Load Groups !</th></tr></table>");
+	});
+}
+/* Reset Edit Scene Modal Function */
+function ResetEditSceneModal()
+{
+	$("#edit-scene-name").val(""); // Clear Scene Name
+	$("#edit-scene-name").css("border-color", "var(--secondary-color)"); // Remove Red Border from Input
+	$("#edit-scene-name-error").hide(); // Hide Error
+
+	$("#edit-scene-time-start").val(""); // Clear Scene Time Start
+	$("#edit-scene-time-start").css("border-color", "var(--secondary-color)"); // Remove Red Border from Input
+	$("#edit-scene-time-start-error").hide(); // Hide Error
+
+	$("#edit-scene-time-end").val(""); // Clear Scene Time End
+	$("#edit-scene-time-end").css("border-color", "var(--secondary-color)"); // Remove Red Border from Input
+	$("#edit-scene-time-end-error").hide(); // Hide Error
+
+	$("#modal-edit-scene div.edit-scene-days-work span.SELECTED").removeClass("SELECTED");
+
+	$("#edit-scene-days-work-error").hide(); // Hide Error
+
+	$("#modal-edit-scene #edit-scene-room table img.SELECTED").css("background-color", "var(--device-color");
+	$("#modal-edit-scene #edit-scene-room table img.SELECTED").removeClass("SELECTED"); // Reset All Devices
+
+	$("#modal-edit-scene #edit-scene-group button.SELECTED").css("background-color", "var(--device-color");
+	$("#modal-edit-scene #edit-scene-group button.SELECTED").removeClass("SELECTED"); // Reset All Groups
+
+	$("#edit-scene-search-floor").empty(); // Clear Floors List
+	$("#edit-scene-search-room").empty(); // Clear Rooms List
 }
 /*==================================================
 		Statistics Section Functions
@@ -5964,7 +6622,7 @@ function LoadHistory()
 									var type = response[i].opt.slice(0, 1);
 									var option = response[i].opt.slice(1, response[i].opt.length);
 									var place = "";
-									if (type == "R") {place = "Room"} else if (type == "G") {place = "Group"}
+									if (type == "R") {place = "Room"} else if (type == "G") {place = "Group"} else if (type == "S") {place = "Scene"}
 									var pin = option.substring(0, option.indexOf(":"));
 									var name = option.substring(option.indexOf(":")+1, option.length);
 
@@ -5990,7 +6648,7 @@ function LoadHistory()
 									var type = response[i].opt.slice(0, 1);
 									var option = response[i].opt.slice(1, response[i].opt.length);
 									var place = "";
-									if (type == "R") {place = "Room"} else if (type == "G") {place = "Group"}
+									if (type == "R") {place = "Room"} else if (type == "G") {place = "Group"} else if (type == "S") {place = "Scene"}
 									var pin = option.substring(0, option.indexOf(":"));
 									var name = option.substring(option.indexOf(":")+1, option.length);
 

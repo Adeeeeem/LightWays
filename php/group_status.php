@@ -96,7 +96,7 @@
 				/* Execute Query */
 				$statement->execute();
 
-				/* Get Card Name for Hisotry */
+				/* Get Group Name for Hisotry */
 				$request = "SELECT GROUP_NAME AS name, ROOM_NAME AS room FROM GROUPS NATURAL JOIN ROOMS WHERE GROUP_ID = :group LIMIT 1;";
 				/* Preparing Statement */
 				$statement = $DB_CONNECTION->prepare($request);

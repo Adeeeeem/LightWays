@@ -7,7 +7,7 @@
 	}
 
 	include_once("config.php");
-	//require_once("toggleLight.php");
+	require_once("toggleLight.php");
 
 	header("Content-Type: application/json");
 
