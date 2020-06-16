@@ -76,10 +76,13 @@
 				$statement->execute();
 			}
 
-			/* Return True */
-			$response["result"] = true;
+			$check = updateSystem();
 
-			updateSystem();
+			if ($check == "true")
+			{
+				/* Return True */
+				$response["result"] = true;
+			}
 		}
 	}
 

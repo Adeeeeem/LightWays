@@ -64,32 +64,47 @@
 					$statement->execute();
 				}
 
-				/* Return Added Scene */
-				/* Preparing Request */
-				$request = "SELECT SCENES.SCENE_ID AS id, SCENE_NAME AS name, SCENE_START AS time_start, SCENE_END AS time_end, SCENE_DAYS AS days, COUNT(SCENENING.DEVICE_ID) AS devices FROM SCENES LEFT JOIN SCENENING USING(SCENE_ID) WHERE SCENES.SCENE_ID = $id GROUP BY SCENES.SCENE_ID, SCENE_NAME, SCENE_STATUS LIMIT 1;";
-				/* Preparing Statement */
-				$statement = $DB_CONNECTION->prepare($request);
-				/* Execute Query */
-				$statement->execute();
-				/* Fetch Result */
-				$response = $statement->fetch();
+				$check = updateSystem();
 
-				if ($_SESSION["6C3Zq5Bpwm"] != "lightways")
+				if ($check == "true")
 				{
-					/* Add to History */
+					/* Return Added Scene */
 					/* Preparing Request */
-					$request = "INSERT INTO HISTORY (HISTORY_USER, HISTORY_TYPE, HISTORY_DATA_ID, HISTORY_DATA, HISTORY_DATE, HISTORY_TIME, HISTORY_OPTION) VALUES (:user, 'ADD', :scene, 'SCENE', CURRENT_DATE, CURRENT_TIME, :name);";
+					$request = "SELECT SCENES.SCENE_ID AS id, SCENE_NAME AS name, SCENE_START AS time_start, SCENE_END AS time_end, SCENE_DAYS AS days, COUNT(SCENENING.DEVICE_ID) AS devices FROM SCENES LEFT JOIN SCENENING USING(SCENE_ID) WHERE SCENES.SCENE_ID = $id GROUP BY SCENES.SCENE_ID, SCENE_NAME, SCENE_STATUS LIMIT 1;";
+					/* Preparing Statement */
+					$statement = $DB_CONNECTION->prepare($request);
+					/* Execute Query */
+					$statement->execute();
+					/* Fetch Result */
+					$response = $statement->fetch();
+
+					if ($_SESSION["6C3Zq5Bpwm"] != "lightways")
+					{
+						/* Add to History */
+						/* Preparing Request */
+						$request = "INSERT INTO HISTORY (HISTORY_USER, HISTORY_TYPE, HISTORY_DATA_ID, HISTORY_DATA, HISTORY_DATE, HISTORY_TIME, HISTORY_OPTION) VALUES (:user, 'ADD', :scene, 'SCENE', CURRENT_DATE, CURRENT_TIME, :name);";
+						/* Preparing Statement */
+						$statement = $DB_CONNECTION->prepare($request);
+						/* Binding Parameter */
+						$statement->bindParam(':user', $_SESSION["6C3Zq5Bpwm"], PDO::PARAM_STR, 30);
+						$statement->bindParam(':scene', $id, PDO::PARAM_STR, 30);
+						$statement->bindParam(':name', $scene, PDO::PARAM_STR, 100);
+						/* Execute Query */
+						$statement->execute();
+					}
+				}
+				else
+				{
+					/* Delete Scene */
+					/* Preparing Request */
+					$request = "DELETE FROM SCENES WHERE SCENE_ID = :scene;";
 					/* Preparing Statement */
 					$statement = $DB_CONNECTION->prepare($request);
 					/* Binding Parameter */
-					$statement->bindParam(':user', $_SESSION["6C3Zq5Bpwm"], PDO::PARAM_STR, 30);
-					$statement->bindParam(':scene', $id, PDO::PARAM_STR, 30);
-					$statement->bindParam(':name', $scene, PDO::PARAM_STR, 100);
+					$statement->bindParam(':scene', $id, PDO::PARAM_INT);
 					/* Execute Query */
 					$statement->execute();
 				}
-
-				updateSystem();
 			}
 		}
 	}

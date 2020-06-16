@@ -40,14 +40,14 @@
 			/* If Scene Status Updated */
 			if ($statement->rowCount())
 			{
-				/* Return True */
-				$response["result"] = true;
-
 				/* Return Boolean */
 				$check = updateSystem();
 
 				if ($check == "true")
 				{
+					/* Return True */
+					$response["result"] = true;
+					
 					if ($_SESSION["6C3Zq5Bpwm"] != "lightways")
 					{
 						/* Get Group Name for Hisotry */
