@@ -1,7 +1,7 @@
 /*====================================================================================================
 *							If this code works,
 *					it was written by Mohamed Adem Ben Moussa.
-*				If not, then it was written by Mohamed Mehdi Charni.
+*					     If not, I don't know who wrote it.
 ====================================================================================================*/
 /* Refresh Website every 12 Hour for new Data */
 $(document).ready(function()
