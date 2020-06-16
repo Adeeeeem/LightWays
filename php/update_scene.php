@@ -37,6 +37,28 @@
 	{
 		if ( (is_numeric($scene)) && (is_string($name)) && (is_string($time_start)) && (is_string($time_end)) && (is_string($working_days)) )
 		{
+			/* Get Scene Old Details for Undo */
+			$request = "SELECT SCENE_NAME AS name, SCENE_START AS time_start, SCENE_END AS time_end, SCENE_DAYS AS working_days FROM SCENES WHERE SCENE_ID = :scene;";
+			/* Preparing Statement */
+			$statement = $DB_CONNECTION->prepare($request);
+			/* Binding Parameter */
+			$statement->bindParam(':scene', $scene, PDO::PARAM_INT);
+			/* Execute Query */
+			$statement->execute();
+			/* Fetch Result */
+			$undo_update = $statement->fetch();
+
+			/* Get Scene Old Devices for Undo */
+			$request = "SELECT DEVICE_ID AS device FROM SCENENING WHERE SCENE_ID = :scene;";
+			/* Preparing Statement */
+			$statement = $DB_CONNECTION->prepare($request);
+			/* Binding Parameter */
+			$statement->bindParam(':scene', $scene, PDO::PARAM_INT);
+			/* Execute Query */
+			$statement->execute();
+			/* Fetch Result */
+			$undo_delete = $statement->fetchAll();
+
 			/* Update Scene */
 			/* Preparing Request */
 			$request = "UPDATE SCENES SET SCENE_NAME = :name, SCENE_START = :time_start, SCENE_END = :time_end, SCENE_DAYS = :working_days WHERE SCENE_ID = :scene;";
@@ -64,7 +86,7 @@
 			/* Go Through Each Device Selected */
 			foreach ($devices as $device)
 			{
-				/* Add Device to Group */
+				/* Add Device to Scene */
 				/* Preparing Request */
 				$request = "INSERT INTO SCENENING (SCENE_ID, DEVICE_ID) VALUES (:scene, :device);";
 				/* Preparing Statement */
@@ -82,6 +104,48 @@
 			{
 				/* Return True */
 				$response["result"] = true;
+			}
+			else
+			{
+				/* Undo Update Scene */
+				/* Preparing Request */
+				$request = "UPDATE SCENES SET SCENE_NAME = :name, SCENE_START = :time_start, SCENE_END = :time_end, SCENE_DAYS = :working_days WHERE SCENE_ID = :scene;";
+				/* Preparing Statement */
+				$statement = $DB_CONNECTION->prepare($request);
+				/* Binding Parameter */
+				$statement->bindParam(':scene', $scene, PDO::PARAM_INT);
+				$statement->bindParam(':name', $undo_update["name"], PDO::PARAM_STR, 30);
+				$statement->bindParam(':time_start', $undo_update["time_start"]);
+				$statement->bindParam(':time_end', $undo_update["time_end"]);
+				$statement->bindParam(':working_days', $undo_update["working_days"], PDO::PARAM_STR, 7);
+				/* Execute Query */
+				$statement->execute();
+
+				/* Delete Updated Devices From Scene */
+				/* Preparing Request */
+				$request = "DELETE FROM SCENENING WHERE SCENE_ID = :scene;";
+				/* Preparing Statement */
+				$statement = $DB_CONNECTION->prepare($request);
+				/* Binding Parameter */
+				$statement->bindParam(':scene', $scene, PDO::PARAM_INT);
+				/* Execute Query */
+				$statement->execute();
+
+				/* Undo Update Device to Scene */
+				foreach($undo_delete as $row)
+				{
+					/* Preparing Request */
+					$request = "INSERT INTO SCENENING (SCENE_ID, DEVICE_ID) VALUES (:scene, :device);";
+					/* Preparing Statement */
+					$statement = $DB_CONNECTION->prepare($request);
+					/* Binding Parameter */
+					$statement->bindParam(':scene', $scene, PDO::PARAM_INT);
+					$statement->bindParam(':device', $row["device"], PDO::PARAM_INT);
+					/* Execute Query */
+					$statement->execute();
+				}
+
+				updateSystem();
 			}
 		}
 	}

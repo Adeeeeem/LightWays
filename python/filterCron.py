@@ -13,7 +13,7 @@ mydb = pymysql.connect(
     
 def updateHistory(device_id, scene_name, state):
     ############# PREPARING VARS ##################
-	option = scene_name
+	option = "S"+pin+":"scene_name
 	current_date = datetime.today().strftime('%Y-%m-%d')
 	current_time = datetime.today().strftime('%H:%M:%S')
 

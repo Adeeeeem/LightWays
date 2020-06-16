@@ -983,6 +983,7 @@ $(function()
 {
 	$("#scenes-list").on("click", "article.scene-details .control-group-button", function()
 	{
+		var button = $(this);
 		var parent = $(this).parent().parent().parent().parent();
 		var scene = parent.attr("id");
 		var status;
@@ -1016,6 +1017,11 @@ $(function()
 			if (!response.result)
 			{
 				$.growl.error({ message: "Failed to Change Scene Status !" });
+
+				if(button.is(":checked"))
+					button.prop("checked", false);
+				else if(button.is(":not(:checked)"))
+					button.prop("checked", true);
 			}
 		})
 		.fail(function()
@@ -3859,7 +3865,7 @@ $(function()
 									case "SCENE":
 										var name = response[i].opt;
 
-										history = "Activated <span style='color: var(--blue-color);'>"+name+"</span> Scene'>";
+										history = "Activated <span style='color: var(--blue-color);'>"+name+"</span> Scene";
 									break;
 								}
 							break;
@@ -3885,7 +3891,7 @@ $(function()
 									case "SCENE":
 										var name = response[i].opt;
 
-										history = "Desactivated <span style='color: var(--blue-color);'>"+name+"</span> Scene'>";
+										history = "Desactivated <span style='color: var(--blue-color);'>"+name+"</span> Scene";
 									break;
 								}
 							break;
@@ -6627,7 +6633,7 @@ function LoadHistory()
 								case "SCENE":
 									var name = response[i].opt;
 
-									history = "Activated <span style='color: var(--blue-color);'>"+name+"</span> Scene'>";
+									history = "Activated <span style='color: var(--blue-color);'>"+name+"</span> Scene";
 								break;
 							}
 						break;
@@ -6653,7 +6659,7 @@ function LoadHistory()
 								case "SCENE":
 									var name = response[i].opt;
 
-									history = "Desactivated <span style='color: var(--blue-color);'>"+name+"</span> Scene'>";
+									history = "Desactivated <span style='color: var(--blue-color);'>"+name+"</span> Scene";
 								break;
 							}
 						break;

@@ -77,6 +77,28 @@
 						$statement->execute();
 					}
 				}
+				else
+				{
+					if ($status == "ON")
+					{
+						$status = "OFF";
+					}
+					else if ($status == "OFF")
+					{
+						$status = "ON";
+					}
+
+					/* Change Group Status */
+					/* Preparing Request */
+					$request = "UPDATE SCENES SET SCENE_STATUS = :status WHERE SCENE_ID = :scene;";
+					/* Preparing Statement */
+					$statement = $DB_CONNECTION->prepare($request);
+					/* Binding Parameter */
+					$statement->bindParam(':scene', $scene, PDO::PARAM_INT);
+					$statement->bindParam(':status', $status, PDO::PARAM_STR, 3);
+					/* Execute Query */
+					$statement->execute();
+				}
 			}
 		}
 	}
