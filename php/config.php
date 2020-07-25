@@ -16,7 +16,7 @@
 	/* Password */
 	$DB_PASSWORD = "";
 	/* Database Name */
-	$DB_DATABASE = "LightWaysTesting"; // LightWays
+	$DB_DATABASE = "LightWays"; // LightWays
 	/* Data Source Name */
 	$DSN = "mysql:host=".$DB_HOST."; dbname=".$DB_DATABASE."; charset=utf8";
 	/* Options */
